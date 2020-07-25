@@ -1,0 +1,146 @@
+import 'package:ecom/Homepage/homefragment.dart';
+import 'package:ecom/Login/login.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../placeholder_widget.dart';
+import 'Utils/data.dart';
+import 'details.dart';
+
+class ReceipeView extends StatefulWidget {
+  @override
+  _ReceipeViewState createState() => _ReceipeViewState();
+}
+
+class _ReceipeViewState extends State<ReceipeView>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    var body = SizedBox(
+        height: 200,
+        child: Container(
+          color: Colors.white,
+          child: ListView.builder(
+              physics: ClampingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: Data.recipes.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailsPage(
+                                      receipe: Data.recipes[index],
+                                    )));
+                      },
+                      child: SizedBox(
+                          child: Container(
+                        margin: EdgeInsets.only(left: 4, bottom: 3),
+                        width: 200,
+                        decoration: BoxDecoration(
+                          // border: Border.all(width: 1.0),
+                          borderRadius: BorderRadius.all(Radius.circular(
+                                  20.0) //         <--- border radius here
+                              ),
+                        ),
+                        child: Card(
+                          color: Colors.grey[200],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: Container(
+                            child: Column(
+                              children: <Widget>[
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20.0),
+                                    ),
+                                    child: Hero(
+                                      tag: Data.recipes[index].id,
+                                      child: FadeInImage(
+                                        image: NetworkImage(
+                                            Data.recipes[index].imageUrl),
+                                        fit: BoxFit.cover,
+                                        placeholder: AssetImage(
+                                            'assets/images/loading.gif'),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Text(
+                                    Data.recipes[index].title,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ))),
+                );
+              }),
+        ));
+
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color(0xFFf83600),
+          // leading: IconButton(
+          //   icon: Icon(EvaIcons.menu,color:Colors.black),
+          //   onPressed: () {},
+          // ),
+          title: Align(
+            alignment: Alignment.centerLeft,
+            child:
+                TextStyling(true, "Receipe", Colors.white, 20, FontWeight.bold),
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                EvaIcons.search,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                showSearch(context: context, delegate: SearchBar());
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                EvaIcons.shoppingCartOutline,
+                color: Colors.white,
+              ),
+              padding: EdgeInsets.only(left: 10, right: 15),
+              onPressed: () async {
+                SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
+                sharedPreferences.clear();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+            ),
+          ],
+        ),
+        body: ListView(children: <Widget>[
+          TextStyling(true, "Receipe", Colors.black, 20, FontWeight.bold),
+          body
+        ]));
+  }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+}
