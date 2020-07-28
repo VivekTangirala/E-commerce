@@ -20,7 +20,7 @@ class Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200.0,
+      height: 210.0,
       child: ListView.builder(
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
@@ -29,68 +29,76 @@ class Category extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             child: Container(
-                margin: EdgeInsets.only(left: 4, bottom: 3),
-                decoration: BoxDecoration(
-                  // border: Border.all(width: 1.0),
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(20.0) //         <--- border radius here
-                      ),
-                ),
-                child: SizedBox(
-                    // height: 100,
-                    width: 160,
-                    child: Card(
-                        color: Colors.grey[200],
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.white70, width: 1),
-                          borderRadius: BorderRadius.circular(20),
+              margin: EdgeInsets.only(left: 4, bottom: 3),
+              decoration: BoxDecoration(
+                // border: Border.all(width: 1.0),
+                borderRadius: BorderRadius.all(
+                    Radius.circular(20.0) //         <--- border radius here
+                    ),
+              ),
+              child: SizedBox(
+                // height: 100,
+                width: 160,
+                child: Card(
+                  color: Colors.grey[200],
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.white70, width: 1),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(children: [
+                    SizedBox(
+                      height: 120,
+                      child: Container(
+                        padding: EdgeInsets.all(4),
+                        //alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage(images[index])),
+                          color: Colors.white,
+                          border: Border.all(
+                              color: Colors.black12, // set border color
+                              width: 0.6), // set border width
+                          borderRadius: BorderRadius.all(Radius.circular(
+                              20.0)), // set rounded corner radius
                         ),
-                        child: Column(children: [
-                          SizedBox(
-                            height: 120,
-                            child: Container(
-                              padding: EdgeInsets.all(4),
-                              //alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(images[index])),
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Colors.black12, // set border color
-                                    width: 0.6), // set border width
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                    20.0)), // set rounded corner radius
-                              ),
+                      ),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(
+                            top: 10, left: 3, right: 3, bottom: 3),
+                        child: Center(
+                          child: Text(
+                            "Vegetables",
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        )),
+                    Container(
+                      margin:
+                          EdgeInsets.only(top: 3, left: 20, right: 3, bottom: 3),
+                      child: Center(
+                        child: Row(children: [
+                          Text(
+                            "Up to",
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                          StrikeThroughWidget(
+                            child: Text(
+                              "30%",
+                              style: Theme.of(context).textTheme.bodyText2,
                             ),
                           ),
-                          Container(
-                              margin: EdgeInsets.only(
-                                  top: 10, left: 3, right: 3, bottom: 3),
-                              child: Center(
-                                child: Text(
-                                  "Vegetables",
-                                  style: GoogleFonts.cabin(
-                                      color: Colors.black,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                              )),
-                          Container(
-                              margin: EdgeInsets.only(
-                                  top: 3, left: 3, right: 3, bottom: 3),
-                              child: Center(
-                                  child: Row(children: [
-                                TextStyling(false, "Up to", Colors.green, 16,
-                                    FontWeight.normal),
-                                StrikeThroughWidget(
-                                  child: TextStyling(false, "30%", Colors.red,
-                                      12, FontWeight.normal),
-                                ),
-                                TextStyling(false, "60% off", Colors.green, 16,
-                                    FontWeight.normal),
-                              ]))),
-                        ])))),
+                          Text(
+                            "off",
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                        ]),
+                      ),
+                    ),
+                  ]),
+                ),
+              ),
+            ),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => Screentwo(value: list[index])));

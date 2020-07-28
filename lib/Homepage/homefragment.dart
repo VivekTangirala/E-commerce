@@ -7,7 +7,6 @@ import './carousel.dart';
 import './category.dart';
 import 'package:ecom/placeholder_widget.dart';
 
-
 class HomeFragment extends StatefulWidget {
   @override
   _HomefragmentState createState() => _HomefragmentState();
@@ -18,24 +17,33 @@ class _HomefragmentState extends State<HomeFragment> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFFf83600),
+          //backgroundColor: Color(0xFFf83600),
           // leading: IconButton(
           //   icon: Icon(EvaIcons.menu,color:Colors.black),
           //   onPressed: () {},
           // ),
           title: Align(
             alignment: Alignment.centerLeft,
-            child: TextStyling(true,"Treg Mart",Colors.white,20,FontWeight.bold),
+            child: Text(
+              "Treg Mart",
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
           ),
           actions: <Widget>[
             IconButton(
-              icon: Icon(EvaIcons.search,color: Colors.white,),
+              icon: Icon(
+                EvaIcons.search,
+                color: Colors.black,
+              ),
               onPressed: () {
                 showSearch(context: context, delegate: SearchBar());
               },
             ),
             IconButton(
-              icon: Icon(EvaIcons.shoppingCartOutline,color: Colors.white,),
+              icon: Icon(
+                EvaIcons.shoppingCartOutline,
+                color: Colors.black,
+              ),
               padding: EdgeInsets.only(left: 10, right: 15),
               onPressed: () async {
                 SharedPreferences sharedPreferences =
@@ -53,30 +61,39 @@ class _HomefragmentState extends State<HomeFragment> {
           child: SingleChildScrollView(
               child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
             CarouselPages(),
-            Align( 
-             alignment: Alignment.centerLeft,
-             child: Container(
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
                 margin: EdgeInsets.all(16),
-                child: TextStyling(true,"Just 4 U",Colors.black,20,FontWeight.bold)),),
+                child: Text(
+                  "Just 4 U",
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              ),
+            ),
             SpecialProducts(),
-           Align( 
-             alignment: Alignment.centerLeft,
-             child: Container(
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
                 margin: EdgeInsets.all(16),
-                child: TextStyling(true,"Shop by Category",Colors.black,20, FontWeight.bold))),
+                child: Text(
+                  "Category",
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              ),
+            ),
             Category(),
             Container(
-              margin: EdgeInsets.all(15),
-              padding: EdgeInsets.all(15),
-              height: 130,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  
-                  image: AssetImage('assets/images/drinks.jpg',)),
-                borderRadius: BorderRadius.all(Radius.circular(25)))),
-              
-              
+                margin: EdgeInsets.all(15),
+                padding: EdgeInsets.all(15),
+                height: 130,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage(
+                          'assets/images/drinks.jpg',
+                        )),
+                    borderRadius: BorderRadius.all(Radius.circular(25)))),
           ])),
         ));
   }

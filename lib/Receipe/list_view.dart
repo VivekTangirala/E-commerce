@@ -18,7 +18,7 @@ class _ReceipeViewState extends State<ReceipeView>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    var body = SizedBox(
+    Widget body = SizedBox(
         height: 200,
         child: Container(
           color: Colors.white,
@@ -79,10 +79,7 @@ class _ReceipeViewState extends State<ReceipeView>
                                   child: Text(
                                     Data.recipes[index].title,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500),
+                                    style: Theme.of(context).textTheme.caption,
                                   ),
                                 )
                               ],
@@ -96,16 +93,17 @@ class _ReceipeViewState extends State<ReceipeView>
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFFf83600),
+          //backgroundColor: Color(0xFFf83600),
           // leading: IconButton(
           //   icon: Icon(EvaIcons.menu,color:Colors.black),
           //   onPressed: () {},
           // ),
           title: Align(
-            alignment: Alignment.centerLeft,
-            child:
-                TextStyling(true, "Receipe", Colors.white, 20, FontWeight.bold),
-          ),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Items",
+                style: Theme.of(context).textTheme.bodyText1,
+              )),
           actions: <Widget>[
             IconButton(
               icon: Icon(
@@ -135,7 +133,10 @@ class _ReceipeViewState extends State<ReceipeView>
           ],
         ),
         body: ListView(children: <Widget>[
-          TextStyling(true, "Receipe", Colors.black, 20, FontWeight.bold),
+          Text(
+            "Recepie",
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
           body
         ]));
   }

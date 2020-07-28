@@ -28,11 +28,10 @@ class SplashScreenState extends State<SplashScreen> {
     bool _seen = (sharedPreferences.getBool('seen') ?? false);
 
     if (_seen) {
-          Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
-        (Route<dynamic> route) => false);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
+          (Route<dynamic> route) => false);
     } else {
-      
       Navigator.of(context).pushReplacement(
           new MaterialPageRoute(builder: (context) => new LoginPage()));
     }
@@ -44,25 +43,36 @@ class SplashScreenState extends State<SplashScreen> {
     // Color _thisColor2 =Color(0xFFF09819);
     return Scaffold(
         body: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [Color(0xFFe74c3c), Color(0xFFF09819)],
-                  begin: Alignment.center,
-                  end: Alignment.bottomRight),
-            ),
-            child: headerSection()));
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            colors: [Colors.orange[300], Colors.white],
+            begin: Alignment.center,
+            end: Alignment.bottomRight),
+      ),
+      child: Center(
+        child: headerSection(context),
+      ),
+    ));
   }
 }
 
-Container headerSection() {
+Container headerSection(BuildContext context) {
   return Container(
       //margin: EdgeInsets.only(top: 50.0, bottom: 15),
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+      padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
       child: Center(
-        child: Text(" Infinity Mart",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 45.0,
-                fontWeight: FontWeight.bold)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(
+              " Infinity Mart",
+              style: Theme.of(context).textTheme.headline1,
+            ),
+            Icon(
+              Icons.shopping_cart,
+              size: 50.0,
+            )
+          ],
+        ),
       ));
 }

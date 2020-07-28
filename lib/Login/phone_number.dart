@@ -51,10 +51,7 @@ class _SignupPageState extends State<SignupPage> {
       margin: EdgeInsets.only(top: 50.0, bottom: 15),
       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
       child: Text(" Infinity Mart",
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold)),
+              style: Theme.of(context).textTheme.headline1,),
     );
   }
 
@@ -85,11 +82,11 @@ class _SignupPageState extends State<SignupPage> {
           context: context,
           builder: (context) {
             return CupertinoAlertDialog(
-              title: Text("Error",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+              title: Text(" Error",
+              style: Theme.of(context).textTheme.headline4,),
               content: Text(
                 "${jsonResponse["detail"]}",
-                style: TextStyle(fontSize: 20),
+                 style: Theme.of(context).textTheme.headline5,
               ),
             );
           });
@@ -156,11 +153,10 @@ class _SignupPageState extends State<SignupPage> {
                       builder: (context) {
                         return CupertinoAlertDialog(
                           title: Text("Error",
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold)),
+                               style: Theme.of(context).textTheme.headline4,),
                           content: Text(
                             "Invalid Number",
-                            style: TextStyle(fontSize: 20),
+                             style: Theme.of(context).textTheme.headline5,
                           ),
                         );
                       });
@@ -192,7 +188,7 @@ class _SignupPageState extends State<SignupPage> {
         elevation: 0.0,
         color: Colors.green,
         child: Text("Already Have an Account  ?",
-            style: TextStyle(color: Colors.white)),
+             style: Theme.of(context).textTheme.headline4,),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       ),
     );

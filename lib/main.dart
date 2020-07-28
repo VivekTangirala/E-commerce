@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ecom/Themes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'Login/splash_screen.dart';
@@ -18,13 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Think Big',
-        theme: ThemeData(
-          primarySwatch: Colors.red,
-          // This makes the visual density adapt to the platform that you run
-          // the app on. For desktop platforms, the controls will be smaller and
-          // closer together (more dense) than on mobile platforms.
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
+        theme: basicTheme(),
         home: SplashScreen());
   }
 }
