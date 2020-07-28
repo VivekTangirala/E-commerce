@@ -60,10 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
         child: Container(
           child: Text(" Infinity Mart",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 40.0,
-                  fontWeight: FontWeight.bold)),
+              style: Theme.of(context).textTheme.headline1,),
         ));
   }
 
@@ -105,11 +102,10 @@ class _RegisterPageState extends State<RegisterPage> {
             builder: (context) {
               return CupertinoAlertDialog(
                 title: Text("Error",
-                    style:
-                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                    style: Theme.of(context).textTheme.headline4),
                 content: Text(
                   a==null?'':a,
-                  style: TextStyle(fontSize: 20),
+                  style: Theme.of(context).textTheme.headline5,
                 ),
               );
             });
@@ -120,11 +116,10 @@ class _RegisterPageState extends State<RegisterPage> {
             builder: (context) {
               return CupertinoAlertDialog(
                 title: Text("Error",
-                    style:
-                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                    style: Theme.of(context).textTheme.headline4),
                 content: Text(
                   "Invalid email",
-                  style: TextStyle(fontSize: 20),
+                  style: Theme.of(context).textTheme.headline5,
                 ),
               );
             });
@@ -232,11 +227,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       builder: (context) {
                         return CupertinoAlertDialog(
                           title: Text("Error",
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold)),
+                              style: Theme.of(context).textTheme.headline4,),
                           content: Text(
                             "Minimum password length 8 characters",
-                            style: TextStyle(fontSize: 20),
+                            style: Theme.of(context).textTheme.headline5,
                           ),
                         );
                       });
@@ -258,7 +252,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   fontSize: 25, fontWeight: FontWeight.bold)),
                           content: Text(
                             "please check the details",
-                            style: TextStyle(fontSize: 20),
+                            style: Theme.of(context).textTheme.headline5,
                           ),
                         );
                       });

@@ -58,7 +58,7 @@ class _DetailsPageState extends State<DetailsPage>
                   labelColor: Colors.black87,
                   unselectedLabelColor: Colors.grey,
                   tabs: [
-                    Tab( text: "Ingredients"),f
+                    Tab( text: "ingredients",),
                     Tab( text: "Tab 2"),
                   ],
                 ),
@@ -77,26 +77,17 @@ class _DetailsPageState extends State<DetailsPage>
             child: Column(
               children: <Widget>[
                 Text('Nutrition',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20)),
+                    style: Theme.of(context).textTheme.bodyText1,),
                 NutritionWidget(
                   nutrients: recipe.nutrients,
                 ),
                 Text('Ingredients',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20)),
+               style: Theme.of(context).textTheme.bodyText1,),
                 IngredientsWidget(
                   ingredients: recipe.ingredients,
                 ),
                 Text('Steps',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20)),
+                    style: Theme.of(context).textTheme.bodyText1,),
                 RecipeSteps(
                   steps: recipe.steps,
                 )
@@ -135,10 +126,7 @@ class RecipeSteps extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(steps[index],
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16)),
+                      style: Theme.of(context).textTheme.bodyText2,),
                 ),
               )
             ],

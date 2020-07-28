@@ -37,7 +37,6 @@ class _OtpScreenState extends State<OtpScreen> {
   void dispose() {
     _timerStream.close();
     _resendCodeTimer.cancel();
-    
 
     super.dispose();
   }
@@ -70,10 +69,10 @@ class _OtpScreenState extends State<OtpScreen> {
                     backgroundColor: Colors.white,
                   )))
                 : ListView(children: <Widget>[
-                    companyName(),
+                    companyName(context),
                     Align(
                       alignment: Alignment.topCenter,
-                      child: enterOTP(),
+                      child: enterOTP(context),
                     ),
                     Align(
                       alignment: Alignment.center,
@@ -117,12 +116,12 @@ class _OtpScreenState extends State<OtpScreen> {
       margin: EdgeInsets.only(top: 45.0, bottom: 3),
       child: RaisedButton(
           color: Colors.green,
-          child: Text("Confirm", style: TextStyle(color: Colors.white)),
+          child: Text("Confirm", style: Theme.of(context).textTheme.headline6),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           onPressed: () {
             setState(() {
-              _isLoading=true;
+              _isLoading = true;
             });
             registerOTP(otpController.text.toString());
           }),
@@ -147,18 +146,17 @@ class _OtpScreenState extends State<OtpScreen> {
       }
     } else {
       setState(() {
-        _isLoading=false;
+        _isLoading = false;
       });
       showDialog(
-        
           context: context,
           builder: (context) {
             return CupertinoAlertDialog(
-              title: Text("Error",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+              title:
+                  Text("Error", style: Theme.of(context).textTheme.headline4),
               content: Text(
                 jsonResponse["detail"],
-                style: TextStyle(fontSize: 20),
+                style: Theme.of(context).textTheme.headline5,
               ),
             );
           });
@@ -189,11 +187,11 @@ class _OtpScreenState extends State<OtpScreen> {
           context: context,
           builder: (context) {
             return CupertinoAlertDialog(
-              title: Text("Error",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+              title:
+                  Text("Error", style: Theme.of(context).textTheme.headline4),
               content: Text(
                 jsonResponse["detail"],
-                style: TextStyle(fontSize: 20),
+                style: Theme.of(context).textTheme.headline5,
               ),
             );
           });
@@ -205,7 +203,7 @@ class _OtpScreenState extends State<OtpScreen> {
     return Container(
         // width: MediaQuery.of(context).size.width,
 
-      child: StreamBuilder(
+        child: StreamBuilder(
       stream: _timerStream.stream,
       builder: (BuildContext ctx, AsyncSnapshot snapshot) {
         return Container(
@@ -217,12 +215,17 @@ class _OtpScreenState extends State<OtpScreen> {
               textColor: Colors.white,
               child: Center(
                   child: snapshot.data == 0
-                      ? Text('resend OTP')
+                      ? Text(
+                          'Resend OTP',
+                          style: Theme.of(context).textTheme.headline6,
+                        )
                       : Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                                ' Try after ${snapshot.hasData ? snapshot.data.toString() : 30} seconds '),
+                              ' Try after ${snapshot.hasData ? snapshot.data.toString() : 30} seconds ',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
                           ],
                         )),
               onPressed: snapshot.data == 0
@@ -241,28 +244,22 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 }
 
-Container enterOTP() {
+Container enterOTP(BuildContext context) {
   return Container(
       margin: EdgeInsets.only(top: 20.0, bottom: 15),
       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
       child: Container(
         child: Text("Enter OTP",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 25.0,
-                fontWeight: FontWeight.bold)),
+            style: Theme.of(context).textTheme.headline4,),
       ));
 }
 
-Container companyName() {
+Container companyName(BuildContext context) {
   return Container(
       margin: EdgeInsets.only(top: 35.0, bottom: 15),
       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
       child: Container(
         child: Text("Infinity Mart",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 45.0,
-                fontWeight: FontWeight.bold)),
+            style: Theme.of(context).textTheme.headline1),
       ));
 }

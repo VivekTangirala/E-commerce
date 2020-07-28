@@ -40,17 +40,19 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: [Color(0xFFe74c3c), Color(0xFFF09819)],
+              colors: [Colors.orange[300], Colors.white],
               begin: Alignment.center,
               end: Alignment.bottomRight),
         ),
         child: _isLoading
-            ? Center(child: CircularProgressIndicator(backgroundColor: Colors.white,))
+            ? Center(
+                child: CircularProgressIndicator(
+                backgroundColor: Colors.white,
+              ))
             : ListView(
                 children: <Widget>[
                   skipSection(),
                   Align(
-
                     alignment: Alignment.center,
                     child: headerSection(),
                   ),
@@ -73,11 +75,10 @@ class _LoginPageState extends State<LoginPage> {
         margin: EdgeInsets.only(top: 20.0, bottom: 15),
         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
         child: Container(
-          child: Text(" Infinity Mart",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 40.0,
-                  fontWeight: FontWeight.bold)),
+          child: Text(
+            " Infinity Mart",
+            style: Theme.of(context).textTheme.headline1,
+          ),
         ));
   }
 
@@ -108,14 +109,13 @@ class _LoginPageState extends State<LoginPage> {
           builder: (context) {
             return CupertinoAlertDialog(
               title: Text("Error",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                  style: Theme.of(context).textTheme.headline4),
               content: Text(
                 "Invalid Credintials",
-                style: TextStyle(fontSize: 20),
+                style: Theme.of(context).textTheme.headline5,
               ),
             );
           });
-      
     }
   }
 
@@ -151,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
               icon: Icon(Icons.lock, color: Colors.white),
-              hintText: "Password",
+              hintText: "data",
               border: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               hintStyle: TextStyle(color: Colors.white),
@@ -165,26 +165,28 @@ class _LoginPageState extends State<LoginPage> {
   //Button Handling
   Container skipSection() {
     return Container(
-        //width: MediaQuery.of(context).size.width,
-        height: 40.0,
-        alignment: Alignment.topRight,
-        padding: EdgeInsets.symmetric(horizontal: 30.0),
-        margin: EdgeInsets.only(top: 26.0, bottom: 3),
-      
-          child: RaisedButton(
-            onPressed: () async {
-              await setSkip();
-              Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
-            (Route<dynamic> route) => false);
-      }
-            ,
-            elevation: 0.0,
-            color: Colors.green,
-            child: Text("Skip Login", style: TextStyle(color: Colors.white)),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-          ),
-        );
+      //width: MediaQuery.of(context).size.width,
+      height: 40.0,
+      alignment: Alignment.topRight,
+      padding: EdgeInsets.symmetric(horizontal: 30.0),
+      margin: EdgeInsets.only(top: 26.0, bottom: 3),
+
+      child: RaisedButton(
+        onPressed: () async {
+          await setSkip();
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
+              (Route<dynamic> route) => false);
+        },
+        elevation: 0.0,
+        color: Colors.white,
+        child: Text(
+          "Skip Login",
+          style: Theme.of(context).textTheme.bodyText2,
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+      ),
+    );
   }
 
   Container buttonSection() {
@@ -203,8 +205,8 @@ class _LoginPageState extends State<LoginPage> {
                 signIn(phoneController.text, passwordController.text);
               },
         elevation: 0.0,
-        color: Colors.green,
-        child: Text("Sign In", style: TextStyle(color: Colors.white)),
+        color: Colors.white,
+        child: Text("Sign In", style: Theme.of(context).textTheme.headline6),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       ),
     );
@@ -224,10 +226,11 @@ class _LoginPageState extends State<LoginPage> {
           );
         },
         elevation: 0.0,
-        color: Colors.green,
-        child: Text("Create New Account   ?",
-            style: TextStyle(color: Colors.white)),
-            
+        color: Colors.white,
+        child: Text(
+          "Create New Account   ?",
+          style: Theme.of(context).textTheme.bodyText2,
+        ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       ),
     );
