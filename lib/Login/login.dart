@@ -38,12 +38,6 @@ class _LoginPageState extends State<LoginPage> {
         .copyWith(statusBarColor: Colors.transparent));
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Colors.orange[300], Colors.white],
-              begin: Alignment.center,
-              end: Alignment.bottomRight),
-        ),
         child: _isLoading
             ? Center(
                 child: CircularProgressIndicator(
@@ -108,8 +102,8 @@ class _LoginPageState extends State<LoginPage> {
           context: context,
           builder: (context) {
             return CupertinoAlertDialog(
-              title: Text("Error",
-                  style: Theme.of(context).textTheme.headline4),
+              title:
+                  Text("Error", style: Theme.of(context).textTheme.headline4),
               content: Text(
                 "Invalid Credintials",
                 style: Theme.of(context).textTheme.headline5,
@@ -134,27 +128,27 @@ class _LoginPageState extends State<LoginPage> {
           TextFormField(
             controller: phoneController,
             cursorColor: Colors.white,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
-              icon: Icon(Icons.phone, color: Colors.white),
+              icon: Icon(Icons.phone, color: Colors.black),
               hintText: "phone",
               border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              hintStyle: TextStyle(color: Colors.white),
+                  borderSide: BorderSide(color: Colors.black)),
+              hintStyle: TextStyle(color: Colors.black),
             ),
           ),
           SizedBox(height: 30.0),
           TextFormField(
             controller: passwordController,
-            cursorColor: Colors.white,
+            cursorColor: Colors.black,
             obscureText: true,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
-              icon: Icon(Icons.lock, color: Colors.white),
-              hintText: "data",
+              icon: Icon(Icons.lock, color: Colors.black),
+              hintText: "Password",
               border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              hintStyle: TextStyle(color: Colors.white),
+                  borderSide: BorderSide(color: Colors.black)),
+              hintStyle: TextStyle(color: Colors.black),
             ),
           ),
         ],
@@ -163,38 +157,33 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   //Button Handling
-  Container skipSection() {
-    return Container(
-      //width: MediaQuery.of(context).size.width,
-      height: 40.0,
-      alignment: Alignment.topRight,
-      padding: EdgeInsets.symmetric(horizontal: 30.0),
-      margin: EdgeInsets.only(top: 26.0, bottom: 3),
-
-      child: RaisedButton(
-        onPressed: () async {
+  Widget skipSection() {
+    return InkWell(
+        onTap: () async {
           await setSkip();
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
               (Route<dynamic> route) => false);
         },
-        elevation: 0.0,
-        color: Colors.white,
-        child: Text(
-          "Skip Login",
-          style: Theme.of(context).textTheme.bodyText2,
-        ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-      ),
-    );
+        child: Container(
+            //width: MediaQuery.of(context).size.width,
+            height: 40.0,
+            alignment: Alignment.topRight,
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            margin: EdgeInsets.only(top: 26.0, bottom: 3),
+            child: Text(
+              "Skip login",
+              style: Theme.of(context).textTheme.bodyText1,
+            )));
   }
 
   Container buttonSection() {
     return Container(
+      decoration: BoxDecoration(),
       width: MediaQuery.of(context).size.width,
       height: 40.0,
       padding: EdgeInsets.symmetric(horizontal: 30.0),
-      margin: EdgeInsets.only(top: 45.0, bottom: 3),
+      margin: EdgeInsets.symmetric(vertical: 10.0,horizontal: 30.0),
       child: RaisedButton(
         onPressed: phoneController.text == "" || passwordController.text == ""
             ? null
@@ -205,35 +194,31 @@ class _LoginPageState extends State<LoginPage> {
                 signIn(phoneController.text, passwordController.text);
               },
         elevation: 0.0,
-        color: Colors.white,
+        color: Colors.black,
         child: Text("Sign In", style: Theme.of(context).textTheme.headline6),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       ),
     );
   }
 
-  Container newAccountbutton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 40.0,
-      padding: EdgeInsets.symmetric(horizontal: 30.0),
-      margin: EdgeInsets.only(top: 75.0, bottom: 3),
-      child: RaisedButton(
-        onPressed: () {
+  Widget newAccountbutton() {
+    return InkWell(
+        onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => SignupPage()),
           );
         },
-        elevation: 0.0,
-        color: Colors.white,
-        child: Text(
-          "Create New Account   ?",
-          style: Theme.of(context).textTheme.bodyText2,
-        ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-      ),
-    );
+        child: Container(
+            //width: MediaQuery.of(context).size.width,
+            height: 40.0,
+            alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            margin: EdgeInsets.only(top: 26.0, bottom: 3),
+            child: Text(
+              "Create new account",
+              style: Theme.of(context).textTheme.bodyText1,
+            )));
   }
 
   final TextEditingController phoneController = new TextEditingController();

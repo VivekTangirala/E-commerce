@@ -45,7 +45,7 @@ class SplashScreenState extends State<SplashScreen> {
         body: Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: [Colors.orange[300], Colors.white],
+            colors: [Color(0xffe75c3c), Color(0xfff09819)],
             begin: Alignment.center,
             end: Alignment.bottomRight),
       ),
@@ -71,6 +71,7 @@ Container headerSection(BuildContext context) {
             Icon(
               Icons.shopping_cart,
               size: 50.0,
+              color: Colors.black,
             )
           ],
         ),

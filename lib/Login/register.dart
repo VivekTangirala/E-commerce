@@ -31,16 +31,17 @@ class _RegisterPageState extends State<RegisterPage> {
         .copyWith(statusBarColor: Colors.transparent));
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Color(0xFFe74c3c), Color(0xFFF09819)],
-              begin: Alignment.center,
-              end: Alignment.bottomRight),
-        ),
+        // decoration: BoxDecoration(
+        //   gradient: LinearGradient(
+        //       colors: [Color(0xFFe74c3c), Color(0xFFF09819)],
+        //       begin: Alignment.center,
+        //       end: Alignment.bottomRight),
+        // ),
         child: _isLoading
-            ? Center(child: CircularProgressIndicator(
-              backgroundColor: Colors.white,
-            ))
+            ? Center(
+                child: CircularProgressIndicator(
+                backgroundColor: Colors.white,
+              ))
             : ListView(
                 children: <Widget>[
                   headerSection(),
@@ -59,9 +60,12 @@ class _RegisterPageState extends State<RegisterPage> {
         margin: EdgeInsets.only(top: 20.0, bottom: 15),
         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
         child: Container(
-          child: Text(" Infinity Mart",
-              style: Theme.of(context).textTheme.headline1,),
-        ));
+            child: Center(
+          child: Text(
+            " Infinity Mart",
+            style: Theme.of(context).textTheme.headline1,
+          ),
+        )));
   }
 
   registerUser(String name, email, password, password2) async {
@@ -75,9 +79,9 @@ class _RegisterPageState extends State<RegisterPage> {
     };
     var jsonResponse;
     var response = await http.post(
-        "https://infintymall.herokuapp.com/user/api/register",
-        body: data,
-       );
+      "https://infintymall.herokuapp.com/user/api/register",
+      body: data,
+    );
     jsonResponse = json.decode(response.body.toString());
     if (response.statusCode == 200) {
       if (jsonResponse != null) {
@@ -101,10 +105,10 @@ class _RegisterPageState extends State<RegisterPage> {
             context: context,
             builder: (context) {
               return CupertinoAlertDialog(
-                title: Text("Error",
-                    style: Theme.of(context).textTheme.headline4),
+                title:
+                    Text("Error", style: Theme.of(context).textTheme.headline4),
                 content: Text(
-                  a==null?'':a,
+                  a == null ? '' : a,
                   style: Theme.of(context).textTheme.headline5,
                 ),
               );
@@ -115,8 +119,8 @@ class _RegisterPageState extends State<RegisterPage> {
             context: context,
             builder: (context) {
               return CupertinoAlertDialog(
-                title: Text("Error",
-                    style: Theme.of(context).textTheme.headline4),
+                title:
+                    Text("Error", style: Theme.of(context).textTheme.headline4),
                 content: Text(
                   "Invalid email",
                   style: Theme.of(context).textTheme.headline5,
@@ -141,57 +145,56 @@ class _RegisterPageState extends State<RegisterPage> {
         children: <Widget>[
           TextFormField(
             controller: nameController,
-            cursorColor: Colors.white,
-            style: TextStyle(color: Colors.white),
+            cursorColor: Colors.black,
+            style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
-              icon: Icon(Icons.supervised_user_circle, color: Colors.white),
+              icon: Icon(Icons.supervised_user_circle, color: Colors.black),
               hintText: "Full Name",
               border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              hintStyle: TextStyle(color: Colors.white),
+                  borderSide: BorderSide(color: Colors.black)),
+              hintStyle: TextStyle(color: Colors.black),
             ),
           ),
           SizedBox(height: 30.0),
           TextFormField(
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
-            cursorColor: Colors.white,
-            
-            style: TextStyle(color: Colors.white),
+            cursorColor: Colors.black,
+            style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
-              icon: Icon(Icons.email, color: Colors.white),
+              icon: Icon(Icons.email, color: Colors.black),
               hintText: "Email",
               border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              hintStyle: TextStyle(color: Colors.white),
+                  borderSide: BorderSide(color: Colors.black)),
+              hintStyle: TextStyle(color: Colors.black),
             ),
           ),
           SizedBox(height: 30.0),
           TextFormField(
             controller: passwordController,
-            cursorColor: Colors.white,
+            cursorColor: Colors.black,
             obscureText: true,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
-              icon: Icon(Icons.lock, color: Colors.white),
+              icon: Icon(Icons.lock, color: Colors.black),
               hintText: "Password",
               border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              hintStyle: TextStyle(color: Colors.white),
+                  borderSide: BorderSide(color: Colors.black)),
+              hintStyle: TextStyle(color: Colors.black),
             ),
           ),
           SizedBox(height: 30.0),
           TextFormField(
             controller: password2Controller,
-            cursorColor: Colors.white,
+            cursorColor: Colors.black,
             obscureText: true,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
-              icon: Icon(Icons.lock, color: Colors.white),
+              icon: Icon(Icons.lock, color: Colors.black),
               hintText: "Re-enter Password",
               border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              hintStyle: TextStyle(color: Colors.white),
+                  borderSide: BorderSide(color: Colors.black)),
+              hintStyle: TextStyle(color: Colors.black),
             ),
           ),
           SizedBox(height: 30.0),
@@ -207,7 +210,7 @@ class _RegisterPageState extends State<RegisterPage> {
       width: MediaQuery.of(context).size.width,
       height: 40.0,
       padding: EdgeInsets.symmetric(horizontal: 30.0),
-      margin: EdgeInsets.only(top: 45.0, bottom: 3),
+      margin: EdgeInsets.symmetric(vertical: 20.0,horizontal: 25.0),
       child: RaisedButton(
         onPressed: emailController.text == "" ||
                 passwordController.text == "" ||
@@ -226,8 +229,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       context: context,
                       builder: (context) {
                         return CupertinoAlertDialog(
-                          title: Text("Error",
-                              style: Theme.of(context).textTheme.headline4,),
+                          title: Text(
+                            "Error",
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
                           content: Text(
                             "Minimum password length 8 characters",
                             style: Theme.of(context).textTheme.headline5,
@@ -260,8 +265,8 @@ class _RegisterPageState extends State<RegisterPage> {
               },
         elevation: 0.0,
         color: Colors.green,
-        child: Text("Sign In", style: TextStyle(color: Colors.white)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        child: Text("Sign Up", style: TextStyle(color: Colors.white)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       ),
     );
   }

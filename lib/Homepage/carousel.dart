@@ -99,7 +99,7 @@ class _CarouselPagesState extends State<CarouselPages> {
                         'assets/images/earphones.jpg',
                       ),
                     )
-                  : Center(child: CircularProgressIndicator()),
+                  : Center(child: CircularProgressIndicator()),   
               b != null
                   ? CachedNetworkImage(
                       imageUrl: b,
