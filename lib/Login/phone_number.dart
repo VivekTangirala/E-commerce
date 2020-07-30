@@ -19,25 +19,25 @@ class _SignupPageState extends State<SignupPage> {
         .copyWith(statusBarColor: Colors.transparent));
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Color(0xFFe74c3c), Color(0xFFF09819)],
-              begin: Alignment.center,
-              end: Alignment.bottomRight),
-        ),
+        // decoration: BoxDecoration(
+        //   gradient: LinearGradient(
+        //       colors: [Color(0xFFe74c3c), Color(0xFFF09819)],
+        //       begin: Alignment.top,
+        //       end: Alignment.bottomRight),
+        // ),
         child: _isLoading
-            ?SizedBox(child:  
-            Center(
-                child: CircularProgressIndicator(
+            ? SizedBox(
+                child: Center(
+                    child: CircularProgressIndicator(
                 backgroundColor: Colors.white,
               )))
             : ListView(
                 children: <Widget>[
-                  loginAccountbutton(),
                   headerSection(),
                   SizedBox(height: 30.0),
                   textSection(),
                   senOTPButton(),
+                  loginAccountbutton(),
                 ],
               ),
       ),
@@ -48,11 +48,14 @@ class _SignupPageState extends State<SignupPage> {
 
   Container headerSection() {
     return Container(
-      margin: EdgeInsets.only(top: 50.0, bottom: 15),
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-      child: Text(" Infinity Mart",
-              style: Theme.of(context).textTheme.headline1,),
-    );
+        margin: EdgeInsets.only(top: 50.0, bottom: 15),
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+        child: Center(
+          child: Text(
+            " Infinity Mart",
+            style: Theme.of(context).textTheme.headline1,
+          ),
+        ));
   }
 
   sendOTP(String phone) async {
@@ -82,15 +85,17 @@ class _SignupPageState extends State<SignupPage> {
           context: context,
           builder: (context) {
             return CupertinoAlertDialog(
-              title: Text(" Error",
-              style: Theme.of(context).textTheme.headline4,),
+              title: Text(
+                " Error",
+                style: Theme.of(context).textTheme.headline4,
+              ),
               content: Text(
                 "${jsonResponse["detail"]}",
-                 style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headline5,
               ),
             );
           });
-            print(response.body);
+      print(response.body);
     }
   }
 
@@ -108,18 +113,20 @@ class _SignupPageState extends State<SignupPage> {
         children: <Widget>[
           TextField(
             controller: phoneController,
-            cursorColor: Colors.white,
+            cursorColor: Colors.black,
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               WhitelistingTextInputFormatter.digitsOnly
             ],
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
-              icon: Icon(Icons.phone, color: Colors.white),
+              icon: Icon(Icons.phone, color: Colors.black),
               hintText: "phone",
               border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              hintStyle: TextStyle(color: Colors.white),
+                  borderSide: BorderSide(
+                color: Color(0xffe75c3c),
+              )),
+              hintStyle: TextStyle(color: Colors.black),
             ),
           ),
           SizedBox(height: 30.0),
@@ -144,7 +151,8 @@ class _SignupPageState extends State<SignupPage> {
                   _isLoading = true;
                 });
 
-                if (phoneController.text.length < 8||phoneController.text.length>12) {
+                if (phoneController.text.length < 8 ||
+                    phoneController.text.length > 12) {
                   setState(() {
                     _isLoading = false;
                   });
@@ -152,11 +160,13 @@ class _SignupPageState extends State<SignupPage> {
                       context: context,
                       builder: (context) {
                         return CupertinoAlertDialog(
-                          title: Text("Error",
-                               style: Theme.of(context).textTheme.headline4,),
+                          title: Text(
+                            "Error",
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
                           content: Text(
                             "Invalid Number",
-                             style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.headline5,
                           ),
                         );
                       });
@@ -166,32 +176,30 @@ class _SignupPageState extends State<SignupPage> {
               },
         elevation: 0.0,
         color: Colors.green,
-        child: Text("Send OTP", style: TextStyle(color: Colors.white)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        child: Text("Send OTP", style: Theme.of(context).textTheme.headline6),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       ),
     );
   }
 
-  Container loginAccountbutton() {
-    return Container(
-      height: 40.0,
-      alignment: Alignment.topRight,
-      padding: EdgeInsets.symmetric(horizontal: 30.0),
-      margin: EdgeInsets.only(top: 26.0, bottom: 3),
-      child: RaisedButton(
-        onPressed: () {
+  Widget loginAccountbutton() {
+    return InkWell(
+        onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => LoginPage()),
           );
         },
-        elevation: 0.0,
-        color: Colors.green,
-        child: Text("Already Have an Account  ?",
-             style: Theme.of(context).textTheme.headline4,),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-      ),
-    );
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 15.0),
+          child: Center(
+            child: Text(
+              "Already Have an Account  ?",
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          ),
+        ));
   }
 
   final TextEditingController phoneController = new TextEditingController();
