@@ -58,11 +58,7 @@ class _DetailsPageState extends State<DetailsPage>
                   labelColor: Colors.black87,
                   unselectedLabelColor: Colors.grey,
                   tabs: [
-<<<<<<< HEAD
                     Tab( text: "Ingredients"),
-=======
-                    Tab( text: "ingredients",),
->>>>>>> 1c287f83fae4d443d08c3f58fa40081854e06153
                     Tab( text: "Tab 2"),
                   ],
                 ),
