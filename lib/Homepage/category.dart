@@ -70,7 +70,7 @@ class Category extends StatelessWidget {
                         child: Center(
                           child: Text(
                             "Vegetables",
-                            style: Theme.of(context).textTheme.bodyText1,
+                            style: Theme.of(context).textTheme.headline2,
                           ),
                         )),
                     Container(
@@ -80,17 +80,17 @@ class Category extends StatelessWidget {
                         child: Row(children: [
                           Text(
                             "Up to",
-                            style: Theme.of(context).textTheme.bodyText2,
+                            style: Theme.of(context).textTheme.headline4,
                           ),
                           StrikeThroughWidget(
                             child: Text(
                               "30%",
-                              style: Theme.of(context).textTheme.bodyText2,
+                              style: Theme.of(context).textTheme.headline4,
                             ),
                           ),
                           Text(
                             "off",
-                            style: Theme.of(context).textTheme.bodyText2,
+                            style: Theme.of(context).textTheme.headline4,
                           ),
                         ]),
                       ),

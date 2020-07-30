@@ -26,7 +26,7 @@ class _HomefragmentState extends State<HomeFragment> {
             alignment: Alignment.centerLeft,
             child: Text(
               "Treg Mart",
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.headline3,
             ),
           ),
           actions: <Widget>[
@@ -67,7 +67,7 @@ class _HomefragmentState extends State<HomeFragment> {
                 margin: EdgeInsets.all(16),
                 child: Text(
                   "Just 4 U",
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.headline3,
                 ),
               ),
             ),
@@ -78,7 +78,7 @@ class _HomefragmentState extends State<HomeFragment> {
                 margin: EdgeInsets.all(16),
                 child: Text(
                   "Category",
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.headline3,
                 ),
               ),
             ),

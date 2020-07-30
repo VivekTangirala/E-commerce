@@ -37,6 +37,7 @@ class _SignupPageState extends State<SignupPage> {
                   SizedBox(height: 30.0),
                   textSection(),
                   senOTPButton(),
+                  SizedBox(height: 50.0),
                   loginAccountbutton(),
                 ],
               ),
@@ -162,11 +163,11 @@ class _SignupPageState extends State<SignupPage> {
                         return CupertinoAlertDialog(
                           title: Text(
                             "Error",
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.headline2,
                           ),
                           content: Text(
                             "Invalid Number",
-                            style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.headline2,
                           ),
                         );
                       });
@@ -175,8 +176,8 @@ class _SignupPageState extends State<SignupPage> {
                 }
               },
         elevation: 0.0,
-        color: Colors.green,
-        child: Text("Send OTP", style: Theme.of(context).textTheme.headline6),
+        color: Color(0xffe74c3c),
+        child: Text("Send OTP", style: Theme.of(context).textTheme.headline2),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       ),
@@ -194,10 +195,16 @@ class _SignupPageState extends State<SignupPage> {
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 15.0),
           child: Center(
-            child: Text(
-              "Already Have an Account  ?",
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+          Text(
+            "Already have an account?",
+            style: Theme.of(context).textTheme.headline4,
+          ),
+          Text(
+            "Signin",
+            style: Theme.of(context).textTheme.headline2,
+          )
+        ]),
           ),
         ));
   }

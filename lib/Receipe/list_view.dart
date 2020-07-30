@@ -102,7 +102,7 @@ class _ReceipeViewState extends State<ReceipeView>
               alignment: Alignment.centerLeft,
               child: Text(
                 "Items",
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.headline3,
               )),
           actions: <Widget>[
             IconButton(
@@ -135,7 +135,7 @@ class _ReceipeViewState extends State<ReceipeView>
         body: ListView(children: <Widget>[
           Text(
             "Recepie",
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.headline2,
           ),
           body
         ]));
