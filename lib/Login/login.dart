@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: textSection(),
                   ),
                   buttonSection(),
-                  newAccountbutton(),
+                  newAccountbutton()
                 ],
               ),
       ),
@@ -103,10 +103,10 @@ class _LoginPageState extends State<LoginPage> {
           builder: (context) {
             return CupertinoAlertDialog(
               title:
-                  Text("Error", style: Theme.of(context).textTheme.headline4),
+                  Text("Error", style: Theme.of(context).textTheme.headline2),
               content: Text(
-                "Invalid Credintials",
-                style: Theme.of(context).textTheme.headline5,
+                "Invalid Credintials!",
+                style: Theme.of(context).textTheme.headline2,
               ),
             );
           });
@@ -127,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           TextFormField(
             controller: phoneController,
-            cursorColor: Colors.white,
+            cursorColor: Colors.black,
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
               icon: Icon(Icons.phone, color: Colors.black),
@@ -173,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
             margin: EdgeInsets.only(top: 26.0, bottom: 3),
             child: Text(
               "Skip login",
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.headline2,
             )));
   }
 
@@ -183,7 +183,7 @@ class _LoginPageState extends State<LoginPage> {
       width: MediaQuery.of(context).size.width,
       height: 40.0,
       padding: EdgeInsets.symmetric(horizontal: 30.0),
-      margin: EdgeInsets.symmetric(vertical: 10.0,horizontal: 30.0),
+      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
       child: RaisedButton(
         onPressed: phoneController.text == "" || passwordController.text == ""
             ? null
@@ -194,31 +194,50 @@ class _LoginPageState extends State<LoginPage> {
                 signIn(phoneController.text, passwordController.text);
               },
         elevation: 0.0,
-        color: Colors.black,
-        child: Text("Sign In", style: Theme.of(context).textTheme.headline6),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
+        color: Color(0xffe74c3c),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+          Text("Sign in", style: Theme.of(context).textTheme.headline2),
+          SizedBox(width:10.0),
+          Icon(
+            Icons.exit_to_app,
+            color: Colors.white,
+          )
+        ]),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       ),
     );
   }
 
   Widget newAccountbutton() {
     return InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SignupPage()),
-          );
-        },
-        child: Container(
-            //width: MediaQuery.of(context).size.width,
-            height: 40.0,
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 30.0),
-            margin: EdgeInsets.only(top: 26.0, bottom: 3),
-            child: Text(
-              "Create new account",
-              style: Theme.of(context).textTheme.bodyText1,
-            )));
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SignupPage()),
+        );
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: 40.0,
+        alignment: Alignment.centerRight,
+        padding: EdgeInsets.symmetric(horizontal: 30.0),
+        margin: EdgeInsets.only(top: 45.0, bottom: 3),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+          Text(
+            "Don't have an account?",
+            style: Theme.of(context).textTheme.headline4,
+          ),
+          
+          Text(
+            "Signup",
+            style: Theme.of(context).textTheme.headline2,
+          )
+        ]),
+      ),
+    );
   }
 
   final TextEditingController phoneController = new TextEditingController();

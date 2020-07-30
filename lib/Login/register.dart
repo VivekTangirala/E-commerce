@@ -106,10 +106,10 @@ class _RegisterPageState extends State<RegisterPage> {
             builder: (context) {
               return CupertinoAlertDialog(
                 title:
-                    Text("Error", style: Theme.of(context).textTheme.headline4),
+                    Text("Error", style: Theme.of(context).textTheme.headline2),
                 content: Text(
                   a == null ? '' : a,
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headline2,
                 ),
               );
             });
@@ -120,10 +120,10 @@ class _RegisterPageState extends State<RegisterPage> {
             builder: (context) {
               return CupertinoAlertDialog(
                 title:
-                    Text("Error", style: Theme.of(context).textTheme.headline4),
+                    Text("Error", style: Theme.of(context).textTheme.headline2),
                 content: Text(
                   "Invalid email",
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headline2,
                 ),
               );
             });
@@ -146,7 +146,7 @@ class _RegisterPageState extends State<RegisterPage> {
           TextFormField(
             controller: nameController,
             cursorColor: Colors.black,
-            style: TextStyle(color: Colors.black),
+            style: Theme.of(context).textTheme.bodyText1,
             decoration: InputDecoration(
               icon: Icon(Icons.supervised_user_circle, color: Colors.black),
               hintText: "Full Name",
@@ -160,7 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
             cursorColor: Colors.black,
-            style: TextStyle(color: Colors.black),
+            style: Theme.of(context).textTheme.bodyText1,
             decoration: InputDecoration(
               icon: Icon(Icons.email, color: Colors.black),
               hintText: "Email",
@@ -174,7 +174,7 @@ class _RegisterPageState extends State<RegisterPage> {
             controller: passwordController,
             cursorColor: Colors.black,
             obscureText: true,
-            style: TextStyle(color: Colors.black),
+            style: Theme.of(context).textTheme.bodyText1,
             decoration: InputDecoration(
               icon: Icon(Icons.lock, color: Colors.black),
               hintText: "Password",
@@ -188,7 +188,7 @@ class _RegisterPageState extends State<RegisterPage> {
             controller: password2Controller,
             cursorColor: Colors.black,
             obscureText: true,
-            style: TextStyle(color: Colors.black),
+            style: Theme.of(context).textTheme.bodyText1,
             decoration: InputDecoration(
               icon: Icon(Icons.lock, color: Colors.black),
               hintText: "Re-enter Password",
@@ -231,11 +231,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         return CupertinoAlertDialog(
                           title: Text(
                             "Error",
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.headline2,
                           ),
                           content: Text(
                             "Minimum password length 8 characters",
-                            style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.headline2,
                           ),
                         );
                       });
@@ -253,11 +253,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       builder: (context) {
                         return CupertinoAlertDialog(
                           title: Text("Error",
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold)),
+                              style: Theme.of(context).textTheme.headline2),
                           content: Text(
                             "please check the details",
-                            style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.headline2,
                           ),
                         );
                       });
@@ -265,7 +264,7 @@ class _RegisterPageState extends State<RegisterPage> {
               },
         elevation: 0.0,
         color: Colors.green,
-        child: Text("Sign Up", style: TextStyle(color: Colors.white)),
+        child: Text("Sign Up", style: Theme.of(context).textTheme.headline2),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       ),
     );

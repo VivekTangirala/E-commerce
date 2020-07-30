@@ -103,7 +103,7 @@ class _ScreentwoState extends State<Screentwo> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Second",style:Theme.of(context).textTheme.caption,),
+          title: Text("Second",style:Theme.of(context).textTheme.headline3,),
         ),
         body: Text(value));
   }

@@ -117,8 +117,8 @@ class _OtpScreenState extends State<OtpScreen> {
       padding: EdgeInsets.symmetric(horizontal: 30.0),
       margin: EdgeInsets.symmetric(vertical: 30.0, horizontal: 30.0),
       child: RaisedButton(
-          color: Colors.black,
-          child: Text("Confirm", style: Theme.of(context).textTheme.headline6),
+          color: Colors.grey,
+          child: Text("Confirm", style: Theme.of(context).textTheme.headline2),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
           onPressed: () {
@@ -155,10 +155,10 @@ class _OtpScreenState extends State<OtpScreen> {
           builder: (context) {
             return CupertinoAlertDialog(
               title:
-                  Text("Error", style: Theme.of(context).textTheme.headline4),
+                  Text("Error", style: Theme.of(context).textTheme.headline2),
               content: Text(
                 jsonResponse["detail"],
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headline2,
               ),
             );
           });
@@ -190,10 +190,10 @@ class _OtpScreenState extends State<OtpScreen> {
           builder: (context) {
             return CupertinoAlertDialog(
               title:
-                  Text("Error", style: Theme.of(context).textTheme.headline4),
+                  Text("Error", style: Theme.of(context).textTheme.headline2),
               content: Text(
                 jsonResponse["detail"],
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headline2,
               ),
             );
           });
@@ -226,14 +226,14 @@ class _OtpScreenState extends State<OtpScreen> {
                 child: snapshot.data == 0
                     ? Text(
                         'Resend OTP?',
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.headline2,
                       )
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
                             ' Try after ${snapshot.hasData ? snapshot.data.toString() : 30} seconds ',
-                            style: Theme.of(context).textTheme.bodyText1,
+                            style: Theme.of(context).textTheme.headline2,
                           ),
                         ],
                       ),
@@ -251,7 +251,7 @@ Container enterOTP(BuildContext context) {
       child: Container(
         child: Text(
           "Enter OTP",
-          style: Theme.of(context).textTheme.headline4,
+          style: Theme.of(context).textTheme.headline3,
         ),
       ));
 }

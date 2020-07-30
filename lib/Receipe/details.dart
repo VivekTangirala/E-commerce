@@ -77,17 +77,17 @@ class _DetailsPageState extends State<DetailsPage>
             child: Column(
               children: <Widget>[
                 Text('Nutrition',
-                    style: Theme.of(context).textTheme.bodyText1,),
+                    style: Theme.of(context).textTheme.headline2,),
                 NutritionWidget(
                   nutrients: recipe.nutrients,
                 ),
                 Text('Ingredients',
-               style: Theme.of(context).textTheme.bodyText1,),
+               style: Theme.of(context).textTheme.headline2,),
                 IngredientsWidget(
                   ingredients: recipe.ingredients,
                 ),
                 Text('Steps',
-                    style: Theme.of(context).textTheme.bodyText1,),
+                    style: Theme.of(context).textTheme.headline2,),
                 RecipeSteps(
                   steps: recipe.steps,
                 )
@@ -126,7 +126,7 @@ class RecipeSteps extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(steps[index],
-                      style: Theme.of(context).textTheme.bodyText2,),
+                      style: Theme.of(context).textTheme.bodyText1,),
                 ),
               )
             ],
