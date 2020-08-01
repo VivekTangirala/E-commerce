@@ -35,6 +35,8 @@ class _SignupPageState extends State<SignupPage> {
                 children: <Widget>[
                   headerSection(),
                   SizedBox(height: 30.0),
+                  getting_started(),
+                  getting_started1(),
                   textSection(),
                   senOTPButton(),
                   SizedBox(height: 50.0),
@@ -44,19 +46,42 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
   }
-
   //Header Handling
 
   Container headerSection() {
     return Container(
-        margin: EdgeInsets.only(top: 50.0, bottom: 15),
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+        margin: EdgeInsets.only(top: 30.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
         child: Center(
           child: Text(
             " Infinity Mart",
             style: Theme.of(context).textTheme.headline1,
           ),
         ));
+  }
+
+  Widget getting_started() {
+    return Container(
+      alignment: Alignment.topLeft,
+      margin: EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.only(left: 20.0),
+      child: Text(
+        " Getting started",
+        style: Theme.of(context).textTheme.headline3,
+      ),
+    );
+  }
+
+  Widget getting_started1() {
+    return Container(
+      alignment: Alignment.topLeft,
+      margin: EdgeInsets.only(bottom: 50),
+      padding: EdgeInsets.only(left: 20.0),
+      child: Text(
+        " Create an account to continue",
+        style: Theme.of(context).textTheme.headline4,
+      ),
+    );
   }
 
   sendOTP(String phone) async {
@@ -177,7 +202,7 @@ class _SignupPageState extends State<SignupPage> {
               },
         elevation: 0.0,
         color: Color(0xffe74c3c),
-        child: Text("Send OTP", style: Theme.of(context).textTheme.headline2),
+        child: Text("Continue", style:Theme.of(context).textTheme.headline2.copyWith(color:Colors.white)),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       ),
@@ -195,16 +220,18 @@ class _SignupPageState extends State<SignupPage> {
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 15.0),
           child: Center(
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-          Text(
-            "Already have an account?",
-            style: Theme.of(context).textTheme.headline4,
-          ),
-          Text(
-            "Signin",
-            style: Theme.of(context).textTheme.headline2,
-          )
-        ]),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Already have an account?",
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                  Text(
+                    "Signin",
+                    style: Theme.of(context).textTheme.headline2,
+                  )
+                ]),
           ),
         ));
   }

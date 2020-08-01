@@ -35,9 +35,9 @@ ThemeData basicTheme() {
       ),
       subtitle1: base.subtitle1.copyWith(
         fontFamily: "DM_Sans",
-        color: Colors.grey[800],
+        color: Colors.grey[700],
         fontSize: 18.0,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.normal,
       ),
       bodyText1: base.bodyText1.copyWith(
         fontFamily: "DM_Sans",
@@ -48,7 +48,7 @@ ThemeData basicTheme() {
       bodyText2: base.bodyText2.copyWith(
         fontFamily: "DM_Sans",
         color: Colors.grey[800],
-        fontSize: 16.0,
+        fontSize: 15.0,
         fontWeight: FontWeight.w600,
       ),
     );

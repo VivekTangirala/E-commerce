@@ -112,11 +112,35 @@ class _LoginPageState extends State<LoginPage> {
           });
     }
   }
+  //getting started section
+// Widget getting_started() {
+//     return Container(
+//       alignment: Alignment.topLeft,
+//       margin: EdgeInsets.only(bottom: 10),
+//       padding: EdgeInsets.only(left: 20.0),
+//       child: Text(
+//         "",
+//         style: Theme.of(context).textTheme.headline3,
+//       ),
+//     );
+//   }
 
-  //Text Handling
+//   Widget getting_started1() {
+//     return Container(
+//       alignment: Alignment.topLeft,
+//       margin: EdgeInsets.only(bottom: 50),
+//       padding: EdgeInsets.only(left: 20.0),
+//       child: Text(
+//         " Create an account to continue",
+//         style: Theme.of(context).textTheme.headline4,
+//       ),
+//     );
+//   }
+//Text Handling
 
   Container textSection() {
     return Container(
+      margin: EdgeInsets.only(bottom:50.0),
       padding: EdgeInsets.symmetric(
         horizontal: 15.0,
         vertical: 20.0,
@@ -180,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
   Container buttonSection() {
     return Container(
       decoration: BoxDecoration(),
-      width: MediaQuery.of(context).size.width,
+      //width: MediaQuery.of(context).size.width,
       height: 40.0,
       padding: EdgeInsets.symmetric(horizontal: 30.0),
       margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
@@ -197,8 +221,8 @@ class _LoginPageState extends State<LoginPage> {
         color: Color(0xffe74c3c),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-          Text("Sign in", style: Theme.of(context).textTheme.headline2),
-          SizedBox(width:10.0),
+          Text("Sign in", style: Theme.of(context).textTheme.headline2.copyWith(color:Colors.white)),
+          SizedBox(width:20.0),
           Icon(
             Icons.exit_to_app,
             color: Colors.white,
@@ -228,7 +252,7 @@ class _LoginPageState extends State<LoginPage> {
             Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
           Text(
             "Don't have an account?",
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.headline5,
           ),
           
           Text(

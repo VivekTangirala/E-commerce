@@ -48,7 +48,7 @@ final  bool a = true;
       position: BadgePosition.topLeft(top: 6, left: 6),
       child: Container(
         margin: EdgeInsets.only(left: 6, bottom: 6),
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(10),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -70,7 +70,7 @@ final  bool a = true;
   Widget _badgeless(int index) {
     return Container(
       margin: EdgeInsets.only(left: 6, bottom: 6),
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(10),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         image: DecorationImage(

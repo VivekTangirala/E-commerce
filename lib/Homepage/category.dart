@@ -30,21 +30,22 @@ class Category extends StatelessWidget {
           return GestureDetector(
             child: Container(
               margin: EdgeInsets.only(left: 4, bottom: 3),
-              decoration: BoxDecoration(
-                // border: Border.all(width: 1.0),
-                borderRadius: BorderRadius.all(
-                    Radius.circular(20.0) //         <--- border radius here
-                    ),
-              ),
+              // decoration: BoxDecoration(
+              //   // border: Border.all(width: 1.0),
+              //   borderRadius: BorderRadius.all(
+              //       Radius.circular(20.0) //         <--- border radius here
+              //       ),
+              // ),
               child: SizedBox(
                 // height: 100,
                 width: 160,
-                child: Card(
-                  color: Colors.grey[200],
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.white70, width: 1),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                child: Container(
+                  margin: EdgeInsets.all(5.0),
+                  // color: Colors.grey[200],
+                  // shape: RoundedRectangleBorder(
+                  //   side: BorderSide(color: Colors.white70, width: 1),
+                  //   borderRadius: BorderRadius.circular(20),
+                  // ),
                   child: Column(children: [
                     SizedBox(
                       height: 120,
@@ -80,17 +81,18 @@ class Category extends StatelessWidget {
                         child: Row(children: [
                           Text(
                             "Up to",
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.bodyText1,
                           ),
+                          
                           StrikeThroughWidget(
                             child: Text(
                               "30%",
-                              style: Theme.of(context).textTheme.headline4,
+                              style: Theme.of(context).textTheme.bodyText1,
                             ),
                           ),
                           Text(
                             "off",
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ]),
                       ),
