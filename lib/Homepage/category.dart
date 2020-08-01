@@ -61,13 +61,13 @@ class Category extends StatelessWidget {
                               color: Colors.black12, // set border color
                               width: 0.6), // set border width
                           borderRadius: BorderRadius.all(Radius.circular(
-                              20.0)), // set rounded corner radius
+                              10.0)), // set rounded corner radius
                         ),
                       ),
                     ),
                     Container(
                         margin: EdgeInsets.only(
-                            top: 10, left: 3, right: 3, bottom: 3),
+                            top: 3, left: 3, right: 3, bottom: 3),
                         child: Center(
                           child: Text(
                             "Vegetables",
@@ -76,7 +76,7 @@ class Category extends StatelessWidget {
                         )),
                     Container(
                       margin:
-                          EdgeInsets.only(top: 3, left: 20, right: 3, bottom: 3),
+                          EdgeInsets.only( left: 20, right: 3,),
                       child: Center(
                         child: Row(children: [
                           Text(

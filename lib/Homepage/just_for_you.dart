@@ -59,7 +59,7 @@ final  bool a = true;
               width: 0.6),
                // set border width
           borderRadius: BorderRadius.all(
-              Radius.circular(20.0)), // set rounded corner radius
+              Radius.circular(10.0)), // set rounded corner radius
         ),
         
         
@@ -82,7 +82,7 @@ final  bool a = true;
             color: Colors.black12, // set border color
             width: 0.6), // set border width
         borderRadius: BorderRadius.all(
-            Radius.circular(20.0)), // set rounded corner radius
+            Radius.circular(10.0)), // set rounded corner radius
       ),
     );
   }
