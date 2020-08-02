@@ -3,8 +3,6 @@ import 'package:ecom/Login/login.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../placeholder_widget.dart';
 import 'Utils/data.dart';
 import 'details.dart';
 
@@ -93,22 +91,17 @@ class _ReceipeViewState extends State<ReceipeView>
 
     return Scaffold(
         appBar: AppBar(
-          //backgroundColor: Color(0xFFf83600),
-          // leading: IconButton(
-          //   icon: Icon(EvaIcons.menu,color:Colors.black),
-          //   onPressed: () {},
-          // ),
           title: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Items",
+                "Recipe",
                 style: Theme.of(context).textTheme.headline3,
               )),
           actions: <Widget>[
             IconButton(
               icon: Icon(
                 EvaIcons.search,
-                color: Colors.white,
+                color: Colors.black,
               ),
               onPressed: () {
                 showSearch(context: context, delegate: SearchBar());
@@ -117,7 +110,7 @@ class _ReceipeViewState extends State<ReceipeView>
             IconButton(
               icon: Icon(
                 EvaIcons.shoppingCartOutline,
-                color: Colors.white,
+                color: Colors.black,
               ),
               padding: EdgeInsets.only(left: 10, right: 15),
               onPressed: () async {

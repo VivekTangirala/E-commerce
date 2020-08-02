@@ -5,6 +5,8 @@ import './Homepage/homefragment.dart';
 import './Receipe/list_view.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
+import 'Profile/main_profile.dart';
+
 class BottomNav extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -43,7 +45,7 @@ class _BottomNav extends State {
               child: ReceipeView(),
             ),
             Container(
-              color: Colors.green,
+             child: ProfileFirst(),
             ),
           ],
         ),
@@ -64,7 +66,7 @@ class _BottomNav extends State {
               icon: Icon(EvaIcons.homeOutline)),
           BottomNavyBarItem(
               inactiveColor: Colors.black54,
-              title: Text('Ingredients',
+              title: Text('Recipe',
                   style: Theme.of(context).textTheme.bodyText2),
               activeColor: Colors.black,
               icon: Icon(Icons.fastfood)

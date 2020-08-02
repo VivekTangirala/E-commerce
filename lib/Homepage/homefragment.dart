@@ -34,17 +34,19 @@ class _HomefragmentState extends State<HomeFragment> {
           ],
         )),
         body: Container(
-          margin: EdgeInsets.only(left:8),
+          margin: EdgeInsets.only(left: 8),
           child: SingleChildScrollView(
               child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
             _textsection(context),
             SizedBox(height: 10),
             _categoryList(),
+            SizedBox(height: 10),
             CarouselPages(),
-            _categoryheading(context,"Just 4 U"),
+            SizedBox(height: 10),
+            _categoryheading(context, "Just 4 U"),
             SpecialProducts(),
-             SizedBox(height: 15),
-            _categoryheading(context,"Category"),
+            SizedBox(height: 15),
+            _categoryheading(context, "Category"),
             Category(),
             Container(
                 margin: EdgeInsets.all(15),
@@ -112,7 +114,7 @@ class SearchBar extends SearchDelegate<String> {
 
 AppBar __appBar(BuildContext context) {
   return AppBar(
-    backgroundColor: Colors.white,
+    // backgroundColor: Colors.white,
     elevation: 0.0,
     leading: IconButton(
       icon: Icon(
@@ -128,8 +130,7 @@ AppBar __appBar(BuildContext context) {
       children: <Widget>[
         Align(
             alignment: Alignment.centerRight,
-            child: Padding(
-              padding: EdgeInsets.only(left: 70),
+            child: Center(
               child: Text(
                 "Treg Mart",
                 style: Theme.of(context).textTheme.headline3,
@@ -172,6 +173,7 @@ AppBar __appBar(BuildContext context) {
 }
 
 Widget _textsection(BuildContext context) {
+  String a="Anitesh";
   return Padding(
       padding: EdgeInsets.only(left: 7.0, top: 5.0),
       child: Column(
@@ -180,7 +182,9 @@ Widget _textsection(BuildContext context) {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "Hi , Vivek",
+              a != null ? "Hola, Amigo" : "Hi, $a",
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
               style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
@@ -217,11 +221,14 @@ Widget _categoryList() {
       itemBuilder: (BuildContext context, int index) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Chip(
-            backgroundColor: Theme.of(context).accentColor,
-            label: Text(ingredients[index],
-                style: TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold)),
+          child: InkWell(
+            onTap: () {},
+            child: Chip(
+              backgroundColor: Theme.of(context).accentColor,
+              label: Text(ingredients[index],
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+            ),
           ),
         );
       },
@@ -229,7 +236,7 @@ Widget _categoryList() {
   );
 }
 
-Widget _categoryheading(BuildContext context,String str) {
+Widget _categoryheading(BuildContext context, String str) {
   return Align(
     alignment: Alignment.centerLeft,
     child: Container(

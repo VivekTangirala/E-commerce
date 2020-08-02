@@ -67,8 +67,6 @@ class _DetailsPageState extends State<DetailsPage>
             ),
           ];
         },
-        // body: TabBarView(
-        //     children: <Widget>[MenuTab(), AboutTab(), ContactTab()],
         body: Container(
           color: Colors.white,
           padding: EdgeInsets.only(top: 8.0),

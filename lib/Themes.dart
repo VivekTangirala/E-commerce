@@ -18,6 +18,7 @@ ThemeData basicTheme() {
       ),
       headline3: base.headline3.copyWith(
         fontFamily: "DM_Sans",
+        letterSpacing: 1,
         color: Colors.black,
         fontSize: 24.0,
         fontWeight: FontWeight.bold,
@@ -57,6 +58,7 @@ ThemeData basicTheme() {
 
   final ThemeData base = ThemeData.light();
   return base.copyWith(
+      appBarTheme: AppBarTheme(color: Colors.white,elevation: 0),
       textTheme: _basictext(base.textTheme),
       primaryColor: Color(0xffe75c3c),
       scaffoldBackgroundColor: Colors.white,
