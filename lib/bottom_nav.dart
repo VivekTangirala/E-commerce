@@ -58,7 +58,7 @@ class _BottomNav extends State {
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(
               inactiveColor: Colors.black54,
-              activeColor: Color(0xffe75c3c),
+              activeColor: Colors.black,
               title: Text('  Home',
                   style: Theme.of(context).textTheme.bodyText2),
               icon: Icon(EvaIcons.homeOutline)),
@@ -66,14 +66,14 @@ class _BottomNav extends State {
               inactiveColor: Colors.black54,
               title: Text('Ingredients',
                   style: Theme.of(context).textTheme.bodyText2),
-              activeColor: Color(0xffe75c3c),
+              activeColor: Colors.black,
               icon: Icon(Icons.fastfood)
               ),
           BottomNavyBarItem(
               title: Text('   Profile',
                   style: Theme.of(context).textTheme.bodyText2),
               inactiveColor: Colors.black54,
-              activeColor: Color(0xffe75c3c),
+              activeColor: Colors.black,
               icon: Icon(
                 EvaIcons.person,
               )),

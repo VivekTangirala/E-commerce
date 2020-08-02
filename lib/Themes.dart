@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 ThemeData basicTheme() {
   TextTheme _basictext(TextTheme base) {
     return base.copyWith(
+    
       headline1: base.headline1.copyWith(
         fontFamily: "DM_Sans",
         color: Colors.black,
@@ -58,6 +59,8 @@ ThemeData basicTheme() {
   return base.copyWith(
       textTheme: _basictext(base.textTheme),
       primaryColor: Color(0xffe75c3c),
+      scaffoldBackgroundColor: Colors.white,
+      accentColor: Colors.grey[800],
       visualDensity: VisualDensity.adaptivePlatformDensity,
       iconTheme: IconThemeData(
         color: Colors.white,

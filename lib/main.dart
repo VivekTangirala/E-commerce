@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Think Big',
         theme: basicTheme(),
+        
         home: SplashScreen());
   }
 }
