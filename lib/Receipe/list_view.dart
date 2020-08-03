@@ -126,9 +126,18 @@ class _ReceipeViewState extends State<ReceipeView>
           ],
         ),
         body: ListView(children: <Widget>[
-          Text(
-            "Recepie",
-            style: Theme.of(context).textTheme.headline2,
+          Padding(
+            padding: EdgeInsets.only(left: 15.0, right: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "Explore",
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                Text("View More",style: Theme.of(context).textTheme.bodyText2,)
+              ],
+            ),
           ),
           body
         ]));
