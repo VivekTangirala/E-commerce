@@ -1,8 +1,10 @@
+import 'package:ecom/Cart/Cart.dart';
 import 'package:ecom/Homepage/just_for_you.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ecom/Login/login.dart';
+import 'Drawer.dart';
 import './carousel.dart';
 import './category.dart';
 import 'package:ecom/placeholder_widget.dart';
@@ -20,26 +22,15 @@ class _HomefragmentState extends State<HomeFragment> {
     return Scaffold(
         backgroundColor: Colors.white,
         key: _scaffoldKey,
-        appBar: __appBar(context),
-        drawer: Drawer(
-            child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              child: Text("Account"),
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            )
-          ],
-        )),
+        appBar: _appBar(context),
+        drawer: Drawer1(),
         body: Container(
           margin: EdgeInsets.only(left: 8),
           child: SingleChildScrollView(
               child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
             _textsection(context),
             SizedBox(height: 10),
-            _categoryList(),
+            Categorylist(),
             SizedBox(height: 10),
             CarouselPages(),
             SizedBox(height: 10),
@@ -112,7 +103,7 @@ class SearchBar extends SearchDelegate<String> {
   }
 }
 
-AppBar __appBar(BuildContext context) {
+AppBar _appBar(BuildContext context) {
   return AppBar(
     // backgroundColor: Colors.white,
     elevation: 0.0,
@@ -161,7 +152,7 @@ AppBar __appBar(BuildContext context) {
                 sharedPreferences.clear();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  MaterialPageRoute(builder: (context) => Carthome()),
                 );
               },
             ),
@@ -173,7 +164,7 @@ AppBar __appBar(BuildContext context) {
 }
 
 Widget _textsection(BuildContext context) {
-  String a="Anitesh";
+  String a = "Anitesh";
   return Padding(
       padding: EdgeInsets.only(left: 7.0, top: 5.0),
       child: Column(
@@ -201,40 +192,43 @@ Widget _textsection(BuildContext context) {
       ));
 }
 
-List<String> ingredients = [
-  "Fruits & vegetables",
-  "Snacks",
-  "Staples",
-  "Beaverages",
-  "Bakery & dairy",
-  "Personal care"
-];
-Widget _categoryList() {
-  return SizedBox(
-    height: 50,
-    width: double.infinity,
-    child: ListView.builder(
-      itemCount: ingredients.length,
-      shrinkWrap: true,
-      scrollDirection: Axis.horizontal,
-      physics: BouncingScrollPhysics(),
-      itemBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: InkWell(
-            onTap: () {},
-            child: Chip(
-              backgroundColor: Theme.of(context).accentColor,
-              label: Text(ingredients[index],
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
-            ),
-          ),
-        );
-      },
-    ),
-  );
-}
+// child: Column(
+//   children: <Widget>[
+//     _ingredients[index],
+//     // SizedBox(
+//     //     height: 5.0,
+//     //     width: 9.0,
+//     //     child: DecoratedBox(
+//     //         decoration: BoxDecoration(
+//     //             color: Colors.orangeAccent,
+//     //             borderRadius: BorderRadius.circular(5.0))))
+//   ],
+// ),
+
+// Widget _categoryList() {
+//   return SizedBox(
+//     height: 50,
+//     width: double.infinity,
+//     child: ListView.builder(
+//       itemCount: ingredients.length,
+//       shrinkWrap: true,
+//       scrollDirection: Axis.horizontal,
+//       physics: BouncingScrollPhysics(),
+//       itemBuilder: (BuildContext context, int index) {
+//         return Padding(
+//           padding: const EdgeInsets.all(8.0),
+//           child: InkWell(
+//             onTap: () {},
+//             child: Chip(
+//               backgroundColor: _chipcolor[index],
+//               label: _ingredients[index],
+//             ),
+//           ),
+//         );
+//       },
+//     ),
+//   );
+// }
 
 Widget _categoryheading(BuildContext context, String str) {
   return Align(
@@ -247,4 +241,74 @@ Widget _categoryheading(BuildContext context, String str) {
       ),
     ),
   );
+}
+
+List<Color> _chipcolor = [
+  Colors.orangeAccent,
+  Colors.orangeAccent,
+  Colors.orangeAccent,
+  Colors.orangeAccent,
+  Colors.orangeAccent,
+  Colors.orangeAccent,
+];
+
+List<Text> _ingredients = [
+  Text("Fruits & vegetables",
+      style: TextStyle(
+          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.bold)),
+  Text("Snacks",
+      style: TextStyle(
+          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
+  Text("Staples",
+      style: TextStyle(
+          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
+  Text("Beaverages",
+      style: TextStyle(
+          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
+  Text("Bakery & dairy",
+      style: TextStyle(
+          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
+  Text("Personal care",
+      style: TextStyle(
+          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
+];
+
+class Categorylist extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _categoryliststate();
+  }
+}
+
+class _categoryliststate extends State<Categorylist> {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 50,
+      width: double.infinity,
+      child: ListView.builder(
+        itemCount: _ingredients.length,
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        physics: BouncingScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  _chipcolor[index] = Colors.white;
+                  
+                });
+              },
+              child: Chip(
+                backgroundColor: _chipcolor[index],
+                label: _ingredients[index],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 }

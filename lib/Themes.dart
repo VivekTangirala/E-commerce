@@ -53,6 +53,12 @@ ThemeData basicTheme() {
         fontSize: 15.0,
         fontWeight: FontWeight.w600,
       ),
+      caption: base.caption.copyWith(
+        fontFamily:"DM_Sans",
+        color:Colors.deepOrange,
+        fontSize:20.0,
+        fontWeight:FontWeight.normal,
+      )
     );
   }
 
