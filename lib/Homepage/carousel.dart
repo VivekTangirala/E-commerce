@@ -34,6 +34,8 @@ class _CarouselPagesState extends State<CarouselPages> {
     fetchPost();
   }
 
+
+
   Future<List<Imaged>> fetchPost() async {
     final response = await http.get(
       'http://infintymall.herokuapp.com/homepage/api/carousel',
@@ -72,7 +74,7 @@ class _CarouselPagesState extends State<CarouselPages> {
     return SizedBox(
         //margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
         height: 175.0,
-        
+
         //width: 3000,
         //width: 300,
         child: FutureBuilder(
@@ -99,7 +101,7 @@ class _CarouselPagesState extends State<CarouselPages> {
                         'assets/images/earphones.jpg',
                       ),
                     )
-                  : Center(child: CircularProgressIndicator()),   
+                  : Center(child: CircularProgressIndicator()),
               b != null
                   ? CachedNetworkImage(
                       imageUrl: b,
