@@ -41,6 +41,7 @@ class Carthomestate extends State<Carthome> {
             ListView.builder(
                 itemCount: l1.length,
                 physics: ScrollPhysics(),
+                scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
                   return new Card(

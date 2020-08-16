@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:ecom/Homepage/categorylist.dart';
+import 'package:ecom/Login/login.dart';
 import 'package:ecom/Profile/main_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -160,8 +160,9 @@ class _Drawerstate extends State<Drawer1> {
         SizedBox(height: 15.0),
         InkWell(
           onTap: () {
+            Navigator.of(context).pop();
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => Categorylist()));
+                builder: (BuildContext context) => LoginPage()));
           },
           child: Container(
             margin: EdgeInsets.only(left: 15.0, right: 15.0),

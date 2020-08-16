@@ -1,10 +1,14 @@
+import 'package:ecom/Homepage/Drawer.dart';
 import 'package:ecom/Homepage/homefragment.dart';
 import 'package:ecom/Login/login.dart';
+import 'package:ecom/Receipe/categorylistrecipe.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Utils/data.dart';
 import 'details.dart';
+
+GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class ReceipeView extends StatefulWidget {
   @override
@@ -90,7 +94,18 @@ class _ReceipeViewState extends State<ReceipeView>
         ));
 
     return Scaffold(
+        key: _scaffoldKey,
+        drawer: Drawer1(),
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.menu,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              _scaffoldKey.currentState.openDrawer();
+            },
+          ),
           title: Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -125,22 +140,30 @@ class _ReceipeViewState extends State<ReceipeView>
             ),
           ],
         ),
-        body: ListView(children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(left: 15.0, right: 15.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "Explore",
-                  style: Theme.of(context).textTheme.headline3,
+        body: ListView(
+            padding: EdgeInsets.only(left: 8.0, right: 8.0),
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      "Explore",
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                    Text(
+                      "View More",
+                      style: Theme.of(context).textTheme.bodyText2,
+                    )
+                  ],
                 ),
-                Text("View More",style: Theme.of(context).textTheme.bodyText2,)
-              ],
-            ),
-          ),
-          body
-        ]));
+              ),
+              SizedBox(height: 15.0),
+              Categorylistrecipe(),
+              SizedBox(height: 15.0),
+              body
+            ]));
   }
 
   @override

@@ -33,14 +33,14 @@ List<Text> _ingredients = [
           color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
 ];
 
-class Categorylist extends StatefulWidget {
+class Categorylistrecipe extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return Categoryliststate();
+    return Categorylistrecipestate();
   }
 }
 
-class Categoryliststate extends State<Categorylist> {
+class Categorylistrecipestate extends State<Categorylistrecipe> {
   @override
   Widget build(BuildContext context) {
     // int _tabindex = 0;
@@ -79,7 +79,22 @@ class Categoryliststate extends State<Categorylist> {
           //             color: Colors.black,
           //           ));
           //     }),
-          Text("Fruits & vegetables",
+          Text("Popular",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.normal)),
+          Text("Top",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.normal)),
+          Text("Breakfast",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.normal)),
+          Text("Lunch",
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 18.0,
@@ -89,27 +104,11 @@ class Categoryliststate extends State<Categorylist> {
                   color: Colors.black,
                   fontSize: 18.0,
                   fontWeight: FontWeight.normal)),
-          Text("Staples",
+          Text("Dinner",
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 18.0,
                   fontWeight: FontWeight.normal)),
-          Text("Beaverages",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.normal)),
-          Text("Bakery & dairy",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.normal)),
-          Text("Personal care",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.normal)),
-        
         ],
       ),
     );

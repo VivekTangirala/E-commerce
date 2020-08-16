@@ -1,4 +1,7 @@
 import 'package:ecom/Cart/Cart.dart';
+import 'package:ecom/Homepage/BestOffers.dart';
+import 'package:ecom/Homepage/Discover.dart';
+import 'package:ecom/Homepage/Varieties.dart';
 import 'package:ecom/Homepage/just_for_you.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +11,9 @@ import 'Drawer.dart';
 import './carousel.dart';
 import './category.dart';
 import 'package:ecom/placeholder_widget.dart';
+
+import 'Invite.dart';
+import 'categorylist.dart';
 
 GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -20,38 +26,92 @@ class _HomefragmentState extends State<HomeFragment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        key: _scaffoldKey,
-        appBar: _appBar(context),
-        drawer: Drawer1(),
+      backgroundColor: Colors.white,
+      key: _scaffoldKey,
+      //appBar: _appBar(context),
+      drawer: Drawer1(),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              leading: IconButton(
+                icon: Icon(
+                  Icons.menu,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  _scaffoldKey.currentState.openDrawer();
+                },
+              ),
+              actions: [
+                IconButton(
+                  padding: EdgeInsets.only(left: 20),
+                  icon: Icon(
+                    EvaIcons.search,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    showSearch(context: context, delegate: SearchBar());
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    EvaIcons.shoppingCartOutline,
+                    color: Colors.black,
+                  ),
+                  padding: EdgeInsets.only(left: 20, right: 20.0),
+                  onPressed: () async {
+                    SharedPreferences sharedPreferences =
+                        await SharedPreferences.getInstance();
+                    sharedPreferences.clear();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Carthome()),
+                    );
+                  },
+                ),
+              ],
+              elevation: 0.0,
+              backgroundColor: Colors.white,
+              expandedHeight: 150.0,
+              floating: false,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                // title: Row(
+
+                background:
+                    // Image.asset("assets/images/tomato.png", fit: BoxFit.cover),
+                    CarouselPages(),
+              ),
+            ),
+          ];
+        },
         body: Container(
-          margin: EdgeInsets.only(left: 8),
+          margin: EdgeInsets.only(left: 8,right: 8),
           child: SingleChildScrollView(
-              child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-            _textsection(context),
-            SizedBox(height: 10),
-            Categorylist(),
-            SizedBox(height: 10),
-            CarouselPages(),
-            SizedBox(height: 10),
-            _categoryheading(context, "Just 4 U"),
-            SpecialProducts(),
-            SizedBox(height: 15),
-            _categoryheading(context, "Category"),
-            Category(),
-            Container(
-                margin: EdgeInsets.all(15),
-                padding: EdgeInsets.all(15),
-                height: 130,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage(
-                          'assets/images/drinks.jpg',
-                        )),
-                    borderRadius: BorderRadius.all(Radius.circular(25)))),
-          ])),
-        ));
+            child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+              _textsection(context),
+              SizedBox(height: 10),
+              Categorylist(),
+              SizedBox(height: 10),
+              _categoryheading(context, "Discover"),
+              // SpecialProducts(),
+              Discover(),
+              _categoryheading(context, "Best Offers"),
+              Bestoffers(),
+              //Category(),
+              _categoryheading(context, "Varieties"),
+
+              Varieties(),
+              SizedBox(height: 15.0),
+              Invite(),
+              _categoryheading(context, "Great Deals"),
+              Discover(),
+            ]),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -100,6 +160,78 @@ class SearchBar extends SearchDelegate<String> {
               title: Text(cities[index]),
             ),
         itemCount: suggestionList.length);
+  }
+}
+
+class SilverApp extends StatefulWidget {
+  @override
+  _SilverAppState createState() => _SilverAppState();
+}
+
+class _SilverAppState extends State<SilverApp> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              leading: IconButton(
+                icon: Icon(
+                  Icons.menu,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  //_scaffoldKey.currentState.openDrawer();
+                },
+              ),
+              actions: [
+                IconButton(
+                  padding: EdgeInsets.only(left: 20),
+                  icon: Icon(
+                    EvaIcons.search,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    showSearch(context: context, delegate: SearchBar());
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    EvaIcons.shoppingCartOutline,
+                    color: Colors.black,
+                  ),
+                  padding: EdgeInsets.only(left: 20),
+                  onPressed: () async {
+                    SharedPreferences sharedPreferences =
+                        await SharedPreferences.getInstance();
+                    sharedPreferences.clear();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Carthome()),
+                    );
+                  },
+                ),
+              ],
+              elevation: 0.0,
+              backgroundColor: Colors.white,
+              expandedHeight: 150.0,
+              floating: false,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                // title: Row(
+
+                background: CarouselPages(),
+              ),
+            ),
+          ];
+        },
+        body: Center(
+          child: Text("sample"),
+        ),
+      ),
+    );
   }
 }
 
@@ -181,7 +313,7 @@ Widget _textsection(BuildContext context) {
           ),
           SizedBox(height: 5.0),
           Text(
-            "Let's Explore",
+            "Explore TREG",
             style: Theme.of(context)
                 .textTheme
                 .headline3
@@ -191,44 +323,6 @@ Widget _textsection(BuildContext context) {
         ],
       ));
 }
-
-// child: Column(
-//   children: <Widget>[
-//     _ingredients[index],
-//     // SizedBox(
-//     //     height: 5.0,
-//     //     width: 9.0,
-//     //     child: DecoratedBox(
-//     //         decoration: BoxDecoration(
-//     //             color: Colors.orangeAccent,
-//     //             borderRadius: BorderRadius.circular(5.0))))
-//   ],
-// ),
-
-// Widget _categoryList() {
-//   return SizedBox(
-//     height: 50,
-//     width: double.infinity,
-//     child: ListView.builder(
-//       itemCount: ingredients.length,
-//       shrinkWrap: true,
-//       scrollDirection: Axis.horizontal,
-//       physics: BouncingScrollPhysics(),
-//       itemBuilder: (BuildContext context, int index) {
-//         return Padding(
-//           padding: const EdgeInsets.all(8.0),
-//           child: InkWell(
-//             onTap: () {},
-//             child: Chip(
-//               backgroundColor: _chipcolor[index],
-//               label: _ingredients[index],
-//             ),
-//           ),
-//         );
-//       },
-//     ),
-//   );
-// }
 
 Widget _categoryheading(BuildContext context, String str) {
   return Align(
@@ -243,72 +337,42 @@ Widget _categoryheading(BuildContext context, String str) {
   );
 }
 
-List<Color> _chipcolor = [
-  Colors.orangeAccent,
-  Colors.orangeAccent,
-  Colors.orangeAccent,
-  Colors.orangeAccent,
-  Colors.orangeAccent,
-  Colors.orangeAccent,
-];
+// class Categorylist extends StatefulWidget {
+//   @override
+//   State<StatefulWidget> createState() {
+//     return _categoryliststate();
+//   }
+// }
 
-List<Text> _ingredients = [
-  Text("Fruits & vegetables",
-      style: TextStyle(
-          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.bold)),
-  Text("Snacks",
-      style: TextStyle(
-          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
-  Text("Staples",
-      style: TextStyle(
-          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
-  Text("Beaverages",
-      style: TextStyle(
-          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
-  Text("Bakery & dairy",
-      style: TextStyle(
-          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
-  Text("Personal care",
-      style: TextStyle(
-          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
-];
+// class _categoryliststate extends State<Categorylist> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: 50,
+//       width: double.infinity,
+//       child: ListView.builder(
+//         itemCount: _ingredients.length,
+//         shrinkWrap: true,
+//         scrollDirection: Axis.horizontal,
+//         physics: BouncingScrollPhysics(),
+//         itemBuilder: (BuildContext context, int index) {
+//           return Padding(
+//             padding: const EdgeInsets.all(8.0),
+//             child: InkWell(
+//               onTap: () {
+//                 setState(() {
+//                   _chipcolor[index] = Colors.white;
 
-class Categorylist extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _categoryliststate();
-  }
-}
-
-class _categoryliststate extends State<Categorylist> {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      width: double.infinity,
-      child: ListView.builder(
-        itemCount: _ingredients.length,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        physics: BouncingScrollPhysics(),
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: () {
-                setState(() {
-                  _chipcolor[index] = Colors.white;
-                  
-                });
-              },
-              child: Chip(
-                backgroundColor: _chipcolor[index],
-                label: _ingredients[index],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
+//                 });
+//               },
+//               child: Chip(
+//                 backgroundColor: _chipcolor[index],
+//                 label: _ingredients[index],
+//               ),
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
