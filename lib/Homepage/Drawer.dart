@@ -4,6 +4,7 @@ import 'package:ecom/Login/login.dart';
 import 'package:ecom/Profile/main_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final List<String> l1 = [
   "Profile",
@@ -55,6 +56,19 @@ class Drawer1 extends StatefulWidget {
 }
 
 class _Drawerstate extends State<Drawer1> {
+  SharedPreferences sharedPreferences;
+  String name;
+  void initState() {
+    super.initState();
+    checklogin();
+  }
+
+  Future checklogin() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    name = sharedPreferences.getString('token');
+    print(name);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -159,11 +173,14 @@ class _Drawerstate extends State<Drawer1> {
         ),
         SizedBox(height: 15.0),
         InkWell(
-          onTap: () {
-            Navigator.of(context).pop();
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => LoginPage()));
-          },
+          onTap: name == null
+              ? () {
+                  sharedPreferences.clear();
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => LoginPage()));
+                }
+              : null,
           child: Container(
             margin: EdgeInsets.only(left: 15.0, right: 15.0),
             alignment: Alignment.center,
@@ -173,7 +190,7 @@ class _Drawerstate extends State<Drawer1> {
                 borderRadius: BorderRadius.circular(20.0),
                 color: Colors.deepOrange),
             child: Text(
-              "Sign Out",
+              name == null ? "Sign In" : "Sign In",
               style: Theme.of(context)
                   .textTheme
                   .headline2

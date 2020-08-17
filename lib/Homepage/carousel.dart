@@ -24,7 +24,8 @@ class CarouselPages extends StatefulWidget {
   _CarouselPagesState createState() => _CarouselPagesState();
 }
 
-class _CarouselPagesState extends State<CarouselPages> {
+class _CarouselPagesState extends State<CarouselPages>
+    with AutomaticKeepAliveClientMixin {
   List values;
   String a, b, c;
 
@@ -34,15 +35,10 @@ class _CarouselPagesState extends State<CarouselPages> {
     fetchPost();
   }
 
-
-
   Future<List<Imaged>> fetchPost() async {
     final response = await http.get(
       'http://infintymall.herokuapp.com/homepage/api/carousel',
-      headers: {
-        HttpHeaders.authorizationHeader:
-            "Token 	c1c6845868d8ce520aaa7b5078370f3ddce55e31"
-      },
+ 
     );
 
     if (response.statusCode == 200) {
@@ -51,11 +47,13 @@ class _CarouselPagesState extends State<CarouselPages> {
       try {
         final x = await http.get("${values[0]["image1"]}");
         if (x.statusCode == 200) {
-          setState(() {
-            a = "${values[0]["image1"]}";
-            b = "${values[0]["image2"]}";
-            c = "${values[0]["image3"]}";
-          });
+          if (mounted) {
+            setState(() {
+              a = "${values[0]["image1"]}";
+              b = "${values[0]["image2"]}";
+              c = "${values[0]["image3"]}";
+            });
+          }
         }
       } on RangeError {
         print(response);
@@ -124,4 +122,7 @@ class _CarouselPagesState extends State<CarouselPages> {
           );
         }));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

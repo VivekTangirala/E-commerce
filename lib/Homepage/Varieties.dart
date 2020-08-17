@@ -14,10 +14,24 @@ class Varieties extends StatefulWidget {
   VarietiesState createState() => VarietiesState();
 }
 
-class VarietiesState extends State<Varieties> {
+class VarietiesState extends State<Varieties> with AutomaticKeepAliveClientMixin  {
+
+  Size screenSize(BuildContext context) {
+    return MediaQuery.of(context).size;
+  }
+
+  double screenHeight(BuildContext context, {double dividedBy = 1}) {
+    return screenSize(context).height / dividedBy;
+  }
+
+  double screenWidth(BuildContext context, {double dividedBy = 1}) {
+    return screenSize(context).width / dividedBy;
+  }
+
   @override
   Widget build(BuildContext context) {
-    var _width = MediaQuery.of(context).size.width;
+    var width = screenSize(context).width;
+    var height = screenSize(context).height;
     return GridView.builder(
       //padding: EdgeInsets.only(right: 15.0),
       shrinkWrap: true,
@@ -30,18 +44,18 @@ class VarietiesState extends State<Varieties> {
           child: Container(
             //margin: EdgeInsets.only(left: 4, bottom: 3),
             child: SizedBox(
-              height: 220.0,
+              //height: height/10,
               child: Container(
                 //margin: EdgeInsets.all(5.0),
                 child: Column(children: [
                   SizedBox(
-                    height: 161,
-                    width: 120.0,
+                    height: height/4,
+                    width: width / 3,
                     child: Container(
                       //alignment: Alignment.center,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                            fit: BoxFit.fitHeight,
+                            fit: BoxFit.cover,
                             image: AssetImage(images[index])),
                         color: Colors.white,
                         // border: Border.all(
@@ -70,4 +84,7 @@ class VarietiesState extends State<Varieties> {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive =>true;
 }

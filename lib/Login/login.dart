@@ -31,6 +31,8 @@ class _LoginPageState extends State<LoginPage> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setBool('seen', true);
   }
+  
+
 
   @override
   Widget build(BuildContext context) {
