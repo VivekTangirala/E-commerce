@@ -35,40 +35,43 @@ class _CarouselPagesState extends State<CarouselPages>
     fetchPost();
   }
 
+  var response;
   Future<List<Imaged>> fetchPost() async {
-    final response = await http.get(
-      'http://infintymall.herokuapp.com/homepage/api/carousel',
- 
-    );
+    try {
+      response = await http.get(
+        'http://infintymall.herokuapp.com/homepage/api/carousel',
+      );
 
-    if (response.statusCode == 200) {
-      // If the call to the server was successful, parse the JSON
-      values = json.decode(response.body);
-      try {
-        final x = await http.get("${values[0]["image1"]}");
-        if (x.statusCode == 200) {
-          if (mounted) {
-            setState(() {
-              a = "${values[0]["image1"]}";
-              b = "${values[0]["image2"]}";
-              c = "${values[0]["image3"]}";
-            });
+      if (response.statusCode == 200) {
+        // If the call to the server was successful, parse the JSON
+        values = json.decode(response.body);
+        try {
+          final x = await http.get("${values[0]["image1"]}");
+          if (x.statusCode == 200) {
+            if (mounted) {
+              setState(() {
+                a = "${values[0]["image1"]}";
+                b = "${values[0]["image2"]}";
+                c = "${values[0]["image3"]}";
+              });
+            }
           }
+        } on RangeError {
+          print(response);
         }
-      } on RangeError {
+        // print(values[0]["image1"]);
+        //return values;
+
+      } else {
         print(response);
       }
-      // print(values[0]["image1"]);
-      //return values;
-
-    } else {
-      print(response);
-    }
-    return null;
+      return null;
+    } catch (e) {}
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SizedBox(
         //margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
         height: 175.0,

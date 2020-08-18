@@ -87,24 +87,29 @@ class _HomefragmentState extends State<HomeFragment> {
           ];
         },
         body: Container(
-          margin: EdgeInsets.only(left: 8,right: 8),
+          margin: EdgeInsets.only(left: 8, right: 8),
           child: SingleChildScrollView(
             child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
               _textsection(context),
               SizedBox(height: 10),
               Categorylist(),
-              SizedBox(height: 10),
+              SizedBox(height: 30),
               _categoryheading(context, "Discover"),
               // SpecialProducts(),
               Discover(),
+              SizedBox(height: 30.0),
+
               _categoryheading(context, "Best Offers"),
               Bestoffers(),
               //Category(),
+              SizedBox(height: 30.0),
+
               _categoryheading(context, "Varieties"),
 
               Varieties(),
-              SizedBox(height: 15.0),
+              SizedBox(height: 30.0),
               Invite(),
+              SizedBox(height: 30.0),
               _categoryheading(context, "Great Deals"),
               Discover(),
             ]),
