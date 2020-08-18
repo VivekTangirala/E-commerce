@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
 
+import 'Directions.dart';
 import 'Utils/class.dart';
 import 'Utils/widgets.dart';
+
+List<String> l1 = [
+  "assets/images/tomato.png",
+  "assets/images/onion.jpeg",
+  "assets/images/burger.jpeg",
+];
+List<String> l2 = [
+  "Tomatoes",
+  "Onions",
+  "Burger",
+];
+List<String> l3 = [
+  "10 pieces",
+  "15 pieces",
+  "50 slices",
+];
 
 class DetailsPage extends StatefulWidget {
   final Recipe receipe;
@@ -37,8 +54,8 @@ class _DetailsPageState extends State<DetailsPage>
           return <Widget>[
             SliverAppBar(
               expandedHeight: 200.0,
-              floating: false,
-              pinned: true,
+              floating: true,
+              pinned: false,
               title: Text(recipe.title),
               flexibleSpace: FlexibleSpaceBar(
                 background: Hero(
@@ -51,86 +68,74 @@ class _DetailsPageState extends State<DetailsPage>
                 ),
               ),
             ),
-            SliverPersistentHeader(
-              delegate: _SliverAppBarDelegate(
-                TabBar(
-                  controller: _controller,
-                  labelColor: Colors.black87,
-                  unselectedLabelColor: Colors.grey,
-                  tabs: [
-                    Tab( text: "Ingredients"),
-                    Tab( text: "Tab 2"),
-                  ],
-                ),
-              ),
-              pinned: true,
-            ),
           ];
         },
         body: Container(
           color: Colors.white,
           padding: EdgeInsets.only(top: 8.0),
           child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 18.0),
             physics: BouncingScrollPhysics(),
             child: Column(
               children: <Widget>[
-                Text('Nutrition',
-                    style: Theme.of(context).textTheme.headline2,),
+                Itemdetails(),
+                SizedBox(height: 10.0),
+                Text(
+                  'Nutrition',
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                SizedBox(height: 10.0),
                 NutritionWidget(
                   nutrients: recipe.nutrients,
                 ),
-                Text('Ingredients',
-               style: Theme.of(context).textTheme.headline2,),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Ingredients',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline2
+                          .copyWith(letterSpacing: 1),
+                    ),
+                    InkWell(
+                        onTap: () {
+                          // Navigator.of(context).push(MaterialPageRoute(
+                          //     builder: (BuildContext context) =>
+                          //         RecipeSteps()));
+                        },
+                        child: Column(
+                          children: [
+                            Text(
+                              'View Directions',
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
+                            Container(
+                              child: Text("                              "),
+                              height: 4.0,
+                              decoration:
+                                  BoxDecoration(color: Colors.orangeAccent),
+                            )
+                          ],
+                        ))
+                  ],
+                ),
                 IngredientsWidget(
                   ingredients: recipe.ingredients,
                 ),
-                Text('Steps',
-                    style: Theme.of(context).textTheme.headline2,),
-                RecipeSteps(
-                  steps: recipe.steps,
-                )
+                // Text('Steps',
+                //     style: Theme.of(context).textTheme.headline2,),
+                // RecipeSteps(
+                //   steps: recipe.steps,
+                // ),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class RecipeSteps extends StatelessWidget {
-  final List<String> steps;
-  RecipeSteps({this.steps});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: steps.length,
-      shrinkWrap: true,
-      physics: ClampingScrollPhysics(),
-      scrollDirection: Axis.vertical,
-      itemBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: <Widget>[
-              CircleAvatar(
-                backgroundColor: Theme.of(context).accentColor,
-                child: Text('${index + 1}',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(steps[index],
-                      style: Theme.of(context).textTheme.bodyText1,),
-                ),
-              )
-            ],
-          ),
-        );
-      },
     );
   }
 }
@@ -141,27 +146,51 @@ class IngredientsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      width: double.infinity,
-      child: ListView.builder(
-        itemCount: ingredients.length,
+    return ListView.builder(
+        itemCount: l1.length,
+        physics: ScrollPhysics(),
+        scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        physics: BouncingScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Chip(
-              backgroundColor: Theme.of(context).accentColor,
-              label: Text(ingredients[index],
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
+          return new Container(
+            margin: EdgeInsets.symmetric(vertical: 5.0),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 7.0, vertical: 5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Image.asset(
+                        l1[index],
+                        height: 70.0,
+                        width: 70.0,
+                      ),
+                      SizedBox(width: 15.0),
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            SizedBox(height: 5.0),
+                            Text(
+                              l2[index],
+                              style: Theme.of(context).textTheme.headline2,
+                            ),
+                            SizedBox(height: 5.0),
+                            Text(
+                              l3[index],
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                          ])
+                    ],
+                  ),
+                  Card(
+                    child: Text("Add to Cart"),
+                  )
+                ],
+              ),
             ),
           );
-        },
-      ),
-    );
+        });
   }
 }
 
@@ -189,27 +218,60 @@ class NutritionWidget extends StatelessWidget {
   }
 }
 
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate(this._tabBar);
-
-  final TabBar _tabBar;
-
+class Itemdetails extends StatelessWidget {
   @override
-  double get minExtent => _tabBar.preferredSize.height;
-  @override
-  double get maxExtent => _tabBar.preferredSize.height;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new Container(
-      child: _tabBar,
-      color: Colors.white,
-    );
-  }
-
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return false;
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.person,
+                        color: Colors.orangeAccent,
+                        size: 40.0,
+                      ),
+                      Text(" 4 "),
+                    ],
+                  ),
+                  SizedBox(width: 40.0),
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.timer,
+                        color: Colors.orangeAccent,
+                        size: 40.0,
+                      ),
+                      Text("30 Min")
+                    ],
+                  ),
+                  SizedBox(width: 40.0),
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.directions_run,
+                        color: Colors.orangeAccent,
+                        size: 40.0,
+                      ),
+                      Text(
+                        "420 Cal",
+                        style: TextStyle(color: Colors.black),
+                      )
+                    ],
+                  ),
+                ]),
+            Icon(
+              Icons.favorite,
+              color: Colors.red,
+              size: 20.0,
+            )
+          ],
+        ));
   }
 }
+

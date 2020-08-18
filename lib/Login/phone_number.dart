@@ -33,7 +33,7 @@ class _SignupPageState extends State<SignupPage> {
               )))
             : ListView(
                 children: <Widget>[
-                  headerSection(),
+                  skipSection(),
                   SizedBox(height: 30.0),
                   getting_started(),
                   getting_started1(),
@@ -48,15 +48,22 @@ class _SignupPageState extends State<SignupPage> {
   }
   //Header Handling
 
-  Container headerSection() {
+  Widget skipSection() {
     return Container(
-        margin: EdgeInsets.only(top: 30.0),
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
-        child: Center(
-          child: Text(
-            " Infinity Mart",
-            style: Theme.of(context).textTheme.headline1,
-          ),
+        decoration: BoxDecoration(
+            color: Colors.orangeAccent,
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30.0),
+                bottomRight: Radius.circular(30.0))),
+        //width: MediaQuery.of(context).size.width,
+        height: 100.0,
+        alignment: Alignment.bottomCenter,
+        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+        margin: EdgeInsets.only(top: 0.0, bottom: 3),
+        child: Text(
+          "Create Account",
+          style: Theme.of(context).textTheme.headline2.copyWith(
+              color: Colors.white, fontSize: 25.0, letterSpacing: 1.5),
         ));
   }
 
@@ -201,8 +208,12 @@ class _SignupPageState extends State<SignupPage> {
                 }
               },
         elevation: 0.0,
-        color: Color(0xffe74c3c),
-        child: Text("Continue", style:Theme.of(context).textTheme.headline2.copyWith(color:Colors.white)),
+        color: Colors.orangeAccent,
+        child: Text("Continue",
+            style: Theme.of(context)
+                .textTheme
+                .headline2
+                .copyWith(color: Colors.white)),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       ),
@@ -229,7 +240,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   Text(
                     "Signin",
-                    style: Theme.of(context).textTheme.headline2,
+                    style: Theme.of(context).textTheme.headline2.copyWith(color:Colors.orangeAccent),
                   )
                 ]),
           ),

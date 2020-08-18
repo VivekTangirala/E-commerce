@@ -31,8 +31,6 @@ class _LoginPageState extends State<LoginPage> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setBool('seen', true);
   }
-  
-
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +46,19 @@ class _LoginPageState extends State<LoginPage> {
             : ListView(
                 children: <Widget>[
                   skipSection(),
-                  Align(
-                    alignment: Alignment.center,
-                    child: headerSection(),
+                  // Align(
+                  //   alignment: Alignment.center,
+                  //   child: headerSection(),
+                  // ),
+                  SizedBox(
+                    height: 50.0,
                   ),
                   Align(
                     alignment: Alignment.center,
                     child: textSection(),
                   ),
+                  _forgotpass(),
+                  SizedBox(height: 25.0),
                   buttonSection(),
                   newAccountbutton()
                 ],
@@ -142,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Container textSection() {
     return Container(
-      margin: EdgeInsets.only(bottom:50.0),
+      margin: EdgeInsets.only(bottom: 10.0),
       padding: EdgeInsets.symmetric(
         horizontal: 15.0,
         vertical: 20.0,
@@ -156,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
             cursorColor: Colors.black,
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
-              icon: Icon(Icons.phone, color: Colors.black),
+              icon: Icon(Icons.phone, color: Colors.orangeAccent),
               hintText: "phone",
               border: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -170,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
             obscureText: true,
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
-              icon: Icon(Icons.lock, color: Colors.black),
+              icon: Icon(Icons.lock, color: Colors.orangeAccent),
               hintText: "Password",
               border: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -184,23 +187,22 @@ class _LoginPageState extends State<LoginPage> {
 
   //Button Handling
   Widget skipSection() {
-    return InkWell(
-        onTap: () async {
-          await setSkip();
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
-              (Route<dynamic> route) => false);
-        },
-        child: Container(
-            //width: MediaQuery.of(context).size.width,
-            height: 40.0,
-            alignment: Alignment.topRight,
-            padding: EdgeInsets.symmetric(horizontal: 30.0),
-            margin: EdgeInsets.only(top: 26.0, bottom: 3),
-            child: Text(
-              "Skip login",
-              style: Theme.of(context).textTheme.headline2,
-            )));
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.orangeAccent,
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30.0),
+                bottomRight: Radius.circular(30.0))),
+        //width: MediaQuery.of(context).size.width,
+        height: 100.0,
+        alignment: Alignment.bottomCenter,
+        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+        margin: EdgeInsets.only(top: 0.0, bottom: 3),
+        child: Text(
+          "SignIn",
+          style: Theme.of(context).textTheme.headline2.copyWith(
+              color: Colors.white, fontSize: 25.0, letterSpacing: 1.5),
+        ));
   }
 
   Container buttonSection() {
@@ -208,7 +210,9 @@ class _LoginPageState extends State<LoginPage> {
       decoration: BoxDecoration(),
       //width: MediaQuery.of(context).size.width,
       height: 40.0,
-      padding: EdgeInsets.symmetric(horizontal: 30.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: 30.0,
+      ),
       margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
       child: RaisedButton(
         onPressed: phoneController.text == "" || passwordController.text == ""
@@ -220,11 +224,15 @@ class _LoginPageState extends State<LoginPage> {
                 signIn(phoneController.text, passwordController.text);
               },
         elevation: 0.0,
-        color: Color(0xffe74c3c),
+        color: Colors.orangeAccent,
         child:
             Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-          Text("Sign in", style: Theme.of(context).textTheme.headline2.copyWith(color:Colors.white)),
-          SizedBox(width:20.0),
+          Text("Sign in",
+              style: Theme.of(context)
+                  .textTheme
+                  .headline2
+                  .copyWith(color: Colors.white)),
+          SizedBox(width: 20.0),
           Icon(
             Icons.exit_to_app,
             color: Colors.white,
@@ -256,14 +264,39 @@ class _LoginPageState extends State<LoginPage> {
             "Don't have an account?",
             style: Theme.of(context).textTheme.headline5,
           ),
-          
           Text(
             "Signup",
-            style: Theme.of(context).textTheme.headline2,
+            style: Theme.of(context).textTheme.headline2.copyWith(color:Colors.orangeAccent),
           )
         ]),
       ),
     );
+  }
+
+  Widget _forgotpass() {
+    return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                "Forgot password?",
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              InkWell(
+                onTap: () async {
+                  await setSkip();
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => BottomNav()),
+                      (Route<dynamic> route) => false);
+                },
+                child: Text(
+                  "Skip Login",
+                  style: Theme.of(context).textTheme.headline2.copyWith(color:Colors.orangeAccent),
+                ),
+              ),
+            ]));
   }
 
   final TextEditingController phoneController = new TextEditingController();

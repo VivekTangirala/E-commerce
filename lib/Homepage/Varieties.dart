@@ -49,7 +49,7 @@ class VarietiesState extends State<Varieties> with AutomaticKeepAliveClientMixin
                 //margin: EdgeInsets.all(5.0),
                 child: Column(children: [
                   SizedBox(
-                    height: height/4,
+                    height: height/4.5,
                     width: width / 3,
                     child: Container(
                       //alignment: Alignment.center,

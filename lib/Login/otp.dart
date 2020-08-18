@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:otp_text_field/otp_text_field.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:otp_text_field/style.dart';
 import './register.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -74,37 +75,51 @@ class _OtpScreenState extends State<OtpScreen> {
                       alignment: Alignment.topCenter,
                       child: enterOTP(context),
                     ),
+                    OTPTextField(
+                          
+                          length: 4,
+                          width: 100,
+                          fieldWidth: 50,
+                          style: TextStyle(fontSize: 20),
+                          textFieldAlignment: MainAxisAlignment.spaceAround,
+                          fieldStyle: FieldStyle.underline,
+                          onCompleted: (pin) {
+                            
+                            print("Completed: " + pin);
+                          },
+                        ),
                     Align(
                       alignment: Alignment.center,
                       child: SizedBox(
                         width: 100,
                         height: 60,
-                        child: TextField(
-                          style: TextStyle(color:Colors.black),
-                          textAlign: TextAlign.center,
-                          textAlignVertical: TextAlignVertical.center,
-                          maxLength: 4,
-                          decoration: InputDecoration(
-                            
-                            filled: true,
-                            //fillColor: Colors.black,
-                            enabledBorder: new OutlineInputBorder(
-                                borderSide:
-                                    new BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                          ),
-                          controller: otpController,
-                          cursorColor: Colors.black,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            WhitelistingTextInputFormatter.digitsOnly
-                          ],
-                          // end onSubmit
-                        ),
+                      
+                        // child: TextField(
+                        //   style: TextStyle(color: Colors.black),
+                        //   textAlign: TextAlign.center,
+                        //   textAlignVertical: TextAlignVertical.center,
+                        //   maxLength: 4,
+                        //   decoration: InputDecoration(
+                        //     filled: true,
+                        //     //fillColor: Colors.black,
+                        //     enabledBorder: new OutlineInputBorder(
+                        //         borderSide:
+                        //             new BorderSide(color: Colors.black)),
+                        //     focusedBorder: OutlineInputBorder(
+                        //       borderSide: BorderSide(color: Colors.black),
+                        //     ),
+                        //   ),
+                        //   controller: otpController,
+                        //   cursorColor: Colors.black,
+                        //   keyboardType: TextInputType.number,
+                        //   inputFormatters: <TextInputFormatter>[
+                        //     WhitelistingTextInputFormatter.digitsOnly
+                        //   ],
+                        //   // end onSubmit
+                        // ),
                       ),
                     ),
+                    SizedBox(height: 15.0),
                     confirmButton(),
                     resendOTPButton(),
                   ])));
@@ -117,8 +132,12 @@ class _OtpScreenState extends State<OtpScreen> {
       padding: EdgeInsets.symmetric(horizontal: 30.0),
       margin: EdgeInsets.symmetric(vertical: 30.0, horizontal: 30.0),
       child: RaisedButton(
-          color: Colors.grey,
-          child: Text("Confirm", style: Theme.of(context).textTheme.headline2),
+          color: Colors.orangeAccent,
+          child: Text("Confirm",
+              style: Theme.of(context)
+                  .textTheme
+                  .headline2
+                  .copyWith(color: Colors.white)),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
           onPressed: () {
@@ -226,7 +245,10 @@ class _OtpScreenState extends State<OtpScreen> {
                 child: snapshot.data == 0
                     ? Text(
                         'Resend OTP?',
-                        style: Theme.of(context).textTheme.headline2,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline2
+                            .copyWith(color: Colors.orangeAccent),
                       )
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -246,14 +268,28 @@ class _OtpScreenState extends State<OtpScreen> {
 
 Container enterOTP(BuildContext context) {
   return Container(
-      margin: EdgeInsets.only(top: 20.0, bottom: 15),
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+      margin: EdgeInsets.only(top: 0.0, bottom: 20),
+      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
       child: Container(
-        child: Text(
-          "Enter OTP",
-          style: Theme.of(context).textTheme.headline3,
-        ),
-      ));
+          child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+            Text(
+              "Enter OTP sent to ",
+              style: Theme.of(context).textTheme.headline3.copyWith(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.normal,
+                  ),
+            ),
+            Text(
+              "+918888888888",
+              style: Theme.of(context).textTheme.headline3.copyWith(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+          ])));
 }
 
 Container companyName(BuildContext context) {
@@ -261,7 +297,10 @@ Container companyName(BuildContext context) {
       margin: EdgeInsets.only(top: 35.0, bottom: 15),
       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
       child: Center(
-        child:
-            Text("Infinity Mart", style: Theme.of(context).textTheme.headline1),
+        child: Text("Verify OPT",
+            style: Theme.of(context)
+                .textTheme
+                .headline1
+                .copyWith(color: Colors.orangeAccent, fontSize: 30.0)),
       ));
 }
