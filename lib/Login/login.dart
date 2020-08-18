@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 
+import 'package:ecom/Login/Forgotpass/Phone.dart';
 import 'package:ecom/Login/phone_number.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,10 +47,10 @@ class _LoginPageState extends State<LoginPage> {
             : ListView(
                 children: <Widget>[
                   skipSection(),
-                  // Align(
-                  //   alignment: Alignment.center,
-                  //   child: headerSection(),
-                  // ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: headerSection(),
+                  ),
                   SizedBox(
                     height: 50.0,
                   ),
@@ -71,12 +72,15 @@ class _LoginPageState extends State<LoginPage> {
 
   Container headerSection() {
     return Container(
-        margin: EdgeInsets.only(top: 20.0, bottom: 15),
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+        margin: EdgeInsets.only(top: 0.0, bottom: 0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 0.0),
         child: Container(
           child: Text(
-            " Infinity Mart",
-            style: Theme.of(context).textTheme.headline1,
+            "TREG",
+            style: Theme.of(context)
+                .textTheme
+                .headline1
+                .copyWith(color: Colors.orange),
           ),
         ));
   }
@@ -188,28 +192,39 @@ class _LoginPageState extends State<LoginPage> {
   //Button Handling
   Widget skipSection() {
     return Container(
-        decoration: BoxDecoration(
-            color: Colors.orangeAccent,
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30.0),
-                bottomRight: Radius.circular(30.0))),
-        //width: MediaQuery.of(context).size.width,
-        height: 100.0,
-        alignment: Alignment.bottomCenter,
-        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
-        margin: EdgeInsets.only(top: 0.0, bottom: 3),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(30.0),
+              bottomRight: Radius.circular(30.0))),
+      //width: MediaQuery.of(context).size.width,
+      height: 100.0,
+      alignment: Alignment.topRight,
+      padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+      margin: EdgeInsets.only(top: 0.0, bottom: 3),
+      child: InkWell(
+        onTap: () async {
+          await setSkip();
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
+              (Route<dynamic> route) => false);
+        },
         child: Text(
-          "SignIn",
-          style: Theme.of(context).textTheme.headline2.copyWith(
-              color: Colors.white, fontSize: 25.0, letterSpacing: 1.5),
-        ));
+          "Skip Login",
+          style: Theme.of(context)
+              .textTheme
+              .headline2
+              .copyWith(color: Colors.orangeAccent),
+        ),
+      ),
+    );
   }
 
   Container buttonSection() {
     return Container(
       decoration: BoxDecoration(),
       //width: MediaQuery.of(context).size.width,
-      height: 40.0,
+      height: 60.0,
       padding: EdgeInsets.symmetric(
         horizontal: 30.0,
       ),
@@ -266,7 +281,10 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Text(
             "Signup",
-            style: Theme.of(context).textTheme.headline2.copyWith(color:Colors.orangeAccent),
+            style: Theme.of(context)
+                .textTheme
+                .headline2
+                .copyWith(color: Colors.orangeAccent),
           )
         ]),
       ),
@@ -275,28 +293,17 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _forgotpass() {
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                "Forgot password?",
-                style: Theme.of(context).textTheme.headline5,
-              ),
-              InkWell(
-                onTap: () async {
-                  await setSkip();
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => BottomNav()),
-                      (Route<dynamic> route) => false);
-                },
-                child: Text(
-                  "Skip Login",
-                  style: Theme.of(context).textTheme.headline2.copyWith(color:Colors.orangeAccent),
-                ),
-              ),
-            ]));
+        padding: EdgeInsets.symmetric(horizontal: 18.0),
+        child: InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (BuildContext context) => Phone()));
+          },
+          child: Text(
+            "Forgot password?",
+            style: Theme.of(context).textTheme.headline5,
+          ),
+        ));
   }
 
   final TextEditingController phoneController = new TextEditingController();

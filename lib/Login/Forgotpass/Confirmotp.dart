@@ -1,23 +1,24 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'package:ecom/Login/Forgotpass/Newpass.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/style.dart';
-import './register.dart';
+import '../register.dart';
 
-class OtpScreen extends StatefulWidget {
+class Confirmotp extends StatefulWidget {
   final String phone;
 
-  const OtpScreen({Key key, this.phone}) : super(key: key);
+  const Confirmotp({Key key, this.phone}) : super(key: key);
   @override
-  _OtpScreenState createState() => _OtpScreenState(phone);
+  _ConfirmotpState createState() => _ConfirmotpState(phone);
 }
 
-class _OtpScreenState extends State<OtpScreen> {
+class _ConfirmotpState extends State<Confirmotp> {
   bool _isLoading = false;
   final TextEditingController otpController = new TextEditingController();
   static const _timerDuration = 30;
@@ -26,7 +27,7 @@ class _OtpScreenState extends State<OtpScreen> {
   int timerCounter;
   Timer _resendCodeTimer;
   String phone;
-  _OtpScreenState(this.phone);
+  _ConfirmotpState(this.phone);
 
   @override
   void initState() {
@@ -127,30 +128,6 @@ class _OtpScreenState extends State<OtpScreen> {
                   ])));
   }
 
-  Container confirmButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 40.0,
-      padding: EdgeInsets.symmetric(horizontal: 30.0),
-      margin: EdgeInsets.symmetric(vertical: 30.0, horizontal: 30.0),
-      child: RaisedButton(
-          color: Colors.orangeAccent,
-          child: Text("Confirm",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline2
-                  .copyWith(color: Colors.white)),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
-          onPressed: () {
-            setState(() {
-              _isLoading = true;
-            });
-            registerOTP(otpController.text.toString());
-          }),
-    );
-  }
-
   registerOTP(String pin) async {
     Map data = {'phone': phone, 'otp': pin};
     var jsonResponse;
@@ -162,8 +139,7 @@ class _OtpScreenState extends State<OtpScreen> {
     if (response.statusCode == 200) {
       if (jsonResponse != null) {
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-                builder: (BuildContext context) => RegisterPage(phone: phone)),
+            MaterialPageRoute(builder: (BuildContext context) => Newpass()),
             (Route<dynamic> route) => false);
         print(jsonResponse);
       }

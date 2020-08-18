@@ -1,7 +1,16 @@
+import 'package:ecom/Login/Forgotpass/Confirmotp.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+List<IconData> icons = [
+  EvaIcons.messageSquareOutline,
+  EvaIcons.peopleOutline,
+  EvaIcons.peopleOutline,
+  EvaIcons.lock,
+];
+List<String> l1 = ["Orders", "Rate us", "Contack us?", "Change password"];
 
 class ProfileFirst extends StatefulWidget {
   ProfileFirst({Key key, this.title}) : super(key: key);
@@ -20,12 +29,11 @@ class _ProfileFirstState extends State<ProfileFirst> {
     setState(() {
       name = (sharedPreferences.getString('name') ?? null);
     });
-    
   }
 
-  void initState()  {
+  void initState() {
     super.initState();
-   getName();
+    getName();
   }
 
   Size screenSize(BuildContext context) {
@@ -71,7 +79,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
                           SizedBox(
                               width: 220,
                               child: Text(
-                                name!=null?"Hello, $name":"Hello, Amigo",
+                                name != null ? "Hello, $name" : "Hello, Amigo",
                                 overflow: TextOverflow.fade,
                                 maxLines: 1,
                                 style: GoogleFonts.dMSans(
@@ -124,24 +132,37 @@ class _ProfileFirstState extends State<ProfileFirst> {
           Padding(
               padding: EdgeInsets.only(top: height / 4.8),
               child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20.0),
-                    topLeft: Radius.circular(20.0),
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20.0),
+                      topLeft: Radius.circular(20.0),
+                    ),
                   ),
-                ),
-                child: ListView(
-                  children: <Widget>[
-                    SizedBox(height: 10),
-                    properties("Edit profile", EvaIcons.peopleOutline, 1),
-                    properties("Invite friends", EvaIcons.peopleOutline, 2),
-                    properties(
-                        "Give us feedback", EvaIcons.messageSquareOutline, 3)
-                  ],
-                ),
-              ))
+                  child: ListView.builder(
+                      physics: ScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: 4,
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          onTap: () {
+                           
+                          },
+                          child: properties(l1[index], icons[index], 1),
+                        );
+                      })
+                  // ListView(
+                  //   children: <Widget>[
+                  //     SizedBox(height: 10),
+                  //     properties("Edit profile", EvaIcons.messageSquareOutlineEvaIcons.peopleOutline,EvaIcons.peopleOutline,, EvaIcons.lock 1),
+                  //     properties("Invite friends", EvaIcons.peopleOutline, 2),
+                  //     properties(
+                  //         "Give us feedback", EvaIcons.messageSquareOutline, 3),properties(
+                  //         "Change password", EvaIcons.lock, 3)
+                  //   ],
+                  // ),
+                  ))
         ]));
   }
 
@@ -170,7 +191,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
             // if (a == 2) {
             //   Navigator.push(context,
             //       MaterialPageRoute(builder: (context) => CustomToolTip()));
-          //}
+            //}
           },
         ),
       )),

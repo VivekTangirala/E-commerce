@@ -1,17 +1,18 @@
 import 'dart:convert';
+import 'package:ecom/Login/Forgotpass/Confirmotp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import './login.dart';
-import './otp.dart';
+import '../login.dart';
+import '../otp.dart';
 
-class SignupPage extends StatefulWidget {
+class Phone extends StatefulWidget {
   @override
-  _SignupPageState createState() => _SignupPageState();
+  _PhoneState createState() => _PhoneState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _PhoneState extends State<Phone> {
   bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -33,14 +34,13 @@ class _SignupPageState extends State<SignupPage> {
               )))
             : ListView(
                 children: <Widget>[
-                  skipSection(),
-                  SizedBox(height: 30.0),
+                  SizedBox(height: 70.0),
                   getting_started(),
+                  SizedBox(height: 10.0),
                   getting_started1(),
                   textSection(),
                   senOTPButton(),
                   SizedBox(height: 50.0),
-                  loginAccountbutton(),
                 ],
               ),
       ),
@@ -48,33 +48,17 @@ class _SignupPageState extends State<SignupPage> {
   }
   //Header Handling
 
-  Widget skipSection() {
-    return Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30.0),
-                bottomRight: Radius.circular(30.0))),
-        //width: MediaQuery.of(context).size.width,
-        height: 100.0,
-        alignment: Alignment.bottomCenter,
-        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
-        margin: EdgeInsets.only(top: 0.0, bottom: 3),
-        child: Text(
-          "Create Account",
-          style: Theme.of(context).textTheme.headline2.copyWith(
-              color: Colors.orange, fontSize: 30.0, letterSpacing: 1.5),
-        ));
-  }
-
   Widget getting_started() {
     return Container(
       alignment: Alignment.topLeft,
       margin: EdgeInsets.only(bottom: 10),
       padding: EdgeInsets.only(left: 20.0),
       child: Text(
-        "Let's get started",
-        style: Theme.of(context).textTheme.headline3,
+        "Enter Phone number",
+        style: Theme.of(context)
+            .textTheme
+            .headline3
+            .copyWith(color: Colors.orange),
       ),
     );
   }
@@ -83,10 +67,13 @@ class _SignupPageState extends State<SignupPage> {
     return Container(
       alignment: Alignment.topLeft,
       margin: EdgeInsets.only(bottom: 50),
-      padding: EdgeInsets.only(left: 15.0),
+      padding: EdgeInsets.only(left: 18.0),
       child: Text(
-        " Enter phone number to continue",
-        style: Theme.of(context).textTheme.headline4.copyWith(fontWeight:FontWeight.normal),
+        "An OTP will be sent to this mobile number",
+        style: Theme.of(context)
+            .textTheme
+            .headline4
+            .copyWith(fontWeight: FontWeight.normal),
       ),
     );
   }
@@ -106,7 +93,7 @@ class _SignupPageState extends State<SignupPage> {
         });
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => OtpScreen(phone: phone)),
+          MaterialPageRoute(builder: (context) => Confirmotp(phone: phone)),
         );
         print(jsonResponse);
       }
@@ -218,33 +205,6 @@ class _SignupPageState extends State<SignupPage> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       ),
     );
-  }
-
-  Widget loginAccountbutton() {
-    return InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => LoginPage()),
-          );
-        },
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 15.0),
-          child: Center(
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "Already have an account?",
-                    style: Theme.of(context).textTheme.headline5,
-                  ),
-                  Text(
-                    "Signin",
-                    style: Theme.of(context).textTheme.headline2.copyWith(color:Colors.orangeAccent),
-                  )
-                ]),
-          ),
-        ));
   }
 
   final TextEditingController phoneController = new TextEditingController();

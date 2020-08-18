@@ -62,8 +62,8 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Container(
             child: Center(
           child: Text(
-            " Infinity Mart",
-            style: Theme.of(context).textTheme.headline1,
+            "TREG",
+            style: Theme.of(context).textTheme.headline1.copyWith(color:Colors.orangeAccent),
           ),
         )));
   }
@@ -148,7 +148,7 @@ class _RegisterPageState extends State<RegisterPage> {
             cursorColor: Colors.black,
             style: Theme.of(context).textTheme.bodyText1,
             decoration: InputDecoration(
-              icon: Icon(Icons.supervised_user_circle, color: Colors.black),
+              icon: Icon(Icons.supervised_user_circle, color: Colors.orangeAccent),
               hintText: "Full Name",
               border: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -162,7 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
             cursorColor: Colors.black,
             style: Theme.of(context).textTheme.bodyText1,
             decoration: InputDecoration(
-              icon: Icon(Icons.email, color: Colors.black),
+              icon: Icon(Icons.email, color: Colors.orangeAccent),
               hintText: "Email",
               border: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -176,7 +176,7 @@ class _RegisterPageState extends State<RegisterPage> {
             obscureText: true,
             style: Theme.of(context).textTheme.bodyText1,
             decoration: InputDecoration(
-              icon: Icon(Icons.lock, color: Colors.black),
+              icon: Icon(Icons.lock, color: Colors.orangeAccent),
               hintText: "Password",
               border: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -190,7 +190,7 @@ class _RegisterPageState extends State<RegisterPage> {
             obscureText: true,
             style: Theme.of(context).textTheme.bodyText1,
             decoration: InputDecoration(
-              icon: Icon(Icons.lock, color: Colors.black),
+              icon: Icon(Icons.lock, color: Colors.orangeAccent),
               hintText: "Re-enter Password",
               border: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -208,7 +208,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Container buttonSection() {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 40.0,
+      height: 60.0,
       padding: EdgeInsets.symmetric(horizontal: 30.0),
       margin: EdgeInsets.symmetric(vertical: 20.0,horizontal: 25.0),
       child: RaisedButton(
@@ -263,8 +263,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 }
               },
         elevation: 0.0,
-        color: Colors.green,
-        child: Text("Sign Up", style: Theme.of(context).textTheme.headline2),
+        color: Colors.orangeAccent,
+        child: Text("Sign Up", style: Theme.of(context).textTheme.headline2.copyWith(color:Colors.white)),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       ),
     );

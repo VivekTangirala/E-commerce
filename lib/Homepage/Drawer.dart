@@ -190,7 +190,7 @@ class _Drawerstate extends State<Drawer1> {
                 borderRadius: BorderRadius.circular(20.0),
                 color: Colors.deepOrange),
             child: Text(
-              name == null ? "Sign In" : "Sign In",
+              name == null ? "Sign out" : "Sign In",
               style: Theme.of(context)
                   .textTheme
                   .headline2
