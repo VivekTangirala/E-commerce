@@ -2,13 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:ecom/Login/Forgotpass/Newpass.dart';
+import 'package:ecom/Login/Forgotpass/Phone.dart';
 import 'package:otp_text_field/otp_text_field.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/style.dart';
-import '../register.dart';
 
 class Confirmotp extends StatefulWidget {
   final String phone;
@@ -79,16 +78,14 @@ class _ConfirmotpState extends State<Confirmotp> {
                     ),
                     OTPTextField(
                       length: 4,
-                      width: MediaQuery.of(context).size.width - 36,
+                      width: 100,
                       fieldWidth: 50,
                       style: TextStyle(fontSize: 20),
                       textFieldAlignment: MainAxisAlignment.spaceAround,
                       fieldStyle: FieldStyle.underline,
                       onCompleted: (pin) {
-                        setState(() {
-                          _isLoading = true;
-                        });
                         registerOTP(pin);
+                        print("Completed: " + pin);
                       },
                     ),
                     Align(
@@ -123,9 +120,33 @@ class _ConfirmotpState extends State<Confirmotp> {
                       ),
                     ),
                     SizedBox(height: 15.0),
-                    //confirmButton(),
+                    // confirmButton(),
                     resendOTPButton(),
                   ])));
+  }
+
+  Container confirmButton() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 40.0,
+      padding: EdgeInsets.symmetric(horizontal: 30.0),
+      margin: EdgeInsets.symmetric(vertical: 30.0, horizontal: 30.0),
+      child: RaisedButton(
+          color: Colors.orangeAccent,
+          child: Text("Confirm",
+              style: Theme.of(context)
+                  .textTheme
+                  .headline2
+                  .copyWith(color: Colors.white)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
+          onPressed: () {
+            setState(() {
+              _isLoading = true;
+            });
+            registerOTP(otpController.text.toString());
+          }),
+    );
   }
 
   registerOTP(String pin) async {
@@ -139,7 +160,8 @@ class _ConfirmotpState extends State<Confirmotp> {
     if (response.statusCode == 200) {
       if (jsonResponse != null) {
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (BuildContext context) => Newpass()),
+            MaterialPageRoute(
+                builder: (BuildContext context) => Newpass()),
             (Route<dynamic> route) => false);
         print(jsonResponse);
       }
@@ -250,25 +272,14 @@ Container enterOTP(BuildContext context, String phone) {
       margin: EdgeInsets.only(top: 0.0, bottom: 20),
       padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
       child: Container(
-          child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-            Text(
-              "Enter OTP sent to ",
-              style: Theme.of(context).textTheme.headline3.copyWith(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.normal,
-                  ),
-            ),
-            Text(
-              "+91" + phone,
-              style: Theme.of(context).textTheme.headline3.copyWith(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w600,
-                  ),
-            ),
-          ])));
+        child: Text(
+          "Enter OTP sent to " + phone,
+          style: Theme.of(context).textTheme.headline3.copyWith(
+                fontSize: 20.0,
+                fontWeight: FontWeight.normal,
+              ),
+        ),
+      ));
 }
 
 Container companyName(BuildContext context) {

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:otp_text_field/otp_text_field.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -78,16 +77,14 @@ class _OtpScreenState extends State<OtpScreen> {
                     ),
                     OTPTextField(
                       length: 4,
-                      width: MediaQuery.of(context).size.width - 36,
+                      width: 100,
                       fieldWidth: 50,
                       style: TextStyle(fontSize: 20),
                       textFieldAlignment: MainAxisAlignment.spaceAround,
                       fieldStyle: FieldStyle.underline,
                       onCompleted: (pin) {
-                        setState(() {
-                          _isLoading = true;
-                        });
                         registerOTP(pin);
+                        print("Completed: " + pin);
                       },
                     ),
                     Align(
@@ -122,7 +119,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       ),
                     ),
                     SizedBox(height: 15.0),
-                    //confirmButton(),
+                    // confirmButton(),
                     resendOTPButton(),
                   ])));
   }
@@ -274,25 +271,14 @@ Container enterOTP(BuildContext context, String phone) {
       margin: EdgeInsets.only(top: 0.0, bottom: 20),
       padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
       child: Container(
-          child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-            Text(
-              "Enter OTP sent to ",
-              style: Theme.of(context).textTheme.headline3.copyWith(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.normal,
-                  ),
-            ),
-            Text(
-              "+91" + phone,
-              style: Theme.of(context).textTheme.headline3.copyWith(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w600,
-                  ),
-            ),
-          ])));
+        child: Text(
+          "Enter OTP sent to " + phone,
+          style: Theme.of(context).textTheme.headline3.copyWith(
+                fontSize: 20.0,
+                fontWeight: FontWeight.normal,
+              ),
+        ),
+      ));
 }
 
 Container companyName(BuildContext context) {

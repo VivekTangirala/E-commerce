@@ -14,8 +14,8 @@ class Varieties extends StatefulWidget {
   VarietiesState createState() => VarietiesState();
 }
 
-class VarietiesState extends State<Varieties> with AutomaticKeepAliveClientMixin  {
-
+class VarietiesState extends State<Varieties>
+    with AutomaticKeepAliveClientMixin {
   Size screenSize(BuildContext context) {
     return MediaQuery.of(context).size;
   }
@@ -30,6 +30,7 @@ class VarietiesState extends State<Varieties> with AutomaticKeepAliveClientMixin
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     var width = screenSize(context).width;
     var height = screenSize(context).height;
     return GridView.builder(
@@ -37,54 +38,46 @@ class VarietiesState extends State<Varieties> with AutomaticKeepAliveClientMixin
       shrinkWrap: true,
       physics: ScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, crossAxisSpacing: 20.0, mainAxisSpacing: 20.0),
+          crossAxisCount: 2, crossAxisSpacing: 15.0, mainAxisSpacing: 25.0),
       itemCount: images.length,
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
-          child: Container(
-            //margin: EdgeInsets.only(left: 4, bottom: 3),
-            child: SizedBox(
-              //height: height/10,
+          child: Column(children: [
+            SizedBox(
+              height: height / 5.8,
+              width: width / 2.5,
               child: Container(
-                //margin: EdgeInsets.all(5.0),
-                child: Column(children: [
-                  SizedBox(
-                    height: height/4.5,
-                    width: width / 3,
-                    child: Container(
-                      //alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(images[index])),
-                        color: Colors.white,
-                        // border: Border.all(
-                        //     color: Colors.black12, // set border color
-                        //     width: 0.6), // set border width
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(5.0)), // set rounded corner radius
-                      ),
-                    ),
-                  ),
-                  // SizedBox(height: 0.0),
-                  Text(
-                    list[index],
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  // Text(
-                  //   list1[index],
-                  //   style: Theme.of(context).textTheme.caption,
-                  // )
-                ]),
+                //alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.cover, image: AssetImage(images[index])),
+                  color: Colors.white,
+                  // border: Border.all(
+                  //     color: Colors.black12, // set border color
+                  //     width: 0.6), // set border width
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(5.0)), // set rounded corner radius
+                ),
               ),
             ),
-          ),
-          onTap: () {},
+            // SizedBox(height: 0.0),
+            Text(
+              list[index],
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+            // Text(
+            //   list1[index],
+            //   style: Theme.of(context).textTheme.caption,
+            // )
+          ]),
+          onTap: () {
+            
+          },
         );
       },
     );
   }
 
   @override
-  bool get wantKeepAlive =>true;
+  bool get wantKeepAlive => true;
 }
