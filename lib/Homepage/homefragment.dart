@@ -1,6 +1,7 @@
+import 'package:carousel_pro/carousel_pro.dart';
 import 'package:ecom/Cart/Cart.dart';
 import 'package:ecom/Homepage/BestOffers.dart';
-import 'package:ecom/Homepage/Discover.dart';
+import 'package:ecom/Homepage/Discovery/Discover.dart';
 import 'package:ecom/Homepage/Varieties.dart';
 import 'package:ecom/Homepage/just_for_you.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -11,11 +12,30 @@ import 'Drawer.dart';
 import './carousel.dart';
 import './category.dart';
 import 'package:ecom/placeholder_widget.dart';
-
+import 'dart:convert';
+import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:carousel_pro/carousel_pro.dart';
+import 'package:http/http.dart' as http;
 import 'Invite.dart';
-import 'categorylist.dart';
+import 'Categorylist/categorylist.dart';
 
 GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+class Imaged {
+  String image1;
+  String image2;
+  String image3;
+
+  Imaged({this.image1, this.image2, this.image3});
+
+  Imaged.fromJson(Map<String, dynamic> json) {
+    image1 = json['image1'];
+    image2 = json['image2'];
+    image3 = json['image3'];
+  }
+}
 
 class HomeFragment extends StatefulWidget {
   @override
@@ -23,6 +43,51 @@ class HomeFragment extends StatefulWidget {
 }
 
 class _HomefragmentState extends State<HomeFragment> {
+  List values;
+  String a, b, c;
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
+  @override
+  void initState() {
+    super.initState();
+    fetchPost();
+  }
+
+  var response;
+  Future<Null> fetchPost() async {
+    refreshKey.currentState?.show(atTop: false);
+    await Future.delayed(Duration(seconds: 2));
+    try {
+      response = await http.get(
+        'http://infintymall.herokuapp.com/homepage/api/carousel',
+      );
+
+      if (response.statusCode == 200) {
+        // If the call to the server was successful, parse the JSON
+        values = json.decode(response.body);
+        try {
+          final x = await http.get("${values[0]["image1"]}");
+          if (x.statusCode == 200) {
+            if (mounted) {
+              setState(() {
+                a = "${values[0]["image1"]}";
+                b = "${values[0]["image2"]}";
+                c = "${values[0]["image3"]}";
+              });
+            }
+          }
+        } on RangeError {
+          print(response);
+        }
+        // print(values[0]["image1"]);
+        //return values;
+
+      } else {
+        print(response);
+      }
+      return null;
+    } catch (e) {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,92 +95,99 @@ class _HomefragmentState extends State<HomeFragment> {
       key: _scaffoldKey,
       //appBar: _appBar(context),
       drawer: Drawer1(),
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              leading: IconButton(
-                icon: Icon(
-                  Icons.menu,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  _scaffoldKey.currentState.openDrawer();
-                },
-              ),
-              actions: [
-                IconButton(
-                  padding: EdgeInsets.only(left: 20),
-                  icon: Icon(
-                    EvaIcons.search,
-                    color: Colors.black,
+      body: RefreshIndicator(
+        onRefresh: fetchPost,
+          key: refreshKey,
+          color: Colors.black,
+          child: NestedScrollView(
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.menu,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      _scaffoldKey.currentState.openDrawer();
+                    },
                   ),
-                  onPressed: () {
-                    showSearch(context: context, delegate: SearchBar());
-                  },
-                ),
-                IconButton(
-                  icon: Icon(
-                    EvaIcons.shoppingCartOutline,
-                    color: Colors.black,
-                  ),
-                  padding: EdgeInsets.only(left: 20, right: 20.0),
-                  onPressed: () async {
-                    SharedPreferences sharedPreferences =
-                        await SharedPreferences.getInstance();
-                    sharedPreferences.clear();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Carthome()),
-                    );
-                  },
-                ),
-              ],
-              elevation: 0.0,
-              backgroundColor: Colors.white,
-              expandedHeight: 150.0,
-              floating: false,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                // title: Row(
+                  actions: [
+                    IconButton(
+                      padding: EdgeInsets.only(left: 20),
+                      icon: Icon(
+                        EvaIcons.search,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        showSearch(context: context, delegate: SearchBar());
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        EvaIcons.shoppingCartOutline,
+                        color: Colors.black,
+                      ),
+                      padding: EdgeInsets.only(left: 20, right: 20.0),
+                      onPressed: () async {
+                        SharedPreferences sharedPreferences =
+                            await SharedPreferences.getInstance();
+                        sharedPreferences.clear();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Carthome()),
+                        );
+                      },
+                    ),
+                  ],
+                  elevation: 0.0,
+                  backgroundColor: Colors.white,
+                  expandedHeight: 150.0,
+                  floating: false,
+                  pinned: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                    // title: Row(
 
-                background:
-                    // Image.asset("assets/images/tomato.png", fit: BoxFit.cover),
-                    CarouselPages(),
+                    background:
+                        // Image.asset("assets/images/tomato.png", fit: BoxFit.cover),
+                        CarouselPages(),
+                  ),
+                ),
+              ];
+            },
+            body: Container(
+              margin: EdgeInsets.only(left: 8, right: 8),
+              child: SingleChildScrollView(
+                child:
+                    Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                  _textsection(context),
+                  SizedBox(height: 10),
+                  Categorylist(),
+                  SizedBox(height: 30),
+                  _categoryheading(context, "Discover"),
+                  // SpecialProducts(),
+                  Discover(),
+                  SizedBox(height: 30.0),
+
+                  _categoryheading(context, "Best Offers"),
+                  Bestoffers(),
+                  //Category(),
+                  SizedBox(height: 30.0),
+
+                  _categoryheading(context, "Varieties"),
+
+                  Varieties(),
+                  SizedBox(height: 30.0),
+                  Invite(),
+                  SizedBox(height: 30.0),
+                  _categoryheading(context, "Great Deals"),
+                  Discover(),
+                ]),
               ),
             ),
-          ];
-        },
-        body: Container(
-          margin: EdgeInsets.only(left: 8, right: 8),
-          child: SingleChildScrollView(
-            child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              _textsection(context),
-              SizedBox(height: 10),
-              Categorylist(),
-              SizedBox(height: 30),
-              _categoryheading(context, "Discover"),
-              // SpecialProducts(),
-              Discover(),
-              SizedBox(height: 30.0),
-
-              _categoryheading(context, "Best Offers"),
-              Bestoffers(),
-              //Category(),
-              SizedBox(height: 30.0),
-
-              _categoryheading(context, "Varieties"),
-
-              Varieties(),
-              SizedBox(height: 30.0),
-              Invite(),
-              SizedBox(height: 30.0),
-              _categoryheading(context, "Great Deals"),
-              Discover(),
-            ]),
           ),
-        ),
-      ),
+          ),
     );
   }
 }

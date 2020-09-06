@@ -205,6 +205,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.8"
+  nuts_activity_indicator:
+    dependency: "direct main"
+    description:
+      name: nuts_activity_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   otp_text_field:
     dependency: "direct main"
     description:

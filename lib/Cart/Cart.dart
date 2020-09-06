@@ -1,3 +1,6 @@
+import 'package:ecom/Api/Apidemo.dart';
+import 'package:ecom/Cart/Refresh.dart';
+import 'package:ecom/Homepage/carousel.dart';
 import 'package:ecom/Login/login.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -131,7 +134,10 @@ class Carthomestate extends State<Carthome> {
             ),
             SizedBox(height: 30.0),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Api()));
+              },
               child: Container(
                 alignment: Alignment.center,
                 height: 50.0,

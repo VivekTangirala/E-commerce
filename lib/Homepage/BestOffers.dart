@@ -19,7 +19,7 @@ class Bestoffersstate extends State<Bestoffers> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 230.0,
+      height: 232.0,
       child: ListView.builder(
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
