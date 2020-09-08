@@ -71,7 +71,7 @@ class VarietiesState extends State<Varieties>
             // )
           ]),
           onTap: () {
-            
+
           },
         );
       },
