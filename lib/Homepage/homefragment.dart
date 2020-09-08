@@ -20,6 +20,8 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:http/http.dart' as http;
 import 'Invite.dart';
 import 'Categorylist/categorylist.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'Categorylist/categorylist.dart';
 
 GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -92,104 +94,97 @@ class _HomefragmentState extends State<HomeFragment> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: _appBar1(context),
       key: _scaffoldKey,
       //appBar: _appBar(context),
       drawer: Drawer1(),
       body: RefreshIndicator(
         onRefresh: fetchPost,
-          key: refreshKey,
-          color: Colors.black,
-          child: NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                SliverAppBar(
-                  leading: IconButton(
-                    icon: Icon(
-                      Icons.menu,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      _scaffoldKey.currentState.openDrawer();
-                    },
-                  ),
-                  actions: [
-                    IconButton(
-                      padding: EdgeInsets.only(left: 20),
-                      icon: Icon(
-                        EvaIcons.search,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {
-                        showSearch(context: context, delegate: SearchBar());
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        EvaIcons.shoppingCartOutline,
-                        color: Colors.black,
-                      ),
-                      padding: EdgeInsets.only(left: 20, right: 20.0),
-                      onPressed: () async {
-                        SharedPreferences sharedPreferences =
-                            await SharedPreferences.getInstance();
-                        sharedPreferences.clear();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Carthome()),
-                        );
-                      },
-                    ),
-                  ],
-                  elevation: 0.0,
-                  backgroundColor: Colors.white,
-                  expandedHeight: 150.0,
-                  floating: false,
-                  pinned: true,
-                  flexibleSpace: FlexibleSpaceBar(
-                    // title: Row(
+        key: refreshKey,
+        color: Colors.black,
+        child: LiquidPullToRefresh(
+          onRefresh: () {
+            Categoryliststate().RefreshCategory();
+          },
+          child: Container(
+            margin: EdgeInsets.only(left: 8, right: 8),
+            child: SingleChildScrollView(
+              child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                _textsection(context),
+                SizedBox(height: 10),
+                Categorylist(),
+                SizedBox(height: 30),
+                _categoryheading(context, "Discover"),
+                // SpecialProducts(),
+                Discover(),
+                SizedBox(height: 30.0),
 
-                    background:
-                        // Image.asset("assets/images/tomato.png", fit: BoxFit.cover),
-                        CarouselPages(),
-                  ),
-                ),
-              ];
-            },
-            body: Container(
-              margin: EdgeInsets.only(left: 8, right: 8),
-              child: SingleChildScrollView(
-                child:
-                    Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                  _textsection(context),
-                  SizedBox(height: 10),
-                  Categorylist(),
-                  SizedBox(height: 30),
-                  _categoryheading(context, "Discover"),
-                  // SpecialProducts(),
-                  Discover(),
-                  SizedBox(height: 30.0),
+                _categoryheading(context, "Best Offers"),
+                Bestoffers(),
+                //Category(),
+                SizedBox(height: 30.0),
 
-                  _categoryheading(context, "Best Offers"),
-                  Bestoffers(),
-                  //Category(),
-                  SizedBox(height: 30.0),
+                _categoryheading(context, "Varieties"),
 
-                  _categoryheading(context, "Varieties"),
-
-                  Varieties(),
-                  SizedBox(height: 30.0),
-                  Invite(),
-                  SizedBox(height: 30.0),
-                  _categoryheading(context, "Great Deals"),
-                  Discover(),
-                ]),
-              ),
+                Varieties(),
+                SizedBox(height: 30.0),
+                Invite(),
+                SizedBox(height: 30.0),
+                _categoryheading(context, "Great Deals"),
+                Discover(),
+              ]),
             ),
           ),
-          ),
+        ),
+      ),
     );
   }
+}
+
+class Categorydata {}
+
+AppBar _appBar(BuildContext context) {
+  return AppBar(
+    leading: IconButton(
+      icon: Icon(
+        Icons.menu,
+        color: Colors.black,
+      ),
+      onPressed: () {
+        _scaffoldKey.currentState.openDrawer();
+      },
+    ),
+    actions: [
+      IconButton(
+        padding: EdgeInsets.only(left: 20),
+        icon: Icon(
+          EvaIcons.search,
+          color: Colors.black,
+        ),
+        onPressed: () {
+          showSearch(context: context, delegate: SearchBar());
+        },
+      ),
+      IconButton(
+        icon: Icon(
+          EvaIcons.shoppingCartOutline,
+          color: Colors.black,
+        ),
+        padding: EdgeInsets.only(left: 20, right: 20.0),
+        onPressed: () async {
+          SharedPreferences sharedPreferences =
+              await SharedPreferences.getInstance();
+          sharedPreferences.clear();
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Carthome()),
+          );
+        },
+      ),
+    ],
+    elevation: 0.0,
+    backgroundColor: Colors.white,
+  );
 }
 
 class SearchBar extends SearchDelegate<String> {
@@ -312,7 +307,7 @@ class _SilverAppState extends State<SilverApp> {
   }
 }
 
-AppBar _appBar(BuildContext context) {
+AppBar _appBar1(BuildContext context) {
   return AppBar(
     // backgroundColor: Colors.white,
     elevation: 0.0,

@@ -40,6 +40,7 @@ dependencies:
   bubble_tab_indicator: "^0.1.4"
   otp_text_field: ^1.0.1
   nuts_activity_indicator: ^0.1.1
+  liquid_pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   flutter_test:
