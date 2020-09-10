@@ -113,16 +113,16 @@ class _HomefragmentState extends State<HomeFragment> {
                 _textsection(context),
                 SizedBox(height: 10),
                 Categorylist(),
-                SizedBox(height: 30),
+                SizedBox(height: 5),
                 _categoryheading(context, "Discover"),
                 // SpecialProducts(),
                 Discover(),
-                SizedBox(height: 30.0),
+                SizedBox(height: 20.0),
 
                 _categoryheading(context, "Best Offers"),
                 Bestoffers(),
                 //Category(),
-                SizedBox(height: 30.0),
+                SizedBox(height: 20.0),
 
                 _categoryheading(context, "Varieties"),
 

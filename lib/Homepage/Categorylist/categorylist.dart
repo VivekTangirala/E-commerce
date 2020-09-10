@@ -21,38 +21,6 @@ class Categoryliststate extends State<Categorylist> {
   List<Categorydata> _categorydata;
   bool _isLoading = true;
 
-  List<Text> _ingredients = [
-    Text("",
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: 18.0,
-            fontWeight: FontWeight.normal)),
-    Text("Snacks",
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: 18.0,
-            fontWeight: FontWeight.normal)),
-    Text("Staples",
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: 18.0,
-            fontWeight: FontWeight.normal)),
-    Text("Beaverages",
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: 18.0,
-            fontWeight: FontWeight.normal)),
-    Text("Bakery & dairy",
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: 18.0,
-            fontWeight: FontWeight.normal)),
-    Text("Personal care",
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: 18.0,
-            fontWeight: FontWeight.normal)),
-  ];
   @override
   TabController _tabcontroller;
   // var response = await http

@@ -60,7 +60,7 @@ class _DiscoverState extends State<Discover> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 350.0,
+      height: 185.0,
       child: ListView.builder(
         controller: _scrollController,
         itemExtent: 125,
