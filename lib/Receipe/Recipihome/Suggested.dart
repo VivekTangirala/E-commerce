@@ -65,7 +65,7 @@ class Suggestedstate extends State<Suggested> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 0.0),
+                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[

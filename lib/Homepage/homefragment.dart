@@ -1,27 +1,17 @@
-import 'package:carousel_pro/carousel_pro.dart';
 import 'package:ecom/Cart/Cart.dart';
 import 'package:ecom/Homepage/BestOffers.dart';
 import 'package:ecom/Homepage/Discovery/Discover.dart';
 import 'package:ecom/Homepage/Varieties.dart';
-import 'package:ecom/Homepage/just_for_you.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ecom/Login/login.dart';
 import 'Drawer.dart';
 import './carousel.dart';
-import './category.dart';
-import 'package:ecom/placeholder_widget.dart';
 import 'dart:convert';
-import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:carousel_pro/carousel_pro.dart';
 import 'package:http/http.dart' as http;
 import 'Invite.dart';
 import 'Categorylist/categorylist.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'Categorylist/categorylist.dart';
 
 GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
