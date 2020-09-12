@@ -1,5 +1,6 @@
 import 'package:ecom/Homepage/Discovery/Discoverdata.dart';
 import 'package:ecom/Homepage/Discovery/discoverimport.dart';
+import 'package:ecom/Homepage/Productdescription.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
@@ -144,7 +145,14 @@ class _DiscoverState extends State<Discover> {
                       ),
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            Productsdescription(),
+                      ),
+                    );
+                  },
                 );
         },
       ),
