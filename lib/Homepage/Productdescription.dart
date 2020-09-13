@@ -15,8 +15,9 @@ class _ProductsdescriptionState extends State<Productsdescription> {
 
   @override
   Widget build(BuildContext context) {
-    var _weight = 1;
+    var _weight = 10;
     var _quantity = 1;
+    bool _isLoading = false;
     return Scaffold(
       appBar: _appBar(context),
       body: Padding(
@@ -55,15 +56,22 @@ class _ProductsdescriptionState extends State<Productsdescription> {
                       children: [
                         Padding(
                           padding: EdgeInsets.all(10.0),
-                          child: GestureDetector(
+                          child: InkWell(
                               onTap: () {
                                 setState(() {
+                                  _isLoading = true;
                                   _weight = _weight - 1;
+                                  _isLoading = false;
+                                  print(_weight);
                                 });
                               },
                               child: Text("-")),
                         ),
-                        Text("$_weight Kg"),
+                        _isLoading
+                            ? Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : Text("$_weight Kg"),
                         Padding(
                           padding: EdgeInsets.all(10.0),
                           child: GestureDetector(
@@ -147,7 +155,7 @@ class _ProductsdescriptionState extends State<Productsdescription> {
                     height: 50.0,
                     width: MediaQuery.of(context).size.width / 2 - 20,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(8.0),
                         border: Border.all(color: Colors.orangeAccent)),
                     child: Text(
                       "Add to cart",
