@@ -48,7 +48,7 @@ class _HomefragmentState extends State<HomeFragment> {
   }
 
   var response;
-  Future <Void> _refresh() {
+  Future <void> _refresh() async{
     Discoverimport.getUsers();
     Categorylistimport.getUsers();
   }
