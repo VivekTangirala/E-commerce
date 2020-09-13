@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
@@ -53,10 +52,13 @@ class _CarouselPagesState extends State<CarouselPages>
                 a = "${values[0]["image1"]}";
                 b = "${values[0]["image2"]}";
                 c = "${values[0]["image3"]}";
+                
               });
+              return null;
             }
           }
         } on RangeError {
+          
           print(response);
         }
         // print(values[0]["image1"]);
@@ -64,6 +66,7 @@ class _CarouselPagesState extends State<CarouselPages>
 
       } else {
         print(response);
+        return null;
       }
       return null;
     } catch (e) {}

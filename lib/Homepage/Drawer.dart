@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:ecom/Homepage/Categorylist/categorylist.dart';
 import 'package:ecom/Login/login.dart';
 import 'package:ecom/Profile/main_profile.dart';
 import 'package:flutter/material.dart';

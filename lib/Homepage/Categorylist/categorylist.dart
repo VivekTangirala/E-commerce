@@ -1,14 +1,8 @@
-import 'dart:ffi';
 
-import 'package:ecom/Cart/Cart.dart';
-import 'package:ecom/Cart/Refresh.dart';
 import 'package:ecom/Homepage/Categorylist/categorylistdata.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
-import 'package:http/http.dart' as http;
 import 'categorylistimport.dart';
-import 'dart:async';
 
 class Categorylist extends StatefulWidget {
   @override
@@ -22,7 +16,6 @@ class Categoryliststate extends State<Categorylist> {
   bool _isLoading = true;
 
   @override
-  TabController _tabcontroller;
   // var response = await http
   //       .post("https://infintymall.herokuapp.com/user/api/login", body: data);
   void initState() {
@@ -30,11 +23,10 @@ class Categoryliststate extends State<Categorylist> {
     // if () {
 
     // }
-    RefreshCategory();
+    refreshCategory();
   }
 
-  @override
-  Function RefreshCategory() {
+   refreshCategory() {
     Categorylistimport.getUsers().then((value) {
       setState(() {
         _categorydata = value;
@@ -69,7 +61,6 @@ class Categoryliststate extends State<Categorylist> {
         },
         child: TabBar(
           physics: ScrollPhysics(),
-          controller: _tabcontroller,
           isScrollable: true,
           //controller: tab,
           indicatorSize: TabBarIndicatorSize.tab,

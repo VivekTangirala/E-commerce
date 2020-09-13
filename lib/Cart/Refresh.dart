@@ -2,13 +2,6 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:carousel_pro/carousel_pro.dart';
-import 'package:http/http.dart' as http;
-
 class Refresh extends StatefulWidget {
   @override
   _HomePageState createState() => new _HomePageState();

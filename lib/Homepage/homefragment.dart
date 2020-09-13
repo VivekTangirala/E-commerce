@@ -1,14 +1,18 @@
+import 'dart:ffi';
+
 import 'package:ecom/Cart/Cart.dart';
 import 'package:ecom/Homepage/BestOffers.dart';
+import 'package:ecom/Homepage/Categorylist/categorylistdata.dart';
+import 'package:ecom/Homepage/Categorylist/categorylistimport.dart';
 import 'package:ecom/Homepage/Discovery/Discover.dart';
+import 'package:ecom/Homepage/Discovery/Discoverdata.dart';
+import 'package:ecom/Homepage/Discovery/discoverimport.dart';
 import 'package:ecom/Homepage/Varieties.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Drawer.dart';
 import './carousel.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'Invite.dart';
 import 'Categorylist/categorylist.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -41,43 +45,12 @@ class _HomefragmentState extends State<HomeFragment> {
   @override
   void initState() {
     super.initState();
-    fetchPost();
   }
 
   var response;
-  Future<Null> fetchPost() async {
-    refreshKey.currentState?.show(atTop: false);
-    await Future.delayed(Duration(seconds: 2));
-    try {
-      response = await http.get(
-        'http://infintymall.herokuapp.com/homepage/api/carousel',
-      );
-
-      if (response.statusCode == 200) {
-        // If the call to the server was successful, parse the JSON
-        values = json.decode(response.body);
-        try {
-          final x = await http.get("${values[0]["image1"]}");
-          if (x.statusCode == 200) {
-            if (mounted) {
-              setState(() {
-                a = "${values[0]["image1"]}";
-                b = "${values[0]["image2"]}";
-                c = "${values[0]["image3"]}";
-              });
-            }
-          }
-        } on RangeError {
-          print(response);
-        }
-        // print(values[0]["image1"]);
-        //return values;
-
-      } else {
-        print(response);
-      }
-      return null;
-    } catch (e) {}
+  Future <Void> _refresh() {
+    Discoverimport.getUsers();
+    Categorylistimport.getUsers();
   }
 
   @override
@@ -86,95 +59,43 @@ class _HomefragmentState extends State<HomeFragment> {
       backgroundColor: Colors.white,
       appBar: _appBar1(context),
       key: _scaffoldKey,
-      //appBar: _appBar(context),
       drawer: Drawer1(),
-      body: RefreshIndicator(
-        onRefresh: fetchPost,
-        key: refreshKey,
-        color: Colors.black,
-        child: LiquidPullToRefresh(
-          onRefresh: () {
-            Categoryliststate().RefreshCategory();
-          },
-          child: Container(
-            margin: EdgeInsets.only(left: 8, right: 8),
-            child: SingleChildScrollView(
-              child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                _textsection(context),
-                SizedBox(height: 10),
-                Categorylist(),
-                SizedBox(height: 5),
-                _categoryheading(context, "Discover"),
-                // SpecialProducts(),
-                Discover(),
-                SizedBox(height: 20.0),
+      body: LiquidPullToRefresh(
+        onRefresh: () {
+          return _refresh();
+        },
+        child: Container(
+          margin: EdgeInsets.only(left: 8, right: 8),
+          child: SingleChildScrollView(
+            child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+              _textsection(context),
+              SizedBox(height: 10),
+              Categorylist(),
+              SizedBox(height: 5),
+              _categoryheading(context, "Discover"),
+              // SpecialProducts(),
+              Discover(),
+              SizedBox(height: 20.0),
 
-                _categoryheading(context, "Best Offers"),
-                Bestoffers(),
-                //Category(),
-                SizedBox(height: 20.0),
+              _categoryheading(context, "Best Offers"),
+              Bestoffers(),
+              //Category(),
+              SizedBox(height: 20.0),
 
-                _categoryheading(context, "Varieties"),
+              _categoryheading(context, "Varieties"),
 
-                Varieties(),
-                SizedBox(height: 30.0),
-                Invite(),
-                SizedBox(height: 30.0),
-                _categoryheading(context, "Great Deals"),
-                Discover(),
-              ]),
-            ),
+              Varieties(),
+              SizedBox(height: 30.0),
+              Invite(),
+              SizedBox(height: 30.0),
+              _categoryheading(context, "Great Deals"),
+              Discover(),
+            ]),
           ),
         ),
       ),
     );
   }
-}
-
-class Categorydata {}
-
-AppBar _appBar(BuildContext context) {
-  return AppBar(
-    leading: IconButton(
-      icon: Icon(
-        Icons.menu,
-        color: Colors.black,
-      ),
-      onPressed: () {
-        _scaffoldKey.currentState.openDrawer();
-      },
-    ),
-    actions: [
-      IconButton(
-        padding: EdgeInsets.only(left: 20),
-        icon: Icon(
-          EvaIcons.search,
-          color: Colors.black,
-        ),
-        onPressed: () {
-          showSearch(context: context, delegate: SearchBar());
-        },
-      ),
-      IconButton(
-        icon: Icon(
-          EvaIcons.shoppingCartOutline,
-          color: Colors.black,
-        ),
-        padding: EdgeInsets.only(left: 20, right: 20.0),
-        onPressed: () async {
-          SharedPreferences sharedPreferences =
-              await SharedPreferences.getInstance();
-          sharedPreferences.clear();
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Carthome()),
-          );
-        },
-      ),
-    ],
-    elevation: 0.0,
-    backgroundColor: Colors.white,
-  );
 }
 
 class SearchBar extends SearchDelegate<String> {
@@ -222,78 +143,6 @@ class SearchBar extends SearchDelegate<String> {
               title: Text(cities[index]),
             ),
         itemCount: suggestionList.length);
-  }
-}
-
-class SilverApp extends StatefulWidget {
-  @override
-  _SilverAppState createState() => _SilverAppState();
-}
-
-class _SilverAppState extends State<SilverApp> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              leading: IconButton(
-                icon: Icon(
-                  Icons.menu,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  //_scaffoldKey.currentState.openDrawer();
-                },
-              ),
-              actions: [
-                IconButton(
-                  padding: EdgeInsets.only(left: 20),
-                  icon: Icon(
-                    EvaIcons.search,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    showSearch(context: context, delegate: SearchBar());
-                  },
-                ),
-                IconButton(
-                  icon: Icon(
-                    EvaIcons.shoppingCartOutline,
-                    color: Colors.black,
-                  ),
-                  padding: EdgeInsets.only(left: 20),
-                  onPressed: () async {
-                    SharedPreferences sharedPreferences =
-                        await SharedPreferences.getInstance();
-                    sharedPreferences.clear();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Carthome()),
-                    );
-                  },
-                ),
-              ],
-              elevation: 0.0,
-              backgroundColor: Colors.white,
-              expandedHeight: 150.0,
-              floating: false,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                // title: Row(
-
-                background: CarouselPages(),
-              ),
-            ),
-          ];
-        },
-        body: Center(
-          child: Text("sample"),
-        ),
-      ),
-    );
   }
 }
 
@@ -398,43 +247,3 @@ Widget _categoryheading(BuildContext context, String str) {
     ),
   );
 }
-
-// class Categorylist extends StatefulWidget {
-//   @override
-//   State<StatefulWidget> createState() {
-//     return _categoryliststate();
-//   }
-// }
-
-// class _categoryliststate extends State<Categorylist> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: 50,
-//       width: double.infinity,
-//       child: ListView.builder(
-//         itemCount: _ingredients.length,
-//         shrinkWrap: true,
-//         scrollDirection: Axis.horizontal,
-//         physics: BouncingScrollPhysics(),
-//         itemBuilder: (BuildContext context, int index) {
-//           return Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: InkWell(
-//               onTap: () {
-//                 setState(() {
-//                   _chipcolor[index] = Colors.white;
-
-//                 });
-//               },
-//               child: Chip(
-//                 backgroundColor: _chipcolor[index],
-//                 label: _ingredients[index],
-//               ),
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }

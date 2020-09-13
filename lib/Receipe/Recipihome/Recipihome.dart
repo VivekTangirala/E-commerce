@@ -74,13 +74,7 @@ class _RecipihomeState extends State<Recipihome>
         body: ListView(
             padding: EdgeInsets.only(left: 8.0, right: 8.0),
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(left: 15.0, right: 15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[],
-                ),
-              ),
+              textsection("Go with categories"),
               SizedBox(height: 15.0),
               Categorylistrecipe(),
               SizedBox(height: 20.0),

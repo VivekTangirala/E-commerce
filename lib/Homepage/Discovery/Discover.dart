@@ -28,13 +28,7 @@ class _DiscoverState extends State<Discover> {
   @override
   void initState() {
     super.initState();
-    Discoverimport.getUsers().then((value) {
-      setState(() {
-        _discoverdata = value;
-        _isloading = false;
-        print(_discoverdata.results[0].image);
-      });
-    });
+    _discoverrefresh();
     // mylist = List.generate(4, (i) => "assets/images/tomato.png");
     // mylist1 = List.generate(4, (i) => "Pineapple");
     // _scrollController.addListener(
@@ -45,6 +39,16 @@ class _DiscoverState extends State<Discover> {
     //     }
     //   },
     // );
+  }
+
+  _discoverrefresh() {
+    Discoverimport.getUsers().then((value) {
+      setState(() {
+        _discoverdata = value;
+        _isloading = false;
+        print(_discoverdata.results[0].image);
+      });
+    });
   }
 
   getMoreData() {
