@@ -35,8 +35,8 @@ class _SignupPageState extends State<SignupPage> {
                 children: <Widget>[
                   skipSection(),
                   SizedBox(height: 30.0),
-                  getting_started(),
-                  getting_started1(),
+                  _gettingstarted(),
+                  _gettingstarted1(),
                   textSection(),
                   senOTPButton(),
                   SizedBox(height: 50.0),
@@ -67,7 +67,7 @@ class _SignupPageState extends State<SignupPage> {
         ));
   }
 
-  Widget getting_started() {
+  Widget _gettingstarted() {
     return Container(
       alignment: Alignment.topLeft,
       margin: EdgeInsets.only(bottom: 10),
@@ -79,7 +79,7 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  Widget getting_started1() {
+  Widget _gettingstarted1() {
     return Container(
       alignment: Alignment.topLeft,
       margin: EdgeInsets.only(bottom: 50),

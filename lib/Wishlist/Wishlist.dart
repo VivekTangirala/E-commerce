@@ -14,13 +14,15 @@ List<String> l2 = [
   "Burger",
 ];
 
+var _qty = new List.generate(l1.length, (index) => 1 );
+
 class Wishlist extends StatefulWidget {
   @override
   _WishlistState createState() => _WishlistState();
 }
 
 class _WishlistState extends State<Wishlist> {
-  var _qty = 1;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,12 +69,12 @@ class _WishlistState extends State<Wishlist> {
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    _qty = _qty + 1;
+                                    _qty[index] = _qty[index] + 1;
                                   });
                                 },
                               ),
                               Text(
-                                "$_qty",
+                                _qty[index].toString().padLeft(1, "0"),
                               ),
                               IconButton(
                                 icon: Icon(
@@ -81,7 +83,9 @@ class _WishlistState extends State<Wishlist> {
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    _qty = _qty - 1;
+                                    if (_qty[index] > 1) {
+                                      _qty[index] = _qty[index] - 1;
+                                    }
                                   });
                                 },
                               ),

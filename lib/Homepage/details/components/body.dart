@@ -2,8 +2,6 @@ import 'package:ecom/Homepage/details/Product.dart';
 import 'package:flutter/material.dart';
 
 import 'add_to_cart.dart';
-import 'color_and_size.dart';
-import 'counter_with_fav_btn.dart';
 import 'description.dart';
 import 'product_title_with_image.dart';
 

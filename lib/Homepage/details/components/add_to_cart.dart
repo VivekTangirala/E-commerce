@@ -1,8 +1,6 @@
 import 'package:ecom/Homepage/details/Product.dart';
 import 'package:ecom/Homepage/details/components/cart_counter.dart';
-import 'package:ecom/Homepage/details/components/counter_with_fav_btn.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class AddToCart extends StatelessWidget {
   const AddToCart({

@@ -18,13 +18,14 @@ List<String> l3 = [
   "50.0",
 ];
 
+  var _qty = new List.generate(l1.length, (index) => 1);
 class Cart extends StatefulWidget {
   @override
   _CartState createState() => _CartState();
 }
 
 class _CartState extends State<Cart> {
-  var _qty=1, _discount, _subtotal, _total;
+ //var _discount, _subtotal, _total;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +63,16 @@ class _CartState extends State<Cart> {
                                     // Text(
                                     //   "Cocktail dress",
                                     // ),
-                                    Text("Quantity: $_qty"),
+                                    Row(
+                                      children: [
+                                        Text("Quantity:"),
+                                        Text(
+                                          _qty[index]
+                                              .toString()
+                                              .padLeft(1, "0"),
+                                        )
+                                      ],
+                                    ),
                                     // Text(
                                     //   "Color: Yellow",
                                     // ),
@@ -81,36 +91,41 @@ class _CartState extends State<Cart> {
                                               MainAxisAlignment.end,
                                           children: [
                                             IconButton(
-                                                icon: Icon(
-                                                  Icons.add_circle,
-                                                  color: Colors.orangeAccent,
-                                                ),
-                                                onPressed:(){
-                                                  setState(() {
-                                                    _qty=_qty+1;
-                                                  });
-                                                },
-                                                ),
+                                              icon: Icon(
+                                                Icons.add_circle,
+                                                color: Colors.orangeAccent,
+                                              ),
+                                              onPressed: () {
+                                                setState(() {
+                                                  _qty[index] = _qty[index] + 1;
+                                                });
+                                              },
+                                            ),
                                             SizedBox(
                                               width: 5,
                                             ),
                                             Text(
-                                             "$_qty",
+                                              _qty[index]
+                                                  .toString()
+                                                  .padLeft(1, "0"),
                                             ),
                                             SizedBox(
                                               width: 5,
                                             ),
                                             IconButton(
-                                                icon: Icon(
-                                                  Icons.remove_circle,
-                                                  color: Colors.orangeAccent,
-                                                ),
-                                                onPressed:(){
-                                                  setState(() {
-                                                    _qty=_qty-1;
-                                                  });
-                                                },
-                                                ),
+                                              icon: Icon(
+                                                Icons.remove_circle,
+                                                color: Colors.orangeAccent,
+                                              ),
+                                              onPressed: () {
+                                                setState(() {
+                                                  if (_qty[index] > 1) {
+                                                    _qty[index] =
+                                                        _qty[index] - 1;
+                                                  }
+                                                });
+                                              },
+                                            ),
                                           ],
                                         ),
                                       ],

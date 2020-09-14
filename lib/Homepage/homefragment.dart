@@ -1,10 +1,6 @@
-import 'dart:ffi';
 
-import 'package:ecom/Cart/Cart.dart';
 import 'package:ecom/Cart/cart1.dart';
 import 'package:ecom/Homepage/BestOffers.dart';
-import 'package:ecom/Homepage/Categorylist/categorylistdata.dart';
-import 'package:ecom/Homepage/Categorylist/categorylistimport.dart';
 import 'package:ecom/Homepage/Discovery/Discover.dart';
 import 'package:ecom/Homepage/Discovery/Discoverdata.dart';
 import 'package:ecom/Homepage/Discovery/discoverimport.dart';
@@ -14,7 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Drawer.dart';
-import './carousel.dart';
 import 'Invite.dart';
 import 'Categorylist/categorylist.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -41,6 +36,7 @@ class HomeFragment extends StatefulWidget {
 }
 
 class _HomefragmentState extends State<HomeFragment> {
+ // bool _firstload = false;
   List values;
   String a, b, c;
   Discoverdata _discoverdata;
@@ -96,7 +92,7 @@ class _HomefragmentState extends State<HomeFragment> {
                     child: Text("Retry"),
                   )
                 ],
-              ))
+              ),)
             : Container(
                 margin: EdgeInsets.only(left: 8, right: 8),
                 child: SingleChildScrollView(

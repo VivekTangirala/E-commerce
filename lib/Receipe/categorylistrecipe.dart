@@ -1,36 +1,29 @@
-import 'package:ecom/Cart/Cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 
-List<Color> _chipcolor = [
-  Colors.orangeAccent,
-  Colors.orangeAccent,
-  Colors.orangeAccent,
-  Colors.orangeAccent,
-  Colors.orangeAccent,
-  Colors.orangeAccent,
+// List<Color> _chipcolor = [
+//   Colors.orangeAccent,
+//   Colors.orangeAccent,
+//   Colors.orangeAccent,
+//   Colors.orangeAccent,
+//   Colors.orangeAccent,
+//   Colors.orangeAccent,
+// ];
+List<String> images = [
+  "assets/images/tomato.png",
+  "assets/images/onion.jpeg",
+  "assets/images/burger.jpeg",
+  "assets/images/some.jpg",
+  "assets/images/tomato.png",
+  "assets/images/onion.jpeg",
 ];
-
-List<Text> _ingredients = [
-  Text("Fruits & vegetables",
-      style: TextStyle(
-          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.bold)),
-  Text("Snacks",
-      style: TextStyle(
-          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
-  Text("Staples",
-      style: TextStyle(
-          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
-  Text("Beaverages",
-      style: TextStyle(
-          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
-  Text("Bakery & dairy",
-      style: TextStyle(
-          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
-  Text("Personal care",
-      style: TextStyle(
-          color: Colors.black, fontSize: 15.0, fontWeight: FontWeight.normal)),
+List<String> _name = [
+  "Popular",
+  "Top",
+  "Breakfast",
+  "Lunch",
+  "Snacks",
+  "Dinner",
 ];
 
 class Categorylistrecipe extends StatefulWidget {
@@ -57,17 +50,38 @@ class Categorylistrecipestate extends State<Categorylistrecipe> {
     return DefaultTabController(
       length: 6,
       child: TabBar(
-        physics: ScrollPhysics(),
+          physics: ScrollPhysics(),
+          isScrollable: true,
+          //controller: tab,
+          indicatorSize: TabBarIndicatorSize.tab,
+          indicator: CustomTabindicator(),
+          //BubbleTabIndicator(
+          //     indicatorHeight: 25.0,
+          //     indicatorColor: Colors.orange,
+          //     tabBarIndicatorSize: TabBarIndicatorSize.tab),
+          tabs: List<Widget>.generate(images.length, (int index) {
+            return GestureDetector(
+              onTap: () {},
+              child: Column(
+                children: [
+                  Container(
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: AssetImage(images[index]), fit: BoxFit.fill),
+                    ),
+                  ),
+                  Text(
+                    _name[index],
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                ],
+              ),
+            );
+          })
 
-        isScrollable: true,
-        //controller: tab,
-        indicatorSize: TabBarIndicatorSize.tab,
-        indicator: CustomTabindicator(),
-        //BubbleTabIndicator(
-        //     indicatorHeight: 25.0,
-        //     indicatorColor: Colors.orange,
-        //     tabBarIndicatorSize: TabBarIndicatorSize.tab),
-        tabs: [
           // ListView.builder(
           //     itemCount: _ingredients.length,
           //     physics: ScrollPhysics(),
@@ -79,38 +93,8 @@ class Categorylistrecipestate extends State<Categorylistrecipe> {
           //             color: Colors.black,
           //           ));
           //     }),
-          Text("Popular",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.normal)),
-          Text("Top",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.normal)),
-          Text("Breakfast",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.normal)),
-          Text("Lunch",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.normal)),
-          Text("Snacks",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.normal)),
-          Text("Dinner",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.normal)),
-        ],
-      ),
+
+          ),
     );
   }
 }
@@ -131,14 +115,12 @@ class _CustomPainter extends BoxPainter {
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     assert(configuration != null);
     assert(configuration.size != null);
-    final Rect rect =
-        Offset(offset.dx, (configuration.size.height / 2 - 24 / 2)) &
-            Size(configuration.size.width, 24);
+    final Rect rect = Offset(offset.dx, 0) & Size(configuration.size.width, 0);
     //final Rect rect = offset & configuration.size;
     final Paint paint = Paint();
-    paint.color = Colors.orangeAccent;
+    paint.color = Colors.white;
     paint.style = PaintingStyle.fill;
     canvas.drawRRect(
-        RRect.fromRectAndRadius(rect, Radius.circular(20.0)), paint);
+        RRect.fromRectAndRadius(rect, Radius.circular(0.0)), paint);
   }
 }

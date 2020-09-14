@@ -2,7 +2,6 @@ import 'package:ecom/Homepage/Discovery/Discoverdata.dart';
 import 'package:ecom/Homepage/Discovery/discoverimport.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 List<String> list = ["Pineapple", "Cherry", "Orange", "Apple"];
 List<String> list1 = ["25", "50", "45", "55"];

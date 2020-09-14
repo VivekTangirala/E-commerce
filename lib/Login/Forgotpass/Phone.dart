@@ -4,9 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import '../login.dart';
-import '../otp.dart';
-
 class Phone extends StatefulWidget {
   @override
   _PhoneState createState() => _PhoneState();
@@ -35,9 +32,9 @@ class _PhoneState extends State<Phone> {
             : ListView(
                 children: <Widget>[
                   SizedBox(height: 70.0),
-                  getting_started(),
+                  _gettingstarted(),
                   SizedBox(height: 10.0),
-                  getting_started1(),
+                  _gettingstarted1(),
                   textSection(),
                   senOTPButton(),
                   SizedBox(height: 50.0),
@@ -48,7 +45,7 @@ class _PhoneState extends State<Phone> {
   }
   //Header Handling
 
-  Widget getting_started() {
+  Widget _gettingstarted() {
     return Container(
       alignment: Alignment.topLeft,
       margin: EdgeInsets.only(bottom: 10),
@@ -63,7 +60,7 @@ class _PhoneState extends State<Phone> {
     );
   }
 
-  Widget getting_started1() {
+  Widget _gettingstarted1() {
     return Container(
       alignment: Alignment.topLeft,
       margin: EdgeInsets.only(bottom: 50),

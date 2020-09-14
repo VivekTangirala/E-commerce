@@ -1,6 +1,4 @@
 import 'package:ecom/Homepage/Discovery/Discoverdata.dart';
-import 'package:ecom/Homepage/Discovery/discoverimport.dart';
-import 'package:ecom/Homepage/Productdescription.dart';
 import 'package:ecom/Homepage/details/Product.dart';
 import 'package:ecom/Homepage/details/details_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +25,7 @@ class Discover extends StatefulWidget {
 class _DiscoverState extends State<Discover> {
   _DiscoverState(this._discoverdata);
  final Discoverdata _discoverdata;
-  bool _isloading = true;
+  //bool _isloading = true;
   List mylist;
   List mylist1;
   ScrollController _scrollController = new ScrollController();

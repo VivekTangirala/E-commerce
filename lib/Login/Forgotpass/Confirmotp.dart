@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 import 'package:ecom/Login/Forgotpass/Newpass.dart';
-import 'package:ecom/Login/Forgotpass/Phone.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
