@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:ecom/Cart/Cart.dart';
+import 'package:ecom/Cart/cart1.dart';
 import 'package:ecom/Homepage/BestOffers.dart';
 import 'package:ecom/Homepage/Categorylist/categorylistdata.dart';
 import 'package:ecom/Homepage/Categorylist/categorylistimport.dart';
@@ -9,6 +10,7 @@ import 'package:ecom/Homepage/Discovery/Discoverdata.dart';
 import 'package:ecom/Homepage/Discovery/discoverimport.dart';
 import 'package:ecom/Homepage/Varieties.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Drawer.dart';
@@ -41,16 +43,33 @@ class HomeFragment extends StatefulWidget {
 class _HomefragmentState extends State<HomeFragment> {
   List values;
   String a, b, c;
+  Discoverdata _discoverdata;
+  bool _isloading = true;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   @override
   void initState() {
     super.initState();
+    _discoverrefresh();
+  }
+
+  _discoverrefresh() async {
+    await Discoverimport.getUsers().then((value) {
+      setState(() {
+        _discoverdata = value;
+        _isloading = false;
+        print(_discoverdata.results[0].image);
+      });
+    });
   }
 
   var response;
-  Future <void> _refresh() async{
-    Discoverimport.getUsers();
-    Categorylistimport.getUsers();
+  Future<void> _refresh() async {
+    setState(() {
+      _isloading = true;
+      _discoverrefresh();
+      // Discoverimport.getUsers();
+      // Categorylistimport.getUsers();
+    });
   }
 
   @override
@@ -64,35 +83,50 @@ class _HomefragmentState extends State<HomeFragment> {
         onRefresh: () {
           return _refresh();
         },
-        child: Container(
-          margin: EdgeInsets.only(left: 8, right: 8),
-          child: SingleChildScrollView(
-            child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              _textsection(context),
-              SizedBox(height: 10),
-              Categorylist(),
-              SizedBox(height: 5),
-              _categoryheading(context, "Discover"),
-              // SpecialProducts(),
-              Discover(),
-              SizedBox(height: 20.0),
+        child: _isloading
+            ? Center(
+                child: CupertinoAlertDialog(
+                title: Text(
+                    "Please make sure you have an active internet connection"),
+                actions: [
+                  CupertinoDialogAction(
+                    onPressed: () {
+                      _refresh();
+                    },
+                    child: Text("Retry"),
+                  )
+                ],
+              ))
+            : Container(
+                margin: EdgeInsets.only(left: 8, right: 8),
+                child: SingleChildScrollView(
+                  child:
+                      Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                    _textsection(context),
+                    SizedBox(height: 10),
+                    Categorylist(),
+                    SizedBox(height: 5),
+                    _categoryheading(context, "Discover"),
+                    // SpecialProducts(),
+                    Discover(receiveddiscoverdata: _discoverdata),
+                    SizedBox(height: 20.0),
 
-              _categoryheading(context, "Best Offers"),
-              Bestoffers(),
-              //Category(),
-              SizedBox(height: 20.0),
+                    _categoryheading(context, "Best Offers"),
+                    Bestoffers(),
+                    //Category(),
+                    SizedBox(height: 20.0),
 
-              _categoryheading(context, "Varieties"),
+                    _categoryheading(context, "Varieties"),
 
-              Varieties(),
-              SizedBox(height: 30.0),
-              Invite(),
-              SizedBox(height: 30.0),
-              _categoryheading(context, "Great Deals"),
-              Discover(),
-            ]),
-          ),
-        ),
+                    Varieties(),
+                    SizedBox(height: 30.0),
+                    Invite(),
+                    SizedBox(height: 30.0),
+                    _categoryheading(context, "Great Deals"),
+                    Discover(receiveddiscoverdata: _discoverdata),
+                  ]),
+                ),
+              ),
       ),
     );
   }
@@ -195,7 +229,7 @@ AppBar _appBar1(BuildContext context) {
                 sharedPreferences.clear();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Carthome()),
+                  MaterialPageRoute(builder: (context) => Cart()),
                 );
               },
             ),

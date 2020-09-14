@@ -14,21 +14,28 @@ final List<String> images = [
 ];
 
 class Discover extends StatefulWidget {
+  final Discoverdata receiveddiscoverdata;
+
+  const Discover({Key key, this.receiveddiscoverdata}) : super(key: key);
+ 
   @override
-  _DiscoverState createState() => _DiscoverState();
+  _DiscoverState createState() => _DiscoverState(receiveddiscoverdata);
 }
 
 class _DiscoverState extends State<Discover> {
-  Discoverdata _discoverdata;
+  _DiscoverState(this._discoverdata);
+ final Discoverdata _discoverdata;
   bool _isloading = true;
   List mylist;
   List mylist1;
   ScrollController _scrollController = new ScrollController();
   int _currentmax = 4;
+
+  
   @override
   void initState() {
     super.initState();
-    _discoverrefresh();
+    // _discoverrefresh();
     // mylist = List.generate(4, (i) => "assets/images/tomato.png");
     // mylist1 = List.generate(4, (i) => "Pineapple");
     // _scrollController.addListener(
@@ -41,15 +48,15 @@ class _DiscoverState extends State<Discover> {
     // );
   }
 
-  _discoverrefresh() {
-    Discoverimport.getUsers().then((value) {
-      setState(() {
-        _discoverdata = value;
-        _isloading = false;
-        print(_discoverdata.results[0].image);
-      });
-    });
-  }
+  // _discoverrefresh() {
+  //   Discoverimport.getUsers().then((value) {
+  //     setState(() {
+  //       _discoverdata = value;
+  //       _isloading = false;
+  //       print(_discoverdata.results[0].image);
+  //     });
+  //   });
+  // }
 
   getMoreData() {
     print("Reached limit");

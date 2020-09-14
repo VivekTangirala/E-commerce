@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:ecom/Login/login.dart';
+import 'package:ecom/Orders/Orders.dart';
 import 'package:ecom/Profile/main_profile.dart';
+import 'package:ecom/Wishlist/Wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -119,7 +121,7 @@ class _Drawerstate extends State<Drawer1> {
                   onTap: () {
                     if (index == 0) {
                       setState(() {
-                        c1[0] = Colors.orangeAccent;
+                        c1[index] = Colors.orangeAccent;
                       });
 
                       Navigator.of(context).pop();
@@ -131,7 +133,43 @@ class _Drawerstate extends State<Drawer1> {
                       );
                       Timer(Duration(milliseconds: 100), () {
                         setState(() {
-                          c1[0] = Colors.white10;
+                          c1[index] = Colors.white10;
+                        });
+                      });
+                    }
+                   if (index == 1) {
+                      setState(() {
+                        c1[index] = Colors.orangeAccent;
+                      });
+
+                      Navigator.of(context).pop();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Orders(),
+                        ),
+                      );
+                      Timer(Duration(milliseconds: 100), () {
+                        setState(() {
+                          c1[index] = Colors.white10;
+                        });
+                      });
+                    }
+                     if (index == 3) {
+                      setState(() {
+                        c1[index] = Colors.orangeAccent;
+                      });
+
+                      Navigator.of(context).pop();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Wishlist(),
+                        ),
+                      );
+                      Timer(Duration(milliseconds: 100), () {
+                        setState(() {
+                          c1[index] = Colors.white10;
                         });
                       });
                     }
