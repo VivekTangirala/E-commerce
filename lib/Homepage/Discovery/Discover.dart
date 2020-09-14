@@ -1,6 +1,8 @@
 import 'package:ecom/Homepage/Discovery/Discoverdata.dart';
 import 'package:ecom/Homepage/Discovery/discoverimport.dart';
 import 'package:ecom/Homepage/Productdescription.dart';
+import 'package:ecom/Homepage/details/Product.dart';
+import 'package:ecom/Homepage/details/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -151,8 +153,9 @@ class _DiscoverState extends State<Discover> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            Productsdescription(),
+                        builder: (BuildContext context) => DetailsScreen(
+                          product: products[index],
+                        ),
                       ),
                     );
                   },
