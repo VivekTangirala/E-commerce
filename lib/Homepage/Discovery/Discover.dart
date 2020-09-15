@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecom/Homepage/Discovery/Discoverdata.dart';
 import 'package:ecom/Homepage/details/Product.dart';
 import 'package:ecom/Homepage/details/details_screen.dart';
@@ -17,21 +18,20 @@ class Discover extends StatefulWidget {
   final Discoverdata receiveddiscoverdata;
 
   const Discover({Key key, this.receiveddiscoverdata}) : super(key: key);
- 
+
   @override
   _DiscoverState createState() => _DiscoverState(receiveddiscoverdata);
 }
 
 class _DiscoverState extends State<Discover> {
   _DiscoverState(this._discoverdata);
- final Discoverdata _discoverdata;
-  //bool _isloading = true;
+  final Discoverdata _discoverdata;
+  bool _isloading = true;
   List mylist;
   List mylist1;
   ScrollController _scrollController = new ScrollController();
   int _currentmax = 4;
 
-  
   @override
   void initState() {
     super.initState();
@@ -116,38 +116,21 @@ class _DiscoverState extends State<Discover> {
                           SizedBox(
                             height: 150,
                             child: Container(
+                              child: Container(
+                                  child: FadeInImage.assetNetwork(
+                                placeholder: "assets/images/burger.jpeg",
+                                image: _discoverdata.results[index].image,
+                                fit: BoxFit.fill,
+                              )),
                               //alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      _discoverdata.results[index].image),
-                                  //image: AssetImage(images[index]),
-                                ),
                                 color: Colors.white,
-                                // border: Border.all(
-                                //     color: Colors.black12, // set border color
-                                //     width: 0.6), // set border width
                                 borderRadius: BorderRadius.all(Radius.circular(
-                                    5.0)), // set rounded corner radius
+                                    25.0)), // set rounded corner radius
                               ),
                             ),
                           ),
                           SizedBox(height: 0.0),
-                          // _isloading == true
-                          //     ? Column(
-                          //         children: [
-                          //           Text(
-                          //             list[index],
-                          //             style: Theme.of(context).textTheme.bodyText1,
-                          //           ),
-                          //           Text(
-                          //             "25",
-                          //             style: Theme.of(context).textTheme.caption,
-                          //           )
-                          //         ],
-                          //       )
-                          //     :
                           Text(
                             _discoverdata.results[index].name,
                           ),
