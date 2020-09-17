@@ -80,7 +80,7 @@ class _Drawerstate extends State<Drawer1> {
             child: Container(
               padding: EdgeInsets.all(10.0),
               alignment: Alignment.center,
-              height: 75.0,
+              height: MediaQuery.of(context).size.height/9,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

@@ -20,7 +20,7 @@ class Suggestedstate extends State<Suggested> {
   Widget build(BuildContext context) {
     return SizedBox(
       
-      height: 180.0,
+    height: MediaQuery.of(context).size.height/4,
       child: ListView.builder(
         padding: EdgeInsets.only(right:15.0),
         physics: ClampingScrollPhysics(),
@@ -38,7 +38,7 @@ class Suggestedstate extends State<Suggested> {
               //       ),
               // ),
               child: SizedBox(
-                // height: 100,
+                //height: 100,
                 width: 300,
                 child: Container(
                   margin: EdgeInsets.all(5.0),
@@ -49,7 +49,7 @@ class Suggestedstate extends State<Suggested> {
                   // ),
                   child: Column(children: [
                     SizedBox(
-                      height: 120,
+                      height: MediaQuery.of(context).size.height/6,
                       child: Container(
                         //alignment: Alignment.center,
                         decoration: BoxDecoration(
