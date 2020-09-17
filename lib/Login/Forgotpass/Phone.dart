@@ -133,7 +133,7 @@ class _PhoneState extends State<Phone> {
             cursorColor: Colors.black,
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
-              WhitelistingTextInputFormatter.digitsOnly
+              FilteringTextInputFormatter.digitsOnly
             ],
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(

@@ -1,4 +1,3 @@
-
 import 'package:ecom/Cart/cart1.dart';
 import 'package:ecom/Homepage/BestOffers.dart';
 import 'package:ecom/Homepage/Discovery/Discover.dart';
@@ -36,7 +35,7 @@ class HomeFragment extends StatefulWidget {
 }
 
 class _HomefragmentState extends State<HomeFragment> {
- // bool _firstload = false;
+  // bool _firstload = false;
   List values;
   String a, b, c;
   Discoverdata _discoverdata;
@@ -53,7 +52,6 @@ class _HomefragmentState extends State<HomeFragment> {
       setState(() {
         _discoverdata = value;
         _isloading = false;
-        print(_discoverdata.results[0].image);
       });
     });
   }
@@ -63,8 +61,7 @@ class _HomefragmentState extends State<HomeFragment> {
     setState(() {
       _isloading = true;
       _discoverrefresh();
-      // Discoverimport.getUsers();
-      // Categorylistimport.getUsers();
+   
     });
   }
 
@@ -80,19 +77,7 @@ class _HomefragmentState extends State<HomeFragment> {
           return _refresh();
         },
         child: _isloading
-            ? Center(
-                child: CupertinoAlertDialog(
-                title: Text(
-                    "Please make sure you have an active internet connection"),
-                actions: [
-                  CupertinoDialogAction(
-                    onPressed: () {
-                      _refresh();
-                    },
-                    child: Text("Retry"),
-                  )
-                ],
-              ),)
+            ? Center(child: CircularProgressIndicator())
             : Container(
                 margin: EdgeInsets.only(left: 8, right: 8),
                 child: SingleChildScrollView(
@@ -102,7 +87,8 @@ class _HomefragmentState extends State<HomeFragment> {
                     SizedBox(height: 10),
                     Categorylist(),
                     SizedBox(height: 5),
-                    _categoryheading(context, "Discover"),
+                    _discoverdata!=null?
+                    _categoryheading(context, "Discover"):Container(),
                     // SpecialProducts(),
                     Discover(receiveddiscoverdata: _discoverdata),
                     SizedBox(height: 20.0),

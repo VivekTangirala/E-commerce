@@ -17,60 +17,37 @@ class Discover extends StatefulWidget {
   final Discoverdata receiveddiscoverdata;
 
   const Discover({Key key, this.receiveddiscoverdata}) : super(key: key);
- 
+
   @override
   _DiscoverState createState() => _DiscoverState(receiveddiscoverdata);
 }
 
 class _DiscoverState extends State<Discover> {
   _DiscoverState(this._discoverdata);
- final Discoverdata _discoverdata;
-  //bool _isloading = true;
+  final Discoverdata _discoverdata;
   List mylist;
   List mylist1;
   ScrollController _scrollController = new ScrollController();
-  int _currentmax = 4;
 
-  
   @override
   void initState() {
     super.initState();
-    // _discoverrefresh();
-    // mylist = List.generate(4, (i) => "assets/images/tomato.png");
-    // mylist1 = List.generate(4, (i) => "Pineapple");
-    // _scrollController.addListener(
-    //   () {
-    //     if (_scrollController.position.pixels ==
-    //         _scrollController.position.maxScrollExtent) {
-    //       getMoreData();
-    //     }
-    //   },
-    // );
   }
 
-  // _discoverrefresh() {
-  //   Discoverimport.getUsers().then((value) {
-  //     setState(() {
-  //       _discoverdata = value;
-  //       _isloading = false;
-  //       print(_discoverdata.results[0].image);
-  //     });
-  //   });
+  // getMoreData() {
+  //   print("Reached limit");
+  //   for (var i = _currentmax; i < _currentmax + 4; i++) {
+  //     images.add("assets/images/burger.jpeg");
+  //     list.add("Burger");
+  //   }
+  //   _currentmax = _currentmax + 4;
+  //   setState(() {});
   // }
-
-  getMoreData() {
-    print("Reached limit");
-    for (var i = _currentmax; i < _currentmax + 4; i++) {
-      images.add("assets/images/burger.jpeg");
-      list.add("Burger");
-    }
-    _currentmax = _currentmax + 4;
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return SafeArea(
+        child: SizedBox(
       height: 185.0,
       child: ListView.builder(
         controller: _scrollController,
@@ -90,9 +67,7 @@ class _DiscoverState extends State<Discover> {
           //   );
           // }
           return _discoverdata == null
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
+              ? Container()
               : GestureDetector(
                   child: Container(
                     margin: EdgeInsets.only(left: 4, bottom: 3),
@@ -116,38 +91,33 @@ class _DiscoverState extends State<Discover> {
                           SizedBox(
                             height: 150,
                             child: Container(
-                              //alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      _discoverdata.results[index].image),
-                                  //image: AssetImage(images[index]),
-                                ),
-                                color: Colors.white,
-                                // border: Border.all(
-                                //     color: Colors.black12, // set border color
-                                //     width: 0.6), // set border width
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                    5.0)), // set rounded corner radius
+                              child: FadeInImage(
+                                imageErrorBuilder: (BuildContext context,
+                                    Object exception, StackTrace stackTrace) {
+                                  return Container(
+                                      decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                            'assets/images/burger.jpeg')),
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5.0),
+                                    ), // set rounded corner radius
+                                  ));
+                                },
+                                placeholder:
+                                    AssetImage('assets/images/loading.gif'),
+                                image: NetworkImage(
+                                    _discoverdata.results[index].image),
+                                fit: BoxFit.cover,
+                                // height: 100.0,
+                                // width: 100.0,
                               ),
+                              //alignment: Alignment.center,
                             ),
                           ),
                           SizedBox(height: 0.0),
-                          // _isloading == true
-                          //     ? Column(
-                          //         children: [
-                          //           Text(
-                          //             list[index],
-                          //             style: Theme.of(context).textTheme.bodyText1,
-                          //           ),
-                          //           Text(
-                          //             "25",
-                          //             style: Theme.of(context).textTheme.caption,
-                          //           )
-                          //         ],
-                          //       )
-                          //     :
                           Text(
                             _discoverdata.results[index].name,
                           ),
@@ -167,6 +137,16 @@ class _DiscoverState extends State<Discover> {
                 );
         },
       ),
-    );
+    ));
+  }
+
+  imagebuild(int index) {
+    try {
+      return Image.network(
+        _discoverdata.results[index].image,
+      );
+    } catch (e) {
+      return Image.asset("assets/images/burger.jpeg");
+    }
   }
 }

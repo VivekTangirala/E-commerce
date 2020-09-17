@@ -20,7 +20,7 @@ class _CircleIndicatorState extends State<CircleIndicator>
   void initState() {
     super.initState();
     var controller = AnimationController(
-        duration: Duration(milliseconds: 1000), vsync: this);
+        duration: Duration(milliseconds: 1000),vsync: this);
 
     animation = Tween(begin: 0.0, end: widget.percent).animate(controller)
       ..addListener(() {

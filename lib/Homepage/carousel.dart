@@ -52,14 +52,13 @@ class _CarouselPagesState extends State<CarouselPages>
                 a = "${values[0]["image1"]}";
                 b = "${values[0]["image2"]}";
                 c = "${values[0]["image3"]}";
-                
               });
               return null;
             }
           }
         } on RangeError {
-          
           print(response);
+          return null;
         }
         // print(values[0]["image1"]);
         //return values;
@@ -69,7 +68,9 @@ class _CarouselPagesState extends State<CarouselPages>
         return null;
       }
       return null;
-    } catch (e) {}
+    } catch (e) {
+      return null;
+    }
   }
 
   @override
