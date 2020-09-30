@@ -40,7 +40,7 @@ class _BottomNav extends State {
           children: <Widget>[
             Container(child: HomeFragment()),
             Container(
-              child: Recipihome(),
+              child: RecipiHome(),
             ),
             // Container(
             //  child: ProfileFirst(),

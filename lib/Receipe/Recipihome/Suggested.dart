@@ -20,7 +20,7 @@ class Suggestedstate extends State<Suggested> {
   Widget build(BuildContext context) {
     return SizedBox(
       
-    height: MediaQuery.of(context).size.height/4,
+    height: MediaQuery.of(context).size.height/3.5,
       child: ListView.builder(
         padding: EdgeInsets.only(right:15.0),
         physics: ClampingScrollPhysics(),
@@ -31,17 +31,14 @@ class Suggestedstate extends State<Suggested> {
           return GestureDetector(
             child: Container(
               margin: EdgeInsets.only(left: 4, bottom: 3,right:5.0),
+               width: 300,
               // decoration: BoxDecoration(
               //   // border: Border.all(width: 1.0),
               //   borderRadius: BorderRadius.all(
               //       Radius.circular(20.0) //         <--- border radius here
               //       ),
               // ),
-              child: SizedBox(
-                //height: 100,
-                width: 300,
-                child: Container(
-                  margin: EdgeInsets.all(5.0),
+           
                   // color: Colors.grey[200],
                   // shape: RoundedRectangleBorder(
                   //   side: BorderSide(color: Colors.white70, width: 1),
@@ -49,7 +46,7 @@ class Suggestedstate extends State<Suggested> {
                   // ),
                   child: Column(children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height/6,
+                  height: MediaQuery.of(context).size.height/5,
                       child: Container(
                         //alignment: Alignment.center,
                         decoration: BoxDecoration(
@@ -77,21 +74,23 @@ class Suggestedstate extends State<Suggested> {
                           Text(
                             list[index],
                             style: Theme.of(context).textTheme.bodyText1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           Text(
                             list1[index],
                             style: Theme.of(context).textTheme.bodyText2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),
                       Text(
                         list3[index],
                         style: Theme.of(context).textTheme.bodyText1,
+                            overflow: TextOverflow.ellipsis,
                       ),
                     ])
                   ]),
-                ),
-              ),
+                
             ),
             onTap: () {},
           );

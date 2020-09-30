@@ -1,3 +1,4 @@
+import 'package:ecom/Receipe/Categorylist/Recipicategorylistexpansion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -26,14 +27,14 @@ List<String> _name = [
   "Dinner",
 ];
 
-class Categorylistrecipe extends StatefulWidget {
+class RecipiCategorylist extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return Categorylistrecipestate();
+    return RecipiCategoryliststate();
   }
 }
 
-class Categorylistrecipestate extends State<Categorylistrecipe> {
+class RecipiCategoryliststate extends State<RecipiCategorylist> {
   @override
   Widget build(BuildContext context) {
     // int _tabindex = 0;
@@ -60,24 +61,37 @@ class Categorylistrecipestate extends State<Categorylistrecipe> {
           //     indicatorColor: Colors.orange,
           //     tabBarIndicatorSize: TabBarIndicatorSize.tab),
           tabs: List<Widget>.generate(images.length, (int index) {
-            return GestureDetector(
-              onTap: () {},
-              child: Column(
-                children: [
-                  Container(
-                    width: 70,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image: AssetImage(images[index]), fit: BoxFit.fill),
+            return Hero(
+              
+              tag: 'categorylist$index',
+              child: GestureDetector(
+                onTap: () {
+                  if (index == 0) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            RecipiCategorylistexpansion(
+                              index1: index,
+                            )));
+                  }
+                },
+                child: Column(
+                  children: [
+                    Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: AssetImage(images[index]), fit: BoxFit.fill),
+                      ),
                     ),
-                  ),
-                  Text(
-                    _name[index],
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ],
+                    Text(
+                      _name[index],
+                      style: Theme.of(context).textTheme.headline5,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
               ),
             );
           })

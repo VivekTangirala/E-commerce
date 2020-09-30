@@ -3,7 +3,7 @@ import 'package:ecom/Homepage/Discovery/discoverimport.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-List<String> list = ["Pineapple", "Cherry", "Orange", "Apple"];
+List<String> list = ["Pizza", "Burger", "Nutella milkshake", "Brownie"];
 List<String> list1 = ["25", "50", "45", "55"];
 final List<String> images = [
   "assets/images/tomato.png",
@@ -116,7 +116,9 @@ class _MadewithfewIngridientsState extends State<MadewithfewIngridients> {
                     ),
                     SizedBox(height: 0.0),
                     Text(
+                      
                       list[index],
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ]),
                 ),
