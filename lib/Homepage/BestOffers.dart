@@ -1,4 +1,7 @@
+import 'package:ecom/Homepage/details/details_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'details/Product.dart';
 
 List<String> list = ["Burger", "Cherry", "Orange", "Apple"];
 List<String> list1 = ["A salad between 2 breads", "50", "45", "55"];
@@ -65,33 +68,39 @@ class Bestoffersstate extends State<Bestoffers> {
                     ),
                     SizedBox(height: 0.0),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-
-                      Column(
-                        
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                list[index],
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                              Text(
+                                list1[index],
+                                style: Theme.of(context).textTheme.bodyText2,
+                              ),
+                            ],
+                          ),
                           Text(
-                            list[index],
+                            list3[index],
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
-                          Text(
-                            list1[index],
-                            style: Theme.of(context).textTheme.bodyText2,
-                          ),
-                        ],
-                      ),
-                      Text(
-                        list3[index],
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                    ])
+                        ])
                   ]),
                 ),
               ),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => DetailsScreen(
+                    product: products[index],
+                  ),
+                ),
+              );
+            },
           );
         },
       ),
