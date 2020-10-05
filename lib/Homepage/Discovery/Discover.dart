@@ -140,13 +140,5 @@ class _DiscoverState extends State<Discover> {
     ));
   }
 
-  imagebuild(int index) {
-    try {
-      return Image.network(
-        _discoverdata.results[index].image,
-      );
-    } catch (e) {
-      return Image.asset("assets/images/burger.jpeg");
-    }
-  }
+
 }
