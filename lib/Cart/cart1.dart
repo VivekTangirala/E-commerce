@@ -35,6 +35,7 @@ class _CartState extends State<Cart> {
   @override
   void initState() {
     super.initState();
+    _refreshcart();
   }
 
   _refreshcart() {
@@ -66,7 +67,8 @@ class _CartState extends State<Cart> {
               child: Container(
                 padding: EdgeInsets.all(8),
                 child: ListView.builder(
-                    itemCount: _cartapidata.cart.length,
+                    itemCount:
+                        _cartapidata != null ? _cartapidata.cart.length : 0,
                     physics: ScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {

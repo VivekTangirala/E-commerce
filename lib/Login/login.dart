@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
           _isLoading = false;
           //print(jsonResponse);
         });
-        sharedPreferences.setString("token", jsonResponse["token"]);
+        sharedPreferences.setString("token","Token " + jsonResponse["token"]);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
             (Route<dynamic> route) => false);
