@@ -94,9 +94,9 @@ class _AddToCartState extends State<AddToCart> {
     }
     if (jsonresponse != null) {
       
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (BuildContext context) => Cart()),
-          (Route<dynamic> route) => false);
+      // Navigator.of(context).pushAndRemoveUntil(
+      //     MaterialPageRoute(builder: (BuildContext context) => Cart()),
+      //     (Route<dynamic> route) => false);
     } else {
       CupertinoDialogAction(
         child: Text("Please check your internet connection"),
