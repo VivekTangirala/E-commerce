@@ -164,13 +164,6 @@ AppBar _appBar(BuildContext context) {
               ),
               padding: EdgeInsets.only(left: 20),
               onPressed: () async {
-                SharedPreferences sharedPreferences =
-                    await SharedPreferences.getInstance();
-                sharedPreferences.clear();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Carthome()),
-                );
               },
             ),
           ],

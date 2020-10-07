@@ -67,7 +67,7 @@ class _DiscoverState extends State<Discover> {
           //   );
           // }
           return _discoverdata == null
-              ? Container()
+              ? Container(child:FlutterLogo())
               : GestureDetector(
                   child: Container(
                     margin: EdgeInsets.only(left: 4, bottom: 3),

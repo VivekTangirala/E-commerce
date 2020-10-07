@@ -85,7 +85,8 @@ class _LoginPageState extends State<LoginPage> {
         ));
   }
 
-  signIn(String phone, password) async {
+  signIn
+  (String phone, password) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map data = {'username': phone, 'password': password};
     var jsonResponse;
@@ -236,6 +237,7 @@ class _LoginPageState extends State<LoginPage> {
                 setState(() {
                   _isLoading = true;
                 });
+              
                 signIn(phoneController.text, passwordController.text);
               },
         elevation: 0.0,

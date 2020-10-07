@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ecom/Homepage/homefragment.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ecom/Login/login.dart';
@@ -29,7 +30,7 @@ class SplashScreenState extends State<SplashScreen> {
 
     if (_seen) {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
+          MaterialPageRoute(builder: (BuildContext context) => HomeFragment()),
           (Route<dynamic> route) => false);
     } else {
       Navigator.of(context).pushReplacement(

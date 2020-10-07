@@ -1,5 +1,6 @@
 import 'package:ecom/Cart/cart1.dart';
 import 'package:ecom/Homepage/BestOffers.dart';
+import 'package:ecom/Homepage/Categorylist/Categorylist1.dart';
 import 'package:ecom/Homepage/Discovery/Discover.dart';
 import 'package:ecom/Homepage/Discovery/Discoverdata.dart';
 import 'package:ecom/Homepage/Discovery/discoverimport.dart';
@@ -52,6 +53,7 @@ class _HomefragmentState extends State<HomeFragment> {
       setState(() {
         _discoverdata = value;
         _isloading = false;
+        print(_discoverdata);
       });
     });
   }
@@ -83,12 +85,14 @@ class _HomefragmentState extends State<HomeFragment> {
                 child: SingleChildScrollView(
                   child:
                       Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                    _textsection(context),
-                    SizedBox(height: 10),
-                    Categorylist(),
+                    // _textsection(context),
+                    // SizedBox(height: 10),
+                    _categoryheading(context, "Categories"),
+
+                   Categorylist1(),
                     SizedBox(height: 5),
-                    _discoverdata!=null?
-                    _categoryheading(context, "Discover"):Container(),
+                  
+                    _categoryheading(context, "Discover"),
                     // SpecialProducts(),
                     Discover(receiveddiscoverdata: _discoverdata),
                     SizedBox(height: 20.0),
