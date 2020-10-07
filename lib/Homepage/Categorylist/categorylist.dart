@@ -1,4 +1,3 @@
-
 import 'package:ecom/Homepage/Categorylist/categorylistdata.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -26,12 +25,11 @@ class Categoryliststate extends State<Categorylist> {
     refreshCategory();
   }
 
-   refreshCategory() {
+  refreshCategory() {
     Categorylistimport.getUsers().then((value) {
       setState(() {
         _categorydata = value;
         _isLoading = false;
-        print(_isLoading);
       });
     });
     setState(() {

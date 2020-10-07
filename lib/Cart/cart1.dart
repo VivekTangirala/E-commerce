@@ -1,6 +1,10 @@
+import 'package:ecom/Cart/Cartapi/Cartapi.dart';
+import 'package:ecom/Cart/Cartapi/Cartapiimport.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 List<String> l1 = [
   "assets/images/tomato.png",
@@ -18,191 +22,223 @@ List<String> l3 = [
   "50.0",
 ];
 
-  var _qty = new List.generate(l1.length, (index) => 1);
+var _qty = new List.generate(l1.length, (index) => 1);
+
 class Cart extends StatefulWidget {
   @override
   _CartState createState() => _CartState();
 }
 
 class _CartState extends State<Cart> {
- //var _discount, _subtotal, _total;
+  Cartapi _cartapidata;
+  bool _isloading = true;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  _refreshcart() {
+    CartApiimport.getUsers().then((value) {
+      setState(() {
+        _cartapidata = value;
+        _isloading = false;
+      });
+    });
+  }
+
+  _onrefresh() {
+    _isloading = true;
+    _refreshcart();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context),
-      body: Padding(
-          padding: EdgeInsets.only(top: 0),
-          child: Expanded(
+        appBar: buildAppBar(context),
+        body: LiquidPullToRefresh(
+          onRefresh: () {
+            _onrefresh();
+            return null;
+          },
+          child: Padding(
+            padding: EdgeInsets.only(top: 0),
+            child: Expanded(
               child: Container(
-            padding: EdgeInsets.all(8),
-            child: ListView.builder(
-                itemCount: l1.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(4),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                l1[index],
-                                width: 150,
-                                height: 180,
-                                fit: BoxFit.fitWidth,
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  //mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(l2[index]),
-                                    // Text(
-                                    //   "Cocktail dress",
-                                    // ),
-                                    Row(
+                padding: EdgeInsets.all(8),
+                child: ListView.builder(
+                    itemCount: _cartapidata.cart.length,
+                    physics: ScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(4),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    l1[index],
+                                    width: 150,
+                                    height: 180,
+                                    fit: BoxFit.fitWidth,
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      //mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        Text("Quantity:"),
-                                        Text(
-                                          _qty[index]
-                                              .toString()
-                                              .padLeft(1, "0"),
-                                        )
-                                      ],
-                                    ),
-                                    // Text(
-                                    //   "Color: Yellow",
-                                    // ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          l3[index],
-                                        ),
+                                        Text(l2[index]),
+                                        // Text(
+                                        //   "Cocktail dress",
+                                        // ),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
                                           children: [
-                                            IconButton(
-                                              icon: Icon(
-                                                Icons.add_circle,
-                                                color: Colors.orangeAccent,
-                                              ),
-                                              onPressed: () {
-                                                setState(() {
-                                                  _qty[index] = _qty[index] + 1;
-                                                });
-                                              },
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
+                                            Text("Quantity:"),
                                             Text(
                                               _qty[index]
                                                   .toString()
                                                   .padLeft(1, "0"),
+                                            )
+                                          ],
+                                        ),
+                                        // Text(
+                                        //   "Color: Yellow",
+                                        // ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              l3[index],
                                             ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            IconButton(
-                                              icon: Icon(
-                                                Icons.remove_circle,
-                                                color: Colors.orangeAccent,
-                                              ),
-                                              onPressed: () {
-                                                setState(() {
-                                                  if (_qty[index] > 1) {
-                                                    _qty[index] =
-                                                        _qty[index] - 1;
-                                                  }
-                                                });
-                                              },
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    Icons.add_circle,
+                                                    color: Colors.orangeAccent,
+                                                  ),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _qty[index] =
+                                                          _qty[index] + 1;
+                                                    });
+                                                  },
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  _qty[index]
+                                                      .toString()
+                                                      .padLeft(1, "0"),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                IconButton(
+                                                  icon: Icon(
+                                                    Icons.remove_circle,
+                                                    color: Colors.orangeAccent,
+                                                  ),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      if (_qty[index] > 1) {
+                                                        _qty[index] =
+                                                            _qty[index] - 1;
+                                                      }
+                                                    });
+                                                  },
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
                                       ],
                                     ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Divider(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Subtotal",
+                                      ),
+                                      Text(
+                                        "25",
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Delivery",
+                                      ),
+                                      Text(
+                                        "\$0",
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Discount",
+                                      ),
+                                      Text(
+                                        "No discount",
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Total",
+                                      ),
+                                      Text(
+                                        "5000",
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Divider(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Subtotal",
-                                  ),
-                                  Text(
-                                    "25",
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Delivery",
-                                  ),
-                                  Text(
-                                    "\$0",
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Discount",
-                                  ),
-                                  Text(
-                                    "No discount",
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Total",
-                                  ),
-                                  Text(
-                                    "5000",
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                }),
-          ))),
-    );
+                      );
+                    }),
+              ),
+            ),
+          ),
+        ));
   }
 
   AppBar buildAppBar(BuildContext context) {

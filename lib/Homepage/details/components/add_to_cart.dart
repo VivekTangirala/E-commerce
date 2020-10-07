@@ -61,7 +61,7 @@ class _AddToCartState extends State<AddToCart> {
                       borderRadius: BorderRadius.circular(18)),
                   color: Colors.orange,
                   onPressed: () {
-                    addtocart("3", "4");
+                    addtocart('3', '4');
                   },
                   child: Text(
                     "Add to Cart".toUpperCase(),
@@ -80,7 +80,7 @@ class _AddToCartState extends State<AddToCart> {
     );
   }
 
-  addtocart(String _product, String _quantity) async {
+  addtocart(String _product,  _quantity) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
    String token = (sharedPreferences.getString('token') ?? null);
     Map data = {'product': _product, 'quantity': _quantity};
