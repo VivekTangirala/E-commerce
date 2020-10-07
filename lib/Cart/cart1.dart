@@ -22,8 +22,6 @@ List<String> l3 = [
   "50.0",
 ];
 
-var _qty = new List.generate(l1.length, (index) => 1);
-
 class Cart extends StatefulWidget {
   @override
   _CartState createState() => _CartState();
@@ -32,41 +30,45 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   Cartapi _cartapidata;
   bool _isloading = true;
+  var _qty;
   @override
   void initState() {
     super.initState();
+    _refreshcart();
   }
 
   _refreshcart() {
     CartApiimport.getUsers().then((value) {
       setState(() {
         _cartapidata = value;
+        _counters();
         _isloading = false;
       });
     });
   }
-
-  _onrefresh() {
-    _isloading = true;
-    _refreshcart();
+_counters()
+{
+  print(_cartapidata.cart);
+  if(_cartapidata.cart != null){
+      _qty = new List.generate(_cartapidata.cart.length, (index) => 1);
   }
-
+}
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
         appBar: buildAppBar(context),
         body: LiquidPullToRefresh(
-          onRefresh: () {
-            _onrefresh();
-            return null;
-          },
+          onRefresh: () {},
           child: Padding(
             padding: EdgeInsets.only(top: 0),
             child: Expanded(
               child: Container(
                 padding: EdgeInsets.all(8),
                 child: ListView.builder(
-                    itemCount: _cartapidata.cart.length,
+                    itemCount: _cartapidata.cart != null
+                        ? _cartapidata.cart.length
+                        : 0,
                     physics: ScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
