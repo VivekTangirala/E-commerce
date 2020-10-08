@@ -80,20 +80,21 @@ class _AddToCartState extends State<AddToCart> {
     );
   }
 
-  addtocart(String _product,  _quantity) async {
+  addtocart(String _product, _quantity) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-   String token = (sharedPreferences.getString('token') ?? null);
+    String token =  sharedPreferences.getString('token');
+    
     Map data = {'product': "1", 'quantity1': "3"};
     var jsonresponse;
     var response = await http.post(
         "http://infintymall.herokuapp.com/homepage/api/cart/",
-        body: data,headers: {HttpHeaders.authorizationHeader: token});
-   print(response.body);
+        body: data,
+        headers: {HttpHeaders.authorizationHeader: token});
+    print(response.body);
     if (response.statusCode == 200) {
       jsonresponse = json.decode(response.body);
     }
     if (jsonresponse != null) {
-      
       // Navigator.of(context).pushAndRemoveUntil(
       //     MaterialPageRoute(builder: (BuildContext context) => Cart()),
       //     (Route<dynamic> route) => false);

@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
 
   // Future checkSkip() async {
   //   SharedPreferences skip = await SharedPreferences.getInstance();
-  //   //bool _seen = (skip.getBool('seen') ?? false);
+  //   bool _seen = (skip.getBool('seen') ?? false);
 
   // }
 
@@ -85,8 +85,7 @@ class _LoginPageState extends State<LoginPage> {
         ));
   }
 
-  signIn
-  (String phone, password) async {
+  signIn(String phone, password) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map data = {'username': phone, 'password': password};
     var jsonResponse;
@@ -99,7 +98,8 @@ class _LoginPageState extends State<LoginPage> {
           _isLoading = false;
           //print(jsonResponse);
         });
-        sharedPreferences.setString("token","Token " + jsonResponse["token"]);
+        sharedPreferences.setString("token", "Token " + jsonResponse["token"]);
+        print(sharedPreferences.getString("token"));
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
             (Route<dynamic> route) => false);
@@ -237,7 +237,7 @@ class _LoginPageState extends State<LoginPage> {
                 setState(() {
                   _isLoading = true;
                 });
-              
+
                 signIn(phoneController.text, passwordController.text);
               },
         elevation: 0.0,

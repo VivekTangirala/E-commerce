@@ -27,7 +27,8 @@ class SplashScreenState extends State<SplashScreen> {
   Future checkFirstSeen() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     bool _seen = (sharedPreferences.getBool('seen') ?? false);
-
+    
+    
     if (_seen) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => HomeFragment()),
