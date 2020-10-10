@@ -7,12 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CartApiimport {
   static const uri = "http://infintymall.herokuapp.com/homepage/api/cart/";
 
-  static Future<Cartapi> getUsers() async {
+  static Future<Cartapi> getCart() async {
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
    String token = (sharedPreferences.getString('token') ?? null);
+  print("This is cart api");
+   print(token);
     try {
       final response = await http.get(uri,headers: {HttpHeaders.authorizationHeader:token});
-      //print(response.body);
+      print(response.body);
       if (response.statusCode == 200) {
         // var data=json.decode(response.body);
         // data=da
@@ -23,7 +25,11 @@ class CartApiimport {
         print("error");
         return null;
       }
-    } catch (e) {
+    }
+    on SocketException{
+
+    }
+     catch (e) {
       print(e);
 
       return null;

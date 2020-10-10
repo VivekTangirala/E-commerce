@@ -38,7 +38,7 @@ class _CartState extends State<Cart> {
   }
 
   _refreshcart() {
-    CartApiimport.getUsers().then((value) {
+    CartApiimport.getCart().then((value) {
       setState(() {
         _cartapidata = value;
         _counters();
@@ -66,9 +66,8 @@ _counters()
               child: Container(
                 padding: EdgeInsets.all(8),
                 child: ListView.builder(
-                    itemCount: _cartapidata.cart != null
-                        ? _cartapidata.cart.length
-                        : 0,
+                    itemCount:
+                        _cartapidata.cart != null ? _cartapidata.cart.length : 0,
                     physics: ScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
