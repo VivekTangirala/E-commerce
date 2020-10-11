@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:ecom/Homepage/homefragment.dart';
 import 'package:ecom/Login/login.dart';
+import 'package:ecom/Login/newSign/screensize.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,7 +38,7 @@ class SplashScreenState extends State<SplashScreen> {
           (Route<dynamic> route) => false);
     } else {
       Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new LoginPage()));
+          new MaterialPageRoute(builder: (context) => new SignInScreen()));
     }
   }
 
@@ -45,6 +46,7 @@ class SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     // Color _thisColor1 = Color(0xFFe74c3c);
     // Color _thisColor2 =Color(0xFFF09819);
+    SizeConfig().init(context);
     return Scaffold(
         body: Container(
       decoration: BoxDecoration(

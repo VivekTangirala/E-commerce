@@ -33,23 +33,6 @@ class _AddToCartState extends State<AddToCart> {
         child: Row(
           children: <Widget>[
             CartCounter(),
-            //Spacer(),
-            // Container(
-            //   margin: EdgeInsets.only(right: 20),
-            //   height: 40,
-            //   width: 58,
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(18),
-            //     border: Border.all(
-            //       color: product.color,
-            //     ),
-            //   ),
-            //   child: IconButton(
-            //     icon: Icon(Icons.add_shopping_cart),
-            //     onPressed: () {},
-            //   ),
-            // ),
-
             SizedBox(
               width: 30,
             ),

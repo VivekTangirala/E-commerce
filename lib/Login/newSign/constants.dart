@@ -21,8 +21,8 @@ final headingStyle = TextStyle(
 );
 
 // Form Error
-final RegExp emailValidatorRegExp =
-    RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+final RegExp phoneValidatorRegExp =
+    RegExp(r"^[6-9]\d{9}$");
 const String kEmailNullError = "Please Enter your email";
 const String kInvalidEmailError = "Please Enter Valid Email";
 const String kPassNullError = "Please Enter your password";

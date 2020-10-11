@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
           //print(jsonResponse);
         });
         sharedPreferences.setString("token", "Token " + jsonResponse["token"]);
-        print(sharedPreferences.getString("token"));
+        
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
             (Route<dynamic> route) => false);
@@ -122,31 +122,7 @@ class _LoginPageState extends State<LoginPage> {
           });
     }
   }
-  //getting started section
-// Widget getting_started() {
-//     return Container(
-//       alignment: Alignment.topLeft,
-//       margin: EdgeInsets.only(bottom: 10),
-//       padding: EdgeInsets.only(left: 20.0),
-//       child: Text(
-//         "",
-//         style: Theme.of(context).textTheme.headline3,
-//       ),
-//     );
-//   }
 
-//   Widget getting_started1() {
-//     return Container(
-//       alignment: Alignment.topLeft,
-//       margin: EdgeInsets.only(bottom: 50),
-//       padding: EdgeInsets.only(left: 20.0),
-//       child: Text(
-//         " Create an account to continue",
-//         style: Theme.of(context).textTheme.headline4,
-//       ),
-//     );
-//   }
-//Text Handling
 
   Container textSection() {
     return Container(
