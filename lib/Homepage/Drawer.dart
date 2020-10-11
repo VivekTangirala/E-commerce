@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:ecom/Login/login.dart';
+import 'package:ecom/Login/newSign/signin.dart';
 import 'package:ecom/Orders/Orders.dart';
 import 'package:ecom/Profile/main_profile.dart';
 import 'package:ecom/Wishlist/Wishlist.dart';
@@ -217,7 +218,7 @@ class _Drawerstate extends State<Drawer1> {
                   sharedPreferences.clear();
                   Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => LoginPage()));
+                      builder: (BuildContext context) => SignInScreen()));
                 }
               : null,
           child: Container(

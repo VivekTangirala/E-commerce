@@ -1,7 +1,8 @@
+import 'package:ecom/Login/newSign/noaccount.dart';
 import 'package:ecom/Login/newSign/screensize.dart';
 import 'package:ecom/Login/newSign/form.dart';
+import 'package:ecom/bottom_nav.dart';
 import 'package:flutter/material.dart';
-
 
 class Body extends StatelessWidget {
   @override
@@ -9,55 +10,40 @@ class Body extends StatelessWidget {
     return SafeArea(
       child: SizedBox(
         width: double.infinity,
-        child: 
-        //Padding(
-          // padding:
-          //     //EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)
-          //     ),
-         // child:
-           SingleChildScrollView(
+        child: Padding(
+          padding:
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+          child: SingleChildScrollView(
             child: Column(
               children: [
-                //SizedBox(height: SizeConfig.screenHeight * 0.04),
+                SizedBox(height: SizeConfig.screenHeight * 0.07),
+                
                 Text(
                   "Welcome Back",
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: getProportionateScreenWidth(28),
+                    fontSize: getProportionateScreenWidth(30),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
-                  "Sign in with your email and password  \nor continue with social media",
-                  textAlign: TextAlign.center,
+                SizedBox(
+                  height: getProportionateScreenWidth(10),
                 ),
-                //SizedBox(height: SizeConfig.screenHeight * 0.08),
-                SignForm(),
-               // SizedBox(height: SizeConfig.screenHeight * 0.08),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     SocalCard(
-                //       icon: "assets/icons/google-icon.svg",
-                //       press: () {},
-                //     ),
-                //     SocalCard(
-                //       icon: "assets/icons/facebook-2.svg",
-                //       press: () {},
-                //     ),
-                //     SocalCard(
-                //       icon: "assets/icons/twitter.svg",
-                //       press: () {},
-                //     ),
-                //   ],
-                // ),
-               // SizedBox(height: getProportionateScreenHeight(20)),
-               // NoAccountText(),
+                Text(
+                  "Sign in with your phone and password \nto continue ",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.grey[600]),
+                ),
+                SizedBox(height: SizeConfig.screenHeight * 0.08),
+                SignForm(),  
+                SizedBox(height: getProportionateScreenHeight(30)),
+                NoAccountText(),
               ],
-            //),
+            ),
           ),
         ),
       ),
     );
   }
+  
 }

@@ -1,10 +1,17 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:ecom/Login/newSign/constants.dart';
 import 'package:ecom/Login/newSign/defaultbutton.dart';
 import 'package:ecom/Login/newSign/formerror.dart';
 import 'package:ecom/Login/newSign/screensize.dart';
+import 'package:ecom/Login/newSign/skipbutton.dart';
 import 'package:ecom/Login/newSign/suffix.dart';
+import 'package:ecom/bottom_nav.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignForm extends StatefulWidget {
   @override
@@ -15,9 +22,12 @@ class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
   String email;
   String password;
-  bool remember = false;
+  bool remember = false, _isLoading = false;
   final List<String> errors = [];
-
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  final RoundedLoadingButtonController _btnController =
+      new RoundedLoadingButtonController();
   void addError({String error}) {
     if (!errors.contains(error))
       setState(() {
@@ -32,6 +42,14 @@ class _SignFormState extends State<SignForm> {
       });
   }
 
+  void dispose() {
+    // Clean up the controller when the widget is removed from the
+    // widget tree.
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -43,38 +61,36 @@ class _SignFormState extends State<SignForm> {
           buildPasswordFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           Row(
-            
             children: [
-              Checkbox(
-                value: remember,
-                activeColor: kPrimaryColor,
-                onChanged: (value) {
-                  setState(() {
-                    remember = value;
-                  });
-                },
-              ),
-              Text("Remember me"),
+              SkipSection(),
               Spacer(),
               GestureDetector(
-                // onTap: () => Navigator.pushNamed(
-                //     context, ForgotPasswordScreen.routeName),
                 child: Text(
                   "Forgot Password",
-                  style: TextStyle(decoration: TextDecoration.underline),
+                  style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: Colors.deepOrange),
                 ),
               )
             ],
           ),
-          FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(20)),
-          DefaultButton(
-            text: "Continue",
-            press: () {
+          FormError(errors: errors),
+          SizedBox(height: getProportionateScreenHeight(80)),
+          RoundedLoadingButton(
+            child: Text('Sign In', style: TextStyle(color: Colors.white)),
+            color: Colors.deepOrange,
+            controller: _btnController,
+            onPressed: () async {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
-                // if all are valid then go to success screen
-               // Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+
+              await  signIn(emailController.text, passwordController.text);
+                _doSomething();
+                _btnController.error();
+              } else {
+                _doSomething();
+                _btnController.error();
               }
             },
           ),
@@ -83,8 +99,52 @@ class _SignFormState extends State<SignForm> {
     );
   }
 
+  void _doSomething() async {
+    Timer(Duration(seconds: 2), () {
+      _btnController.reset();
+    });
+  }
+
+  TextFormField buildEmailFormField() {
+    return TextFormField(
+      controller: emailController,
+      keyboardType: TextInputType.phone,
+      onSaved: (newValue) => email = newValue,
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          removeError(error: kEmailNullError);
+        } else if (phoneValidatorRegExp.hasMatch(value)) {
+          removeError(error: kInvalidEmailError);
+        }
+        return null;
+      },
+      validator: (value) {
+        if (value.isEmpty) {
+          addError(error: kEmailNullError);
+
+          return "";
+        } else if (!phoneValidatorRegExp.hasMatch(value)) {
+          addError(error: kInvalidEmailError);
+
+          return "";
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        labelText: "Phone number",
+        fillColor: Colors.white,
+        border: new OutlineInputBorder(
+          borderRadius: new BorderRadius.circular(25.0),
+          borderSide: new BorderSide(),
+        ),
+        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
+      ),
+    );
+  }
+
   TextFormField buildPasswordFormField() {
     return TextFormField(
+      controller: passwordController,
       obscureText: true,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
@@ -98,54 +158,63 @@ class _SignFormState extends State<SignForm> {
       validator: (value) {
         if (value.isEmpty) {
           addError(error: kPassNullError);
+
           return "";
-        } else if (value.length < 8) {
+        } else if (value.length < 3) {
           addError(error: kShortPassError);
+
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Password",
-        hintText: "Enter your password",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        labelText: "Enter Password",
+        fillColor: Colors.white,
+        border: new OutlineInputBorder(
+          borderRadius: new BorderRadius.circular(25.0),
+          borderSide: new BorderSide(),
+        ),
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
       ),
     );
   }
 
-  TextFormField buildEmailFormField() {
-    return TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      onSaved: (newValue) => email = newValue,
-      onChanged: (value) {
-        if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
-        } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
-        }
-        return null;
-      },
-      validator: (value) {
-        if (value.isEmpty) {
-          addError(error: kEmailNullError);
-          return "";
-        } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
-          return "";
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        labelText: "Email",
-        hintText: "Enter your email",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
-      ),
-    );
+ Future signIn(String phone, password) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    Map data = {'username': phone, 'password': password};
+    var jsonResponse;
+    var response = await http
+        .post("https://infintymall.herokuapp.com/user/api/login", body: data);
+
+    if (response.statusCode == 200) {
+      jsonResponse = json.decode(response.body);
+      if (jsonResponse != null) {
+       
+        _btnController.success();
+        sharedPreferences.setString("token", "Token " + jsonResponse["token"]);
+
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
+            (Route<dynamic> route) => false);
+      }
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      _btnController.error();
+      _btnController.reset();
+      showDialog(
+          context: context,
+          builder: (context) {
+            return CupertinoAlertDialog(
+              title:
+                  Text("Error", style: Theme.of(context).textTheme.headline2),
+              content: Text(
+                "Invalid Credintials!",
+                style: Theme.of(context).textTheme.headline2,
+              ),
+            );
+          });
+    }
   }
 }
