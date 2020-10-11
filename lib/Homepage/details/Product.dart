@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
+class Productmaping extends StatefulWidget {
+  @override
+  _ProductmapingState createState() => _ProductmapingState();
+}
 
+class _ProductmapingState extends State<Productmaping> {
+  @override
+  Widget build(BuildContext context) {
+    return null;
+  }
+}
 class Product {
   final String image, title, description;
   final int price, size, id;

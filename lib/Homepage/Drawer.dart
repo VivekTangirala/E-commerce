@@ -78,11 +78,12 @@ class _Drawerstate extends State<Drawer1> {
         DrawerHeader(
           child: Center(
             child: Container(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(0.0),
               alignment: Alignment.center,
               height: MediaQuery.of(context).size.height/9,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Icon(
                     Icons.person,
@@ -100,6 +101,7 @@ class _Drawerstate extends State<Drawer1> {
                       ),
                       Text(
                         "Phone no",
+                          style: Theme.of(context).textTheme.headline3,
                       ),
                     ],
                   ),

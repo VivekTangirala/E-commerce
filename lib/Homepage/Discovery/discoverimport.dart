@@ -7,7 +7,7 @@ class Discoverimport {
 
   static Future<Discoverdata> getUsers() async {
     try {
-      final response = await http.get(uri);
+      final response = await http.get( "http://infintymall.herokuapp.com/homepage/api/product");
       if (response.statusCode == 200) {
         final Discoverdata discover = discoverdataFromJson(response.body);
         return discover;

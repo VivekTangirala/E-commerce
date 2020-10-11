@@ -12,17 +12,20 @@ import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddToCart extends StatefulWidget {
-  final Product product;
+  final productid,quantity;
 
-  const AddToCart({Key key, this.product}) : super(key: key);
+  const AddToCart({Key key, this.productid, this.quantity}) : super(key: key);
+
+  
   @override
-  _AddToCartState createState() => _AddToCartState(product);
+  _AddToCartState createState() => _AddToCartState(productid,quantity);
 }
 
 class _AddToCartState extends State<AddToCart> {
-  final Product product;
+  final  productid,quantity;
 
-  _AddToCartState(this.product);
+  _AddToCartState(this.productid, this.quantity);
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +64,7 @@ class _AddToCartState extends State<AddToCart> {
                       borderRadius: BorderRadius.circular(18)),
                   color: Colors.orange,
                   onPressed: () {
-                    addtocart('3', '4');
+                    addtocart('$productid', '$quantity');
                   },
                   child: Text(
                     "Add to Cart".toUpperCase(),
@@ -84,7 +87,7 @@ class _AddToCartState extends State<AddToCart> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String token =  sharedPreferences.getString('token');
     
-    Map data = {'product': "1", 'quantity1': "3"};
+    Map data = {'product': _product, 'quantity1': _quantity};
     var jsonresponse;
     var response = await http.post(
         "http://infintymall.herokuapp.com/homepage/api/cart/",

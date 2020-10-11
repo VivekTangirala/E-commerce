@@ -302,7 +302,7 @@ packages:
       name: petitparser
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.0"
+    version: "3.0.4"
   pin_entry_text_field:
     dependency: "direct main"
     description:
@@ -491,10 +491,5 @@ packages:
     source: hosted
     version: "4.5.1"
 sdks:
-<<<<<<< HEAD
   dart: ">=2.9.0-14.0.dev <3.0.0"
-  flutter: ">=1.12.13+hotfix.5 <2.0.0"
-=======
-  dart: ">=2.10.0-0.0.dev <2.10.0"
   flutter: ">=1.18.0-6.0.pre <2.0.0"
->>>>>>> 10aacb6f3e7f10d67c29ddbf2526dfb85e9a5280
