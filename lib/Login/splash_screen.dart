@@ -2,8 +2,9 @@ import 'dart:async';
 import 'package:ecom/Homepage/homefragment.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ecom/Login/login.dart';
-import 'package:ecom/bottom_nav.dart';
+
+
+import 'newSign/signin.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -35,7 +36,7 @@ class SplashScreenState extends State<SplashScreen> {
           (Route<dynamic> route) => false);
     } else {
       Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new LoginPage()));
+          new MaterialPageRoute(builder: (context) => new SignInScreen()));
     }
   }
 
@@ -68,7 +69,7 @@ Container headerSection(BuildContext context) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
-              " Infinity Mart",
+              " Infinity",
               style: Theme.of(context).textTheme.headline1,
             ),
             Icon(
