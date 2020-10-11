@@ -71,22 +71,13 @@ class _DiscoverState extends State<Discover> {
               : GestureDetector(
                   child: Container(
                     margin: EdgeInsets.only(left: 4, bottom: 3),
-                    // decoration: BoxDecoration(
-                    //   // border: Border.all(width: 1.0),
-                    //   borderRadius: BorderRadius.all(
-                    //       Radius.circular(20.0) //         <--- border radius here
-                    //       ),
-                    // ),
+                    
                     child: SizedBox(
                       // height: 100,
                       width: 120,
                       child: Container(
                         margin: EdgeInsets.all(5.0),
-                        // color: Colors.grey[200],
-                        // shape: RoundedRectangleBorder(
-                        //   side: BorderSide(color: Colors.white70, width: 1),
-                        //   borderRadius: BorderRadius.circular(20),
-                        // ),
+                       
                         child: Column(children: [
                           SizedBox(
                             height: 150,
