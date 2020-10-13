@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:ecom/Homepage/homefragment.dart';
 import 'package:ecom/Login/login.dart';
-import 'package:ecom/Login/newSign/screensize.dart';
+import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

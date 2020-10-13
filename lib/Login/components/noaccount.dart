@@ -1,5 +1,5 @@
-import 'package:ecom/Login/newSign/constants.dart';
-import 'package:ecom/Login/newSign/screensize.dart';
+import 'package:ecom/Login/components/constants.dart';
+import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 
 

@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:ecom/Login/Forgotpass/Newpass.dart';
+import 'package:ecom/Login/Forgotpass/passwordchange/passbody.dart';
+import 'package:ecom/Login/components/formerror.dart';
+import 'package:ecom/components/screensize.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -17,6 +20,7 @@ class Confirmotp extends StatefulWidget {
 
 class _ConfirmotpState extends State<Confirmotp> {
   bool _isLoading = false;
+  List<String> errors = [];
   final TextEditingController otpController = new TextEditingController();
   static const _timerDuration = 30;
   StreamController _timerStream = new StreamController<int>.broadcast();
@@ -56,12 +60,6 @@ class _ConfirmotpState extends State<Confirmotp> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-            // decoration: BoxDecoration(
-            //   gradient: LinearGradient(
-            //       colors: [Color(0xFFe74c3c), Color(0xFFF09819)],
-            //       begin: Alignment.center,
-            //       end: Alignment.bottomRight),
-            // ),
             child: _isLoading
                 ? SizedBox(
                     child: Center(
@@ -69,7 +67,9 @@ class _ConfirmotpState extends State<Confirmotp> {
                     backgroundColor: Colors.white,
                   )))
                 : ListView(children: <Widget>[
-                    companyName(context),
+                    heading(context),
+                    subHeading(context),
+                    SizedBox(height: SizeConfig.screenHeight * 0.1),
                     Align(
                       alignment: Alignment.topCenter,
                       child: enterOTP(context, phone),
@@ -78,73 +78,19 @@ class _ConfirmotpState extends State<Confirmotp> {
                       length: 4,
                       width: 100,
                       fieldWidth: 50,
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20,color: Colors.deepOrange),
                       textFieldAlignment: MainAxisAlignment.spaceAround,
                       fieldStyle: FieldStyle.underline,
+                      
                       onCompleted: (pin) {
                         registerOTP(pin);
-                        print("Completed: " + pin);
                       },
                     ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        width: 100,
-                        height: 60,
-
-                        // child: TextField(
-                        //   style: TextStyle(color: Colors.black),
-                        //   textAlign: TextAlign.center,
-                        //   textAlignVertical: TextAlignVertical.center,
-                        //   maxLength: 4,
-                        //   decoration: InputDecoration(
-                        //     filled: true,
-                        //     //fillColor: Colors.black,
-                        //     enabledBorder: new OutlineInputBorder(
-                        //         borderSide:
-                        //             new BorderSide(color: Colors.black)),
-                        //     focusedBorder: OutlineInputBorder(
-                        //       borderSide: BorderSide(color: Colors.black),
-                        //     ),
-                        //   ),
-                        //   controller: otpController,
-                        //   cursorColor: Colors.black,
-                        //   keyboardType: TextInputType.number,
-                        //   inputFormatters: <TextInputFormatter>[
-                        //     WhitelistingTextInputFormatter.digitsOnly
-                        //   ],
-                        //   // end onSubmit
-                        // ),
-                      ),
-                    ),
-                    SizedBox(height: 15.0),
-                    // confirmButton(),
+                    SizedBox(height: SizeConfig.screenHeight*0.1,),
+                    FormError(errors: errors),
+                    
                     resendOTPButton(),
                   ])));
-  }
-
-  Container confirmButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 40.0,
-      padding: EdgeInsets.symmetric(horizontal: 30.0),
-      margin: EdgeInsets.symmetric(vertical: 30.0, horizontal: 30.0),
-      child: RaisedButton(
-          color: Colors.orangeAccent,
-          child: Text("Confirm",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline2
-                  .copyWith(color: Colors.white)),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
-          onPressed: () {
-            setState(() {
-              _isLoading = true;
-            });
-            registerOTP(otpController.text.toString());
-          }),
-    );
   }
 
   registerOTP(String pin) async {
@@ -157,10 +103,9 @@ class _ConfirmotpState extends State<Confirmotp> {
     jsonResponse = json.decode(response.body);
     if (response.statusCode == 200) {
       if (jsonResponse != null) {
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-                builder: (BuildContext context) => Newpass()),
-            (Route<dynamic> route) => false);
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => CompleteProfileScreen()),
+            );
         print(jsonResponse);
       }
     } else {
@@ -221,8 +166,6 @@ class _ConfirmotpState extends State<Confirmotp> {
 
   Container resendOTPButton() {
     return Container(
-        // width: MediaQuery.of(context).size.width,
-
         child: StreamBuilder(
       stream: _timerStream.stream,
       builder: (BuildContext ctx, AsyncSnapshot snapshot) {
@@ -247,15 +190,17 @@ class _ConfirmotpState extends State<Confirmotp> {
                         style: Theme.of(context)
                             .textTheme
                             .headline2
-                            .copyWith(color: Colors.orangeAccent),
+                            .copyWith(color: Colors.deepOrange),
                       )
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            ' Try after ${snapshot.hasData ? snapshot.data.toString() : 30} seconds ',
-                            style: Theme.of(context).textTheme.headline2,
-                          ),
+                              ' Try after ${snapshot.hasData ? snapshot.data.toString() : 30} seconds ',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline2
+                                  .copyWith(color: Colors.deepOrange)),
                         ],
                       ),
               ),
@@ -274,21 +219,38 @@ Container enterOTP(BuildContext context, String phone) {
           "Enter OTP sent to " + phone,
           style: Theme.of(context).textTheme.headline3.copyWith(
                 fontSize: 20.0,
-                fontWeight: FontWeight.normal,
+                fontWeight: FontWeight.bold,
+                color: Colors.black
               ),
         ),
       ));
 }
 
-Container companyName(BuildContext context) {
+Container heading(BuildContext context) {
   return Container(
-      margin: EdgeInsets.only(top: 35.0, bottom: 15),
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+      margin: EdgeInsets.only(
+        top: 35.0,
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Center(
-        child: Text("Verify OPT",
+        child: Text("Verify OTP",
+            style: Theme.of(context).textTheme.headline1.copyWith(
+                color: Colors.black,
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold)),
+      ));
+}
+
+Container subHeading(BuildContext context) {
+  return Container(
+      margin: EdgeInsets.only(top: 6.0, bottom: 15),
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      child: Center(
+        child: Text(
+            "Enter otp received to continue\n   to change your password",
             style: Theme.of(context)
                 .textTheme
                 .headline1
-                .copyWith(color: Colors.orangeAccent, fontSize: 30.0)),
+                .copyWith(color: Colors.grey[600], fontSize: 16.0)),
       ));
 }

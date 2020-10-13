@@ -1,4 +1,4 @@
-import 'package:ecom/Login/newSign/screensize.dart';
+import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -30,7 +30,7 @@ class FormError extends StatelessWidget {
         SizedBox(
           width: getProportionateScreenWidth(10),
         ),
-        Text(error),
+        Text(error,maxLines: 6,overflow: TextOverflow.ellipsis,),
       ],
     );
   }

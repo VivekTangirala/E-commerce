@@ -199,7 +199,8 @@ class _OtpScreenState extends State<OtpScreen> {
         });
         print(jsonResponse);
       }
-    } else {
+    }
+    else {
       setState(() {
         _isLoading = false;
       });

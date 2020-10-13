@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:ecom/Login/newSign/constants.dart';
-import 'package:ecom/Login/newSign/defaultbutton.dart';
-import 'package:ecom/Login/newSign/formerror.dart';
-import 'package:ecom/Login/newSign/screensize.dart';
-import 'package:ecom/Login/newSign/skipbutton.dart';
-import 'package:ecom/Login/newSign/suffix.dart';
+import 'package:ecom/Login/Forgotpass/phonenumber/phonenumber.dart';
+import 'package:ecom/Login/components/constants.dart';
+import 'package:ecom/Login/components/formerror.dart';
+import 'package:ecom/components/screensize.dart';
+import 'package:ecom/Login/components/skipbutton.dart';
+import 'package:ecom/Login/components/suffix.dart';
 import 'package:ecom/bottom_nav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +22,13 @@ class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
   String email;
   String password;
-  bool remember = false, _isLoading = false;
+  bool remember = false;
   final List<String> errors = [];
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   final RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
+
   void addError({String error}) {
     if (!errors.contains(error))
       setState(() {
@@ -40,6 +41,12 @@ class _SignFormState extends State<SignForm> {
       setState(() {
         errors.remove(error);
       });
+  }
+
+  void _doSomething() async {
+    Timer(Duration(seconds: 2), () {
+      _btnController.reset();
+    });
   }
 
   void dispose() {
@@ -56,7 +63,7 @@ class _SignFormState extends State<SignForm> {
       key: _formKey,
       child: Column(
         children: [
-          buildEmailFormField(),
+          buildphoneFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildPasswordFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
@@ -65,6 +72,10 @@ class _SignFormState extends State<SignForm> {
               SkipSection(),
               Spacer(),
               GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => PhoneNumber()));
+                },
                 child: Text(
                   "Forgot Password",
                   style: TextStyle(
@@ -85,7 +96,7 @@ class _SignFormState extends State<SignForm> {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
 
-              await  signIn(emailController.text, passwordController.text);
+                await signIn(emailController.text, passwordController.text);
                 _doSomething();
                 _btnController.error();
               } else {
@@ -99,33 +110,29 @@ class _SignFormState extends State<SignForm> {
     );
   }
 
-  void _doSomething() async {
-    Timer(Duration(seconds: 2), () {
-      _btnController.reset();
-    });
-  }
-
-  TextFormField buildEmailFormField() {
+  TextFormField buildphoneFormField() {
     return TextFormField(
       controller: emailController,
       keyboardType: TextInputType.phone,
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
+          removeError(error: kPhoneNullError);
+          return "";
         } else if (phoneValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
+          setState(() {
+            removeError(error: kInvalidPhoneNumber);
+          });
+          return "";
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kEmailNullError);
-
+          addError(error: kInvalidPhoneNumber);
           return "";
         } else if (!phoneValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
-
+          addError(error: kInvalidPhoneNumber);
           return "";
         }
         return null;
@@ -179,7 +186,7 @@ class _SignFormState extends State<SignForm> {
     );
   }
 
- Future signIn(String phone, password) async {
+  Future signIn(String phone, password) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map data = {'username': phone, 'password': password};
     var jsonResponse;
@@ -189,7 +196,6 @@ class _SignFormState extends State<SignForm> {
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
       if (jsonResponse != null) {
-       
         _btnController.success();
         sharedPreferences.setString("token", "Token " + jsonResponse["token"]);
 
@@ -198,23 +204,11 @@ class _SignFormState extends State<SignForm> {
             (Route<dynamic> route) => false);
       }
     } else {
-      setState(() {
-        _isLoading = false;
-      });
       _btnController.error();
-      _btnController.reset();
-      showDialog(
-          context: context,
-          builder: (context) {
-            return CupertinoAlertDialog(
-              title:
-                  Text("Error", style: Theme.of(context).textTheme.headline2),
-              content: Text(
-                "Invalid Credintials!",
-                style: Theme.of(context).textTheme.headline2,
-              ),
-            );
-          });
+      setState(() {
+        errors.clear();
+      });
+      addError(error: kinvalidcredentials);
     }
   }
 }
