@@ -1,7 +1,6 @@
-import 'package:ecom/Login/newSign/noaccount.dart';
-import 'package:ecom/Login/newSign/screensize.dart';
+import 'package:ecom/Login/components/noaccount.dart';
+import 'package:ecom/components/screensize.dart';
 import 'package:ecom/Login/newSign/form.dart';
-import 'package:ecom/bottom_nav.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatelessWidget {
