@@ -1,4 +1,7 @@
+import 'package:ecom/Homepage/Specialproductsapi/Specialproductsapi.dart';
+import 'package:ecom/Homepage/Specialproductsapi/Specialproductsimport.dart';
 import 'package:ecom/Homepage/details/details_screen.dart';
+import 'package:ecom/Homepage/just_for_you.dart';
 import 'package:flutter/material.dart';
 
 import 'details/Product.dart';
@@ -19,6 +22,25 @@ class Bestoffers extends StatefulWidget {
 }
 
 class Bestoffersstate extends State<Bestoffers> {
+  List<Specialproductsapi> _specialproducts;
+  bool _isloading = true;
+  @override
+  void initState() {
+    super.initState();
+    refresh();
+  }
+
+  refresh() {
+    Specialproductsimport.getspecialproudcts().then(
+      (value) => setState(
+        () {
+          _specialproducts = value;
+          _isloading = false;
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -27,7 +49,7 @@ class Bestoffersstate extends State<Bestoffers> {
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: images.length,
+        itemCount: _specialproducts[1].specialProducts.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             child: Container(
@@ -93,13 +115,15 @@ class Bestoffersstate extends State<Bestoffers> {
               ),
             ),
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) => DetailsScreen(
-                    product: products[index],
+              if (_specialproducts != null) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => DetailsScreen(
+                      productid: _specialproducts[1].specialProducts[index],
+                    ),
                   ),
-                ),
-              );
+                );
+              }
             },
           );
         },

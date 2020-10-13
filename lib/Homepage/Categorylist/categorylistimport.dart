@@ -1,4 +1,3 @@
-
 import 'package:http/http.dart' as http;
 
 import 'categorylistdata.dart';
@@ -13,7 +12,8 @@ class Categorylistimport {
       if (response.statusCode == 200) {
         // var data=json.decode(response.body);
         // data=da
-        final List<Categorydata> categories = categorydataFromJson(response.body);
+        final List<Categorydata> categories =
+            categorydataFromJson(response.body);
 
         return categories;
       } else {

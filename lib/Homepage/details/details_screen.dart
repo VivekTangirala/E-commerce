@@ -4,16 +4,17 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatelessWidget {
-  final Product product;
+  final productid;
 
-  const DetailsScreen({Key key, this.product}) : super(key: key);
+  const DetailsScreen({Key key, this.productid}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // each product have a color
       backgroundColor: Colors.grey[300],
       appBar: buildAppBar(context),
-      body: Body(product: product),
+      body: Body(),
     );
   }
 

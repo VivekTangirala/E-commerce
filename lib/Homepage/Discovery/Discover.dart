@@ -120,7 +120,7 @@ class _DiscoverState extends State<Discover> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) => DetailsScreen(
-                          product: products[index],
+   
                         ),
                       ),
                     );
