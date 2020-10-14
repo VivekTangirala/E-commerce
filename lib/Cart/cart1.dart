@@ -1,5 +1,5 @@
-import 'package:ecom/Cart/Cartapi/Cartapi.dart';
-import 'package:ecom/Cart/Cartapi/Cartapiimport.dart';
+import 'package:ecom/Api/Cartapi/Cartapi.dart';
+import 'package:ecom/Api/Cartapi/Cartapiimport.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

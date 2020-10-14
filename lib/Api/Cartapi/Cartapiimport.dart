@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:ecom/Cart/Cartapi/Cartapi.dart';
+import 'package:ecom/Api/Cartapi/Cartapi.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,16 +1,16 @@
+
 import 'package:http/http.dart' as http;
 
-import 'Discoverdata.dart';
-
-class Discoverimport {
+import 'Productapi.dart';
+class Productapiimport {
   static const uri = "http://infintymall.herokuapp.com/homepage/api/product";
 
-  static Future<Discoverdata> getUsers() async {
+  static Future<Productsapi> getProducts() async {
     try {
       final response = await http.get( "http://infintymall.herokuapp.com/homepage/api/product");
       if (response.statusCode == 200) {
-        final Discoverdata discover = discoverdataFromJson(response.body);
-        return discover;
+        final Productsapi productsapi = productsapiFromJson(response.body);
+        return productsapi;
       } else {
         print("error");
         return null;

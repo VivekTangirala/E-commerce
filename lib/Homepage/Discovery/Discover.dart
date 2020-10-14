@@ -1,39 +1,57 @@
-import 'package:ecom/Homepage/Discovery/Discoverdata.dart';
+import 'package:ecom/Api/Productapi/Productapi.dart';
+import 'package:ecom/Api/Specialproductsapi/Specialproductsapi.dart';
+import 'package:ecom/Api/Specialproductsapi/Specialproductsimport.dart';
 import 'package:ecom/Homepage/details/Product.dart';
 import 'package:ecom/Homepage/details/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-List<String> list = ["Pineapple", "Cherry", "Orange", "Apple"];
-List<String> list1 = ["25", "50", "45", "55"];
+List<String> list = ["Pineapple", "Cherry", "Orange", "Apple", "Apple"];
+List<String> list1 = ["25", "50", "45", "55", "55"];
 final List<String> images = [
   "assets/images/tomato.png",
   "assets/images/onion.jpeg",
   "assets/images/burger.jpeg",
   'assets/images/some.jpg',
+  'assets/images/some.jpg',
 ];
 
 class Discover extends StatefulWidget {
-  final Discoverdata receiveddiscoverdata;
+  final Productsapi receivedproductapi;
 
-  const Discover({Key key, this.receiveddiscoverdata}) : super(key: key);
+  const Discover({Key key, this.receivedproductapi}) : super(key: key);
 
   @override
-  _DiscoverState createState() => _DiscoverState(receiveddiscoverdata);
+  _DiscoverState createState() => _DiscoverState(receivedproductapi);
 }
 
 class _DiscoverState extends State<Discover> {
-  _DiscoverState(this._discoverdata);
-  final Discoverdata _discoverdata;
+  final Productsapi _productsapi;
+  List<Specialproductsapi> _specialproducts;
+  bool _isloading = true;
   List mylist;
   List mylist1;
   ScrollController _scrollController = new ScrollController();
 
+  _DiscoverState(this._productsapi);
+
   @override
   void initState() {
     super.initState();
+    refreshspecialproducts();
   }
 
+  refreshspecialproducts() {
+    Specialproductsimport.getspecialproudcts().then(
+      (value) => setState(
+        () {
+          _specialproducts = value;
+          _isloading = false;
+          print(_specialproducts[0].specialProducts.length);
+        },
+      ),
+    );
+  }
   // getMoreData() {
   //   print("Reached limit");
   //   for (var i = _currentmax; i < _currentmax + 4; i++) {
@@ -55,9 +73,9 @@ class _DiscoverState extends State<Discover> {
         physics: ScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: _discoverdata == null
+        itemCount: _specialproducts == null
             ? 1
-            : _discoverdata.results.length, //images.length+ 1,
+            : _specialproducts[0].specialProducts.length, //images.length+ 1,
 
         itemBuilder: (BuildContext context, int index) {
           // if (index == images.length) {
@@ -66,18 +84,16 @@ class _DiscoverState extends State<Discover> {
           //     animationDuration: Duration(seconds: 1),
           //   );
           // }
-          return _discoverdata == null
-              ? Container(child:FlutterLogo())
+          return _specialproducts == null
+              ? Container(child: FlutterLogo())
               : GestureDetector(
                   child: Container(
                     margin: EdgeInsets.only(left: 4, bottom: 3),
-                    
                     child: SizedBox(
                       // height: 100,
                       width: 120,
                       child: Container(
                         margin: EdgeInsets.all(5.0),
-                       
                         child: Column(children: [
                           SizedBox(
                             height: 150,
@@ -99,8 +115,11 @@ class _DiscoverState extends State<Discover> {
                                 },
                                 placeholder:
                                     AssetImage('assets/images/loading.gif'),
-                                image: NetworkImage(
-                                    _discoverdata.results[index].image),
+                                image: NetworkImage(_productsapi
+                                    .results[_specialproducts[0]
+                                        .specialProducts
+                                        [index]-1]
+                                    .image),
                                 fit: BoxFit.cover,
                                 // height: 100.0,
                                 // width: 100.0,
@@ -110,7 +129,10 @@ class _DiscoverState extends State<Discover> {
                           ),
                           SizedBox(height: 0.0),
                           Text(
-                            _discoverdata.results[index].name,
+                            _productsapi
+                                .results[
+                                    _specialproducts[0].specialProducts[index]-1]
+                                .name,
                           ),
                         ]),
                       ),
@@ -120,7 +142,7 @@ class _DiscoverState extends State<Discover> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) => DetailsScreen(
-   
+                          productid: _specialproducts[0].specialProducts[index],
                         ),
                       ),
                     );
@@ -130,6 +152,4 @@ class _DiscoverState extends State<Discover> {
       ),
     ));
   }
-
-
 }

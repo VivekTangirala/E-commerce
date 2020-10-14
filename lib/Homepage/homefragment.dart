@@ -1,9 +1,9 @@
+import 'package:ecom/Api/Productapi/Productapi.dart';
+import 'package:ecom/Api/Productapi/Productapiimport.dart';
 import 'package:ecom/Cart/cart1.dart';
 import 'package:ecom/Homepage/BestOffers.dart';
 import 'package:ecom/Homepage/Categorylist/Categorylist1.dart';
 import 'package:ecom/Homepage/Discovery/Discover.dart';
-import 'package:ecom/Homepage/Discovery/Discoverdata.dart';
-import 'package:ecom/Homepage/Discovery/discoverimport.dart';
 import 'package:ecom/Homepage/Varieties.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,7 +39,7 @@ class _HomefragmentState extends State<HomeFragment> {
   // bool _firstload = false;
   List values;
   String a, b, c;
-  Discoverdata _discoverdata;
+  Productsapi _productsapi;
   bool _isloading = true;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   @override
@@ -49,11 +49,11 @@ class _HomefragmentState extends State<HomeFragment> {
   }
 
   _discoverrefresh() async {
-    await Discoverimport.getUsers().then((value) {
+    await Productapiimport.getProducts().then((value) {
       setState(() {
-        _discoverdata = value;
+        _productsapi = value;
         _isloading = false;
-        print(_discoverdata);
+        print(_productsapi);
       });
     });
   }
@@ -63,7 +63,6 @@ class _HomefragmentState extends State<HomeFragment> {
     setState(() {
       _isloading = true;
       _discoverrefresh();
-   
     });
   }
 
@@ -89,12 +88,12 @@ class _HomefragmentState extends State<HomeFragment> {
                     // SizedBox(height: 10),
                     _categoryheading(context, "Categories"),
 
-                   Categorylist1(),
+                    Categorylist1(),
                     SizedBox(height: 5),
-                  
+
                     _categoryheading(context, "Discover"),
                     // SpecialProducts(),
-                    Discover(receiveddiscoverdata: _discoverdata),
+                    Discover(receivedproductapi: _productsapi),
                     SizedBox(height: 20.0),
 
                     _categoryheading(context, "Best Offers"),
@@ -109,7 +108,7 @@ class _HomefragmentState extends State<HomeFragment> {
                     Invite(),
                     SizedBox(height: 30.0),
                     _categoryheading(context, "Great Deals"),
-                    Discover(receiveddiscoverdata: _discoverdata),
+                    Discover(receivedproductapi: _productsapi),
                   ]),
                 ),
               ),

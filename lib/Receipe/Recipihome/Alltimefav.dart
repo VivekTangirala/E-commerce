@@ -1,5 +1,6 @@
-import 'package:ecom/Homepage/Discovery/Discoverdata.dart';
-import 'package:ecom/Homepage/Discovery/discoverimport.dart';
+
+import 'package:ecom/Api/Productapi/Productapi.dart';
+import 'package:ecom/Api/Productapi/Productapiimport.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -18,7 +19,7 @@ class Alltimefav extends StatefulWidget {
 }
 
 class _AlltimefavState extends State<Alltimefav> {
-  Discoverdata _discoverdata;
+  Productsapi _productsapi;
   bool _isloading = true;
   List mylist;
   List mylist1;
@@ -27,11 +28,11 @@ class _AlltimefavState extends State<Alltimefav> {
   @override
   void initState() {
     super.initState();
-    Discoverimport.getUsers().then((value) {
+    Productapiimport.getProducts().then((value) {
       setState(() {
-        _discoverdata = value;
+        _productsapi = value;
         _isloading = false;
-        print(_discoverdata.results[0].image);
+        print(_productsapi.results[0].image);
       });
     });
     // mylist = List.generate(4, (i) => "assets/images/tomato.png");
