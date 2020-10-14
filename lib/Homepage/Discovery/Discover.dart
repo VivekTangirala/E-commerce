@@ -5,6 +5,7 @@ import 'package:ecom/Homepage/details/Product.dart';
 import 'package:ecom/Homepage/details/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shimmer/shimmer.dart';
 
 List<String> list = ["Pineapple", "Cherry", "Orange", "Apple", "Apple"];
 List<String> list1 = ["25", "50", "45", "55", "55"];
@@ -38,10 +39,10 @@ class _DiscoverState extends State<Discover> {
   @override
   void initState() {
     super.initState();
-    refreshspecialproducts();
+    refresh();
   }
 
-  refreshspecialproducts() {
+  refresh() {
     Specialproductsimport.getspecialproudcts().then(
       (value) => setState(
         () {
@@ -85,7 +86,13 @@ class _DiscoverState extends State<Discover> {
           //   );
           // }
           return _specialproducts == null
-              ? Container(child: FlutterLogo())
+              ? Shimmer.fromColors(
+                  child: Center(
+                    child: Text("TREG",style: TextStyle(fontSize:30),),
+                  ),
+                  baseColor: Colors.white,
+                  highlightColor: Colors.grey,
+                )
               : GestureDetector(
                   child: Container(
                     margin: EdgeInsets.only(left: 4, bottom: 3),
@@ -105,8 +112,11 @@ class _DiscoverState extends State<Discover> {
                                       decoration: BoxDecoration(
                                     image: DecorationImage(
                                         fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            'assets/images/burger.jpeg')),
+                                        image: AssetImage(_productsapi
+                                            .results[_specialproducts[0]
+                                                    .specialProducts[index] -
+                                                1]
+                                            .image)),
                                     color: Colors.white,
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(5.0),
@@ -117,8 +127,8 @@ class _DiscoverState extends State<Discover> {
                                     AssetImage('assets/images/loading.gif'),
                                 image: NetworkImage(_productsapi
                                     .results[_specialproducts[0]
-                                        .specialProducts
-                                        [index]-1]
+                                            .specialProducts[index] -
+                                        1]
                                     .image),
                                 fit: BoxFit.cover,
                                 // height: 100.0,
@@ -131,7 +141,8 @@ class _DiscoverState extends State<Discover> {
                           Text(
                             _productsapi
                                 .results[
-                                    _specialproducts[0].specialProducts[index]-1]
+                                    _specialproducts[0].specialProducts[index] -
+                                        1]
                                 .name,
                           ),
                         ]),

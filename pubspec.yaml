@@ -45,6 +45,7 @@ dependencies:
   pull_to_refresh: ^1.5.7
   flutter_svg: ^0.18.0
   rounded_loading_button: ^1.0.0
+  shimmer: ^1.1.2
 
 dev_dependencies:
   flutter_test:

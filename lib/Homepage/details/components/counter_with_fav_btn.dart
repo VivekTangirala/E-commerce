@@ -1,6 +1,6 @@
+import 'package:ecom/Homepage/details/components/add_to_cart.dart';
 import 'package:flutter/material.dart';
 
-import 'cart_counter.dart';
 
 class CounterWithFavBtn extends StatelessWidget {
   const CounterWithFavBtn({

@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:ecom/Api/Productapi/Productapi.dart';
 import 'package:ecom/Api/Productapi/Productapiimport.dart';
+import 'package:ecom/Api/Productdetails/Productdetails.dart';
+import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
 import 'package:http/http.dart' as http;
 import 'package:ecom/Homepage/details/Product.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,11 +28,14 @@ class _BodyState extends State<Body> {
   _BodyState(this._productid);
 
   Productsapi _productsapi;
+  Productdetails _productdetails;
   bool _isloading = true;
   @override
   void initState() {
-    refreshproducts();
     super.initState();
+    refreshproducts();
+    _isloading = true;
+    refreshproductdetails();
   }
 
   refreshproducts() {
@@ -42,6 +47,13 @@ class _BodyState extends State<Body> {
         },
       ),
     );
+  }
+
+  refreshproductdetails() {
+    Productdetailsimport.getProductdetails().then((value) => setState(() {
+          _productdetails = value;
+          _isloading = false;
+        }));
   }
 
   @override
@@ -82,14 +94,13 @@ class _BodyState extends State<Body> {
                         child: Column(
                           children: <Widget>[
                             // CounterWithFavBtn(),
-                            //ProductTitleWithImage(product: product),
+                            ProductTitleWithImage(productdetails: _productdetails,),
                             AddToCart(
-                              productid: 2,
-                              quantity: 6,
+                              productid: _productid,
                             ),
                             //ColorAndSize(product: product),
                             SizedBox(height: 20 / 3),
-                            // Description(product: product),
+                            Description(productdetails: _productdetails,),
                             SizedBox(height: 20 / 3),
                           ],
                         ),
