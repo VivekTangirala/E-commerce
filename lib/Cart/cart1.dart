@@ -31,7 +31,6 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   Cartapi _cartapidata;
-  bool _isloading = true;
   var _qty;
   @override
   void initState() {
@@ -44,13 +43,11 @@ class _CartState extends State<Cart> {
       setState(() {
         _cartapidata = value;
         _counters();
-        _isloading = false;
       });
     });
   }
 
   _counters() {
-    var index;
     print(_cartapidata.cart);
     print(_cartapidata.cart.length);
     if (_cartapidata.cart != null) {

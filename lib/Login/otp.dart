@@ -56,12 +56,7 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-            // decoration: BoxDecoration(
-            //   gradient: LinearGradient(
-            //       colors: [Color(0xFFe74c3c), Color(0xFFF09819)],
-            //       begin: Alignment.center,
-            //       end: Alignment.bottomRight),
-            // ),
+           
             child: _isLoading
                 ? SizedBox(
                     child: Center(
@@ -92,29 +87,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         width: 100,
                         height: 60,
 
-                        // child: TextField(
-                        //   style: TextStyle(color: Colors.black),
-                        //   textAlign: TextAlign.center,
-                        //   textAlignVertical: TextAlignVertical.center,
-                        //   maxLength: 4,
-                        //   decoration: InputDecoration(
-                        //     filled: true,
-                        //     //fillColor: Colors.black,
-                        //     enabledBorder: new OutlineInputBorder(
-                        //         borderSide:
-                        //             new BorderSide(color: Colors.black)),
-                        //     focusedBorder: OutlineInputBorder(
-                        //       borderSide: BorderSide(color: Colors.black),
-                        //     ),
-                        //   ),
-                        //   controller: otpController,
-                        //   cursorColor: Colors.black,
-                        //   keyboardType: TextInputType.number,
-                        //   inputFormatters: <TextInputFormatter>[
-                        //     WhitelistingTextInputFormatter.digitsOnly
-                        //   ],
-                        //   // end onSubmit
-                        // ),
+                      
                       ),
                     ),
                     SizedBox(height: 15.0),

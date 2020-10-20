@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:ecom/Login/otp.dart';
 import 'package:http/http.dart' as http;
 import 'package:ecom/Login/Forgotpass/Confirmotp.dart';
 import 'package:ecom/Login/components/constants.dart';
@@ -41,7 +42,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
           FormError(errors: errors),
           SizedBox(height: SizeConfig.screenHeight * 0.1),
           RoundedLoadingButton(
-            child: Text('Sign In', style: TextStyle(color: Colors.white)),
+            child: Text('Send OTP', style: TextStyle(color: Colors.white)),
             color: Colors.deepOrange,
             controller: _btnController,
             onPressed: () async {
@@ -123,7 +124,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
 
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Confirmotp(phone: phone)),
+          MaterialPageRoute(builder: (context) => Confirmotp(phone: phone,value: 0,)),
         );
       }
     } else {

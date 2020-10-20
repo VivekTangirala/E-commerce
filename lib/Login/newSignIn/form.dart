@@ -7,6 +7,7 @@ import 'package:ecom/components/screensize.dart';
 import 'package:ecom/Login/components/skipbutton.dart';
 import 'package:ecom/Login/components/suffix.dart';
 import 'package:ecom/bottom_nav.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -66,7 +67,7 @@ class _SignFormState extends State<SignForm> {
           buildphoneFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildPasswordFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(50)),
           Row(
             children: [
               SkipSection(),
@@ -74,13 +75,12 @@ class _SignFormState extends State<SignForm> {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => PhoneNumber()));
+                      builder: (BuildContext context) =>
+                          PhoneNumber(value: 1)));
                 },
                 child: Text(
                   "Forgot Password",
-                  style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      color: Colors.deepOrange),
+                  style: TextStyle(color: Colors.deepOrange),
                 ),
               )
             ],
@@ -89,7 +89,24 @@ class _SignFormState extends State<SignForm> {
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(80)),
           RoundedLoadingButton(
-            child: Text('Sign In', style: TextStyle(color: Colors.white)),
+            child: Row(
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Spacer(),
+                Text('Sign In', style: TextStyle(color: Colors.white)),
+                Padding(
+                    padding: EdgeInsets.only(
+                        left: getProportionateScreenWidth(100))),
+                Icon(
+                  EvaIcons.logIn,
+                  color: Colors.white,
+                ),
+                Padding(
+                    padding:
+                        EdgeInsets.only(left: getProportionateScreenWidth(30))),
+              ],
+            ),
             color: Colors.deepOrange,
             controller: _btnController,
             onPressed: () async {
@@ -118,33 +135,29 @@ class _SignFormState extends State<SignForm> {
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPhoneNullError);
-          return "";
         } else if (phoneValidatorRegExp.hasMatch(value)) {
           setState(() {
             removeError(error: kInvalidPhoneNumber);
           });
-          return "";
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
           addError(error: kInvalidPhoneNumber);
-          return "";
         } else if (!phoneValidatorRegExp.hasMatch(value)) {
           addError(error: kInvalidPhoneNumber);
-          return "";
         }
         return null;
       },
       decoration: InputDecoration(
+        prefixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
         labelText: "Phone number",
         fillColor: Colors.white,
         border: new OutlineInputBorder(
           borderRadius: new BorderRadius.circular(25.0),
-          borderSide: new BorderSide(),
+          borderSide: new BorderSide(color: Colors.black),
         ),
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
       ),
     );
   }
@@ -177,11 +190,11 @@ class _SignFormState extends State<SignForm> {
       decoration: InputDecoration(
         labelText: "Enter Password",
         fillColor: Colors.white,
+        prefixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
         border: new OutlineInputBorder(
           borderRadius: new BorderRadius.circular(25.0),
-          borderSide: new BorderSide(),
+          borderSide: new BorderSide(color: Colors.black),
         ),
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
       ),
     );
   }

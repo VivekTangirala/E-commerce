@@ -15,7 +15,7 @@ class SkipSection extends StatelessWidget {
         child: Text(
           "Skip Login",
           style: TextStyle(
-              decoration: TextDecoration.underline, color: Colors.black),
+               color: Colors.black),
         ),
       ),
     );

@@ -1,15 +1,10 @@
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:ecom/Api/Productapi/Productapi.dart';
 import 'package:ecom/Api/Productapi/Productapiimport.dart';
 import 'package:ecom/Api/Productdetails/Productdetails.dart';
 import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
-import 'package:http/http.dart' as http;
-import 'package:ecom/Homepage/details/Product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'add_to_cart.dart';
 import 'description.dart';
@@ -29,12 +24,12 @@ class _BodyState extends State<Body> {
 
   Productsapi _productsapi;
   Productdetails _productdetails;
-  bool _isloading = true;
+  
   @override
   void initState() {
     super.initState();
     refreshproducts();
-    _isloading = true;
+   
     refreshproductdetails();
   }
 
@@ -43,7 +38,7 @@ class _BodyState extends State<Body> {
       (value) => setState(
         () {
           _productsapi = value;
-          _isloading = false;
+        
         },
       ),
     );
@@ -52,7 +47,7 @@ class _BodyState extends State<Body> {
   refreshproductdetails() {
     Productdetailsimport.getProductdetails().then((value) => setState(() {
           _productdetails = value;
-          _isloading = false;
+          
         }));
   }
 

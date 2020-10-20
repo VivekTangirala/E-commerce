@@ -1,12 +1,10 @@
 import 'dart:io';
 
-import 'package:ecom/Cart/cart1.dart';
-import 'package:ecom/Homepage/details/Product.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:async';
 
 import 'package:shared_preferences/shared_preferences.dart';
 

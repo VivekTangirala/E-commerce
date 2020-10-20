@@ -27,14 +27,11 @@ class CartApiimport {
         print("error");
         return null;
       }
-    }
-    on SocketException{
-
-    }
-     catch (e) {
+    } on SocketException {} catch (e) {
       print(e);
 
       return null;
     }
+    return null;
   }
 }

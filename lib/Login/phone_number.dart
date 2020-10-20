@@ -7,6 +7,7 @@ import './login.dart';
 import './otp.dart';
 
 class SignupPage extends StatefulWidget {
+  
   @override
   _SignupPageState createState() => _SignupPageState();
 }
@@ -86,7 +87,10 @@ class _SignupPageState extends State<SignupPage> {
       padding: EdgeInsets.only(left: 15.0),
       child: Text(
         " Enter phone number to continue",
-        style: Theme.of(context).textTheme.headline4.copyWith(fontWeight:FontWeight.normal),
+        style: Theme.of(context)
+            .textTheme
+            .headline4
+            .copyWith(fontWeight: FontWeight.normal),
       ),
     );
   }
@@ -240,7 +244,10 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   Text(
                     "Signin",
-                    style: Theme.of(context).textTheme.headline2.copyWith(color:Colors.orangeAccent),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline2
+                        .copyWith(color: Colors.orangeAccent),
                   )
                 ]),
           ),

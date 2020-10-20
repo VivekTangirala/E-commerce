@@ -1,7 +1,7 @@
 import 'package:ecom/Login/components/constants.dart';
+import 'package:ecom/Login/newSignUp/signUp.dart';
 import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
-
 
 class NoAccountText extends StatelessWidget {
   const NoAccountText({
@@ -14,11 +14,14 @@ class NoAccountText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Don’t have an account? ",
+          "Already have an account? ",
           style: TextStyle(fontSize: getProportionateScreenWidth(16)),
         ),
         GestureDetector(
-         // onTap: () => Navigator.pushNamed(context, SignUpScreen.routeName),
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => SignUpScreen())),
           child: Text(
             "Sign Up",
             style: TextStyle(

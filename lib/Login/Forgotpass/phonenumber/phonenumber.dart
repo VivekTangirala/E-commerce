@@ -4,7 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PhoneNumber extends StatelessWidget {
-  
+  final value;
+
+  const PhoneNumber({Key key, this.value}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,8 +23,10 @@ class PhoneNumber extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   horizontal: getProportionateScreenWidth(20)),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: SizeConfig.screenHeight * 0.04),
+        
                   Text(
                     "Forgot Password",
                     style: TextStyle(
@@ -32,8 +37,8 @@ class PhoneNumber extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    "One time password will be sent to the \n provided phone number",
-                    textAlign: TextAlign.center,
+                    "One time password will be sent to the \nprovided phone number",
+                    
                     style: TextStyle(color: Colors.grey[600]),
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.1),

@@ -1,7 +1,6 @@
 import 'package:ecom/Api/Productapi/Productapi.dart';
 import 'package:ecom/Api/Specialproductsapi/Specialproductsapi.dart';
 import 'package:ecom/Api/Specialproductsapi/Specialproductsimport.dart';
-import 'package:ecom/Homepage/details/Product.dart';
 import 'package:ecom/Homepage/details/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -53,15 +52,7 @@ class _DiscoverState extends State<Discover> {
       ),
     );
   }
-  // getMoreData() {
-  //   print("Reached limit");
-  //   for (var i = _currentmax; i < _currentmax + 4; i++) {
-  //     images.add("assets/images/burger.jpeg");
-  //     list.add("Burger");
-  //   }
-  //   _currentmax = _currentmax + 4;
-  //   setState(() {});
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,12 +70,7 @@ class _DiscoverState extends State<Discover> {
             : _specialproducts[0].specialProducts.length, //images.length+ 1,
 
         itemBuilder: (BuildContext context, int index) {
-          // if (index == images.length) {
-          //   return NutsActivityIndicator(
-          //     radius: 15.0,
-          //     animationDuration: Duration(seconds: 1),
-          //   );
-          // }
+
           return _specialproducts == null
               ? Shimmer.fromColors(
                   child: Center(
@@ -131,8 +117,7 @@ class _DiscoverState extends State<Discover> {
                                         1]
                                     .image),
                                 fit: BoxFit.cover,
-                                // height: 100.0,
-                                // width: 100.0,
+                                
                               ),
                               //alignment: Alignment.center,
                             ),

@@ -244,6 +244,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     passwordController.text != null) {
                   registerUser(nameController.text, emailController.text,
                       passwordController.text, password2Controller.text);
+                      
                 } else {
                   setState(() {
                     _isLoading = false;

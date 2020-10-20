@@ -1,10 +1,9 @@
 import 'package:ecom/Api/Specialproductsapi/Specialproductsapi.dart';
 import 'package:ecom/Api/Specialproductsapi/Specialproductsimport.dart';
 import 'package:ecom/Homepage/details/details_screen.dart';
-import 'package:ecom/Homepage/just_for_you.dart';
 import 'package:flutter/material.dart';
 
-import 'details/Product.dart';
+
 
 List<String> list = ["Burger", "Cherry", "Orange", "Apple", "Apple"];
 List<String> list1 = ["A salad between 2 breads", "50", "45", "55", "55"];
@@ -24,7 +23,7 @@ class Bestoffers extends StatefulWidget {
 
 class Bestoffersstate extends State<Bestoffers> {
   List<Specialproductsapi> _specialproducts;
-  bool _isloading = true;
+ 
   @override
   void initState() {
     super.initState();
@@ -36,7 +35,6 @@ class Bestoffersstate extends State<Bestoffers> {
       (value) => setState(
         () {
           _specialproducts = value;
-          _isloading = false;
           print(_specialproducts[0].specialProducts.length);
         },
       ),

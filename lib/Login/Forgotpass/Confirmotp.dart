@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ecom/Login/Forgotpass/Newpass.dart';
 import 'package:ecom/Login/Forgotpass/passwordchange/passbody.dart';
 import 'package:ecom/Login/components/formerror.dart';
+import 'package:ecom/Login/newSignUp/signUp.dart';
 import 'package:ecom/components/screensize.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:http/http.dart' as http;
@@ -11,11 +12,13 @@ import 'package:flutter/material.dart';
 import 'package:otp_text_field/style.dart';
 
 class Confirmotp extends StatefulWidget {
+  final value;
+
   final String phone;
 
-  const Confirmotp({Key key, this.phone}) : super(key: key);
+  const Confirmotp({Key key, this.phone, this.value}) : super(key: key);
   @override
-  _ConfirmotpState createState() => _ConfirmotpState(phone);
+  _ConfirmotpState createState() => _ConfirmotpState(phone, value);
 }
 
 class _ConfirmotpState extends State<Confirmotp> {
@@ -25,10 +28,14 @@ class _ConfirmotpState extends State<Confirmotp> {
   static const _timerDuration = 30;
   StreamController _timerStream = new StreamController<int>.broadcast();
 
-  int timerCounter;
+  int timerCounter, value;
   Timer _resendCodeTimer;
   String phone;
-  _ConfirmotpState(this.phone);
+  List a = [
+    "https://infintymall.herokuapp.com/user/api/register/mobile/otp",
+    "https://infintymall.herokuapp.com/user/api/register/mobile/otp"
+  ];
+  _ConfirmotpState(this.phone, this.value);
 
   @override
   void initState() {
@@ -78,17 +85,20 @@ class _ConfirmotpState extends State<Confirmotp> {
                       length: 4,
                       width: 100,
                       fieldWidth: 50,
-                      style: TextStyle(fontSize: 20,color: Colors.deepOrange),
+                      style: TextStyle(fontSize: 20, color: Colors.deepOrange),
                       textFieldAlignment: MainAxisAlignment.spaceAround,
                       fieldStyle: FieldStyle.underline,
-                      
                       onCompleted: (pin) {
+                        setState(() {
+                          _isLoading = true;
+                        });
                         registerOTP(pin);
                       },
                     ),
-                    SizedBox(height: SizeConfig.screenHeight*0.1,),
+                    SizedBox(
+                      height: SizeConfig.screenHeight * 0.1,
+                    ),
                     FormError(errors: errors),
-                    
                     resendOTPButton(),
                   ])));
   }
@@ -98,14 +108,15 @@ class _ConfirmotpState extends State<Confirmotp> {
     var jsonResponse;
     var response;
     response = await http.post(
-        "https://infintymall.herokuapp.com/user/api/register/mobile/otp",
+        a[0],
         body: data);
     jsonResponse = json.decode(response.body);
     if (response.statusCode == 200) {
       if (jsonResponse != null) {
         Navigator.of(context).push(
-            MaterialPageRoute(builder: (BuildContext context) => CompleteProfileScreen()),
-            );
+          MaterialPageRoute(
+              builder: (BuildContext context) =>value==1? NewPassword():SignUpScreen()),
+        );
         print(jsonResponse);
       }
     } else {
@@ -218,10 +229,7 @@ Container enterOTP(BuildContext context, String phone) {
         child: Text(
           "Enter OTP sent to " + phone,
           style: Theme.of(context).textTheme.headline3.copyWith(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.black
-              ),
+              fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black),
         ),
       ));
 }

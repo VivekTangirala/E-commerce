@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:ecom/Login/login.dart';
-import 'package:ecom/Login/newSign/signin.dart';
+
+import 'package:ecom/Login/newSignIn/signin.dart';
 import 'package:ecom/Orders/Orders.dart';
 import 'package:ecom/Profile/main_profile.dart';
 import 'package:ecom/Wishlist/Wishlist.dart';

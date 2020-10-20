@@ -81,6 +81,7 @@ flutter:
     - assets/icons/Mail.svg
     - assets/icons/Lock.svg
     - assets/icons/Phone.svg
+    - assets/icons/User.svg
     - assets/gif/loading.gif
     #- images/a_dot_ham.jpeg
 
