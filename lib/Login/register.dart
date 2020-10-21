@@ -63,7 +63,10 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Center(
           child: Text(
             "TREG",
-            style: Theme.of(context).textTheme.headline1.copyWith(color:Colors.orangeAccent),
+            style: Theme.of(context)
+                .textTheme
+                .headline1
+                .copyWith(color: Colors.orangeAccent),
           ),
         )));
   }
@@ -148,7 +151,8 @@ class _RegisterPageState extends State<RegisterPage> {
             cursorColor: Colors.black,
             style: Theme.of(context).textTheme.bodyText1,
             decoration: InputDecoration(
-              icon: Icon(Icons.supervised_user_circle, color: Colors.orangeAccent),
+              icon: Icon(Icons.supervised_user_circle,
+                  color: Colors.orangeAccent),
               hintText: "Full Name",
               border: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -210,7 +214,7 @@ class _RegisterPageState extends State<RegisterPage> {
       width: MediaQuery.of(context).size.width,
       height: 60.0,
       padding: EdgeInsets.symmetric(horizontal: 30.0),
-      margin: EdgeInsets.symmetric(vertical: 20.0,horizontal: 25.0),
+      margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
       child: RaisedButton(
         onPressed: emailController.text == "" ||
                 passwordController.text == "" ||
@@ -244,7 +248,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     passwordController.text != null) {
                   registerUser(nameController.text, emailController.text,
                       passwordController.text, password2Controller.text);
-                      
                 } else {
                   setState(() {
                     _isLoading = false;
@@ -265,8 +268,13 @@ class _RegisterPageState extends State<RegisterPage> {
               },
         elevation: 0.0,
         color: Colors.orangeAccent,
-        child: Text("Sign Up", style: Theme.of(context).textTheme.headline2.copyWith(color:Colors.white)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
+        child: Text("Sign Up",
+            style: Theme.of(context)
+                .textTheme
+                .headline2
+                .copyWith(color: Colors.white)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       ),
     );
   }

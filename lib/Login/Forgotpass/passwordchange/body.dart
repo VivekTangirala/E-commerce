@@ -11,21 +11,23 @@ class Body extends StatelessWidget {
         width: double.infinity,
         child: Padding(
           padding:
-              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20),),
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.001),
                   // 4%
                 Text("Change Password", style: headingStyle),
                 SizedBox(height: SizeConfig.screenHeight * 0.006),
                 Text(
-                  "Continue to change to \nyour password",
+                  "Continue to change to your password",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.grey[600]),
                 ),
-                SizedBox(height: SizeConfig.screenHeight * 0.08),
-                SignUpForm(),
+                SizedBox(height: SizeConfig.screenHeight * 0.04),
+                PasswordForm(),
                 SizedBox(height: SizeConfig.screenHeight * 0.1),  
                 SizedBox(height: getProportionateScreenHeight(20)),
               ],

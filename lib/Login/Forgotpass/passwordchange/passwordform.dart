@@ -7,12 +7,14 @@ import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-class SignUpForm extends StatefulWidget {
+
+class PasswordForm extends StatefulWidget {
   @override
-  _SignUpFormState createState() => _SignUpFormState();
+  _PasswordFormState createState() => _PasswordFormState();
 }
 
-class _SignUpFormState extends State<SignUpForm> {
+class _PasswordFormState extends State<PasswordForm> {
+
   final _formKey = GlobalKey<FormState>();
   String email;
   String password;
@@ -109,7 +111,7 @@ class _SignUpFormState extends State<SignUpForm> {
         labelText: "Confirm Password",
         fillColor: Colors.white,
         border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(25.0),
+          borderRadius: new BorderRadius.circular(15.0),
           borderSide: new BorderSide(),
         ),
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
@@ -150,7 +152,7 @@ class _SignUpFormState extends State<SignUpForm> {
         labelText: "Password",
         fillColor: Colors.white,
         border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(25.0),
+          borderRadius: new BorderRadius.circular(15.0),
           borderSide: new BorderSide(),
         ),
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),

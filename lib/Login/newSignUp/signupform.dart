@@ -13,7 +13,7 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpForm extends StatefulWidget {
-  final String phone;
+  final  phone;
 
   const SignUpForm({Key key, this.phone}) : super(key: key);
 
@@ -91,9 +91,7 @@ class _SignUpFormState extends State<SignUpForm> {
             onPressed: () async {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
-                _stopbutton();
                 registerUser(name, email, password, conformPassword);
-                _btnController.error();
               } else {
                 _stopbutton();
                 _btnController.start();
@@ -120,9 +118,10 @@ class _SignUpFormState extends State<SignUpForm> {
       body: data,
     );
     jsonResponse = json.decode(response.body.toString());
+    print(jsonResponse);
     if (response.statusCode == 200) {
       if (jsonResponse != null) {
-        _btnController.reset();
+        _btnController.success();
         sharedPreferences.setString("token", jsonResponse["token"]);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
@@ -130,11 +129,10 @@ class _SignUpFormState extends State<SignUpForm> {
       }
     } else {
       _btnController.reset();
-      
-        var a = jsonResponse["detail"];
-        print(a);
-        a != null ? errors.add(a) : errors.add("error");
-     
+
+      var a = jsonResponse["detail"];
+      print(a);
+      a != null ? errors.add(a) : errors.add("error");
     }
   }
 
@@ -165,7 +163,7 @@ class _SignUpFormState extends State<SignUpForm> {
         fillColor: Colors.white,
         prefixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
         border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(25.0),
+          borderRadius: new BorderRadius.circular(15.0),
           borderSide: new BorderSide(),
         ),
       ),
@@ -199,7 +197,7 @@ class _SignUpFormState extends State<SignUpForm> {
         fillColor: Colors.white,
         prefixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
         border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(25.0),
+          borderRadius: new BorderRadius.circular(15.0),
           borderSide: new BorderSide(),
         ),
       ),
@@ -208,24 +206,19 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildNameFormField() {
     return TextFormField(
-      keyboardType: TextInputType.emailAddress,
+
       onSaved: (newValue) => name = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
-        } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
-        }
+          removeError(error: kNameNullError);
+        } 
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kEmailNullError);
+          addError(error: kNameNullError);
           return "";
-        } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
-          return "";
-        }
+        } 
         return null;
       },
       decoration: InputDecoration(
@@ -233,7 +226,7 @@ class _SignUpFormState extends State<SignUpForm> {
         fillColor: Colors.white,
         prefixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
         border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(25.0),
+          borderRadius: new BorderRadius.circular(15.0),
           borderSide: new BorderSide(),
         ),
       ),
@@ -267,7 +260,7 @@ class _SignUpFormState extends State<SignUpForm> {
         fillColor: Colors.white,
         prefixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
         border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(25.0),
+          borderRadius: new BorderRadius.circular(15.0),
           borderSide: new BorderSide(),
         ),
       ),

@@ -99,7 +99,7 @@ class _NewpassState extends State<Newpass> {
                 .headline2
                 .copyWith(color: Colors.white)),
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       ),
     );
   }
