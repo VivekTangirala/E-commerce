@@ -1,5 +1,3 @@
-import 'package:ecom/Api/Productapi/Productapi.dart';
-import 'package:ecom/Api/Productapi/Productapiimport.dart';
 import 'package:ecom/Cart/cart1.dart';
 import 'package:ecom/Homepage/BestOffers.dart';
 import 'package:ecom/Homepage/Categorylist/Categorylist1.dart';
@@ -39,30 +37,18 @@ class _HomefragmentState extends State<HomeFragment> {
   // bool _firstload = false;
   List values;
   String a, b, c;
-  Productsapi _productsapi;
   bool _isloading = true;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   @override
   void initState() {
     super.initState();
-    _discoverrefresh();
-  }
-
-  _discoverrefresh() async {
-    await Productapiimport.getProducts().then((value) {
-      setState(() {
-        _productsapi = value;
-        _isloading = false;
-        print(_productsapi);
-      });
-    });
+    _refresh();
   }
 
   var response;
   Future<void> _refresh() async {
     setState(() {
-      _isloading = true;
-      _discoverrefresh();
+      _isloading = false;
     });
   }
 
@@ -93,7 +79,7 @@ class _HomefragmentState extends State<HomeFragment> {
 
                     _categoryheading(context, "Discover"),
                     // SpecialProducts(),
-                    Discover(receivedproductapi: _productsapi),
+                    Discover(),
                     SizedBox(height: 20.0),
 
                     _categoryheading(context, "Best Offers"),
@@ -108,7 +94,7 @@ class _HomefragmentState extends State<HomeFragment> {
                     Invite(),
                     SizedBox(height: 30.0),
                     _categoryheading(context, "Great Deals"),
-                    Discover(receivedproductapi: _productsapi),
+                    Discover(),
                   ]),
                 ),
               ),

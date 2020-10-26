@@ -48,7 +48,7 @@ class _CartState extends State<Cart> {
   }
 
   _counters() {
-    print(_cartapidata.cart);
+    print(_cartapidata.cart[1]);
     print(_cartapidata.cart.length);
     if (_cartapidata.cart != null) {
       _qty = new List.generate(_cartapidata.cart.length, (index) => 1);

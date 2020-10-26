@@ -1,4 +1,6 @@
-import 'package:ecom/Api/Productapi/Productapi.dart';
+import 'package:ecom/Api/Productdetails/Productdetails.dart';
+import 'package:ecom/Api/Productdetails/Productdetailsgetusers.dart';
+import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
 import 'package:ecom/Api/Specialproductsapi/Specialproductsapi.dart';
 import 'package:ecom/Api/Specialproductsapi/Specialproductsimport.dart';
 import 'package:ecom/Homepage/details/details_screen.dart';
@@ -17,42 +19,48 @@ final List<String> images = [
 ];
 
 class Discover extends StatefulWidget {
-  final Productsapi receivedproductapi;
-
-  const Discover({Key key, this.receivedproductapi}) : super(key: key);
-
   @override
-  _DiscoverState createState() => _DiscoverState(receivedproductapi);
+  _DiscoverState createState() => _DiscoverState(); //receivedproductapi);
 }
 
 class _DiscoverState extends State<Discover> {
-  final Productsapi _productsapi;
+  Productdetails _productdetails;
+
   List<Specialproductsapi> _specialproducts;
   bool _isloading = true;
   List mylist;
-  List mylist1;
   ScrollController _scrollController = new ScrollController();
 
-  _DiscoverState(this._productsapi);
+  // _DiscoverState(this._productsapi);
 
   @override
   void initState() {
     super.initState();
-    refresh();
+    specialProducts();
+    // productdetails();
   }
 
-  refresh() {
+  specialProducts() {
     Specialproductsimport.getspecialproudcts().then(
       (value) => setState(
         () {
-          _specialproducts = value;
+          _specialproducts =
+              value; //__specialproducts gives a list of product ids[]
           _isloading = false;
-          print(_specialproducts[0].specialProducts.length);
+          print(_specialproducts[0].specialProducts);
         },
       ),
     );
+    _isloading = true;
+    // ignore: unused_element
+    Productdetailsimport.getProductdetails(_specialproducts[0].specialProducts)
+        .then((value1) => setState(() {
+              _productdetails = value1;
+              _isloading = false;
+              print(_productdetails.results.length);
+            }));
+    // productdetails() {}
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +78,13 @@ class _DiscoverState extends State<Discover> {
             : _specialproducts[0].specialProducts.length, //images.length+ 1,
 
         itemBuilder: (BuildContext context, int index) {
-
           return _specialproducts == null
               ? Shimmer.fromColors(
                   child: Center(
-                    child: Text("TREG",style: TextStyle(fontSize:30),),
+                    child: Text(
+                      "TREG",
+                      style: TextStyle(fontSize: 30),
+                    ),
                   ),
                   baseColor: Colors.white,
                   highlightColor: Colors.grey,
@@ -97,12 +107,14 @@ class _DiscoverState extends State<Discover> {
                                   return Container(
                                       decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(_productsapi
-                                            .results[_specialproducts[0]
-                                                    .specialProducts[index] -
-                                                1]
-                                            .image)),
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(_productdetails
+                                          .results[
+                                              _productdetails.results.length -
+                                                  _specialproducts[0]
+                                                      .specialProducts[index]]
+                                          .image),
+                                    ),
                                     color: Colors.white,
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(5.0),
@@ -111,25 +123,21 @@ class _DiscoverState extends State<Discover> {
                                 },
                                 placeholder:
                                     AssetImage('assets/images/loading.gif'),
-                                image: NetworkImage(_productsapi
-                                    .results[_specialproducts[0]
-                                            .specialProducts[index] -
-                                        1]
+                                image: NetworkImage(_productdetails
+                                    .results[_productdetails.results.length -
+                                        _specialproducts[0]
+                                            .specialProducts[index]]
                                     .image),
                                 fit: BoxFit.cover,
-                                
                               ),
                               //alignment: Alignment.center,
                             ),
                           ),
                           SizedBox(height: 0.0),
-                          Text(
-                            _productsapi
-                                .results[
-                                    _specialproducts[0].specialProducts[index] -
-                                        1]
-                                .name,
-                          ),
+                          Text(_productdetails
+                              .results[_productdetails.results.length -
+                                  _specialproducts[0].specialProducts[index]]
+                              .name),
                         ]),
                       ),
                     ),

@@ -1,6 +1,3 @@
-
-import 'package:ecom/Api/Productapi/Productapi.dart';
-import 'package:ecom/Api/Productapi/Productapiimport.dart';
 import 'package:ecom/Api/Productdetails/Productdetails.dart';
 import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,35 +16,22 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  List l;
   final _productid;
   _BodyState(this._productid);
 
-  Productsapi _productsapi;
   Productdetails _productdetails;
-  
+
   @override
   void initState() {
     super.initState();
-    refreshproducts();
-   
+
     refreshproductdetails();
   }
 
-  refreshproducts() {
-    Productapiimport.getProducts().then(
-      (value) => setState(
-        () {
-          _productsapi = value;
-        
-        },
-      ),
-    );
-  }
-
   refreshproductdetails() {
-    Productdetailsimport.getProductdetails().then((value) => setState(() {
+    Productdetailsimport.getProductdetails(l).then((value) => setState(() {
           _productdetails = value;
-          
         }));
   }
 
@@ -55,7 +39,7 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     // It provide us total height and width
     Size size = MediaQuery.of(context).size * 1.3;
-    return _productsapi != null
+    return _productdetails != null
         ? SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -67,7 +51,7 @@ class _BodyState extends State<Body> {
                         height: size.height * 0.22,
                         width: size.width,
                         child: Image.asset(
-                          _productsapi.results[_productid].image,
+                          _productdetails.results[_productid].image,
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -89,13 +73,17 @@ class _BodyState extends State<Body> {
                         child: Column(
                           children: <Widget>[
                             // CounterWithFavBtn(),
-                            ProductTitleWithImage(productdetails: _productdetails,),
+                            ProductTitleWithImage(
+                              productdetails: _productdetails,
+                            ),
                             AddToCart(
                               productid: _productid,
                             ),
                             //ColorAndSize(product: product),
                             SizedBox(height: 20 / 3),
-                            Description(productdetails: _productdetails,),
+                            Description(
+                              productdetails: _productdetails,
+                            ),
                             SizedBox(height: 20 / 3),
                           ],
                         ),
