@@ -1,4 +1,5 @@
-import 'package:ecom/Login/Forgotpass/phonenumber/forgotform.dart';
+import 'package:ecom/Login/Forgotpass/phonenumber/phoneForm.dart';
+import 'package:ecom/Login/components/noaccount.dart';
 import 'package:ecom/components/screensize.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class PhoneNumber extends StatelessWidget {
                 children: [
         
                   Text(
-                    "Forgot Password",
+                  value==1?  "Forgot Password":"Phone Number",
                     style: TextStyle(
                       fontSize: getProportionateScreenWidth(28),
                       color: Colors.black,
@@ -42,7 +43,8 @@ class PhoneNumber extends StatelessWidget {
                     style: TextStyle(color: Colors.grey[600]),
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.1),
-                  ForgotPassForm(),
+                  PhoneForm(value: value),
+                value==1?  NoAccountText():Container(),
                 ],
               ),
             ),

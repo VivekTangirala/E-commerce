@@ -7,7 +7,6 @@ import './login.dart';
 import './otp.dart';
 
 class SignupPage extends StatefulWidget {
-  
   @override
   _SignupPageState createState() => _SignupPageState();
 }
@@ -219,7 +218,7 @@ class _SignupPageState extends State<SignupPage> {
                 .headline2
                 .copyWith(color: Colors.white)),
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:ecom/Login/Forgotpass/phonenumber/phonenumber.dart';
 import 'package:ecom/Login/components/constants.dart';
 import 'package:ecom/Login/newSignUp/signUp.dart';
 import 'package:ecom/components/screensize.dart';
@@ -21,7 +22,7 @@ class NoAccountText extends StatelessWidget {
           onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => SignUpScreen())),
+                  builder: (BuildContext context) => PhoneNumber (value: 0,))),
           child: Text(
             "Sign Up",
             style: TextStyle(

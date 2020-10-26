@@ -1,9 +1,10 @@
 import 'dart:convert';
-import 'package:ecom/Login/Forgotpass/Confirmotp.dart';
+import 'package:ecom/Login/components/Confirmotp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+
 class Phone extends StatefulWidget {
   @override
   _PhoneState createState() => _PhoneState();
@@ -199,7 +200,7 @@ class _PhoneState extends State<Phone> {
                 .headline2
                 .copyWith(color: Colors.white)),
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       ),
     );
   }

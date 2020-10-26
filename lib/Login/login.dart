@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
           //print(jsonResponse);
         });
         sharedPreferences.setString("token", "Token " + jsonResponse["token"]);
-        
+
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
             (Route<dynamic> route) => false);
@@ -122,7 +122,6 @@ class _LoginPageState extends State<LoginPage> {
           });
     }
   }
-
 
   Container textSection() {
     return Container(
@@ -232,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
           )
         ]),
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       ),
     );
   }

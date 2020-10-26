@@ -56,7 +56,6 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-           
             child: _isLoading
                 ? SizedBox(
                     child: Center(
@@ -86,8 +85,6 @@ class _OtpScreenState extends State<OtpScreen> {
                       child: SizedBox(
                         width: 100,
                         height: 60,
-
-                      
                       ),
                     ),
                     SizedBox(height: 15.0),
@@ -110,7 +107,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   .headline2
                   .copyWith(color: Colors.white)),
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
           onPressed: () {
             setState(() {
               _isLoading = true;
@@ -129,6 +126,9 @@ class _OtpScreenState extends State<OtpScreen> {
         body: data);
     jsonResponse = json.decode(response.body);
     if (response.statusCode == 200) {
+      setState(() {
+        _isLoading = false;
+      });
       if (jsonResponse != null) {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
@@ -172,8 +172,7 @@ class _OtpScreenState extends State<OtpScreen> {
         });
         print(jsonResponse);
       }
-    }
-    else {
+    } else {
       setState(() {
         _isLoading = false;
       });

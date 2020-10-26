@@ -1,29 +1,32 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:ecom/Login/otp.dart';
 import 'package:http/http.dart' as http;
-import 'package:ecom/Login/Forgotpass/Confirmotp.dart';
+import 'package:ecom/Login/components/Confirmotp.dart';
 import 'package:ecom/Login/components/constants.dart';
 import 'package:ecom/Login/components/formerror.dart';
-import 'package:ecom/Login/components/noaccount.dart';
 import 'package:ecom/Login/components/suffix.dart';
 import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-class ForgotPassForm extends StatefulWidget {
+class PhoneForm extends StatefulWidget {
+  final int value;
+
+  const PhoneForm({Key key, this.value}) : super(key: key);
   @override
-  _ForgotPassFormState createState() => _ForgotPassFormState();
+   _PhoneFormState createState() => _PhoneFormState(value);
 }
 
-class _ForgotPassFormState extends State<ForgotPassForm> {
+class  _PhoneFormState extends State<PhoneForm> {
   final RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
   TextEditingController _controller = TextEditingController();
-
+  final value;
   final _formKey = GlobalKey<FormState>();
   List<String> errors = [];
   String phone;
+
+   _PhoneFormState(this.value);
 
   void _doSomething() async {
     Timer(Duration(seconds: 2), () {
@@ -39,17 +42,16 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
         children: [
           phonetextfeild(),
           SizedBox(height: getProportionateScreenHeight(30)),
-          FormError(errors: errors),
+        FormError(errors: errors),
           SizedBox(height: SizeConfig.screenHeight * 0.1),
           RoundedLoadingButton(
             child: Text('Send OTP', style: TextStyle(color: Colors.white)),
             color: Colors.deepOrange,
             controller: _btnController,
             onPressed: () async {
-
               if (_formKey.currentState.validate() &&
-                  _controller.text.length == 10 ) {
-                await sendOTP(_controller.text);
+                  _controller.text.length == 10) {
+                await sendOTP(_controller.text, value);
                 _doSomething();
                 _btnController.error();
               } else {
@@ -59,7 +61,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
             },
           ),
           SizedBox(height: SizeConfig.screenHeight * 0.1),
-          NoAccountText(),
+          
         ],
       ),
     );
@@ -102,7 +104,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
         labelText: "Phone number",
         fillColor: Colors.white,
         border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(25.0),
+          borderRadius: new BorderRadius.circular(15.0),
           borderSide: new BorderSide(),
         ),
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
@@ -110,7 +112,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
     );
   }
 
-  sendOTP(String phone) async {
+  sendOTP(String phone, int value) async {
     print(phone);
     Map data = {'phone': phone};
     var jsonResponse;
@@ -124,7 +126,11 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
 
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Confirmotp(phone: phone,value: 0,)),
+          MaterialPageRoute(
+              builder: (context) => Confirmotp(
+                    phone: phone,
+                    value: value,
+                  )),
         );
       }
     } else {

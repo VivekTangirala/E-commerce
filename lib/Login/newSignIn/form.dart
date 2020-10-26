@@ -67,46 +67,10 @@ class _SignFormState extends State<SignForm> {
           buildphoneFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildPasswordFormField(),
-          SizedBox(height: getProportionateScreenHeight(50)),
-          Row(
-            children: [
-              SkipSection(),
-              Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          PhoneNumber(value: 1)));
-                },
-                child: Text(
-                  "Forgot Password",
-                  style: TextStyle(color: Colors.deepOrange),
-                ),
-              )
-            ],
-          ),
-          SizedBox(height: getProportionateScreenHeight(20)),
           FormError(errors: errors),
-          SizedBox(height: getProportionateScreenHeight(80)),
+          SizedBox(height: getProportionateScreenHeight(70)),
           RoundedLoadingButton(
-            child: Row(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Spacer(),
-                Text('Sign In', style: TextStyle(color: Colors.white)),
-                Padding(
-                    padding: EdgeInsets.only(
-                        left: getProportionateScreenWidth(100))),
-                Icon(
-                  EvaIcons.logIn,
-                  color: Colors.white,
-                ),
-                Padding(
-                    padding:
-                        EdgeInsets.only(left: getProportionateScreenWidth(30))),
-              ],
-            ),
+            child: rowfield(),
             color: Colors.deepOrange,
             controller: _btnController,
             onPressed: () async {
@@ -114,16 +78,46 @@ class _SignFormState extends State<SignForm> {
                 _formKey.currentState.save();
 
                 await signIn(emailController.text, passwordController.text);
-                _doSomething();
-                _btnController.error();
               } else {
                 _doSomething();
                 _btnController.error();
               }
             },
           ),
+          Padding(
+            padding: EdgeInsets.only(top: getProportionateScreenWidth(30)),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => PhoneNumber(value: 1)));
+              },
+              child: Text(
+                "Forgot Password",
+                style: TextStyle(color: Colors.deepOrange),
+              ),
+            ),
+          ),
         ],
       ),
+    );
+  }
+
+  Row rowfield() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Spacer(),
+        Text('Sign In', style: TextStyle(color: Colors.white)),
+        Padding(
+            padding: EdgeInsets.only(left: getProportionateScreenWidth(100))),
+        Icon(
+          EvaIcons.logIn,
+          color: Colors.white,
+        ),
+        Padding(
+            padding: EdgeInsets.only(left: getProportionateScreenWidth(30))),
+      ],
     );
   }
 
@@ -155,7 +149,7 @@ class _SignFormState extends State<SignForm> {
         labelText: "Phone number",
         fillColor: Colors.white,
         border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(25.0),
+          borderRadius: new BorderRadius.circular(15.0),
           borderSide: new BorderSide(color: Colors.black),
         ),
       ),
@@ -192,7 +186,7 @@ class _SignFormState extends State<SignForm> {
         fillColor: Colors.white,
         prefixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
         border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(25.0),
+          borderRadius: new BorderRadius.circular(15.0),
           borderSide: new BorderSide(color: Colors.black),
         ),
       ),
@@ -222,6 +216,8 @@ class _SignFormState extends State<SignForm> {
         errors.clear();
       });
       addError(error: kinvalidcredentials);
+      _doSomething();
+      _btnController.error();
     }
   }
 }

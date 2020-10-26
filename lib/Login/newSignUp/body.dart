@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'signupform.dart';
 
 class Body extends StatelessWidget {
+  final  phone;
+
+  const Body({Key key, this.phone}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -18,15 +22,16 @@ class Body extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: SizeConfig.screenHeight * 0.04),
                 Text("Getting Started", style: headingStyle),
                 Text(
-                  "Create an account to continue",
+                  "Enter details to create an account",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.grey[600]),
                 ),
-                SizedBox(height: SizeConfig.screenHeight * 0.08),
-                SignUpForm(),
+                SizedBox(height: SizeConfig.screenHeight * 0.05),
+                SignUpForm(
+                  phone:phone
+                ),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
                 Text(
                   'By continuing, you confirm that you agree \nwith our Terms and Conditions',

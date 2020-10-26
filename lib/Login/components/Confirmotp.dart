@@ -107,15 +107,17 @@ class _ConfirmotpState extends State<Confirmotp> {
     Map data = {'phone': phone, 'otp': pin};
     var jsonResponse;
     var response;
-    response = await http.post(
-        a[0],
-        body: data);
+    response = await http.post(a[value], body: data);
     jsonResponse = json.decode(response.body);
     if (response.statusCode == 200) {
+      setState(() {
+        _isLoading = false;
+      });
       if (jsonResponse != null) {
         Navigator.of(context).push(
           MaterialPageRoute(
-              builder: (BuildContext context) =>value==1? NewPassword():SignUpScreen()),
+              builder: (BuildContext context) =>
+                  value == 1 ? NewPassword(phone:phone) : SignUpScreen(phone:phone)),
         );
         print(jsonResponse);
       }
