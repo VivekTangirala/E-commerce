@@ -1,5 +1,4 @@
 import 'package:ecom/Api/Productdetails/Productdetails.dart';
-import 'package:ecom/Api/Productdetails/Productdetailsgetusers.dart';
 import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
 import 'package:ecom/Api/Specialproductsapi/Specialproductsapi.dart';
 import 'package:ecom/Api/Specialproductsapi/Specialproductsimport.dart';
@@ -36,24 +35,26 @@ class _DiscoverState extends State<Discover> {
   @override
   void initState() {
     super.initState();
-    specialProducts();
+    getSpecialProducts();
     // productdetails();
   }
 
-  specialProducts() {
-    Specialproductsimport.getspecialproudcts().then(
+  getSpecialProducts() async {
+    await Specialproductsimport.getspecialproudcts().then(
       (value) => setState(
         () {
           _specialproducts =
               value; //__specialproducts gives a list of product ids[]
           _isloading = false;
-          print(_specialproducts[0].specialProducts);
+          print(value.length);
         },
       ),
     );
     _isloading = true;
-    // ignore: unused_element
-    Productdetailsimport.getProductdetails(_specialproducts[0].specialProducts)
+    print("special");
+    print(_specialproducts[0].specialProducts);
+    Productdetailsimport.getProductdetails(
+            _specialproducts[0].specialProducts.toList())
         .then((value1) => setState(() {
               _productdetails = value1;
               _isloading = false;
@@ -78,7 +79,7 @@ class _DiscoverState extends State<Discover> {
             : _specialproducts[0].specialProducts.length, //images.length+ 1,
 
         itemBuilder: (BuildContext context, int index) {
-          return _specialproducts == null
+          return _productdetails == null
               ? Shimmer.fromColors(
                   child: Center(
                     child: Text(
@@ -123,11 +124,9 @@ class _DiscoverState extends State<Discover> {
                                 },
                                 placeholder:
                                     AssetImage('assets/images/loading.gif'),
-                                image: NetworkImage(_productdetails
-                                    .results[_productdetails.results.length -
-                                        _specialproducts[0]
-                                            .specialProducts[index]]
-                                    .image),
+                                image: NetworkImage(_productdetails == null
+                                    ? "assets/images/loading.gif"
+                                    : _productdetails.results[index].image),
                                 fit: BoxFit.cover,
                               ),
                               //alignment: Alignment.center,

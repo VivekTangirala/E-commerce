@@ -38,7 +38,6 @@ class _HomefragmentState extends State<HomeFragment> {
   List values;
   String a, b, c;
   bool _isloading = true;
-  var refreshKey = GlobalKey<RefreshIndicatorState>();
   @override
   void initState() {
     super.initState();
@@ -55,51 +54,53 @@ class _HomefragmentState extends State<HomeFragment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: _appBar1(context),
-      key: _scaffoldKey,
-      drawer: Drawer1(),
-      body: LiquidPullToRefresh(
-        onRefresh: () {
-          return _refresh();
-        },
-        child: _isloading
-            ? Center(child: CircularProgressIndicator())
-            : Container(
-                margin: EdgeInsets.only(left: 8, right: 8),
-                child: SingleChildScrollView(
-                  child:
-                      Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                    // _textsection(context),
-                    // SizedBox(height: 10),
-                    _categoryheading(context, "Categories"),
+        backgroundColor: Colors.white,
+        appBar: _appBar1(context),
+        key: _scaffoldKey,
+        drawer: Drawer1(),
+        body: SafeArea(
+          child: LiquidPullToRefresh(
+            onRefresh: () {
+              return _refresh();
+            },
+            child: _isloading
+                ? Center(child: CircularProgressIndicator())
+                : Container(
+                    margin: EdgeInsets.only(left: 8, right: 8),
+                    child: SingleChildScrollView(
+                      child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            // _textsection(context),
+                            // SizedBox(height: 10),
+                            _categoryheading(context, "Categories"),
 
-                    Categorylist1(),
-                    SizedBox(height: 5),
+                            Categorylist1(),
+                            SizedBox(height: 5),
 
-                    _categoryheading(context, "Discover"),
-                    // SpecialProducts(),
-                    Discover(),
-                    SizedBox(height: 20.0),
+                            _categoryheading(context, "Discover"),
+                            // SpecialProducts(),
+                            Discover(),
+                            SizedBox(height: 20.0),
 
-                    _categoryheading(context, "Best Offers"),
-                    Bestoffers(),
-                    //Category(),
-                    SizedBox(height: 20.0),
+                            _categoryheading(context, "Best Offers"),
+                            Bestoffers(),
+                            //Category(),
+                            SizedBox(height: 20.0),
 
-                    _categoryheading(context, "Varieties"),
+                            _categoryheading(context, "Varieties"),
 
-                    Varieties(),
-                    SizedBox(height: 30.0),
-                    Invite(),
-                    SizedBox(height: 30.0),
-                    _categoryheading(context, "Great Deals"),
-                    Discover(),
-                  ]),
-                ),
-              ),
-      ),
-    );
+                            Varieties(),
+                            SizedBox(height: 30.0),
+                            Invite(),
+                            SizedBox(height: 30.0),
+                            _categoryheading(context, "Great Deals"),
+                            Discover(),
+                          ]),
+                    ),
+                  ),
+          ),
+        ));
   }
 }
 

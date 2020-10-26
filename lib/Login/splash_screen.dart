@@ -6,8 +6,6 @@ import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
 class SplashScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -30,9 +28,9 @@ class SplashScreenState extends State<SplashScreen> {
   Future checkFirstSeen() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     bool _seen = (sharedPreferences.getBool('seen') ?? false);
-    
-    
-    if (_seen) {
+    String _login = (sharedPreferences.getString('token') ?? null);
+
+    if (_seen || _login!=null) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => HomeFragment()),
           (Route<dynamic> route) => false);
@@ -51,10 +49,9 @@ class SplashScreenState extends State<SplashScreen> {
         body: Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xffe75c3c), Color(0xfff09819)],
-          begin: Alignment.center,
-          end: Alignment.bottomRight
-        ),
+            colors: [Color(0xffe75c3c), Color(0xfff09819)],
+            begin: Alignment.center,
+            end: Alignment.bottomRight),
       ),
       child: Center(
         child: headerSection(context),

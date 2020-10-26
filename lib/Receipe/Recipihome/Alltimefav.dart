@@ -1,6 +1,4 @@
 
-import 'package:ecom/Api/Productapi/Productapi.dart';
-import 'package:ecom/Api/Productapi/Productapiimport.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -19,7 +17,7 @@ class Alltimefav extends StatefulWidget {
 }
 
 class _AlltimefavState extends State<Alltimefav> {
-  Productsapi _productsapi;
+ // Productsapi _productsapi;
   bool _isloading = true;
   List mylist;
   List mylist1;
@@ -28,13 +26,13 @@ class _AlltimefavState extends State<Alltimefav> {
   @override
   void initState() {
     super.initState();
-    Productapiimport.getProducts().then((value) {
-      setState(() {
-        _productsapi = value;
-        _isloading = false;
-        print(_productsapi.results[0].image);
-      });
-    });
+    // Productapiimport.getProducts().then((value) {
+    //   setState(() {
+    //     _productsapi = value;
+    //     _isloading = false;
+    //     print(_productsapi.results[0].image);
+    //   });
+    // });
     // mylist = List.generate(4, (i) => "assets/images/tomato.png");
     // mylist1 = List.generate(4, (i) => "Pineapple");
     // _scrollController.addListener(

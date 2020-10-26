@@ -1,6 +1,5 @@
 
-import 'package:ecom/Api/Productapi/Productapi.dart';
-import 'package:ecom/Api/Productapi/Productapiimport.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -19,7 +18,7 @@ class MadewithfewIngridients extends StatefulWidget {
 }
 
 class _MadewithfewIngridientsState extends State<MadewithfewIngridients> {
-  Productsapi _productsapi;
+ // Productsapi _productsapi;
   bool _isloading = true;
   List mylist;
   List mylist1;
@@ -28,13 +27,13 @@ class _MadewithfewIngridientsState extends State<MadewithfewIngridients> {
   @override
   void initState() {
     super.initState();
-    Productapiimport.getProducts().then((value) {
-      setState(() {
-        _productsapi = value;
-        _isloading = false;
-        print(_productsapi.results[0].image);
-      });
-    });
+    // Productapiimport.getProducts().then((value) {
+    //   setState(() {
+    //     _productsapi = value;
+    //     _isloading = false;
+    //     print(_productsapi.results[0].image);
+    //   });
+    // });
     // mylist = List.generate(4, (i) => "assets/images/tomato.png");
     // mylist1 = List.generate(4, (i) => "Pineapple");
     // _scrollController.addListener(

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class Specialproductsimport {
   static const uri =
-      "http://infintymall.herokuapp.com/homepage/api/specialproducts";
+      "https://infintymall.herokuapp.com/homepage/api/specialproducts";
 
   static Future<List<Specialproductsapi>> getspecialproudcts() async {
     try {
@@ -11,13 +11,13 @@ class Specialproductsimport {
       if (response.statusCode == 200) {
         final List<Specialproductsapi> specialproducts =
             specialproductsapiFromJson(response.body);
-
+        print("success");
+        print(response.body);
         return specialproducts;
       } else {
         print("error");
         return null;
       }
-      
     } catch (e) {
       print(e);
       return null;
