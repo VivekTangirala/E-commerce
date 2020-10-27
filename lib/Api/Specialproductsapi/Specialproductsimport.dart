@@ -11,8 +11,7 @@ class Specialproductsimport {
       if (response.statusCode == 200) {
         final List<Specialproductsapi> specialproducts =
             specialproductsapiFromJson(response.body);
-        print("success");
-        print(response.body);
+     
         return specialproducts;
       } else {
         print("error");

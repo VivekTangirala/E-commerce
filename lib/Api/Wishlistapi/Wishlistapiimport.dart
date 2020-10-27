@@ -1,36 +1,31 @@
 import 'dart:io';
 
-import 'package:ecom/Api/Cartapi/Cartapi.dart';
+import 'package:ecom/Api/Wishlistapi/Wishlistapi.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CartApiimport {
-  static const uri = "http://infintymall.herokuapp.com/homepage/api/cart";
+class Wishlistapiimport {
+  static const uri = "http://infintymall.herokuapp.com/homepage/api/wishlist/";
 
-  static Future<Cartapi> getCart() async {
+  static Future<Wishlistapi> getwishlist() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    
+
     String token = sharedPreferences.getString("token");
 
     try {
-      //print(response.body);
-
-      print(token);
       final response = await http.get(
-          "http://infintymall.herokuapp.com/homepage/api/cart",
+          "http://infintymall.herokuapp.com/homepage/api/wishlist",
           headers: {HttpHeaders.authorizationHeader: token});
-      print(response.body);
       if (response.statusCode == 200) {
-        final Cartapi cartapi = cartapiFromJson(response.body);
-
-        return cartapi;
+        final Wishlistapi wishlistapi = wishlistapiFromJson(response.body);
+        // print(wishlistapi);
+        return wishlistapi;
       } else {
         print("error");
         return null;
       }
     } on SocketException {} catch (e) {
       print(e);
-
       return null;
     }
     return null;
