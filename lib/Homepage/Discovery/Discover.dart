@@ -26,7 +26,6 @@ class _DiscoverState extends State<Discover> {
   Productdetails _productdetails;
 
   List<Specialproductsapi> _specialproducts;
-  bool _isloading = true;
   List mylist;
   ScrollController _scrollController = new ScrollController();
 
@@ -45,19 +44,16 @@ class _DiscoverState extends State<Discover> {
         () {
           _specialproducts =
               value; //__specialproducts gives a list of product ids[]
-          _isloading = false;
           print(value.length);
         },
       ),
     );
-    _isloading = true;
     print("special");
     print(_specialproducts[0].specialProducts);
     Productdetailsimport.getProductdetails(
             _specialproducts[0].specialProducts.toList())
         .then((value1) => setState(() {
               _productdetails = value1;
-              _isloading = false;
               print(_productdetails.results.length);
             }));
     // productdetails() {}
