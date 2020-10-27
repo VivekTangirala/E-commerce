@@ -69,7 +69,7 @@ Container headerSection(BuildContext context) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
-              " Infinity",
+              " Infinity Mart",
               style: Theme.of(context).textTheme.headline1,
             ),
             Icon(

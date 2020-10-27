@@ -46,13 +46,10 @@ class _DiscoverState extends State<Discover> {
           _specialproducts =
               value; //__specialproducts gives a list of product ids[]
           _isloading = false;
-          print(value.length);
         },
       ),
     );
     _isloading = true;
-    print("special");
-    print(_specialproducts[0].specialProducts);
     Productdetailsimport.getProductdetails(
             _specialproducts[0].specialProducts.toList())
         .then((value1) => setState(() {
