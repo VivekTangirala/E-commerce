@@ -38,8 +38,8 @@ class _WishlistState extends State<Wishlist> {
     //productdetails();
   }
 
-  wishlist() {
-    Wishlistapiimport.getwishlist().then((value) => setState(() {
+  wishlist() async {
+    await Wishlistapiimport.getwishlist().then((value) => setState(() {
           _wishlistapi = value;
           _isloading = false;
         }));
@@ -48,6 +48,7 @@ class _WishlistState extends State<Wishlist> {
       _wishlistproductids.add(_wishlistapi.wishlist[i].productId.toString());
     }
     print("in wishlist");
+    print(_wishlistapi.wishlist[0].productId);
     print(_wishlistproductids[0].length);
     print(_wishlistproductids);
   }
