@@ -209,34 +209,7 @@ AppBar _appBar1(BuildContext context) {
   );
 }
 
-Widget _textsection(BuildContext context) {
-  String a = "Anitesh";
-  return Padding(
-      padding: EdgeInsets.only(left: 7.0, top: 5.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              a != null ? "Hola, Amigo" : "Hi, $a",
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ),
-          SizedBox(height: 5.0),
-          Text(
-            "Explore TREG",
-            style: Theme.of(context)
-                .textTheme
-                .headline3
-                .copyWith(letterSpacing: 1),
-          ),
-          //Text("data"),
-        ],
-      ));
-}
+
 
 Widget _categoryheading(BuildContext context, String str) {
   return Align(
