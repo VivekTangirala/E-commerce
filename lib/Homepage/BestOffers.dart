@@ -118,16 +118,16 @@ class Bestoffersstate extends State<Bestoffers> {
                     ),
                   ),
                   onTap: () {
-                    if (_specialproducts != null) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => DetailsScreen(
-                            productid:
-                                _specialproducts[0].specialProducts[index],
-                          ),
-                        ),
-                      );
-                    }
+                    // if (_specialproducts != null) {
+                    //   Navigator.of(context).push(
+                    //     MaterialPageRoute(
+                    //       builder: (BuildContext context) => DetailsScreen(
+                    //         productid:
+                    //             _specialproducts[0].specialProducts[index].toList(),
+                    //       ),
+                    //     ),
+                    //   );
+                    // }
                   },
                 );
               },

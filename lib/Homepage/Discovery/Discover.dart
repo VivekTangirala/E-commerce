@@ -26,7 +26,7 @@ class _DiscoverState extends State<Discover> {
   Productdetails _productdetails;
 
   List<Specialproductsapi> _specialproducts;
-  List mylist;
+  List mylist, l;
   ScrollController _scrollController = new ScrollController();
 
   // _DiscoverState(this._productsapi);
@@ -44,18 +44,19 @@ class _DiscoverState extends State<Discover> {
         () {
           _specialproducts =
               value; //__specialproducts gives a list of product ids[]
-          print(value.length);
         },
       ),
     );
-    print("special");
-    print(_specialproducts[0].specialProducts);
-    Productdetailsimport.getProductdetails(
+
+    await Productdetailsimport.getProductdetails(
             _specialproducts[0].specialProducts.toList())
         .then((value1) => setState(() {
               _productdetails = value1;
-              print(_productdetails.results.length);
             }));
+    print(_specialproducts[0].specialProducts.toList());
+    print(_specialproducts[0].specialProducts[0]);
+
+    print(l);
     // productdetails() {}
   }
 
@@ -105,12 +106,8 @@ class _DiscoverState extends State<Discover> {
                                       decoration: BoxDecoration(
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
-                                      image: AssetImage(_productdetails
-                                          .results[
-                                              _productdetails.results.length -
-                                                  _specialproducts[0]
-                                                      .specialProducts[index]]
-                                          .image),
+                                      image: AssetImage(
+                                          _productdetails.results[index].image),
                                     ),
                                     color: Colors.white,
                                     borderRadius: BorderRadius.all(
@@ -129,10 +126,7 @@ class _DiscoverState extends State<Discover> {
                             ),
                           ),
                           SizedBox(height: 0.0),
-                          Text(_productdetails
-                              .results[_productdetails.results.length -
-                                  _specialproducts[0].specialProducts[index]]
-                              .name),
+                          Text(_productdetails.results[index].name),
                         ]),
                       ),
                     ),
@@ -141,7 +135,7 @@ class _DiscoverState extends State<Discover> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) => DetailsScreen(
-                          productid: _specialproducts[0].specialProducts[index],
+                          productid: _productdetails.results[index].id,
                         ),
                       ),
                     );

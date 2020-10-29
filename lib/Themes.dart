@@ -27,37 +27,39 @@ ThemeData basicTheme() {
         fontFamily: "DM_Sans",
         color: Colors.grey[800],
         fontSize: 18.0,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.bold,letterSpacing: 1,
       ),
       headline5: base.headline5.copyWith(
         fontFamily: "DM_Sans",
         color: Colors.black,
         fontSize: 18.0,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.normal,letterSpacing: 1,
       ),
       subtitle1: base.subtitle1.copyWith(
         fontFamily: "DM_Sans",
         color: Colors.grey[700],
         fontSize: 18.0,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.normal,letterSpacing: 1,
       ),
       bodyText1: base.bodyText1.copyWith(
         fontFamily: "DM_Sans",
         color: Colors.black,
         fontSize: 18.0,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.normal,letterSpacing: 1,
       ),
       bodyText2: base.bodyText2.copyWith(
         fontFamily: "DM_Sans",
         color: Colors.grey[800],
         fontSize: 15.0,
         fontWeight: FontWeight.w600,
+        letterSpacing: 1,
       ),
       caption: base.caption.copyWith(
         fontFamily:"DM_Sans",
         color:Colors.deepOrange,
         fontSize:20.0,
         fontWeight:FontWeight.normal,
+        letterSpacing: 1,
       )
     );
   }

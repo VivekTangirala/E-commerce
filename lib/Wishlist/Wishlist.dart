@@ -35,7 +35,7 @@ class _WishlistState extends State<Wishlist> {
     // TODO: implement initState
     super.initState();
     wishlist();
-    //productdetails();
+    productdetails();
   }
 
   wishlist() async {
@@ -44,129 +44,175 @@ class _WishlistState extends State<Wishlist> {
           _isloading = false;
         }));
     for (var i = 0; i < _wishlistapi.wishlist.length; i++) {
-      print(_wishlistapi.wishlist[i].productId);
       _wishlistproductids.add(_wishlistapi.wishlist[i].productId.toString());
     }
-    print("in wishlist");
-    print(_wishlistapi.wishlist[0].productId);
-    print(_wishlistproductids[0].length);
-    print(_wishlistproductids);
-  }
-
-  productdetails() {
     Productdetailsimport.getProductdetails(_wishlistproductids)
         .then((value) => setState(() {
               _productdetails = value;
               _isloading = false;
-              print("In productdettails");
-              print(_productdetails.results.length);
             }));
   }
+
+  productdetails() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(context),
-      body: _isloading == true
-          ? Center(
-              child: CupertinoDialogAction(
-              child: Text("Please connect to the internet"),
-            ))
-          : Container(
-              padding: EdgeInsets.only(left: 15.0, right: 15.0),
-              width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
-                itemCount: _wishlistapi.wishlist.length,
-                physics: ScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        appBar: _appBar(context),
+        body: SafeArea(
+          child: _productdetails == null
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container(
+                  padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                    itemCount: _wishlistapi.wishlist.length,
+                    physics: ScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        height: MediaQuery.of(context).size.height / 6,
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15.0),
-                              child: Image.asset(
-                                l1[index],
-                                width: MediaQuery.of(context).size.width / 3,
-                              ),
-                            ),
-                            Column(
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  child: Image.network(
+                                    _productdetails.results[index].image,
+                                    width:
+                                        MediaQuery.of(context).size.width / 3.5,
+                                  ),
+                                ),
                                 Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(l2[index]),
-                                    SizedBox(height: 5.0),
-                                    Text("RS 50"),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          _productdetails.results[index].name,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline4,
+                                        ),
+                                        SizedBox(height: 5.0),
+                                        Text(
+                                          _productdetails.results[index].price
+                                              .toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline5,
+                                        ),
+                                      ],
+                                    ),
+                                    // Row(
+                                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    //   children: [
+                                    //     IconButton(
+                                    //       icon: Icon(
+                                    //         Icons.add_circle,
+                                    //         color: Colors.orangeAccent,
+                                    //       ),
+                                    //       onPressed: () {
+                                    //         setState(() {
+                                    //           _qty[index] = _qty[index] + 1;
+                                    //         });
+                                    //       },
+                                    //     ),
+                                    //     Text(
+                                    //       _qty[index].toString().padLeft(1, "0"),
+                                    //     ),
+                                    //     IconButton(
+                                    //       icon: Icon(
+                                    //         Icons.remove_circle,
+                                    //         color: Colors.orangeAccent,
+                                    //       ),
+                                    //       onPressed: () {
+                                    //         setState(() {
+                                    //           if (_qty[index] > 1) {
+                                    //             _qty[index] = _qty[index] - 1;
+                                    //           }
+                                    //         });
+                                    //       },
+                                    //     ),
+                                    //   ],
+                                    // ),
                                   ],
                                 ),
-                                // Row(
-                                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                //   children: [
-                                //     IconButton(
-                                //       icon: Icon(
-                                //         Icons.add_circle,
-                                //         color: Colors.orangeAccent,
-                                //       ),
-                                //       onPressed: () {
-                                //         setState(() {
-                                //           _qty[index] = _qty[index] + 1;
-                                //         });
-                                //       },
-                                //     ),
-                                //     Text(
-                                //       _qty[index].toString().padLeft(1, "0"),
-                                //     ),
-                                //     IconButton(
-                                //       icon: Icon(
-                                //         Icons.remove_circle,
-                                //         color: Colors.orangeAccent,
-                                //       ),
-                                //       onPressed: () {
-                                //         setState(() {
-                                //           if (_qty[index] > 1) {
-                                //             _qty[index] = _qty[index] - 1;
-                                //           }
-                                //         });
-                                //       },
-                                //     ),
-                                //   ],
-                                // ),
+                                Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: 30.0,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                    3 -
+                                                30,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            border: Border.all(
+                                                color: Colors.orangeAccent)),
+                                        child: Text(
+                                          "Add to cart",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline2
+                                              .copyWith(
+                                                  fontSize: 15.0,
+                                                  color: Colors.orangeAccent,
+                                                  letterSpacing: 0.0),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 2,
+                                    ),
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: 30.0,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                    3 -
+                                                30,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            border: Border.all(
+                                                color: Colors.redAccent)),
+                                        child: Text(
+                                          "Remove",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline2
+                                              .copyWith(
+                                                  fontSize: 15.0,
+                                                  color: Colors.redAccent,
+                                                  letterSpacing: 0.0),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                )
                               ],
                             ),
-                            Container(
-                              alignment: Alignment.center,
-                              height: 40.0,
-                              width: MediaQuery.of(context).size.width / 3 - 30,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  border:
-                                      Border.all(color: Colors.orangeAccent)),
-                              child: Text(
-                                "Add to cart",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                                    .copyWith(
-                                        fontSize: 15.0,
-                                        color: Colors.orangeAccent,
-                                        letterSpacing: 0.0),
-                              ),
-                            ),
+                            Divider(),
                           ],
                         ),
-                        Divider(),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-    );
+                      );
+                    },
+                  ),
+                ),
+        ));
   }
 }
 
