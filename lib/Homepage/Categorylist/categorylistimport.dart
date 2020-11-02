@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'categorylistdata.dart';
 
 class Categorylistimport {
-  static const uri = "http://infintymall.herokuapp.com/homepage/api/category";
+  static const uri = "https://infintymall.herokuapp.com/homepage/api/category";
 
   static Future<List<Categorydata>> getUsers() async {
     try {

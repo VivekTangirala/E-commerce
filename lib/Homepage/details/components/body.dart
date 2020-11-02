@@ -16,11 +16,12 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  List l;
   final _productid;
+
   _BodyState(this._productid);
 
   Productdetails _productdetails;
+  List<String> l = [];
 
   @override
   void initState() {
@@ -29,7 +30,8 @@ class _BodyState extends State<Body> {
     refreshproductdetails();
   }
 
-  refreshproductdetails() {
+  refreshproductdetails() async {
+    l.add(_productid.toString());
     Productdetailsimport.getProductdetails(l).then((value) => setState(() {
           _productdetails = value;
         }));
@@ -50,8 +52,8 @@ class _BodyState extends State<Body> {
                       Container(
                         height: size.height * 0.22,
                         width: size.width,
-                        child: Image.asset(
-                          _productdetails.results[_productid].image,
+                        child: Image.network(
+                          _productdetails.results[0].image,
                           fit: BoxFit.fill,
                         ),
                       ),

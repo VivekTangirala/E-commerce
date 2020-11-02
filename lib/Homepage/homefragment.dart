@@ -72,8 +72,8 @@ class _HomefragmentState extends State<HomeFragment> {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             // _textsection(context),
-                            // SizedBox(height: 10),
-                            _categoryheading(context, "Categories"),
+                             SizedBox(height: 10),
+                           // _categoryheading(context, ""),
 
                             Categorylist1(),
                             SizedBox(height: 5),
