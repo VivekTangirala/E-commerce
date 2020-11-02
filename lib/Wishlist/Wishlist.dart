@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:ecom/Api/Productdetails/Productdetails.dart';
 import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
 import 'package:ecom/Api/Wishlistapi/Wishlistapi.dart';
@@ -34,11 +37,10 @@ class _WishlistState extends State<Wishlist> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    wishlist();
-    productdetails();
+    getwishlist();
   }
 
-  wishlist() async {
+  getwishlist() async {
     await Wishlistapiimport.getwishlist().then((value) => setState(() {
           _wishlistapi = value;
           _isloading = false;
@@ -53,7 +55,54 @@ class _WishlistState extends State<Wishlist> {
             }));
   }
 
-  productdetails() {}
+  addtocart(String _product, _quantity) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String token = sharedPreferences.getString('token');
+
+    Map data = {'product': _product, 'quantity1': _quantity};
+    var jsonresponse;
+    var response = await http.post(
+        "http://infintymall.herokuapp.com/homepage/api/cart/",
+        body: data,
+        headers: {HttpHeaders.authorizationHeader: token});
+    print(response.body);
+    if (response.statusCode == 200) {
+      jsonresponse = json.decode(response.body);
+    }
+    if (jsonresponse != null) {
+      // Navigator.of(context).pushAndRemoveUntil(
+      //     MaterialPageRoute(builder: (BuildContext context) => Cart()),
+      //     (Route<dynamic> route) => false);
+    } else {
+      CupertinoDialogAction(
+        child: Text("Please check your internet connection"),
+      );
+    }
+    print(response.statusCode);
+    print(jsonresponse);
+  }
+
+  postwishlist(String _productid) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String token = sharedPreferences.getString('token');
+
+    Map data = {'product': _productid};
+    var jsonresponse;
+    var response = await http.post(
+        "http://infintymall.herokuapp.com/homepage/api/wishlist",
+        body: data,
+        headers: {HttpHeaders.authorizationHeader: token});
+    print(response.body);
+    if (response.statusCode == 200) {
+      jsonresponse = json.decode(response.body);
+    } else {
+      CupertinoDialogAction(
+        child: Text("Please check your internet connection"),
+      );
+    }
+    print(response.statusCode);
+    print(jsonresponse);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +196,23 @@ class _WishlistState extends State<Wishlist> {
                                 Column(
                                   children: [
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        setState(() {
+                                          addtocartbutton() async {
+                                            await addtocart(
+                                                _productdetails
+                                                    .results[index].id
+                                                    .toString(),
+                                                '1');
+                                            await postwishlist(_productdetails
+                                                .results[index].id
+                                                .toString());
+                                            getwishlist();
+                                          }
+
+                                          addtocartbutton();
+                                        });
+                                      },
                                       child: Container(
                                         alignment: Alignment.center,
                                         height: 30.0,
@@ -176,7 +241,18 @@ class _WishlistState extends State<Wishlist> {
                                       height: 2,
                                     ),
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        setState(() {
+                                          removefromwishlist() async {
+                                            await postwishlist(_productdetails
+                                                .results[index].id
+                                                .toString());
+                                            getwishlist();
+                                          }
+
+                                          removefromwishlist();
+                                        });
+                                      },
                                       child: Container(
                                         alignment: Alignment.center,
                                         height: 30.0,
