@@ -1,8 +1,8 @@
 import 'package:http/http.dart' as http;
 
-import 'categorylistdata.dart';
+import 'categorydata.dart';
 
-class Categorylistimport {
+class Categoryimport {
   static const uri = "http://infintymall.herokuapp.com/homepage/api/category";
 
   static Future<List<Categorydata>> getUsers() async {
@@ -14,7 +14,6 @@ class Categorylistimport {
         // data=da
         final List<Categorydata> categories =
             categorydataFromJson(response.body);
-
         return categories;
       } else {
         print("error");
