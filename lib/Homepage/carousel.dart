@@ -38,7 +38,7 @@ class _CarouselPagesState extends State<CarouselPages>
   Future<List<Imaged>> fetchPost() async {
     try {
       response = await http.get(
-        'https://infintymall.herokuapp.com/homepage/api/carousel',
+        'http://infintymall.herokuapp.com/homepage/api/carousel',
       );
 
       if (response.statusCode == 200) {

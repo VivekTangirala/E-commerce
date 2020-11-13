@@ -41,13 +41,10 @@ class _WishlistState extends State<Wishlist> {
   }
 
   getwishlist() async {
-    await Wishlistapiimport.getwishlist().then((value) {
-      if (mounted)
-        setState(() {
+    await Wishlistapiimport.getwishlist().then((value) => setState(() {
           _wishlistapi = value;
           _isloading = false;
-        });
-    });
+        }));
     for (var i = 0; i < _wishlistapi.wishlist.length; i++) {
       _wishlistproductids.add(_wishlistapi.wishlist[i].productId.toString());
     }

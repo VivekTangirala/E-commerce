@@ -107,7 +107,7 @@ class _DiscoverState extends State<Discover> {
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
                                       image: AssetImage(
-                                          "assets/images/burger.jpeg"),
+                                          _productdetails.results[index].image),
                                     ),
                                     color: Colors.white,
                                     borderRadius: BorderRadius.all(
@@ -119,12 +119,7 @@ class _DiscoverState extends State<Discover> {
                                     AssetImage('assets/images/loading.gif'),
                                 image: NetworkImage(_productdetails == null
                                     ? "assets/images/loading.gif"
-                                    : _productdetails
-                                        .results[
-                                            _productdetails.results.length -
-                                                _specialproducts[0]
-                                                    .specialProducts[index]]
-                                        .image),
+                                    : _productdetails.results[index].image),
                                 fit: BoxFit.cover,
                               ),
                               //alignment: Alignment.center,

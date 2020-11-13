@@ -1,6 +1,6 @@
 import 'package:ecom/Cart/cart1.dart';
 import 'package:ecom/Homepage/BestOffers.dart';
-import 'package:ecom/Homepage/Categorylist/Categorylist1.dart';
+import 'package:ecom/Homepage/Categorylist/Category.dart';
 import 'package:ecom/Homepage/Discovery/Discover.dart';
 import 'package:ecom/Homepage/Varieties.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Drawer.dart';
 import 'Invite.dart';
-import 'Categorylist/categorylist.dart';
+import 'Categorylist/categorylistexamole.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -72,10 +72,10 @@ class _HomefragmentState extends State<HomeFragment> {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             // _textsection(context),
-                             SizedBox(height: 10),
-                           // _categoryheading(context, ""),
+                            // SizedBox(height: 10),
+                            _categoryheading(context, "Categories"),
 
-                            Categorylist1(),
+                            Category(),
                             SizedBox(height: 5),
 
                             _categoryheading(context, "Discover"),
@@ -209,7 +209,34 @@ AppBar _appBar1(BuildContext context) {
   );
 }
 
-
+Widget _textsection(BuildContext context) {
+  String a = "Anitesh";
+  return Padding(
+      padding: EdgeInsets.only(left: 7.0, top: 5.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              a != null ? "Hola, Amigo" : "Hi, $a",
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          ),
+          SizedBox(height: 5.0),
+          Text(
+            "Explore TREG",
+            style: Theme.of(context)
+                .textTheme
+                .headline3
+                .copyWith(letterSpacing: 1),
+          ),
+          //Text("data"),
+        ],
+      ));
+}
 
 Widget _categoryheading(BuildContext context, String str) {
   return Align(
