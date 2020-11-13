@@ -43,9 +43,9 @@ final  bool a = true;
       badgeContent: Image.asset('assets/images/india-flag.png',
           height: 16, width: 26, fit: BoxFit.fill),
       badgeColor: Colors.white,
-      borderRadius: 15,
+     // borderRadius: 12,
       shape: BadgeShape.square,
-      position: BadgePosition.topLeft(top: 6, left: 6),
+      position: BadgePosition.topStart(top: 6, ),
       child: Container(
         margin: EdgeInsets.only(left: 6, bottom: 6),
         padding: EdgeInsets.all(10),
