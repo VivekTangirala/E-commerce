@@ -29,6 +29,14 @@ class _SignFormState extends State<SignForm> {
   TextEditingController emailController = TextEditingController();
   final RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
+  String phoneNumber;
+
+
+  void _doSomething() async {
+    Timer(Duration(seconds: 2), () {
+      _btnController.stop();
+    });
+  }
 
   void addError({String error}) {
     if (!errors.contains(error))
@@ -43,21 +51,6 @@ class _SignFormState extends State<SignForm> {
         errors.remove(error);
       });
   }
-
-  void _doSomething() async {
-    Timer(Duration(seconds: 2), () {
-      _btnController.reset();
-    });
-  }
-
-  void dispose() {
-    // Clean up the controller when the widget is removed from the
-    // widget tree.
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Form(
