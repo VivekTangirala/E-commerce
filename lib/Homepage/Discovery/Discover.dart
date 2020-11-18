@@ -107,7 +107,7 @@ class _DiscoverState extends State<Discover> {
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
                                       image: AssetImage(
-                                          _productdetails.results[index].image),
+                                          "assets/images/tomato.png"),
                                     ),
                                     color: Colors.white,
                                     borderRadius: BorderRadius.all(
@@ -116,11 +116,10 @@ class _DiscoverState extends State<Discover> {
                                   ));
                                 },
                                 placeholder:
-                                    AssetImage('assets/images/loading.gif'),
-                                image: NetworkImage(_productdetails == null
-                                    ? "assets/images/loading.gif"
-                                    : _productdetails.results[index].image),
+                                    AssetImage('assets/images/loading.gif',),
+                                image: NetworkImage(_productdetails.results[index].image),
                                 fit: BoxFit.cover,
+                                
                               ),
                               //alignment: Alignment.center,
                             ),

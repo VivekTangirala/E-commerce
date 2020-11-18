@@ -1,19 +1,19 @@
 import 'package:http/http.dart' as http;
 
-import 'categorydata.dart';
+import 'Brandapi.dart';
 
-class Categoryimport {
-  static const uri = "http://infintymall.herokuapp.com/homepage/api/category";
+class Brandapiimport {
+  static const uri = "http://infintymall.herokuapp.com/homepage/api/brand";
 
-  static Future<List<Categorydata>> getcategorylist() async {
+  static Future<List<Brandapi>> getbrandlist() async{
     try {
       final response = await http.get(uri);
       //print(response.body);
       if (response.statusCode == 200) {
         // var data=json.decode(response.body);
         // data=da
-        final List<Categorydata> categories =
-            categorydataFromJson(response.body);
+        final List<Brandapi> categories =
+            brandapiFromJson(response.body);
         return categories;
       } else {
         print("error");
