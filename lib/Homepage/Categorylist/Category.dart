@@ -4,22 +4,22 @@ import 'package:ecom/Api/Categorydetailsapi/Categorydetailsimport.dart';
 import 'package:ecom/Homepage/categoryitems/categoryitems.dart';
 import 'package:flutter/material.dart';
 
-List<String> images = [
-  "assets/images/tomato.png",
-  "assets/images/onion.jpeg",
-  "assets/images/burger.jpeg",
-  "assets/images/some.jpg",
-  "assets/images/tomato.png",
-  "assets/images/onion.jpeg",
-];
-List<String> _name = [
-  "Popular",
-  "Top",
-  "Breakfast",
-  "Lunch",
-  "Snacks",
-  "Dinner",
-];
+// List<String> images = [
+//   "assets/images/tomato.png",
+//   "assets/images/onion.jpeg",
+//   "assets/images/burger.jpeg",
+//   "assets/images/some.jpg",
+//   "assets/images/tomato.png",
+//   "assets/images/onion.jpeg",
+// ];
+// List<String> _name = [
+//   "Popular",
+//   "Top",
+//   "Breakfast",
+//   "Lunch",
+//   "Snacks",
+//   "Dinner",
+// ];
 
 class Category extends StatefulWidget {
   @override

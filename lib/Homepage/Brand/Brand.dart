@@ -5,16 +5,16 @@ import 'package:ecom/Api/Specialproductsapi/Specialproductsimport.dart';
 import 'package:ecom/Homepage/details/details_screen.dart';
 import 'package:flutter/material.dart';
 
-List<String> list = ["Burger", "Cherry", "Orange", "Apple", "Apple"];
-List<String> list1 = ["A salad between 2 breads", "50", "45", "55", "55"];
-List<String> list3 = ["4.5", "5", "4", "2.5", "2.5"];
-final List<String> images = [
-  "assets/images/burger.jpeg",
-  "assets/images/tomato.png",
-  "assets/images/onion.jpeg",
-  'assets/images/some.jpg',
-  'assets/images/some.jpg',
-];
+// List<String> list = ["Burger", "Cherry", "Orange", "Apple", "Apple"];
+// List<String> list1 = ["A salad between 2 breads", "50", "45", "55", "55"];
+// List<String> list3 = ["4.5", "5", "4", "2.5", "2.5"];
+// final List<String> images = [
+//   "assets/images/burger.jpeg",
+//   "assets/images/tomato.png",
+//   "assets/images/onion.jpeg",
+//   'assets/images/some.jpg',
+//   'assets/images/some.jpg',
+// ];
 
 class Brand extends StatefulWidget {
   @override
@@ -42,13 +42,18 @@ class Brandstate extends State<Brand> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 232.0,
+    return _body(context);
+  }
+
+  Widget _body(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 110.0,
       child: _brandapi != null
           ? ListView.builder(
-              physics: ClampingScrollPhysics(),
-              shrinkWrap: true,
               scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              physics: ScrollPhysics(),
               itemCount: _brandapi.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
@@ -62,7 +67,7 @@ class Brandstate extends State<Brand> {
                     // ),
                     child: SizedBox(
                       // height: 100,
-                      width: 300,
+                      width: 100,
                       child: Container(
                         margin: EdgeInsets.all(5.0),
                         // color: Colors.grey[200],
@@ -72,46 +77,34 @@ class Brandstate extends State<Brand> {
                         // ),
                         child: Column(children: [
                           SizedBox(
-                            height: 170,
-                            child: Container(
-                              //alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
+                            height: 50,
+                            child: FadeInImage(
+                              imageErrorBuilder: (BuildContext context,
+                                  Object exception, StackTrace stackTrace) {
+                                return Container(
+                                    decoration: BoxDecoration(
+                                  image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: AssetImage(images[index])),
-                                color: Colors.white,
-                                // border: Border.all(
-                                //     color: Colors.black12, // set border color
-                                //     width: 0.6), // set border width
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                    5.0)), // set rounded corner radius
-                              ),
+                                    image:
+                                        AssetImage("assets/images/drinks.jpg"),
+                                  ),
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5.0),
+                                  ), // set rounded corner radius
+                                ));
+                              },
+                              placeholder:
+                                  AssetImage('assets/images/loading.gif'),
+                              image: NetworkImage(_brandapi[index].img),
+                              fit: BoxFit.cover,
                             ),
                           ),
                           SizedBox(height: 0.0),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      list[index],
-                                      style:
-                                          Theme.of(context).textTheme.bodyText1,
-                                    ),
-                                    Text(
-                                      list1[index],
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2,
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  list3[index],
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                ),
-                              ])
+                          Text(
+                            _brandapi[index].name,
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
                         ]),
                       ),
                     ),

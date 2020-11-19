@@ -1,5 +1,6 @@
 import 'package:ecom/Cart/cart1.dart';
 import 'package:ecom/Homepage/BestOffers.dart';
+import 'package:ecom/Homepage/Brand/Brand.dart';
 import 'package:ecom/Homepage/Categorylist/Category.dart';
 import 'package:ecom/Homepage/Discovery/Discover.dart';
 import 'package:ecom/Homepage/Varieties.dart';
@@ -97,7 +98,7 @@ class _HomefragmentState extends State<HomeFragment> {
                             Discover(),
                             SizedBox(height: 20.0),
                             _categoryheading(context, "Shop by brand"),
-
+                            Brand(),
                           ]),
                     ),
                   ),
