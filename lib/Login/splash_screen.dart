@@ -19,7 +19,7 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    new Timer(new Duration(seconds: 1), () {
+    new Timer(new Duration(seconds: 25), () {
       checkFirstSeen();
     });
   }
@@ -69,11 +69,11 @@ Container headerSection(BuildContext context) {
           children: <Widget>[
             Text(
               " Infinity Mart",
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.headline1.copyWith(fontSize: getProportionateScreenWidth(40)),
             ),
             Icon(
               Icons.shopping_cart,
-              size: 50.0,
+              size: getProportionateScreenWidth(25),
               color: Colors.black,
             )
           ],

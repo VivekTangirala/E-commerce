@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'Brandapi.dart';
 
 class Brandapiimport {
-  static const uri = "http://infintymall.herokuapp.com/homepage/api/brand";
+  static const uri = "https://infintymall.herokuapp.com/homepage/api/brand";
 
   static Future<List<Brandapi>> getbrandlist() async{
     try {
