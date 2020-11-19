@@ -53,8 +53,6 @@ class _DiscoverState extends State<Discover> {
         .then((value1) => setState(() {
               _productdetails = value1;
             }));
-    print(_specialproducts[0].specialProducts.toList());
-    print(_specialproducts[0].specialProducts[0]);
 
     print(l);
     // productdetails() {}
@@ -66,6 +64,7 @@ class _DiscoverState extends State<Discover> {
         child: SizedBox(
       height: 185.0,
       child: ListView.builder(
+
         controller: _scrollController,
         itemExtent: 125,
         physics: ScrollPhysics(),

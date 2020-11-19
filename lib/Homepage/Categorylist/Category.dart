@@ -30,13 +30,12 @@ class _Categorylist1State extends State<Category> {
   List<Categorydata> _categorydata;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getcategories();
   }
 
   getcategories() async {
-    await Categoryimport.getUsers().then((value) => setState(() {
+    await Categoryimport.getCategoryList().then((value) => setState(() {
           _categorydata = value;
         }));
   }
@@ -53,7 +52,7 @@ class _Categorylist1State extends State<Category> {
           : ListView.builder(
               padding: EdgeInsets.only(left: 8.0, right: 8.0),
               scrollDirection: Axis.horizontal,
-              itemCount: images.length,
+              itemCount: _categorydata.length,
               shrinkWrap: true,
               physics: ScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
@@ -66,7 +65,7 @@ class _Categorylist1State extends State<Category> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (BuildContext context) {
                           return Categoryitems(
-                            string: _categorydata[index].name.toString(),
+                            string: _categorydata[index].name,
                           );
                         }));
                       },

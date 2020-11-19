@@ -1,6 +1,6 @@
 import 'package:ecom/Homepage/Drawer.dart';
 import 'package:ecom/Homepage/homefragment.dart';
-import 'package:ecom/Login/login.dart';
+import 'package:ecom/Login/newSignIn/signin.dart';
 import 'package:ecom/Receipe/Categorylist/Recipicategorylist.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -134,7 +134,7 @@ class _ReceipeViewState extends State<ReceipeView>
                 sharedPreferences.clear();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  MaterialPageRoute(builder: (context) => SignInScreen()),
                 );
               },
             ),

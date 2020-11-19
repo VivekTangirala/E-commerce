@@ -138,6 +138,7 @@ class _SignFormState extends State<SignForm> {
         return null;
       },
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(horizontal: 6,),
         prefixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
         labelText: "Phone number",
         fillColor: Colors.white,
@@ -175,6 +176,7 @@ class _SignFormState extends State<SignForm> {
         return null;
       },
       decoration: InputDecoration(
+         contentPadding: EdgeInsets.symmetric(horizontal: 0,),
         labelText: "Enter Password",
         fillColor: Colors.white,
         prefixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),

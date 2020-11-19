@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Drawer.dart';
 import 'Invite.dart';
-import 'Categorylist/categorylistexamole.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();

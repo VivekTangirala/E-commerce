@@ -1,6 +1,6 @@
 import 'package:ecom/Homepage/Drawer.dart';
 import 'package:ecom/Homepage/homefragment.dart';
-import 'package:ecom/Login/login.dart';
+import 'package:ecom/Login/newSignIn/signin.dart';
 import 'package:ecom/Receipe/Categorylist/Recipicategorylist.dart';
 import 'package:ecom/Receipe/Recipihome/Alltimefav.dart';
 import 'package:ecom/Receipe/Recipihome/Madewithfew.dart';
@@ -96,7 +96,7 @@ AppBar _appBar(BuildContext context){
                 sharedPreferences.clear();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  MaterialPageRoute(builder: (context) => SignInScreen()),
                 );
               },
             ),

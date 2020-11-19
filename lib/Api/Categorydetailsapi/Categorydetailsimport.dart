@@ -12,6 +12,8 @@ class Categorydetailsimport {
       if (response.statusCode == 200) {
         final Categorydetails categorydetails =
             categorydetailsFromJson(response.body);
+        print("working");
+        print(categorydetails.results[0].brand);
         return categorydetails;
       } else {
         print("error");

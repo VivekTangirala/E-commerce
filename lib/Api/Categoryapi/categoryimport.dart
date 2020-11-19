@@ -3,9 +3,9 @@ import 'package:http/http.dart' as http;
 import 'categorydata.dart';
 
 class Categoryimport {
-  static const uri = "http://infintymall.herokuapp.com/homepage/api/category";
+  static const uri = "https://infintymall.herokuapp.com/homepage/api/category";
 
-  static Future<List<Categorydata>> getUsers() async {
+  static Future<List<Categorydata>> getCategoryList() async {
     try {
       final response = await http.get(uri);
       //print(response.body);
@@ -14,6 +14,7 @@ class Categoryimport {
         // data=da
         final List<Categorydata> categories =
             categorydataFromJson(response.body);
+            print("done");
         return categories;
       } else {
         print("error");
