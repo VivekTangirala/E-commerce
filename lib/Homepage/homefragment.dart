@@ -95,6 +95,9 @@ class _HomefragmentState extends State<HomeFragment> {
                             SizedBox(height: 30.0),
                             _categoryheading(context, "Great Deals"),
                             Discover(),
+                            SizedBox(height: 20.0),
+                            _categoryheading(context, "Shop by brand"),
+
                           ]),
                     ),
                   ),

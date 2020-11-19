@@ -71,16 +71,31 @@ class _Categorylist1State extends State<Category> {
                       },
                       child: Column(
                         children: [
-                          Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: NetworkImage(_categorydata == null
-                                      ? "assets/images/loading.gif"
-                                      : _categorydata[index].image),
-                                  fit: BoxFit.fill),
+                          SizedBox(
+                            height: 45,
+                            width: 45,
+                            child: FadeInImage(
+                              imageErrorBuilder: (BuildContext context,
+                                  Object exception, StackTrace stackTrace) {
+                                return Container(
+                                    decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image:
+                                        AssetImage("assets/images/tomato.png"),
+                                  ),
+                                  color: Colors.white,
+                                  // borderRadius: BorderRadius.all(
+                                  //   Radius.circular(5.0),
+                                  // ), // set rounded corner radius
+                                ));
+                              },
+                              placeholder: AssetImage(
+                                'assets/images/loading.gif',
+                              ),
+                              image: NetworkImage(_categorydata[index].image),
+                              fit: BoxFit.fill,
                             ),
                           ),
                           Text(
