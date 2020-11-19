@@ -1,8 +1,5 @@
 import 'package:ecom/Api/Brandapi/Brandapi.dart';
 import 'package:ecom/Api/Brandapi/Brandapiimport.dart';
-import 'package:ecom/Api/Specialproductsapi/Specialproductsapi.dart';
-import 'package:ecom/Api/Specialproductsapi/Specialproductsimport.dart';
-import 'package:ecom/Homepage/details/details_screen.dart';
 import 'package:flutter/material.dart';
 
 // List<String> list = ["Burger", "Cherry", "Orange", "Apple", "Apple"];

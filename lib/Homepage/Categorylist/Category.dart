@@ -1,6 +1,5 @@
 import 'package:ecom/Api/Categoryapi/categorydata.dart';
 import 'package:ecom/Api/Categoryapi/categoryimport.dart';
-import 'package:ecom/Api/Categorydetailsapi/Categorydetailsimport.dart';
 import 'package:ecom/Homepage/categoryitems/categoryitems.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,5 @@
 import 'package:ecom/Login/Forgotpass/phonenumber/phonenumber.dart';
 import 'package:ecom/Login/components/constants.dart';
-import 'package:ecom/Login/newSignUp/signUp.dart';
 import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 

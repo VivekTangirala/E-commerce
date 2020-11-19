@@ -1,8 +1,6 @@
 import 'package:ecom/Receipe/Directions.dart';
 import 'package:flutter/material.dart';
 
-import 'Utils/class.dart';
-import 'Utils/widgets.dart';
 
 List<String> l1 = [
   "assets/images/tomato.png",
@@ -26,7 +24,6 @@ class Details1 extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<Details1> {
-  TabController _controller;
 
   @override
   Widget build(BuildContext context) {

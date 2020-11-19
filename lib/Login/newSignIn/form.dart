@@ -4,7 +4,6 @@ import 'package:ecom/Login/Forgotpass/phonenumber/phonenumber.dart';
 import 'package:ecom/Login/components/constants.dart';
 import 'package:ecom/Login/components/formerror.dart';
 import 'package:ecom/components/screensize.dart';
-import 'package:ecom/Login/components/skipbutton.dart';
 import 'package:ecom/Login/components/suffix.dart';
 import 'package:ecom/bottom_nav.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';

@@ -19,7 +19,6 @@ class MadewithfewIngridients extends StatefulWidget {
 
 class _MadewithfewIngridientsState extends State<MadewithfewIngridients> {
  // Productsapi _productsapi;
-  bool _isloading = true;
   List mylist;
   List mylist1;
   ScrollController _scrollController = new ScrollController();
