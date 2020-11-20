@@ -1,25 +1,8 @@
-import 'package:ecom/Api/Categoryapi/categorydata.dart';
-import 'package:ecom/Api/Categoryapi/categoryimport.dart';
-import 'package:ecom/Api/Categorydetailsapi/Categorydetailsimport.dart';
+import 'package:ecom/Homepage/Categorylist/categorydata.dart';
+import 'package:ecom/Homepage/Categorylist/categoryimport.dart';
 import 'package:ecom/Homepage/categoryitems/categoryitems.dart';
 import 'package:flutter/material.dart';
 
-// List<String> images = [
-//   "assets/images/tomato.png",
-//   "assets/images/onion.jpeg",
-//   "assets/images/burger.jpeg",
-//   "assets/images/some.jpg",
-//   "assets/images/tomato.png",
-//   "assets/images/onion.jpeg",
-// ];
-// List<String> _name = [
-//   "Popular",
-//   "Top",
-//   "Breakfast",
-//   "Lunch",
-//   "Snacks",
-//   "Dinner",
-// ];
 
 class Category extends StatefulWidget {
   @override
@@ -86,9 +69,7 @@ class _Categorylist1State extends State<Category> {
                                         AssetImage("assets/images/tomato.png"),
                                   ),
                                   color: Colors.white,
-                                  // borderRadius: BorderRadius.all(
-                                  //   Radius.circular(5.0),
-                                  // ), // set rounded corner radius
+                                  
                                 ));
                               },
                               placeholder: AssetImage(

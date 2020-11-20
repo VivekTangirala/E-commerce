@@ -19,7 +19,7 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    new Timer(new Duration(seconds: 25), () {
+    new Timer(new Duration(seconds: 1), () {
       checkFirstSeen();
     });
   }
@@ -73,7 +73,7 @@ Container headerSection(BuildContext context) {
             ),
             Icon(
               Icons.shopping_cart,
-              size: getProportionateScreenWidth(25),
+              size: getProportionateScreenWidth(60),
               color: Colors.black,
             )
           ],

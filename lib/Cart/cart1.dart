@@ -1,5 +1,5 @@
-import 'package:ecom/Api/Cartapi/Cartapi.dart';
-import 'package:ecom/Api/Cartapi/Cartapiimport.dart';
+import 'package:ecom/Cart/Cartapi.dart';
+import 'package:ecom/Cart/Cartapiimport.dart';
 import 'package:ecom/Api/Productdetails/Productdetails.dart';
 import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
 import 'package:flutter/cupertino.dart';
@@ -95,11 +95,28 @@ class _CartState extends State<Cart> {
                               padding: EdgeInsets.all(4),
                               child: Row(
                                 children: [
-                                  Image.network(
-                                    _productdetails.results[index].image,
-                                    width: 150,
-                                    height: 180,
-                                    fit: BoxFit.fitWidth,
+                                  FadeInImage(
+                                    imageErrorBuilder: (BuildContext context,
+                                        Object exception,
+                                        StackTrace stackTrace) {
+                                      return Container(
+                                          decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                              "assets/images/drinks.jpg"),
+                                        ),
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0),
+                                        ), // set rounded corner radius
+                                      ));
+                                    },
+                                    placeholder:
+                                        AssetImage('assets/images/loading.gif'),
+                                    image: NetworkImage(
+                                        _productdetails.results[index].image),
+                                    fit: BoxFit.cover,
                                   ),
                                   SizedBox(
                                     width: 20,

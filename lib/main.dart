@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:ecom/Themes.dart';
+import 'package:ecom/components/Themes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'Login/splash_screen.dart';

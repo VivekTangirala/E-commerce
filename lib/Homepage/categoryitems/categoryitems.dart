@@ -1,5 +1,5 @@
-import 'package:ecom/Api/Categorydetailsapi/Categorydetailsapi.dart';
-import 'package:ecom/Api/Categorydetailsapi/Categorydetailsimport.dart';
+import 'package:ecom/Homepage/categoryitems/Categorydetailsapi.dart';
+import 'package:ecom/Homepage/categoryitems/Categorydetailsimport.dart';
 import 'package:ecom/components/appBar.dart';
 import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
@@ -68,9 +68,29 @@ class Categoryitemsstate extends State<Categoryitems> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(5.0)),
                               ),
-                              child: Image.network(
-                                  _categorydetails.results[index].image),
+                              child:   FadeInImage(
+                                  imageErrorBuilder: (BuildContext context,
+                                      Object exception, StackTrace stackTrace) {
+                                    return Container(
+                                        decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                            "assets/images/drinks.jpg"),
+                                      ),
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(5.0),
+                                      ), // set rounded corner radius
+                                    ));
+                                  },
+                                  placeholder:
+                                      AssetImage('assets/images/loading.gif'),
+                                  image: NetworkImage(_categorydetails.results[index].image),
+                                  fit: BoxFit.cover,
+                                ),
                             ),
+                             
                           ),
                           Text(
                             _categorydetails.results[index].name,

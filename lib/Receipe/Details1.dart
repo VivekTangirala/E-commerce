@@ -42,11 +42,12 @@ class _DetailsPageState extends State<Details1> {
               flexibleSpace: FlexibleSpaceBar(
                 background: Hero(
                   tag: ' recipe.id',
-                  child: FadeInImage(
-                    image: NetworkImage('recipe.imageUrl'),
-                    fit: BoxFit.cover,
-                    placeholder: AssetImage('assets/images/loading.gif'),
-                  ),
+                  child:Container()
+                  //  FadeInImage(
+                  //   image: NetworkImage(recipe.imageUrl),
+                  //   fit: BoxFit.cover,
+                  //   placeholder: AssetImage('assets/images/loading.gif'),
+                  // ),
                 ),
               ),
             ),

@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:ecom/Api/Productdetails/Productdetails.dart';
 import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
-import 'package:ecom/Api/Wishlistapi/Wishlistapi.dart';
-import 'package:ecom/Api/Wishlistapi/Wishlistapiimport.dart';
+import 'package:ecom/Wishlist/Wishlistapi.dart';
+import 'package:ecom/Wishlist/Wishlistapiimport.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +62,7 @@ class _WishlistState extends State<Wishlist> {
     Map data = {'product': _product, 'quantity1': _quantity};
     var jsonresponse;
     var response = await http.post(
-        "http://infintymall.herokuapp.com/homepage/api/cart/",
+        "https://infintymall.herokuapp.com/homepage/api/cart/",
         body: data,
         headers: {HttpHeaders.authorizationHeader: token});
     print(response.body);
@@ -131,10 +131,29 @@ class _WishlistState extends State<Wishlist> {
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(15.0),
-                                  child: Image.network(
-                                    _productdetails.results[index].image,
-                                    width:
-                                        MediaQuery.of(context).size.width / 3.5,
+                                  child: FadeInImage(
+                                    imageErrorBuilder: (BuildContext context,
+                                        Object exception,
+                                        StackTrace stackTrace) {
+                                      print('Error Handler');
+                                      return Container(
+                                          decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                              "assets/images/drinks.jpg"),
+                                        ),
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0),
+                                        ), // set rounded corner radius
+                                      ));
+                                    },
+                                    placeholder:
+                                        AssetImage('assets/images/loading.gif'),
+                                    image: NetworkImage(
+                                        _productdetails.results[index].image),
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                                 Column(

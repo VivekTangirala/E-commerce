@@ -73,10 +73,10 @@ final  bool a = true;
       padding: EdgeInsets.all(10),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        image: DecorationImage(
-            fit: BoxFit.fill,
-            image: NetworkImage(
-                'https://infintymall.herokuapp.com/media/pics/Screenshot_from_2020-06-06_23-21-23.png')),
+        // image: DecorationImage(
+        //     fit: BoxFit.fill,
+        //     image: NetworkImage(
+        //         'https://infintymall.herokuapp.com/media/pics/Screenshot_from_2020-06-06_23-21-23.png')),
         color: Colors.white,
         border: Border.all(
             color: Colors.black12, // set border color

@@ -1,4 +1,4 @@
-import 'package:ecom/Homepage/details/Product.dart';
+import 'package:ecom/details/Product.dart';
 import 'package:flutter/material.dart';
 
 

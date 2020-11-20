@@ -60,9 +60,23 @@ class _DetailsPageState extends State<DetailsPage>
                 background: Hero(
                   tag: recipe.id,
                   child: FadeInImage(
+                    imageErrorBuilder: (BuildContext context, Object exception,
+                        StackTrace stackTrace) {
+                      return Container(
+                          decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage("assets/images/drinks.jpg"),
+                        ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5.0),
+                        ), // set rounded corner radius
+                      ));
+                    },
+                    placeholder: AssetImage('assets/images/loading.gif'),
                     image: NetworkImage(recipe.imageUrl),
                     fit: BoxFit.cover,
-                    placeholder: AssetImage('assets/images/loading.gif'),
                   ),
                 ),
               ),
@@ -273,4 +287,3 @@ class Itemdetails extends StatelessWidget {
         ));
   }
 }
-

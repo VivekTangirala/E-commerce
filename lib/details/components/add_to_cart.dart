@@ -70,7 +70,7 @@ class _AddToCartState extends State<AddToCart> {
     Map data = {'product': _product, 'quantity1': _quantity};
     var jsonresponse;
     var response = await http.post(
-        "http://infintymall.herokuapp.com/homepage/api/cart/",
+        "https://infintymall.herokuapp.com/homepage/api/cart/",
         body: data,
         headers: {HttpHeaders.authorizationHeader: token});
     print(response.body);

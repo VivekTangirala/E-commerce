@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:ecom/Api/Wishlistapi/Wishlistapi.dart';
+import 'package:ecom/Wishlist/Wishlistapi.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:ecom/Login/Forgotpass/Newpass.dart';
 import 'package:ecom/Login/Forgotpass/passwordchange/passbody.dart';
 import 'package:ecom/Login/components/formerror.dart';
 import 'package:ecom/Login/newSignUp/signUp.dart';

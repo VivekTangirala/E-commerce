@@ -1,10 +1,10 @@
 import 'package:ecom/Homepage/Drawer.dart';
-import 'package:ecom/Homepage/homefragment.dart';
 import 'package:ecom/Login/newSignIn/signin.dart';
 import 'package:ecom/Receipe/Categorylist/Recipicategorylist.dart';
 import 'package:ecom/Receipe/Recipihome/Alltimefav.dart';
 import 'package:ecom/Receipe/Recipihome/Madewithfew.dart';
 import 'package:ecom/Receipe/Recipihome/Suggested.dart';
+import 'package:ecom/components/appBar.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';

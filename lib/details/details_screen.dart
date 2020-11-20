@@ -1,7 +1,7 @@
-import 'package:ecom/Homepage/details/Product.dart';
-import 'package:ecom/Homepage/details/components/body.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+
+import 'components/body.dart';
 
 class DetailsScreen extends StatefulWidget {
   final productid;
