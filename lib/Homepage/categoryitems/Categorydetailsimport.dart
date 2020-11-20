@@ -1,4 +1,3 @@
-import 'package:ecom/Api/Productdetails/Productdetails.dart';
 import 'package:http/http.dart' as http;
 import 'Categorydetailsapi.dart';
 

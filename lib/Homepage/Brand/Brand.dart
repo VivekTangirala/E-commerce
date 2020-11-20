@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import 'package:ecom/Homepage/Brand/Brandapi.dart';
 import 'package:ecom/Homepage/Brand/Brandapiimport.dart';
 
+=======
+import 'package:ecom/Api/Brandapi/Brandapi.dart';
+import 'package:ecom/Api/Brandapi/Brandapiimport.dart';
+>>>>>>> f4e9a7327960e73e42f2a68ecf42365414ebb9de
 import 'package:flutter/material.dart';
 
 

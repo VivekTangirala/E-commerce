@@ -109,6 +109,137 @@ class _HomefragmentState extends State<HomeFragment> {
 
 
 
+<<<<<<< HEAD
+=======
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+          icon: AnimatedIcon(
+            icon: AnimatedIcons.menu_close,
+            progress: transitionAnimation,
+          ),
+          onPressed: () {
+            query = "";
+          })
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+        icon: AnimatedIcon(
+          icon: AnimatedIcons.menu_arrow,
+          progress: transitionAnimation,
+        ),
+        onPressed: () {
+          close(context, null);
+        });
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggestionList = query.isEmpty ? recentCities : cities;
+    return ListView.builder(
+        itemBuilder: (context, index) => ListTile(
+              leading: Icon(Icons.near_me),
+              title: Text(cities[index]),
+            ),
+        itemCount: suggestionList.length);
+  }
+}
+
+AppBar _appBar1(BuildContext context) {
+  return AppBar(
+    // backgroundColor: Colors.white,
+    elevation: 0.0,
+    leading: IconButton(
+      icon: Icon(
+        Icons.menu,
+        color: Colors.black,
+      ),
+      onPressed: () {
+        _scaffoldKey.currentState.openDrawer();
+      },
+    ),
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Align(
+            alignment: Alignment.centerRight,
+            child: Center(
+              child: Text(
+                "Treg Mart",
+                style: Theme.of(context).textTheme.headline3,
+              ),
+            )),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            IconButton(
+              padding: EdgeInsets.only(left: 20),
+              icon: Icon(
+                EvaIcons.search,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                showSearch(context: context, delegate: SearchBar());
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                EvaIcons.shoppingCartOutline,
+                color: Colors.black,
+              ),
+              padding: EdgeInsets.only(left: 20),
+              onPressed: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Cart()),
+                );
+              },
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+
+// Widget _textsection(BuildContext context) {
+//   String a = "Anitesh";
+//   return Padding(
+//       padding: EdgeInsets.only(left: 7.0, top: 5.0),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: <Widget>[
+//           Align(
+//             alignment: Alignment.centerLeft,
+//             child: Text(
+//               a != null ? "Hola, Amigo" : "Hi, $a",
+//               overflow: TextOverflow.ellipsis,
+//               maxLines: 1,
+//               style: Theme.of(context).textTheme.bodyText1,
+//             ),
+//           ),
+//           SizedBox(height: 5.0),
+//           Text(
+//             "Explore TREG",
+//             style: Theme.of(context)
+//                 .textTheme
+//                 .headline3
+//                 .copyWith(letterSpacing: 1),
+//           ),
+//           //Text("data"),
+//         ],
+//       ));
+// }
+>>>>>>> f4e9a7327960e73e42f2a68ecf42365414ebb9de
 
 Widget _categoryheading(BuildContext context, String str) {
   return Align(

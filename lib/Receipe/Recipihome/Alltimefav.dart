@@ -18,7 +18,6 @@ class Alltimefav extends StatefulWidget {
 
 class _AlltimefavState extends State<Alltimefav> {
  // Productsapi _productsapi;
-  bool _isloading = true;
   List mylist;
   List mylist1;
   ScrollController _scrollController = new ScrollController();

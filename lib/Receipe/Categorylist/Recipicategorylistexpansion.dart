@@ -1,7 +1,5 @@
 import 'package:ecom/Cart/cart1.dart';
 import 'package:ecom/Receipe/Details1.dart';
-import 'package:ecom/Receipe/Directions.dart';
-import 'package:ecom/Receipe/details.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
