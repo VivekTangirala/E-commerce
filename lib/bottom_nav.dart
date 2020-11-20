@@ -1,9 +1,10 @@
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:ecom/Receipe/Recipihome/Recipihome.dart';
-import 'package:flutter/material.dart';
-import './Homepage/homefragment.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+//
 
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/material.dart';
+
+import 'Receipe/Recipihome/Recipihome.dart';
 
 class BottomNav extends StatefulWidget {
   @override
@@ -38,7 +39,7 @@ class _BottomNav extends State {
             setState(() => _currentIndex = index);
           },
           children: <Widget>[
-            Container(child: HomeFragment()),
+          //  Container(child: HomeFragment()),
             Container(
               child: RecipiHome(),
             ),
@@ -59,16 +60,15 @@ class _BottomNav extends State {
           BottomNavyBarItem(
               inactiveColor: Colors.black54,
               activeColor: Colors.black,
-              title: Text('  Home',
-                  style: Theme.of(context).textTheme.bodyText2),
+              title:
+                  Text('  Home', style: Theme.of(context).textTheme.bodyText2),
               icon: Icon(EvaIcons.homeOutline)),
           BottomNavyBarItem(
               inactiveColor: Colors.black54,
-              title: Text('Recipe',
-                  style: Theme.of(context).textTheme.bodyText2),
+              title:
+                  Text('Recipe', style: Theme.of(context).textTheme.bodyText2),
               activeColor: Colors.black,
-              icon: Icon(Icons.fastfood)
-              ),
+              icon: Icon(Icons.fastfood)),
           // BottomNavyBarItem(
           //     title: Text('   Profile',
           //         style: Theme.of(context).textTheme.bodyText2),

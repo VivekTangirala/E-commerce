@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import 'package:ecom/Homepage/Categorylist/categorydata.dart';
 import 'package:ecom/Homepage/Categorylist/categoryimport.dart';
-=======
-import 'package:ecom/Api/Categoryapi/categorydata.dart';
-import 'package:ecom/Api/Categoryapi/categoryimport.dart';
->>>>>>> f4e9a7327960e73e42f2a68ecf42365414ebb9de
 import 'package:ecom/Homepage/categoryitems/categoryitems.dart';
 import 'package:flutter/material.dart';
 

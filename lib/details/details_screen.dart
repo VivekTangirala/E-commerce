@@ -1,8 +1,3 @@
-<<<<<<< HEAD:lib/details/details_screen.dart
-=======
-
-import 'package:ecom/Homepage/details/components/body.dart';
->>>>>>> f4e9a7327960e73e42f2a68ecf42365414ebb9de:lib/Homepage/details/details_screen.dart
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 

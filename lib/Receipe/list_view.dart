@@ -1,15 +1,15 @@
+
+
 import 'package:ecom/Homepage/Drawer.dart';
-import 'package:ecom/Homepage/homefragment.dart';
 import 'package:ecom/Login/newSignIn/signin.dart';
-import 'package:ecom/Receipe/Categorylist/Recipicategorylist.dart';
-import 'package:ecom/components/appBar.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'Categorylist/Recipicategorylist.dart';
+import 'Categorylist/Recipicategorylistexpansion.dart';
 import 'Utils/data.dart';
 import 'details.dart';
-
-GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class ReceipeView extends StatefulWidget {
   @override
@@ -18,6 +18,8 @@ class ReceipeView extends StatefulWidget {
 
 class _ReceipeViewState extends State<ReceipeView>
     with AutomaticKeepAliveClientMixin {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     super.build(context);

@@ -77,7 +77,6 @@ class _CartState extends State<Cart> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-<<<<<<< HEAD
           : LiquidPullToRefresh(
               onRefresh: () {
                 return _refreshcart();
@@ -90,235 +89,191 @@ class _CartState extends State<Cart> {
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
                       return Card(
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(4),
-                              child: Row(
-                                children: [
-                                  FadeInImage(
-                                    imageErrorBuilder: (BuildContext context,
-                                        Object exception,
-                                        StackTrace stackTrace) {
-                                      return Container(
-                                          decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage(
-                                              "assets/images/drinks.jpg"),
-                                        ),
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(5.0),
-                                        ), // set rounded corner radius
-                                      ));
-                                    },
-                                    placeholder:
-                                        AssetImage('assets/images/loading.gif'),
-                                    image: NetworkImage(
-                                        _productdetails.results[index].image),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      //mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Text(_productdetails
-                                            .results[index].name),
-                                        // Text(
-                                        //   "Cocktail dress",
-                                        // ),
-                                        Row(
-=======
-          : _cartapidata.cart.length == 0
-              ? Center(
-                  child: Text("Your cart is wmpty"),
-                )
-              : LiquidPullToRefresh(
-                  onRefresh: () {
-                    return _refreshcart();
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(8),
-                    child: ListView.builder(
-                        itemCount: _cartapidata.cart.length,
-                        physics: ScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Card(
-                            child: Column(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(4),
-                                  child: Row(
+                          child: Column(children: [
+                        Container(
+                          padding: EdgeInsets.all(4),
+                          child: Row(
+                            children: [
+                              FadeInImage(
+                                imageErrorBuilder: (BuildContext context,
+                                    Object exception, StackTrace stackTrace) {
+                                  return Container(
+                                      decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                          "assets/images/drinks.jpg"),
+                                    ),
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5.0),
+                                    ), // set rounded corner radius
+                                  ));
+                                },
+                                placeholder:
+                                    AssetImage('assets/images/loading.gif'),
+                                image: NetworkImage(
+                                    _productdetails.results[index].image),
+                                fit: BoxFit.cover,
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Expanded(
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    //mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Image.network(
-                                        _productdetails.results[index].image,
-                                        width: 150,
-                                        height: 180,
-                                        fit: BoxFit.fitWidth,
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          //mainAxisAlignment: MainAxisAlignment.start,
->>>>>>> f4e9a7327960e73e42f2a68ecf42365414ebb9de
-                                          children: [
-                                            Text(_productdetails
-                                                .results[index].name),
-                                            // Text(
-                                            //   "Cocktail dress",
-                                            // ),
-                                            Row(
-                                              children: [
-                                                Text("Quantity:"),
-                                                Text(_productdetails
-                                                    .results[index].quantity)
-                                              ],
-                                            ),
-                                            // Text(
-                                            //   "Color: Yellow",
-                                            // ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  _productdetails
-                                                      .results[index].price
-                                                      .toString(),
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    IconButton(
-                                                      icon: Icon(
-                                                        Icons.add_circle,
-                                                        color:
-                                                            Colors.orangeAccent,
-                                                      ),
-                                                      onPressed: () {
-                                                        setState(() {
+                                      Text(_productdetails.results[index].name),
+                                      // Text(
+                                      //   "Cocktail dress",
+                                      // ),
+                                      Row(
+                                        children: [
+                                          Text(_productdetails
+                                              .results[index].name),
+                                          // Text(
+                                          //   "Cocktail dress",
+                                          // ),
+                                          Row(
+                                            children: [
+                                              Text("Quantity:"),
+                                              Text(_productdetails
+                                                  .results[index].quantity)
+                                            ],
+                                          ),
+                                          // Text(
+                                          //   "Color: Yellow",
+                                          // ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                _productdetails
+                                                    .results[index].price
+                                                    .toString(),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  IconButton(
+                                                    icon: Icon(
+                                                      Icons.add_circle,
+                                                      color:
+                                                          Colors.orangeAccent,
+                                                    ),
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        _qty[index] =
+                                                            _qty[index] + 1;
+                                                      });
+                                                    },
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(_productdetails
+                                                      .results[index].quantity),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  IconButton(
+                                                    icon: Icon(
+                                                      Icons.remove_circle,
+                                                      color:
+                                                          Colors.orangeAccent,
+                                                    ),
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        if (_qty[index] > 1) {
                                                           _qty[index] =
-                                                              _qty[index] + 1;
-                                                        });
-                                                      },
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Text(_productdetails
-                                                        .results[index]
-                                                        .quantity),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    IconButton(
-                                                      icon: Icon(
-                                                        Icons.remove_circle,
-                                                        color:
-                                                            Colors.orangeAccent,
-                                                      ),
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          if (_qty[index] > 1) {
-                                                            _qty[index] =
-                                                                _qty[index] - 1;
-                                                          }
-                                                        });
-                                                      },
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                                              _qty[index] - 1;
+                                                        }
+                                                      });
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ]),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                child: Divider(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(20),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Subtotal",
                                         ),
-                                      )
-                                    ],
-                                  ),
+                                        Text(
+                                          "25",
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Delivery",
+                                        ),
+                                        Text(
+                                          "\$0",
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Discount",
+                                        ),
+                                        Text(
+                                          "No discount",
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Total",
+                                        ),
+                                        Text(
+                                          "5000",
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
-                                  child: Divider(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(20),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Subtotal",
-                                          ),
-                                          Text(
-                                            "25",
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Delivery",
-                                          ),
-                                          Text(
-                                            "\$0",
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Discount",
-                                          ),
-                                          Text(
-                                            "No discount",
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Total",
-                                          ),
-                                          Text(
-                                            "5000",
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        }),
-                  ),
-                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ]));
+                    }),
+              ),
+            ),
     );
   }
 
