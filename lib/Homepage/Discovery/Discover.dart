@@ -2,6 +2,7 @@ import 'package:ecom/Api/Productdetails/Productdetails.dart';
 import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
 import 'package:ecom/Api/Specialproductsapi/Specialproductsapi.dart';
 import 'package:ecom/Api/Specialproductsapi/Specialproductsimport.dart';
+import 'package:ecom/components/screensize.dart';
 import 'package:ecom/details/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -63,7 +64,7 @@ class _DiscoverState extends State<Discover> {
     return SafeArea(
       child: Container(
         width: double.infinity,
-        height: 185.0,
+        height: getProportionateScreenHeight(220.0),
         child: ListView.builder(
           controller: _scrollController,
           itemExtent: 125,
@@ -88,32 +89,34 @@ class _DiscoverState extends State<Discover> {
                       margin: EdgeInsets.only(left: 4, bottom: 3),
                       child: SizedBox(
                         // height: 100,
-                        width: 120,
+                        //width: getProportionateScreenWidth(0.0),
                         child: Container(
                           margin: EdgeInsets.all(5.0),
                           child: Column(children: [
                             SizedBox(
-                              height: 150,
+                              height: getProportionateScreenHeight(180.0),
                               child: Container(
                                 child: FadeInImage(
                                   imageErrorBuilder: (BuildContext context,
                                       Object exception, StackTrace stackTrace) {
                                     return Container(
-                                        decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            "assets/images/drinks.jpg"),
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                              "assets/images/drinks.jpg"),
+                                        ),
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0),
+                                        ), // set rounded corner radius
                                       ),
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(5.0),
-                                      ), // set rounded corner radius
-                                    ));
+                                    );
                                   },
                                   placeholder:
                                       AssetImage('assets/images/loading.gif'),
-                                  image: NetworkImage( _productdetails.results[index].image),
+                                  image: NetworkImage(
+                                      _productdetails.results[index].image),
                                   fit: BoxFit.cover,
                                 ),
                                 //alignment: Alignment.center,

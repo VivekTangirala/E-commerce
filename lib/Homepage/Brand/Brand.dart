@@ -1,5 +1,6 @@
 import 'package:ecom/Homepage/Brand/Brandapi.dart';
 import 'package:ecom/Homepage/Brand/Brandapiimport.dart';
+import 'package:ecom/components/screensize.dart';
 
 import 'package:flutter/material.dart';
 
@@ -36,7 +37,7 @@ class Brandstate extends State<Brand> {
   Widget _body(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 110.0,
+      height: getProportionateScreenHeight(140.0),
       child: _brandapi != null
           ? ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -49,12 +50,12 @@ class Brandstate extends State<Brand> {
                     margin: EdgeInsets.only(left: 4, bottom: 3),
                     child: SizedBox(
                       // height: 100,
-                      width: 100,
+                      width: getProportionateScreenWidth(100.0),
                       child: Container(
                         margin: EdgeInsets.all(5.0),
                         child: Column(children: [
                           SizedBox(
-                            height: 50,
+                            height: getProportionateScreenHeight(65.0),
                             child: FadeInImage(
                               imageErrorBuilder: (BuildContext context,
                                   Object exception, StackTrace stackTrace) {

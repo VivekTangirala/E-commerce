@@ -1,9 +1,8 @@
-
-
 import 'package:ecom/Homepage/BestOffers.dart';
 import 'package:ecom/Homepage/Brand/Brand.dart';
 import 'package:ecom/Homepage/Invite.dart';
 import 'package:ecom/components/appBar.dart';
+import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
@@ -11,7 +10,6 @@ import 'Categorylist/Category.dart';
 import 'Discovery/Discover.dart';
 import 'Drawer.dart';
 import 'Varieties.dart';
-
 
 class Imaged {
   String image1;
@@ -49,7 +47,8 @@ class _HomefragmentState extends State<HomeFragment> {
       _isloading = false;
     });
   }
-GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -68,47 +67,43 @@ GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
                 : Container(
                     margin: EdgeInsets.only(left: 8, right: 8),
                     child: SingleChildScrollView(
-                      child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            // _textsection(context),
-                            // SizedBox(height: 10),
-                            _categoryheading(context, "Categories"),
+                      child: Column(mainAxisSize: MainAxisSize.min, children: <
+                          Widget>[
+                        // _textsection(context),
+                        // SizedBox(height: 10),
+                        _categoryheading(context, "Categories"),
 
-                            Category(),
-                            SizedBox(height: 5),
+                        Category(),
+                        SizedBox(height: getProportionateScreenHeight(5.0)),
 
-                            _categoryheading(context, "Discover"),
-                            // SpecialProducts(),
-                            Discover(),
-                            SizedBox(height: 20.0),
+                        _categoryheading(context, "Discover"),
+                        // SpecialProducts(),
+                        Discover(),
+                        SizedBox(height: getProportionateScreenHeight(15.0)),
 
-                            _categoryheading(context, "Best Offers"),
-                            Bestoffers(),
-                            //Category(),
-                            SizedBox(height: 20.0),
+                        _categoryheading(context, "Best Offers"),
+                        Bestoffers(),
+                        //Category(),
+                        SizedBox(height: getProportionateScreenHeight(15.0)),
 
-                            _categoryheading(context, "Varieties"),
-
-                            Varieties(),
-                            SizedBox(height: 30.0),
-                            Invite(),
-                            SizedBox(height: 30.0),
-                            _categoryheading(context, "Great Deals"),
-                            Discover(),
-                            SizedBox(height: 20.0),
-                            _categoryheading(context, "Shop by brand"),
-                            Brand(),
-                          ]),
+                        _categoryheading(context, "Varieties"),
+                        SizedBox(height: getProportionateScreenHeight(10.0)),
+                        Varieties(),
+                        SizedBox(height: getProportionateScreenHeight(10.0)),
+                        Invite(),
+                        SizedBox(height: getProportionateScreenHeight(20.0)),
+                        _categoryheading(context, "Great Deals"),
+                        Discover(),
+                        SizedBox(height: getProportionateScreenHeight(20.0)),
+                        _categoryheading(context, "Shop by brand"),
+                        Brand(),
+                      ]),
                     ),
                   ),
           ),
         ));
   }
 }
-
-
-
 
 Widget _categoryheading(BuildContext context, String str) {
   return Align(

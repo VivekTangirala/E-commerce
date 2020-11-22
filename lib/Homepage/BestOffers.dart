@@ -2,6 +2,7 @@ import 'package:ecom/Api/Productdetails/Productdetails.dart';
 import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
 import 'package:ecom/Api/Specialproductsapi/Specialproductsapi.dart';
 import 'package:ecom/Api/Specialproductsapi/Specialproductsimport.dart';
+import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 
 // List<String> list = ["Burger", "Cherry", "Orange", "Apple", "Apple"];
@@ -49,7 +50,7 @@ class Bestoffersstate extends State<Bestoffers> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 232.0,
+      height: getProportionateScreenHeight(280.0),
       child: _productdetails != null
           ? ListView.builder(
               physics: ClampingScrollPhysics(),
@@ -60,16 +61,14 @@ class Bestoffersstate extends State<Bestoffers> {
                 return GestureDetector(
                   child: Container(
                     margin: EdgeInsets.only(left: 4, bottom: 3),
-                
                     child: SizedBox(
                       // height: 100,
-                      width: 300,
+                      width: getProportionateScreenWidth(310.0),
                       child: Container(
                         margin: EdgeInsets.all(5.0),
-                       
                         child: Column(children: [
                           SizedBox(
-                            height: 170,
+                            height: getProportionateScreenHeight(190),
                             child: Container(
                               child: FadeInImage(
                                 imageErrorBuilder: (BuildContext context,

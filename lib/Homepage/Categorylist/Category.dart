@@ -1,6 +1,7 @@
 import 'package:ecom/Homepage/Categorylist/categorydata.dart';
 import 'package:ecom/Homepage/Categorylist/categoryimport.dart';
 import 'package:ecom/Homepage/categoryitems/categoryitems.dart';
+import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 
 
@@ -26,7 +27,7 @@ class _Categorylist1State extends State<Category> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.0,
+      height: getProportionateScreenHeight(80.0),
       width: double.infinity,
       child: _categorydata == null
           ? Center(
@@ -55,8 +56,8 @@ class _Categorylist1State extends State<Category> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 45,
-                            width: 45,
+                            height: getProportionateScreenHeight(50),
+                            width: getProportionateScreenWidth(50),
                             child: FadeInImage(
                               imageErrorBuilder: (BuildContext context,
                                   Object exception, StackTrace stackTrace) {
