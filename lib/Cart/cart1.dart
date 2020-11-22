@@ -61,11 +61,7 @@ class _CartState extends State<Cart> {
   _counters() {
     if (_cartapidata.cart != null) {
       _qty = new List.generate(_cartapidata.cart.length, (index) => 1);
-      // List<String> myList = List<String>(3);
-      // List<String> _qty = List<String>(_cartapidata.cart.length);
-      // while (index < _cartapidata.cart.length) {
-      //   _qty[index] = _cartapidata.cart[index].quantity.toString();
-      // }
+     
     }
   }
 
