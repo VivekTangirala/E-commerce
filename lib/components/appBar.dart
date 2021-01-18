@@ -60,7 +60,7 @@ AppBar appBar(BuildContext context,GlobalKey<ScaffoldState> _scaffoldKey) {
         color: Colors.black,
       ),
       onPressed: () {
-        _scaffoldKey.currentState.openDrawer();
+       // scaffoldkey.currentState.openDrawer();
       },
     ),
     title: Row(
