@@ -214,7 +214,7 @@ AppBar _appBar(BuildContext context) {
               onPressed: () async {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Cart()),
+                  MaterialPageRoute(builder: (context) => Cart1()),
                 );
               },
             ),

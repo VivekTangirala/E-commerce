@@ -9,12 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-class Cart extends StatefulWidget {
+class Cart1 extends StatefulWidget {
   @override
   _CartState createState() => _CartState();
 }
 
-class _CartState extends State<Cart> {
+class _CartState extends State<Cart1> {
   Cartapi _cartapidata;
   Productdetails _productdetails;
   var _qty;

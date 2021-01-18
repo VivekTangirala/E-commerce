@@ -156,7 +156,7 @@ AppBar _appBar(BuildContext context, index) {
           sharedPreferences.clear();
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Cart()),
+            MaterialPageRoute(builder: (context) => Cart1()),
           );
         },
       ),
