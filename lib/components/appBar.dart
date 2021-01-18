@@ -96,7 +96,7 @@ AppBar appBar(BuildContext context,GlobalKey<ScaffoldState> _scaffoldKey) {
               onPressed: () async {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Cart()),
+                  MaterialPageRoute(builder: (context) => Cart1()),
                 );
               },
             ),
