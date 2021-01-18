@@ -1,4 +1,4 @@
-import 'package:ecom/Cart/cart1.dart';
+import 'package:ecom/Cart/cart.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -50,7 +50,7 @@ class SearchBar extends SearchDelegate<String> {
   }
 }
 
-AppBar appBar(BuildContext context) {
+AppBar appBar(BuildContext context,GlobalKey<ScaffoldState> _scaffoldKey) {
   return AppBar(
     // backgroundColor: Colors.white,
     elevation: 0.0,
@@ -60,7 +60,7 @@ AppBar appBar(BuildContext context) {
         color: Colors.black,
       ),
       onPressed: () {
-       // _scaffoldKey.currentState.openDrawer();
+        _scaffoldKey.currentState.openDrawer();
       },
     ),
     title: Row(

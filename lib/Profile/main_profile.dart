@@ -60,7 +60,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
           backgroundColor: Colors.grey,
           elevation: 0,
         ),
-        body: Stack(overflow: Overflow.visible, children: <Widget>[
+        body: Stack( children: <Widget>[
           Container(
             color: Colors.grey,
             height: height / 4,

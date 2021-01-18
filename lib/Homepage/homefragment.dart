@@ -1,5 +1,3 @@
-
-
 import 'package:ecom/Homepage/BestOffers.dart';
 import 'package:ecom/Homepage/Brand/Brand.dart';
 import 'package:ecom/Homepage/Invite.dart';
@@ -11,7 +9,6 @@ import 'Categorylist/Category.dart';
 import 'Discovery/Discover.dart';
 import 'Drawer.dart';
 import 'Varieties.dart';
-
 
 class Imaged {
   String image1;
@@ -32,7 +29,8 @@ class HomeFragment extends StatefulWidget {
   _HomefragmentState createState() => _HomefragmentState();
 }
 
-class _HomefragmentState extends State<HomeFragment> {
+class _HomefragmentState extends State<HomeFragment>
+    with AutomaticKeepAliveClientMixin {
   // bool _firstload = false;
   List values;
   String a, b, c;
@@ -49,13 +47,15 @@ class _HomefragmentState extends State<HomeFragment> {
       _isloading = false;
     });
   }
-GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: appBar(context),
+        appBar: appBar(context, _scaffoldKey),
         key: _scaffoldKey,
         drawer: Drawer1(),
         body: SafeArea(
@@ -105,10 +105,10 @@ GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
           ),
         ));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
-
-
-
 
 Widget _categoryheading(BuildContext context, String str) {
   return Align(

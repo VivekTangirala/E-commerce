@@ -52,9 +52,24 @@ class _BodyState extends State<Body> {
                       Container(
                         height: size.height * 0.22,
                         width: size.width,
-                        child: Image.network(
-                          _productdetails.results[0].image,
-                          fit: BoxFit.fill,
+                        child: FadeInImage(
+                          imageErrorBuilder: (BuildContext context,
+                              Object exception, StackTrace stackTrace) {
+                            return Container(
+                                decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage("assets/images/drinks.jpg"),
+                              ),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5.0),
+                              ), // set rounded corner radius
+                            ));
+                          },
+                          placeholder: AssetImage('assets/images/loading.gif'),
+                          image: NetworkImage(_productdetails.results[0].image),
+                          fit: BoxFit.cover,
                         ),
                       ),
                       Container(
@@ -76,7 +91,7 @@ class _BodyState extends State<Body> {
                           children: <Widget>[
                             // CounterWithFavBtn(),
                             ProductTitleWithImage(
-                              productdetails: _productdetails,
+                              productdetails: _productdetails.results[0].name,
                             ),
                             AddToCart(
                               productid: _productid,
@@ -84,7 +99,8 @@ class _BodyState extends State<Body> {
                             //ColorAndSize(product: product),
                             SizedBox(height: 20 / 3),
                             Description(
-                              productdetails: _productdetails,
+                              productdetails:
+                                  _productdetails.results[0].description,
                             ),
                             SizedBox(height: 20 / 3),
                           ],

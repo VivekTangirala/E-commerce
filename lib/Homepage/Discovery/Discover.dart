@@ -2,7 +2,7 @@ import 'package:ecom/Api/Productdetails/Productdetails.dart';
 import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
 import 'package:ecom/Api/Specialproductsapi/Specialproductsapi.dart';
 import 'package:ecom/Api/Specialproductsapi/Specialproductsimport.dart';
-import 'package:ecom/details/details_screen.dart';
+import 'package:ecom/productDetails/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shimmer/shimmer.dart';

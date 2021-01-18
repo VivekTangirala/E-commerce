@@ -1,4 +1,4 @@
-import 'package:ecom/Cart/cart1.dart';
+import 'package:ecom/Cart/cart.dart';
 import 'package:ecom/Receipe/Details1.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';

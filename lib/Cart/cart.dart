@@ -49,6 +49,7 @@ class _CartState extends State<Cart> {
         _counters();
       });
     });
+    
     for (var i = 0; i < _cartapidata.cart.length; i++) {
       _cartproducts.add(_cartapidata.cart[i].productId.toString());
     }

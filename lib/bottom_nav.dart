@@ -70,14 +70,7 @@ class _BottomNav extends State {
                   Text('Recipe', style: Theme.of(context).textTheme.bodyText2),
               activeColor: Colors.black,
               icon: Icon(Icons.fastfood)),
-          // BottomNavyBarItem(
-          //     title: Text('   Profile',
-          //         style: Theme.of(context).textTheme.bodyText2),
-          //     inactiveColor: Colors.black54,
-          //     activeColor: Colors.black,
-          //     icon: Icon(
-          //       EvaIcons.person,
-          //     )),
+         
         ],
       ),
     );

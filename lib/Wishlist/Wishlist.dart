@@ -5,7 +5,6 @@ import 'package:ecom/Api/Productdetails/Productdetails.dart';
 import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
 import 'package:ecom/Wishlist/Wishlistapi.dart';
 import 'package:ecom/Wishlist/Wishlistapiimport.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -101,7 +100,7 @@ class _WishlistState extends State<Wishlist> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _appBar(context),
+       // appBar: _appBar(context),
         body: SafeArea(
           child: _wishlistapi == null
               ? Center(
@@ -329,101 +328,6 @@ class _WishlistState extends State<Wishlist> {
 
 /////////////////////////////////////////////////////////
 
-AppBar _appBar(BuildContext context) {
-  return AppBar(
-    // backgroundColor: Colors.white,
-    elevation: 0.0,
-    leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-        ),
-        onPressed: () {
-          Navigator.of(context).pop();
-        }),
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Align(
-            alignment: Alignment.centerRight,
-            child: Center(
-              child: Text(
-                "Wishlist",
-                style: Theme.of(context).textTheme.headline3,
-              ),
-            )),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            IconButton(
-              padding: EdgeInsets.only(left: 20),
-              icon: Icon(
-                EvaIcons.search,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                showSearch(context: context, delegate: SearchBar());
-              },
-            ),
-            IconButton(
-              icon: Icon(
-                EvaIcons.shoppingCartOutline,
-                color: Colors.black,
-              ),
-              padding: EdgeInsets.only(left: 20),
-              onPressed: () async {},
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
-}
 
-class SearchBar extends SearchDelegate<String> {
-  final cities = ["aa"];
 
-  final recentCities = ["aa"];
 
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-          icon: AnimatedIcon(
-            icon: AnimatedIcons.menu_close,
-            progress: transitionAnimation,
-          ),
-          onPressed: () {
-            query = "";
-          })
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-        icon: AnimatedIcon(
-          icon: AnimatedIcons.menu_arrow,
-          progress: transitionAnimation,
-        ),
-        onPressed: () {
-          close(context, null);
-        });
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    final suggestionList = query.isEmpty ? recentCities : cities;
-    return ListView.builder(
-        itemBuilder: (context, index) => ListTile(
-              leading: Icon(Icons.near_me),
-              title: Text(cities[index]),
-            ),
-        itemCount: suggestionList.length);
-  }
-}

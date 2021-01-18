@@ -34,15 +34,14 @@ class _DetailsPageState extends State<DetailsPage>
 
   _DetailsPageState(this.recipe);
 
-  TabController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(
-      length: 2,
-      vsync: this,
-    );
+    // _controller = TabController(
+    //   length: 2,
+    //   vsync: this,
+    // );
   }
 
   @override

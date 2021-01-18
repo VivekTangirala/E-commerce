@@ -1,8 +1,7 @@
-import 'package:ecom/Api/Productdetails/Productdetails.dart';
 import 'package:flutter/material.dart';
 
 class Description extends StatefulWidget {
-  final Productdetails productdetails;
+  final String productdetails;
 
   const Description({Key key, this.productdetails}) : super(key: key);
   @override
@@ -10,7 +9,7 @@ class Description extends StatefulWidget {
 }
 
 class _DescriptionState extends State<Description> {
-  final Productdetails _productdetails;
+  final String _productdetails;
 
   _DescriptionState(this._productdetails);
   @override
@@ -18,7 +17,7 @@ class _DescriptionState extends State<Description> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Text(
-        _productdetails.results[0].description,
+        _productdetails,
         overflow: TextOverflow.ellipsis,
         textAlign: TextAlign.justify,
         maxLines: 8,

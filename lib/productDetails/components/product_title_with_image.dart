@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductTitleWithImage extends StatefulWidget {
-  final Productdetails productdetails;
+  final String productdetails;
 
   const ProductTitleWithImage({Key key, this.productdetails}) : super(key: key);
   @override
@@ -12,7 +12,7 @@ class ProductTitleWithImage extends StatefulWidget {
 }
 
 class _ProductTitleWithImageState extends State<ProductTitleWithImage> {
-  final Productdetails _productdetails;
+  final String _productdetails;
 
   _ProductTitleWithImageState(this._productdetails);
   @override
@@ -23,7 +23,7 @@ class _ProductTitleWithImageState extends State<ProductTitleWithImage> {
           Container(
             width: 200,
             margin: EdgeInsets.only(top: 16),
-            child: Text(_productdetails.results[0].name,
+            child: Text(_productdetails,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.dMSans(color: Colors.black, fontSize: 25)),

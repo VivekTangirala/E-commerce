@@ -1,6 +1,5 @@
 import 'package:ecom/Homepage/categoryitems/Categorydetailsapi.dart';
 import 'package:ecom/Homepage/categoryitems/Categorydetailsimport.dart';
-import 'package:ecom/components/appBar.dart';
 import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +39,7 @@ class Categoryitemsstate extends State<Categoryitems> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appBar(context),
+     // appBar: appBar(context,),
       body: _categorydetails == null
           ? Center(
               child: CircularProgressIndicator(),

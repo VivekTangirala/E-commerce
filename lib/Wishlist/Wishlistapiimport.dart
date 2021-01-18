@@ -14,7 +14,7 @@ class Wishlistapiimport {
 
     try {
       final response = await http.get(
-          "http://infintymall.herokuapp.com/homepage/api/wishlist",
+          "https://infintymall.herokuapp.com/homepage/api/wishlist",
           headers: {HttpHeaders.authorizationHeader: token});
       if (response.statusCode == 200) {
         final Wishlistapi wishlistapi = wishlistapiFromJson(response.body);
