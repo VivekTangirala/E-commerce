@@ -124,7 +124,7 @@ class _WishlistState extends State<Wishlist> {
                           return Container(
                             height: MediaQuery.of(context).size.height / 6,
                             width: MediaQuery.of(context).size.width,
-                            child: Column(
+                            child: Row(
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(15.0),
@@ -151,9 +151,10 @@ class _WishlistState extends State<Wishlist> {
                                     image: NetworkImage(
                                         _productdetails.results[index].image),
                                     fit: BoxFit.cover,
+                                    width: 50.0,
                                   ),
                                 ),
-                                Column(
+                                Row(
                                   children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(15.0),
