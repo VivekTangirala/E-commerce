@@ -26,11 +26,11 @@ class Cartapiremove {
       //     .delete("http://infintymall.herokuapp.com/homepage/api/cart",
       //         // body:data,
       //         headers: {HttpHeaders.authorizationHeader: _token});
-      print(request.body);
       if (response.statusCode == 200) {
         print("product removed");
       } else {
         print(response.statusCode);
+        print(request.body);
       }
     } catch (e) {
       print(e);
