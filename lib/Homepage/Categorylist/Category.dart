@@ -34,14 +34,15 @@ class _Categorylist1State extends State<Category> {
               child: CircularProgressIndicator(),
             )
           : ListView.builder(
-              padding: EdgeInsets.only(left: 8.0, right: 8.0),
+            
+              padding: EdgeInsets.symmetric(horizontal:8),
               scrollDirection: Axis.horizontal,
               itemCount: _categorydata.length,
               shrinkWrap: true,
               physics: ScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
                   child: Hero(
                     tag: 'Categories$index',
                     child: GestureDetector(
@@ -56,18 +57,19 @@ class _Categorylist1State extends State<Category> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: getProportionateScreenHeight(50),
-                            width: getProportionateScreenWidth(50),
+                            height: getProportionateScreenHeight(55),
+                            width: getProportionateScreenWidth(60),
                             child: FadeInImage(
                               imageErrorBuilder: (BuildContext context,
                                   Object exception, StackTrace stackTrace) {
                                 return Container(
+                                 // padding: EdgeInsets.only(right:50.0),
                                     decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
+                                      borderRadius: BorderRadius.circular(10.0),
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image:
-                                        AssetImage("assets/images/tomato.png"),
+                                        AssetImage("assets/images/burger.jpeg"),
                                   ),
                                   color: Colors.white,
                                   
@@ -81,6 +83,7 @@ class _Categorylist1State extends State<Category> {
                             ),
                           ),
                           Text(
+                            
                             _categorydata[index].name,
                             style: Theme.of(context).textTheme.headline5,
                             overflow: TextOverflow.ellipsis,

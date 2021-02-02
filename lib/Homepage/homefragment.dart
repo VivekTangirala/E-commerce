@@ -1,6 +1,7 @@
 import 'package:ecom/Cart/cart.dart';
 import 'package:ecom/Homepage/BestOffers.dart';
 import 'package:ecom/Homepage/Brand/Brand.dart';
+import 'package:ecom/Homepage/Cashback.dart';
 import 'package:ecom/Homepage/Invite.dart';
 import 'package:ecom/components/screensize.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -39,6 +40,7 @@ class _HomefragmentState extends State<HomeFragment>
   List values;
   String a, b, c;
   bool _isloading = true;
+  TextEditingController _textEditingController;
   @override
   void initState() {
     super.initState();
@@ -56,7 +58,7 @@ class _HomefragmentState extends State<HomeFragment>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-        backgroundColor: Colors.white,
+       backgroundColor: Colors.grey[50],
         appBar: _appBar(context),
         key: _scaffoldKey,
         drawer: Drawer1(),
@@ -74,15 +76,17 @@ class _HomefragmentState extends State<HomeFragment>
                           Widget>[
                         // _textsection(context),
                         // SizedBox(height: 10),
-                        _categoryheading(context, "Categories"),
+                        _searchBar(context),
+                        Cashback(),
+                       // _categoryheading(context, "Categories"),
 
                         Category(),
-                        SizedBox(height: getProportionateScreenHeight(5.0)),
+                        //SizedBox(height: getProportionateScreenHeight(5.0)),
 
                         _categoryheading(context, "Discover"),
                         // SpecialProducts(),
                         Discover(),
-                        SizedBox(height: getProportionateScreenHeight(15.0)),
+                       // SizedBox(height: getProportionateScreenHeight(5.0)),
 
                         _categoryheading(context, "Best Offers"),
                         Bestoffers(),
@@ -172,7 +176,80 @@ class SearchBar extends SearchDelegate<String> {
         itemCount: suggestionList.length);
   }
 }
-
+  Widget _searchBar(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16, ),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16,),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFFFFF),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(38.0),
+                  ),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        offset: const Offset(0, 2),
+                        blurRadius: 8.0),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 16, right: 16, top: 0, bottom: 0),
+                  child: TextField(
+                    onChanged: (String txt) {},
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                    cursorColor: Colors.deepOrange,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Search...',
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.orange,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(38.0),
+              ),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.4),
+                    offset: const Offset(0, 2),
+                    blurRadius: 8.0),
+              ],
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(32.0),
+                ),
+                onTap: () {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(Icons.search,
+                      size: 20,
+                      color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 AppBar _appBar(BuildContext context) {
   return AppBar(
     // backgroundColor: Colors.white,
@@ -203,7 +280,7 @@ AppBar _appBar(BuildContext context) {
             IconButton(
               padding: EdgeInsets.only(left: 20),
               icon: Icon(
-                EvaIcons.search,
+                EvaIcons.heartOutline,
                 color: Colors.black,
               ),
               onPressed: () {
