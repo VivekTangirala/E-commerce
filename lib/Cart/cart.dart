@@ -47,7 +47,7 @@ class _Cart1State extends State<Cart1> {
               _productdetails = value;
             }));
     firstload = true;
-  }
+  } 
 
   _deleteproduct(delproductid) async {
     await Cartapiremove.removefromcart(delproductid.toString())
