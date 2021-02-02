@@ -21,6 +21,7 @@ class _CheckoutState extends State<Checkout> {
   final String _id, _amount, _currency;
   _CheckoutState(this._id, this._amount, this._currency);
   bool _paymentsuccess;
+  bool _ordervarification = false;
   Razorpay _razorpay;
   @override
   void initState() {
@@ -58,15 +59,15 @@ class _CheckoutState extends State<Checkout> {
     return null;
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+  void _handlePaymentSuccess(PaymentSuccessResponse response) async {
     print(
         "H111111111111111111111111111111111111111111111111111111111111111111111111111");
     print(response.orderId);
     print(response.paymentId);
     print(response.signature);
     _paymentsuccess = true;
-    getpaymentverification(
-        response.orderId, response.paymentId, response.signature);
+    await getpaymentverification(
+        response.orderId, response.paymentId, response.signature, _id);
     // Do something when payment succeeds
   }
 
@@ -116,13 +117,30 @@ class _CheckoutState extends State<Checkout> {
                       borderRadius: BorderRadius.circular(4.0)),
                   onPressed: () async {
                     await _placeorder(_id, _amount, _currency);
-                    if (null) {
-                      
-                    }
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      return HomeFragment();
-                    }));
+                    _ordervarification == false
+                        ? Scaffold(
+                            body: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
+                        : Scaffold(
+                            body: Center(
+                            child: CupertinoAlertDialog(
+                              title: Text("You placed your order "),
+                              actions: [
+                                CupertinoButton(
+                                    child: Text("Continue Shopping!"),
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) {
+                                          return HomeFragment();
+                                        }),
+                                      );
+                                    })
+                              ],
+                            ),
+                          ));
                     // if (_success || _error == true)
                     //   {
                     //     Navigator.of(context).pushAndRemoveUntil(
@@ -145,7 +163,7 @@ class _CheckoutState extends State<Checkout> {
     );
   }
 
-  getpaymentverification(razororderid, paymentid, signature) async {
+  getpaymentverification(razororderid, paymentid, signature, id) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     String token = sharedPreferences.getString('token');
@@ -155,7 +173,8 @@ class _CheckoutState extends State<Checkout> {
     Map data = {
       'razorsignature': signature,
       'razororderid': razororderid,
-      'razorpaymentid': paymentid
+      'razorpaymentid': paymentid,
+      'orderid': id,
     };
 
     try {
@@ -167,8 +186,10 @@ class _CheckoutState extends State<Checkout> {
         },
       );
       if (response.statusCode == 200) {
+        _ordervarification = true;
         return true;
-      }else{
+      } else {
+        _ordervarification = true;
         return false;
       }
     } catch (e) {
