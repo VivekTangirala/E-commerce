@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 
@@ -73,7 +74,6 @@ class _AddToCartState extends State<AddToCart> {
         "https://infintymall.herokuapp.com/homepage/api/cart",
         body: data,
         headers: {HttpHeaders.authorizationHeader: token});
-    print(response.body);
     if (response.statusCode == 200) {
       
       jsonresponse = json.decode(response.body);
@@ -88,7 +88,6 @@ class _AddToCartState extends State<AddToCart> {
       );
     }
     print(response.statusCode);
-    print(jsonresponse);
   }
 }
 
