@@ -16,6 +16,7 @@ class _Categorylist1State extends State<Category> {
     super.initState();
     getcategories();
   }
+  
 
   getcategories() async {
     await Categoryimport.getCategoryList().then((value) => setState(() {
