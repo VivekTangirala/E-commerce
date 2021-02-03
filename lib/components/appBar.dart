@@ -1,108 +1,60 @@
+
+
 import 'package:ecom/Cart/cart.dart';
+import 'package:ecom/components/searchBar.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
-class SearchBar extends SearchDelegate<String> {
-  final cities = ["aa"];
-
-  final recentCities = ["aa"];
-
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-          icon: AnimatedIcon(
-            icon: AnimatedIcons.menu_close,
-            progress: transitionAnimation,
+AppBar appBar(BuildContext context,GlobalKey<ScaffoldState> scaffoldKey) {
+  return AppBar(
+    backgroundColor: Colors.white,
+    elevation: 0.0,
+    leading: Container(
+        padding: EdgeInsets.all(16),
+        width: 15,
+        height: 15,
+        child: InkWell(
+          child: SvgPicture.asset(
+            "assets/icons/menu.svg",
+            height: 15,
+            width: 15,
+            color: Colors.black,
           ),
-          onPressed: () {
-            query = "";
-          })
-    ];
-  }
+          onTap: () {
+                      scaffoldKey.currentState.openDrawer();
 
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-        icon: AnimatedIcon(
-          icon: AnimatedIcons.menu_arrow,
-          progress: transitionAnimation,
+          },
+        )),
+    centerTitle: true,
+    title: Text(
+      "Treg Mart",
+      style: Theme.of(context).textTheme.headline3,
+    ),
+    actions: [
+      IconButton(
+        padding: EdgeInsets.only(left: 20),
+        icon: Icon(
+          EvaIcons.heartOutline,
+          color: Colors.black,
         ),
         onPressed: () {
-          close(context, null);
-        });
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    final suggestionList = query.isEmpty ? recentCities : cities;
-    return ListView.builder(
-        itemBuilder: (context, index) => ListTile(
-              leading: Icon(Icons.near_me),
-              title: Text(cities[index]),
-            ),
-        itemCount: suggestionList.length);
-  }
-}
-
-AppBar appBar(BuildContext context,GlobalKey<ScaffoldState> _scaffoldKey) {
-  return AppBar(
-    // backgroundColor: Colors.white,
-    elevation: 0.0,
-    leading: IconButton(
-      icon: Icon(
-        Icons.menu,
-        color: Colors.black,
+          showSearch(context: context, delegate: SearchBar());
+        },
       ),
-      onPressed: () {
-       // scaffoldkey.currentState.openDrawer();
-      },
-    ),
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Align(
-            alignment: Alignment.centerRight,
-            child: Center(
-              child: Text(
-                "Treg Mart",
-                style: Theme.of(context).textTheme.headline3,
-              ),
-            )),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            IconButton(
-              padding: EdgeInsets.only(left: 20),
-              icon: Icon(
-                EvaIcons.search,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                showSearch(context: context, delegate: SearchBar());
-              },
-            ),
-            IconButton(
-              icon: Icon(
-                EvaIcons.shoppingCartOutline,
-                color: Colors.black,
-              ),
-              padding: EdgeInsets.only(left: 20),
-              onPressed: () async {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Cart1()),
-                );
-              },
-            ),
-          ],
+      IconButton(
+        icon: Icon(
+          EvaIcons.shoppingCartOutline,
+          color: Colors.black,
         ),
-      ],
-    ),
+        padding: EdgeInsets.only(left: 20,right: 16),
+        onPressed: () async {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Cart1()),
+          );
+        },
+      ),
+    ],
   );
 }

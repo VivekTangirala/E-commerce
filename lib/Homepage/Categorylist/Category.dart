@@ -4,7 +4,6 @@ import 'package:ecom/Homepage/categoryitems/categoryitems.dart';
 import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 
-
 class Category extends StatefulWidget {
   @override
   _Categorylist1State createState() => _Categorylist1State();
@@ -34,8 +33,7 @@ class _Categorylist1State extends State<Category> {
               child: CircularProgressIndicator(),
             )
           : ListView.builder(
-            
-              padding: EdgeInsets.symmetric(horizontal:8),
+              padding: EdgeInsets.symmetric(horizontal: 8),
               scrollDirection: Axis.horizontal,
               itemCount: _categorydata.length,
               shrinkWrap: true,
@@ -56,36 +54,43 @@ class _Categorylist1State extends State<Category> {
                       },
                       child: Column(
                         children: [
-                          SizedBox(
-                            height: getProportionateScreenHeight(55),
-                            width: getProportionateScreenWidth(60),
-                            child: FadeInImage(
-                              imageErrorBuilder: (BuildContext context,
-                                  Object exception, StackTrace stackTrace) {
-                                return Container(
-                                 // padding: EdgeInsets.only(right:50.0),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image:
-                                        AssetImage("assets/images/burger.jpeg"),
-                                  ),
-                                  color: Colors.white,
-                                  
-                                ));
-                              },
-                              placeholder: AssetImage(
-                                'assets/images/loading.gif',
+                          Container(
+                              width: getProportionateScreenHeight(50),
+                              height: getProportionateScreenHeight(50),
+                              decoration: new BoxDecoration(
+                                shape: BoxShape.circle,
                               ),
-                              image: NetworkImage(_categorydata[index].image),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
+                              child: AspectRatio(
+                                  aspectRatio: 1 / 1,
+                                  child: ClipOval(
+                                    child: FadeInImage(
+                                      imageErrorBuilder: (BuildContext context,
+                                          Object exception,
+                                          StackTrace stackTrace) {
+                                        return Container(
+                                            // padding: EdgeInsets.only(right:50.0),
+                                            decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          image: DecorationImage(
+                                            fit: BoxFit.contain,
+                                            image: AssetImage(
+                                                "assets/images/burger.jpeg"),
+                                          ),
+                                          color: Colors.white,
+                                        ));
+                                      },
+                                      placeholder: AssetImage(
+                                        'assets/images/loading.gif',
+                                      ),
+                                      image: NetworkImage(
+                                          _categorydata[index].image),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ))),
                           Text(
-                            
                             _categorydata[index].name,
-                            style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.headline5.copyWith(fontSize:14),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ],
