@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:ecom/Cart/Cartapi.dart';
 import 'package:ecom/Cart/Cartapiimport.dart';
 import 'package:ecom/Api/Productdetails/Productdetails.dart';
@@ -11,6 +14,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Cart1 extends StatefulWidget {
   @override
@@ -29,8 +33,6 @@ class _Cart1State extends State<Cart1> {
     super.initState();
     _refreshcart();
   }
-
- 
 
   _refreshcart() async {
     await CartApiimport.getCart().then((value) {
@@ -68,8 +70,8 @@ class _Cart1State extends State<Cart1> {
   }
 
   _counters() {
-    if (_cartapidata.cart != null) {
-      _qty = new List.generate(_cartapidata.cart.length, (index) => 0);
+    if (_cartapidata != null) {
+      _qty = new List.generate(_cartapidata.cart.length, (index) => 1);
     }
   }
 
@@ -156,8 +158,10 @@ class _Cart1State extends State<Cart1> {
                                         Row(
                                           children: [
                                             Text("Quantity : "),
-                                            Text(_productdetails
-                                                .results[index].quantity)
+                                            Text(
+                                              _cartapidata.cart[index].quantity
+                                                  .toString(),
+                                            )
                                           ],
                                         ),
                                         Row(
@@ -198,17 +202,31 @@ class _Cart1State extends State<Cart1> {
                                                 Icons.add_circle,
                                                 color: Colors.orangeAccent,
                                               ),
-                                              onPressed: () {
+                                              onPressed: () async {
                                                 setState(() {
                                                   _qty[index] = _qty[index] + 1;
+                                                });
+                                                await _cartquantity(
+                                                  _cartapidata
+                                                      .cart[index].productId
+                                                      .toString(),
+                                                  (_cartapidata.cart[index]
+                                                              .quantity +
+                                                          1)
+                                                      .toString(),
+                                                );
+                                                setState(() {
+                                                  _refreshcart();
                                                 });
                                               },
                                             ),
                                             SizedBox(
                                               width: 5,
                                             ),
-                                            Text(_productdetails
-                                                .results[index].quantity),
+                                            Text(
+                                              _cartapidata.cart[index].quantity
+                                                  .toString(),
+                                            ),
                                             SizedBox(
                                               width: 5,
                                             ),
@@ -217,13 +235,28 @@ class _Cart1State extends State<Cart1> {
                                                 Icons.remove_circle,
                                                 color: Colors.orangeAccent,
                                               ),
-                                              onPressed: () {
+                                              onPressed: () async {
                                                 setState(() {
                                                   if (_qty[index] > 1) {
                                                     _qty[index] =
                                                         _qty[index] - 1;
                                                   }
                                                 });
+                                                if (_cartapidata
+                                                        .cart[index].quantity >
+                                                    1) {
+                                                  await _cartquantity(
+                                                      _cartapidata
+                                                          .cart[index].productId
+                                                          .toString(),
+                                                      (_cartapidata.cart[index]
+                                                                  .quantity -
+                                                              1)
+                                                          .toString());
+                                                  setState(() {
+                                                    _refreshcart();
+                                                  });
+                                                }
                                               },
                                             ),
                                           ],
@@ -352,5 +385,29 @@ class _Cart1State extends State<Cart1> {
         ),
       ],
     );
+  }
+
+  _cartquantity(String _product, _quantity) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String token = sharedPreferences.getString('token');
+
+    Map data = {'product': _product, 'quantity1': _quantity};
+    var jsonresponse;
+    var response = await http.post(
+        "https://infintymall.herokuapp.com/homepage/api/cart",
+        body: data,
+        headers: {HttpHeaders.authorizationHeader: token});
+    if (response.statusCode == 200) {
+      jsonresponse = json.decode(response.body);
+    }
+    if (jsonresponse != null) {
+      // Navigator.of(context).pushAndRemoveUntil(
+      //     MaterialPageRoute(builder: (BuildContext context) => Cart()),
+      //     (Route<dynamic> route) => false);
+    } else {
+      CupertinoDialogAction(
+        child: Text("Please check your internet connection"),
+      );
+    }
   }
 }
