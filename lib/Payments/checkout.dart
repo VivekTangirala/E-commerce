@@ -168,7 +168,7 @@ class _CheckoutState extends State<Checkout> {
 
     String token = sharedPreferences.getString('token');
 
-    String uri = "http://infintymall.herokuapp.com/homepage/api/verifyorder";
+    String uri = "https://infintymall.herokuapp.com/homepage/api/verifyorder";
 
     Map data = {
       'razorsignature': signature,
@@ -186,6 +186,7 @@ class _CheckoutState extends State<Checkout> {
         },
       );
       if (response.statusCode == 200) {
+        print("valid order");
         _ordervarification = true;
         return true;
       } else {

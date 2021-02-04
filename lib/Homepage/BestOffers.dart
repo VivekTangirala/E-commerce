@@ -50,7 +50,7 @@ class Bestoffersstate extends State<Bestoffers> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: getProportionateScreenHeight(280.0),
+      height: getProportionateScreenHeight(200.0),
       child: _productdetails != null
           ? ListView.builder(
               physics: ClampingScrollPhysics(),
@@ -63,12 +63,12 @@ class Bestoffersstate extends State<Bestoffers> {
                     margin: EdgeInsets.only(left: 4, bottom: 3),
                     child: SizedBox(
                       // height: 100,
-                      width: getProportionateScreenWidth(310.0),
+                      width: getProportionateScreenWidth(250.0),
                       child: Container(
                         margin: EdgeInsets.all(5.0),
                         child: Column(children: [
                           SizedBox(
-                            height: getProportionateScreenHeight(190),
+                            height: getProportionateScreenHeight(140),
                             child: Container(
                               child: FadeInImage(
                                 imageErrorBuilder: (BuildContext context,
@@ -82,7 +82,7 @@ class Bestoffersstate extends State<Bestoffers> {
                                     ),
                                     color: Colors.white,
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(5.0),
+                                      Radius.circular(25.0),
                                     ), // set rounded corner radius
                                   ));
                                 },

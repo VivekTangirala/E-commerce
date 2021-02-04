@@ -108,7 +108,7 @@ class _DiscoverState extends State<Discover> {
                                         ),
                                         color: Colors.white,
                                         borderRadius: BorderRadius.all(
-                                          Radius.circular(5.0),
+                                          Radius.circular(15.0),
                                         ), // set rounded corner radius
                                       ),
                                     );

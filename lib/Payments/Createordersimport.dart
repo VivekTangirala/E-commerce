@@ -1,8 +1,6 @@
 import 'package:ecom/Payments/Createordersapi.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
-import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,7 +10,7 @@ class Createordersimport {
 
     String token = sharedPreferences.getString('token');
 
-    String uri = "http://infintymall.herokuapp.com/homepage/api/createorder";
+    String uri = "https://infintymall.herokuapp.com/homepage/api/createorder";
 
     try {
       var response = await http

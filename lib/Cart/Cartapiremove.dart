@@ -4,12 +4,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 class Cartapiremove {
-  static const uri = "http://infintymall.herokuapp.com/homepage/api/cart";
   static Future<Cartapiremove> removefromcart(String _productid) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String token = sharedPreferences.getString("token");
     print(token);
-    final baseurl = "http://infintymall.herokuapp.com/homepage/api/cart";
+    final baseurl = "https://infintymall.herokuapp.com/homepage/api/cart";
     final url = Uri.parse(baseurl);
     final request = http.Request("DELETE", url);
     request.headers.addAll(<String, String>{

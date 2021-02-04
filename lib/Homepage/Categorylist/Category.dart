@@ -16,7 +16,6 @@ class _Categorylist1State extends State<Category> {
     super.initState();
     getcategories();
   }
-  
 
   getcategories() async {
     await Categoryimport.getCategoryList().then((value) => setState(() {
@@ -27,79 +26,89 @@ class _Categorylist1State extends State<Category> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: getProportionateScreenHeight(80.0),
+      height: getProportionateScreenHeight(100.0),
       width: double.infinity,
       child: _categorydata == null
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              scrollDirection: Axis.horizontal,
-              itemCount: _categorydata.length,
-              shrinkWrap: true,
-              physics: ScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Hero(
-                    tag: 'Categories$index',
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return Categoryitems(
-                            string: _categorydata[index].name,
-                          );
-                        }));
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                              width: getProportionateScreenHeight(50),
-                              height: getProportionateScreenHeight(50),
-                              decoration: new BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: AspectRatio(
-                                  aspectRatio: 1 / 1,
-                                  child: ClipOval(
-                                    child: FadeInImage(
-                                      imageErrorBuilder: (BuildContext context,
-                                          Object exception,
-                                          StackTrace stackTrace) {
-                                        return Container(
-                                            // padding: EdgeInsets.only(right:50.0),
-                                            decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          image: DecorationImage(
-                                            fit: BoxFit.contain,
-                                            image: AssetImage(
-                                                "assets/images/burger.jpeg"),
-                                          ),
-                                          color: Colors.white,
-                                        ));
-                                      },
-                                      placeholder: AssetImage(
-                                        'assets/images/loading.gif',
-                                      ),
-                                      image: NetworkImage(
-                                          _categorydata[index].image),
-                                      fit: BoxFit.fill,
+          : layoutCards(),
+    );
+  }
+
+  Widget layoutCards() {
+    return ListView.builder(
+        padding: EdgeInsets.symmetric(horizontal: 8),
+        scrollDirection: Axis.horizontal,
+        itemCount: _categorydata.length,
+        shrinkWrap: true,
+        physics: ScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Hero(
+                tag: 'Categories$index',
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return Categoryitems(
+                        string: _categorydata[index].name,
+                      );
+                    }));
+                  },
+                  child: Container(
+                    width: getProportionateScreenWidth(80),
+                    child: Column(
+                      children: [
+                        Container(
+                            width: getProportionateScreenHeight(80),
+                            height: getProportionateScreenHeight(80),
+                            decoration: new BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: AspectRatio(
+                                aspectRatio: 1 / 1,
+                                child: ClipOval(
+                                  child: FadeInImage(
+                                    imageErrorBuilder: (BuildContext context,
+                                        Object exception,
+                                        StackTrace stackTrace) {
+                                      return Container(
+                                          // padding: EdgeInsets.only(right:50.0),
+                                          decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                              "assets/images/burger.jpeg"),
+                                        ),
+                                        color: Colors.white,
+                                      ));
+                                    },
+                                    placeholder: AssetImage(
+                                      'assets/images/loading.gif',
                                     ),
-                                  ))),
-                          Text(
-                            _categorydata[index].name,
-                            style: Theme.of(context).textTheme.headline5.copyWith(fontSize:14),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
+                                    image: NetworkImage(
+                                        _categorydata[index].image),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ))),
+                        SizedBox(
+                            child: Text(
+                          _categorydata[index].name,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5
+                              .copyWith(fontSize: 12),
+                          overflow: TextOverflow.ellipsis,
+                        )),
+                      ],
                     ),
                   ),
-                );
-              }),
-    );
+                )),
+          );
+        });
   }
 }
