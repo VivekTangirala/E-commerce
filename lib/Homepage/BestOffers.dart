@@ -45,6 +45,7 @@ class Bestoffersstate extends State<Bestoffers> {
         .then((value1) => setState(() {
               _productdetails = value1;
             }));
+          
   }
 
   @override
@@ -63,7 +64,7 @@ class Bestoffersstate extends State<Bestoffers> {
                     margin: EdgeInsets.only(left: 4, bottom: 3),
                     child: SizedBox(
                       // height: 100,
-                      width: getProportionateScreenWidth(250.0),
+                      width: getProportionateScreenWidth(280.0),
                       child: Container(
                         margin: EdgeInsets.all(5.0),
                         child: Column(children: [
@@ -97,6 +98,7 @@ class Bestoffersstate extends State<Bestoffers> {
                           ),
                           SizedBox(height: 0.0),
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Column(

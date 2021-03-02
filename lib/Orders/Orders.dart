@@ -1,17 +1,9 @@
-
+import 'package:ecom/Api/Productdetails/Productdetails.dart';
+import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
+import 'package:ecom/Orders/Ordersapiimport.dart';
+import 'package:ecom/Orders/ordersapi.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-
-List<String> l1 = [
-  "assets/images/tomato.png",
-  "assets/images/onion.jpeg",
-  "assets/images/burger.jpeg",
-];
-List<String> l2 = [
-  "Tomatoes",
-  "Onions",
-  "Burger",
-];
 
 class Orders extends StatefulWidget {
   @override
@@ -19,6 +11,55 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
+  List<Ordersapi> _orderdetails;
+  Productdetails _productdetails;
+  List<String> _productids = [];
+  @override
+  void initState() {
+    getorders();
+    super.initState();
+  }
+
+  getorders() async {
+    await Ordersapiimport.getorderdetails().then(
+      (value) => setState(
+        () {
+          _orderdetails = value;
+        },
+      ),
+    );
+    for (var i = 0; i < _orderdetails.length; i++) {
+      _productids.add(_orderdetails[i].product.toString());
+    }
+    print(_productids);
+    await Productdetailsimport.getProductdetails(_productids).then(
+      (value) => setState(
+        () {
+          _productdetails = value;
+        },
+      ),
+    );
+    final _repeatedproduteids =
+        List<int>.generate(_productdetails.results.length, (index) => 0);
+
+    for (var i = 0; i < _productids.length; i++) {
+      for (var j = 0; j < _productdetails.results.length; j++) {
+        if (_orderdetails[i].product == _productdetails.results[j].id) {
+          _repeatedproduteids[i] = _repeatedproduteids[i] + 1;
+        }
+      }
+      
+    // }
+    // print(_repeatedproduteids);
+    // await Productdetailsimport.getProductdetails(_productids).then(
+    //   (value) => setState(
+    //     () {
+    //       _productdetails = value;
+    //     },
+    //   ),
+    // );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +68,7 @@ class _OrdersState extends State<Orders> {
         padding: EdgeInsets.only(left: 15.0, right: 15.0),
         width: MediaQuery.of(context).size.width,
         child: ListView.builder(
-          itemCount: l1.length,
+          itemCount: _orderdetails.length,
           physics: ScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
@@ -40,17 +81,16 @@ class _OrdersState extends State<Orders> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15.0),
-                        child: Image.asset(
-                          l1[index],
+                        child: Image.network(
+                          _productdetails.results[index].image,
                           width: MediaQuery.of(context).size.width / 3,
                         ),
+                        //
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(l2[index]),
-                          SizedBox(height: 5.0),
-                          Text("Delivided Sunday"),
+                          Text(_productdetails.results[index].name.toString()),
                         ],
                       ),
                       IconButton(
@@ -115,8 +155,7 @@ AppBar _appBar(BuildContext context) {
                 color: Colors.black,
               ),
               padding: EdgeInsets.only(left: 20),
-              onPressed: () async {
-              },
+              onPressed: () async {},
             ),
           ],
         ),
