@@ -1,12 +1,11 @@
-
-
 import 'package:ecom/Cart/cart.dart';
+import 'package:ecom/Wishlist/Wishlist.dart';
 import 'package:ecom/components/searchBar.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-AppBar appBar(BuildContext context,GlobalKey<ScaffoldState> scaffoldKey) {
+AppBar appBar(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {
   return AppBar(
     backgroundColor: Colors.white,
     elevation: 0.0,
@@ -22,8 +21,7 @@ AppBar appBar(BuildContext context,GlobalKey<ScaffoldState> scaffoldKey) {
             color: Colors.black,
           ),
           onTap: () {
-                      scaffoldKey.currentState.openDrawer();
-
+            scaffoldKey.currentState.openDrawer();
           },
         )),
     centerTitle: true,
@@ -39,7 +37,15 @@ AppBar appBar(BuildContext context,GlobalKey<ScaffoldState> scaffoldKey) {
           color: Colors.black,
         ),
         onPressed: () {
-          showSearch(context: context, delegate: SearchBar());
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return Wishlist();
+              },
+            ),
+          );
+        //  showSearch(context: context, delegate: SearchBar());
         },
       ),
       IconButton(
@@ -47,7 +53,7 @@ AppBar appBar(BuildContext context,GlobalKey<ScaffoldState> scaffoldKey) {
           EvaIcons.shoppingCartOutline,
           color: Colors.black,
         ),
-        padding: EdgeInsets.only(left: 20,right: 16),
+        padding: EdgeInsets.only(left: 20, right: 16),
         onPressed: () async {
           Navigator.push(
             context,

@@ -29,7 +29,9 @@ class _OrdersState extends State<Orders> {
       ),
     );
     for (var i = 0; i < _orderdetails.length; i++) {
+
       _productids.add(_orderdetails[i].product.toString());
+    
     }
     print(_productids);
     await Productdetailsimport.getProductdetails(_productids).then(
@@ -39,15 +41,7 @@ class _OrdersState extends State<Orders> {
         },
       ),
     );
-    final _repeatedproduteids =
-        List<int>.generate(_productdetails.results.length, (index) => 0);
-
-    for (var i = 0; i < _productids.length; i++) {
-      for (var j = 0; j < _productdetails.results.length; j++) {
-        if (_orderdetails[i].product == _productdetails.results[j].id) {
-          _repeatedproduteids[i] = _repeatedproduteids[i] + 1;
-        }
-      }
+ 
       
     // }
     // print(_repeatedproduteids);

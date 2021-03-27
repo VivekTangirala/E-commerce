@@ -124,6 +124,7 @@ Widget searchBar(BuildContext context) {
                 Radius.circular(20.0),
               ),
               onTap: () {
+                showSearch(context: context, delegate: SearchBar());
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               child: Icon(Icons.search, size: 25, color: Colors.white),
