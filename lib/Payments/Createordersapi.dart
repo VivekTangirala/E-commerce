@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final createorderapi = createorderapiFromJson(jsonString);
-
 import 'dart:convert';
 
 Createorderapi createorderapiFromJson(String str) => Createorderapi.fromJson(json.decode(str));
