@@ -117,7 +117,7 @@ class _DiscoverState extends State<Discover> {
                                       AssetImage('assets/images/loading.gif'),
                                   image: NetworkImage(
                                       _productdetails.results[index].image),
-                                  fit: BoxFit.cover,
+                                 fit: BoxFit.cover,
                                 ),
                                 //alignment: Alignment.center,
                               ),

@@ -1,7 +1,6 @@
-import 'package:ecom/Api/Productdetails/Productdetails.dart';
-import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
 import 'package:ecom/Orders/Ordersapiimport.dart';
 import 'package:ecom/Orders/ordersapi.dart';
+import 'package:ecom/components/screensize.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +10,7 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
-  List<Ordersapi> _orderdetails;
-  Productdetails _productdetails;
-  List<String> _productids = [];
+  Pastordersapi _orderdetails;
   @override
   void initState() {
     getorders();
@@ -28,81 +25,85 @@ class _OrdersState extends State<Orders> {
         },
       ),
     );
-    for (var i = 0; i < _orderdetails.length; i++) {
-
-      _productids.add(_orderdetails[i].product.toString());
-    
-    }
-    print(_productids);
-    await Productdetailsimport.getProductdetails(_productids).then(
-      (value) => setState(
-        () {
-          _productdetails = value;
-        },
-      ),
-    );
- 
-      
-    // }
-    // print(_repeatedproduteids);
-    // await Productdetailsimport.getProductdetails(_productids).then(
-    //   (value) => setState(
-    //     () {
-    //       _productdetails = value;
-    //     },
-    //   ),
-    // );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(context),
-      body: Container(
-        padding: EdgeInsets.only(left: 15.0, right: 15.0),
-        width: MediaQuery.of(context).size.width,
-        child: ListView.builder(
-          itemCount: _orderdetails.length,
-          physics: ScrollPhysics(),
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
+      body: _orderdetails == null
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Container(
+              padding: EdgeInsets.only(left: 15.0, right: 15.0),
               width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15.0),
-                        child: Image.network(
-                          _productdetails.results[index].image,
-                          width: MediaQuery.of(context).size.width / 3,
+              child: ListView.builder(
+                itemCount: _orderdetails.orders.length,
+                physics: ScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            FadeInImage(
+                              imageErrorBuilder: (BuildContext context,
+                                  Object exception, StackTrace stackTrace) {
+                                return Container(
+                                  height: getProportionateScreenHeight(70.0),
+                                  width: getProportionateScreenWidth(110.0),
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                        "assets/images/drinks.jpg",
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(15.0),
+                                    ), // set rounded corner radius
+                                  ),
+                                );
+                              },
+                              placeholder:
+                                  AssetImage('assets/images/loading.gif'),
+                              image: NetworkImage(
+                                _orderdetails.orders[index].product.image,
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(_orderdetails.orders[index].product.name),
+                                Text(
+                                  _orderdetails.orders[index].updatedAt
+                                      .toString().substring(0,10),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.navigate_next,
+                                color: Colors.black,
+                              ),
+                              onPressed: () {},
+                            ),
+                          ],
                         ),
-                        //
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(_productdetails.results[index].name.toString()),
-                        ],
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.navigate_next,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                  Divider(),
-                ],
+                        Divider(),
+                      ],
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
-      ),
+            ),
     );
   }
 }
