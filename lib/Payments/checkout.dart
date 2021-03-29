@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:ecom/Homepage/homefragment.dart';
@@ -60,8 +59,7 @@ class _CheckoutState extends State<Checkout> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) async {
-    print(
-        "H111111111111111111111111111111111111111111111111111111111111111111111111111");
+    
     print(response.orderId);
     print(response.paymentId);
     print(response.signature);
