@@ -6,10 +6,6 @@ import 'package:flutter/material.dart';
 import 'Login/splash_screen.dart';
 
 void main() {
-  FlutterError.onError = (FlutterErrorDetails details) {
-    FlutterError.dumpErrorToConsole(details);
-    if (kReleaseMode) exit(1);
-  };
   runApp(MyApp());
 }
 

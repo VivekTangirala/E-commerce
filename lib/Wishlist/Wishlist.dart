@@ -28,9 +28,7 @@ class Wishlist extends StatefulWidget {
 }
 
 class _WishlistState extends State<Wishlist> {
-  Productdetails _productdetails;
   Wishlistapi _wishlistapi;
-  List<String> _wishlistproductids = [];
   bool _firstload = false;
   @override
   void initState() {
@@ -42,16 +40,6 @@ class _WishlistState extends State<Wishlist> {
     await Wishlistapiimport.getwishlist().then((value) => setState(() {
           _wishlistapi = value;
         }));
-    for (var i = 0; i < _wishlistapi.wishlist.length; i++) {
-      _wishlistproductids.add(_wishlistapi.wishlist[i].productId.toString());
-    }
-    await Productdetailsimport.getProductdetails(_wishlistproductids).then(
-      (value) => setState(
-        () {
-          _productdetails = value;
-        },
-      ),
-    );
     _firstload = true;
   }
 
@@ -113,7 +101,7 @@ class _WishlistState extends State<Wishlist> {
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : _productdetails == null
+            : _wishlistapi == null
                 ? Center(
                     child: Text("Your wishlist is empty,let's go shopping..."),
                   )
@@ -121,37 +109,33 @@ class _WishlistState extends State<Wishlist> {
                     padding: EdgeInsets.only(left: 5.0, right: 5.0, top: 8.0),
                     //width: MediaQuery.of(context).size.width,
                     child: ListView.builder(
-                      itemCount: _wishlistapi.wishlist.length,
+                      itemCount: _wishlistapi.wishList.length,
                       physics: ScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
                         return Card(
-                        //  margin: EdgeInsets.all(getProportionateScreenWidth(5.0)),
+                          //  margin: EdgeInsets.all(getProportionateScreenWidth(5.0)),
                           // height: MediaQuery.of(context).size.height / 6,
                           // width: MediaQuery.of(context).size.width,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(15.0),
+                               SizedBox(
+                              height: getProportionateScreenHeight(120.0),
+                              child: Container(
                                 child: FadeInImage(
                                   imageErrorBuilder: (BuildContext context,
                                       Object exception, StackTrace stackTrace) {
                                     return Container(
-                                      padding: EdgeInsets.all(getProportionateScreenWidth(5.0)),
-                                      height:
-                                          getProportionateScreenHeight(100.0),
-                                      width: getProportionateScreenWidth(120.0),
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           fit: BoxFit.cover,
                                           image: AssetImage(
-                                            "assets/images/drinks.jpg",
-                                          ),
+                                              "assets/images/drinks.jpg"),
                                         ),
                                         color: Colors.white,
                                         borderRadius: BorderRadius.all(
-                                          Radius.circular(5.0),
+                                          Radius.circular(15.0),
                                         ), // set rounded corner radius
                                       ),
                                     );
@@ -159,11 +143,12 @@ class _WishlistState extends State<Wishlist> {
                                   placeholder:
                                       AssetImage('assets/images/loading.gif'),
                                   image: NetworkImage(
-                                      _productdetails.results[index].image),
-                                  fit: BoxFit.fill,
-                                  width: getProportionateScreenWidth(140.0),
+                                      _wishlistapi.wishList[index].product.image),
+                                 fit: BoxFit.cover,
                                 ),
+                                //alignment: Alignment.center,
                               ),
+                            ),
                               Column(
                                 children: [
                                   Column(
@@ -171,14 +156,16 @@ class _WishlistState extends State<Wishlist> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        _productdetails.results[index].name,
+                                        _wishlistapi
+                                            .wishList[index].product.name,
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline4,
                                       ),
                                       SizedBox(height: 5.0),
                                       Text(
-                                        _productdetails.results[index].price
+                                        _wishlistapi
+                                            .wishList[index].product.price
                                             .toString(),
                                         style: Theme.of(context)
                                             .textTheme
@@ -192,19 +179,22 @@ class _WishlistState extends State<Wishlist> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      setState(() {
+                                      setState(() async {
                                         addtocartbutton() async {
                                           await addtocart(
-                                              _productdetails.results[index].id
+                                              _wishlistapi
+                                                  .wishList[index].product.id
                                                   .toString(),
                                               '1');
-                                          await postwishlist(_productdetails
-                                              .results[index].id
-                                              .toString());
-                                          getwishlist();
+                                          await postwishlist(
+                                            _wishlistapi
+                                                .wishList[index].product.id
+                                                .toString(),
+                                          );
+                                          await getwishlist();
                                         }
 
-                                        addtocartbutton();
+                                        await addtocartbutton();
                                       });
                                     },
                                     child: Container(
@@ -236,9 +226,11 @@ class _WishlistState extends State<Wishlist> {
                                     onTap: () {
                                       setState(() {
                                         removefromwishlist() async {
-                                          await postwishlist(_productdetails
-                                              .results[index].id
-                                              .toString());
+                                          await postwishlist(
+                                            _wishlistapi
+                                                .wishList[index].product.id
+                                                .toString(),
+                                          );
                                           getwishlist();
                                         }
 
