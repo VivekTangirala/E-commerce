@@ -22,7 +22,6 @@ class Cart1 extends StatefulWidget {
 
 class _Cart1State extends State<Cart1> {
   Cartapi _cartapidata;
-  Productdetails _productdetails;
   Createorderapi _orderdetails;
   List _qty;
   bool firstload = false;
@@ -40,14 +39,6 @@ class _Cart1State extends State<Cart1> {
         _counters();
       });
     });
-
-    for (var i = 0; i < _cartapidata.cart.length; i++) {
-      _cartproducts.add(_cartapidata.cart[i].productId.toString());
-    }
-    await Productdetailsimport.getProductdetails(_cartproducts)
-        .then((value) => setState(() {
-              _productdetails = value;
-            }));
     firstload = true;
   }
 
@@ -82,7 +73,7 @@ class _Cart1State extends State<Cart1> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : _productdetails == null
+          : _cartapidata.cart.length == 0
               ? Center(
                   child: Text("Your cart is empty."),
                 )
@@ -122,7 +113,8 @@ class _Cart1State extends State<Cart1> {
                                 placeholder:
                                     AssetImage('assets/images/loading.gif'),
                                 image: NetworkImage(
-                                    _productdetails.results[index].image),
+                                  _cartapidata.cart[index].product.image,
+                                ),
                                 fit: BoxFit.fill,
                                 width: getProportionateScreenWidth(140.0),
                               ),
@@ -143,7 +135,8 @@ class _Cart1State extends State<Cart1> {
                                       //mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         Text(
-                                            _productdetails.results[index].name,
+                                            _cartapidata
+                                                .cart[index].product.name,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline2),
@@ -171,8 +164,8 @@ class _Cart1State extends State<Cart1> {
                                               "Price:-",
                                             ),
                                             Text(
-                                              _productdetails
-                                                  .results[index].price
+                                              _cartapidata
+                                                  .cart[index].product.price
                                                   .toString(),
                                             ),
                                             Text("/KG"),
@@ -207,10 +200,12 @@ class _Cart1State extends State<Cart1> {
                                                 });
                                                 await _cartquantity(
                                                   _cartapidata
-                                                      .cart[index].productId
+                                                      .cart[index].product.id
                                                       .toString(),
-                                                  (_cartapidata.cart[index]
-                                                              .quantity +
+                                                  (int.parse(_cartapidata
+                                                              .cart[index]
+                                                              .product
+                                                              .quantity) +
                                                           1)
                                                       .toString(),
                                                 );
@@ -245,13 +240,16 @@ class _Cart1State extends State<Cart1> {
                                                         .cart[index].quantity >
                                                     1) {
                                                   await _cartquantity(
-                                                      _cartapidata
-                                                          .cart[index].productId
-                                                          .toString(),
-                                                      (_cartapidata.cart[index]
-                                                                  .quantity -
-                                                              1)
-                                                          .toString());
+                                                    _cartapidata
+                                                        .cart[index].product.id
+                                                        .toString(),
+                                                    (int.parse(_cartapidata
+                                                                .cart[index]
+                                                                .product
+                                                                .quantity) -
+                                                            1)
+                                                        .toString(),
+                                                  );
                                                   setState(() {
                                                     _refreshcart();
                                                   });
@@ -271,8 +269,8 @@ class _Cart1State extends State<Cart1> {
                                                 borderRadius:
                                                     BorderRadius.circular(4.0)),
                                             onPressed: () => {
-                                              _deleteproduct(_productdetails
-                                                  .results[index].id)
+                                              _deleteproduct(_cartapidata
+                                                  .cart[index].product.id)
                                             },
                                             color: Colors.redAccent,
                                             child: Text(
@@ -318,8 +316,8 @@ class _Cart1State extends State<Cart1> {
                                     "25",
                                   ),
                                   Text(
-                                    _productdetails
-                                        .results[index].discountPercentage
+                                    _cartapidata
+                                        .cart[index].product.discountPercentage
                                         .toString(),
                                   ),
                                   Text(

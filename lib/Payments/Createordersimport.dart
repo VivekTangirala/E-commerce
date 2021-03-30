@@ -10,7 +10,7 @@ class Createordersimport {
 
     String token = sharedPreferences.getString('token');
 
-    String uri = "https://infintymall.herokuapp.com/homepage/api/createorder";
+    String uri = "http://infintymall.herokuapp.com/homepage/api/order";
 
     try {
       var response = await http
