@@ -77,7 +77,7 @@ class _WishlistState extends State<Wishlist> {
     Map data = {'product': _productid};
     var jsonresponse;
     var response = await http.post(
-        "http://infintymall.herokuapp.com/homepage/api/wishlist",
+        "https://infintymall.herokuapp.com/homepage/api/wishlist",
         body: data,
         headers: {HttpHeaders.authorizationHeader: token});
     print(response.body);

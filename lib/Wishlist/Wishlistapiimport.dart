@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Wishlistapiimport {
-  static const uri = "http://infintymall.herokuapp.com/homepage/api/wishlist";
+  static const uri = "https://infintymall.herokuapp.com/homepage/api/wishlist";
 
   static Future<Wishlistapi> getwishlist() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
