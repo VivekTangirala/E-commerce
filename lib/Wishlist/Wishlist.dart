@@ -120,35 +120,54 @@ class _WishlistState extends State<Wishlist> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                               SizedBox(
-                              height: getProportionateScreenHeight(120.0),
-                              child: Container(
-                                child: FadeInImage(
-                                  imageErrorBuilder: (BuildContext context,
-                                      Object exception, StackTrace stackTrace) {
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage(
-                                              "assets/images/drinks.jpg"),
-                                        ),
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(15.0),
-                                        ), // set rounded corner radius
-                                      ),
-                                    );
-                                  },
-                                  placeholder:
-                                      AssetImage('assets/images/loading.gif'),
-                                  image: NetworkImage(
-                                      _wishlistapi.wishList[index].product.image),
-                                 fit: BoxFit.cover,
+                              Container(
+                                padding: EdgeInsets.only(
+                                  top: getProportionateScreenHeight(10.0),
+                                  bottom: getProportionateScreenHeight(10.0),
+                                  left: getProportionateScreenHeight(5.0),
                                 ),
-                                //alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5.0)),
+                                ),
+                                child:
+                                    //  CircularProgressIndicator(),
+                                    Container(
+                                      height: getProportionateScreenHeight(
+                                              80.0),
+                                          width: getProportionateScreenWidth(
+                                              100.0),
+                                  child: FadeInImage(
+                                    imageErrorBuilder: (BuildContext context,
+                                        Object exception,
+                                        StackTrace stackTrace) {
+                                      return Container(
+                                          height: getProportionateScreenHeight(
+                                              80.0),
+                                          width: getProportionateScreenWidth(
+                                              100.0),
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: AssetImage(
+                                                  "assets/images/drinks.jpg"),
+                                            ),
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(5.0),
+                                            ), // set rounded corner radius
+                                          ));
+                                    },
+                                    placeholder:
+                                        AssetImage("assets/images/loading.gif"),
+                                    image: NetworkImage(
+                                      _wishlistapi
+                                          .wishList[index].product.image,
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                            ),
                               Column(
                                 children: [
                                   Column(

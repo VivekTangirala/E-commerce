@@ -49,34 +49,36 @@ class _OrdersState extends State<Orders> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            FadeInImage(
-                              imageErrorBuilder: (BuildContext context,
-                                  Object exception, StackTrace stackTrace) {
-                                return Container(
-                                  height: getProportionateScreenHeight(70.0),
+                          children: [ Container(
+                                                height: getProportionateScreenHeight(70.0),
                                   width: getProportionateScreenWidth(110.0),
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                        "assets/images/drinks.jpg",
-                                      ),
+                                  child: FadeInImage(
+                                    imageErrorBuilder: (BuildContext context,
+                                        Object exception,
+                                        StackTrace stackTrace) {
+                                      return Container(
+                                                     height: getProportionateScreenHeight(70.0),
+                                  width: getProportionateScreenWidth(110.0),
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: AssetImage(
+                                                  "assets/images/drinks.jpg"),
+                                            ),
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(5.0),
+                                            ), // set rounded corner radius
+                                          ));
+                                    },
+                                    placeholder:
+                                        AssetImage("assets/images/loading.gif"),
+                                    image: NetworkImage(
+                                     _orderdetails.orders[index].product.image,
                                     ),
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(15.0),
-                                    ), // set rounded corner radius
+                                    fit: BoxFit.cover,
                                   ),
-                                );
-                              },
-                              placeholder:
-                                  AssetImage('assets/images/loading.gif'),
-                              image: NetworkImage(
-                                _orderdetails.orders[index].product.image,
-                              ),
-                              fit: BoxFit.cover,
-                            ),
+                                ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
