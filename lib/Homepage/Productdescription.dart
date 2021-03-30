@@ -159,7 +159,7 @@ class _ProductsdescriptionState extends State<Productsdescription> {
                     child: Text(
                       "Add to cart",
                       style: Theme.of(context).textTheme.headline2.copyWith(
-                          color: Colors.orangeAccent, letterSpacing: 1.0),
+                          color: Colors.deepOrange, letterSpacing: 1.0),
                     ),
                   ),
                   Container(

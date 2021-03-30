@@ -43,7 +43,7 @@ class _AddToCartState extends State<AddToCart> {
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18)),
-                  color: Colors.orange,
+                  color: Colors.deepOrange,
                   onPressed: () {
                     addtocart('$productid', '$numOfItems');
                   },

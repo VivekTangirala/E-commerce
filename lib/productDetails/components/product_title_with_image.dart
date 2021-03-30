@@ -33,7 +33,7 @@ class _ProductTitleWithImageState extends State<ProductTitleWithImage> {
             margin: EdgeInsets.only(top: 16),
             child: Text("save ",
                 style: GoogleFonts.dMSans(
-                  color: Colors.orange,
+                  color: Colors.deepOrange,
                   fontSize: 16,
                 )),
           ),
@@ -48,7 +48,7 @@ class _ProductTitleWithImageState extends State<ProductTitleWithImage> {
                     new TextSpan(
                       text: ' \$3.99',
                       style: new TextStyle(
-                        color: Colors.orange,
+                        color: Colors.deepOrange,
                         fontSize: 20,
                       ),
                     ),
