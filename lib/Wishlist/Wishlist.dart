@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:ecom/Cart/Cartapi.dart';
+import 'package:ecom/Cart/cart.dart';
 import 'package:ecom/components/screensize.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -101,7 +103,7 @@ class _WishlistState extends State<Wishlist> {
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : _wishlistapi == null
+            : _wishlistapi.wishList.length == 0
                 ? Center(
                     child: Text("Your wishlist is empty,let's go shopping..."),
                   )
@@ -314,7 +316,11 @@ class _WishlistState extends State<Wishlist> {
           child: RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4.0)),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                return Cart1();
+              }));
+            },
             color: Colors.greenAccent,
             child: Text(
               "Cart",
