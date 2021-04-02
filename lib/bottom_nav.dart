@@ -1,11 +1,7 @@
 //
 
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:ecom/Homepage/homefragment.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-
-import 'Receipe/Recipihome/Recipihome.dart';
 
 class BottomNav extends StatefulWidget {
   @override

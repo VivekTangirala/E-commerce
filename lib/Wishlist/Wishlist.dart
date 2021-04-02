@@ -1,12 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:ecom/Cart/Cartapi.dart';
 import 'package:ecom/Cart/cart.dart';
 import 'package:ecom/components/screensize.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:ecom/Api/Productdetails/Productdetails.dart';
-import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
 import 'package:ecom/Wishlist/Wishlistapi.dart';
 import 'package:ecom/Wishlist/Wishlistapiimport.dart';
 import 'package:flutter/cupertino.dart';

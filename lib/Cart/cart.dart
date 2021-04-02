@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:ecom/Cart/Cartapi.dart';
 import 'package:ecom/Cart/Cartapiimport.dart';
-import 'package:ecom/Api/Productdetails/Productdetails.dart';
-import 'package:ecom/Api/Productdetails/Productdetailsimport.dart';
 import 'package:ecom/Cart/Cartapiremove.dart';
 import 'package:ecom/Payments/Createordersapi.dart';
 import 'package:ecom/Payments/Createordersimport.dart';
