@@ -20,7 +20,7 @@ class _CheckoutState extends State<Checkout> {
   final String _id, _amount, _currency;
   _CheckoutState(this._id, this._amount, this._currency);
   bool _paymentsuccess;
-  bool _ordervarification = false;
+  bool _orderverification = false;
   Razorpay _razorpay;
   @override
   void initState() {
@@ -59,13 +59,38 @@ class _CheckoutState extends State<Checkout> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) async {
-    
     print(response.orderId);
     print(response.paymentId);
     print(response.signature);
     _paymentsuccess = true;
     await getpaymentverification(
         response.orderId, response.paymentId, response.signature, _id);
+    _orderverification == false
+        ? Center(
+            child: CircularProgressIndicator(),
+          )
+        : showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("Order successfully placed."),
+                actions: [
+                  FlatButton(onPressed: () {}, child: null),
+                  FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return HomeFragment();
+                          },
+                        ), (Route<dynamic> route) => false);
+                      },
+                      child: Center(
+                        child: Text("Continue shopping."),
+                      ))
+                ],
+              );
+            });
     // Do something when payment succeeds
   }
 
@@ -115,30 +140,32 @@ class _CheckoutState extends State<Checkout> {
                       borderRadius: BorderRadius.circular(4.0)),
                   onPressed: () async {
                     await _placeorder(_id, _amount, _currency);
-                    _ordervarification == false
-                        ? Scaffold(
-                            body: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          )
-                        : Scaffold(
-                            body: Center(
-                            child: CupertinoAlertDialog(
-                              title: Text("You placed your order "),
-                              actions: [
-                                CupertinoButton(
-                                    child: Text("Continue Shopping!"),
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) {
-                                          return HomeFragment();
-                                        }),
-                                      );
-                                    })
-                              ],
-                            ),
-                          ));
+                    // _orderverification == false
+                    //     ? Center(
+                    //         child: CircularProgressIndicator(),
+                    //       )
+                    //     : showDialog(
+                    //         context: context,
+                    //         builder: (context) {
+                    //           return AlertDialog(
+                    //             title: Text("Order successfully placed."),
+                    //             actions: [
+                    //               FlatButton(onPressed: () {}, child: null),
+                    //               FlatButton(
+                    //                   onPressed: () {
+                    //                     Navigator.of(context)
+                    //                         .pushAndRemoveUntil(
+                    //                             MaterialPageRoute(
+                    //                       builder: (BuildContext context) {
+                    //                         return HomeFragment();
+                    //                       },
+                    //                     ), (Route<dynamic> route) => false);
+                    //                   },
+                    //                   child: Text("Continue shopping....."))
+                    //             ],
+                    //           );
+                    //         });
+
                     // if (_success || _error == true)
                     //   {
                     //     Navigator.of(context).pushAndRemoveUntil(
@@ -185,10 +212,10 @@ class _CheckoutState extends State<Checkout> {
       );
       if (response.statusCode == 200) {
         print("valid order");
-        _ordervarification = true;
+        _orderverification = true;
         return true;
       } else {
-        _ordervarification = true;
+        _orderverification = true;
         return false;
       }
     } catch (e) {

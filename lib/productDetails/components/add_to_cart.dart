@@ -1,6 +1,4 @@
-
 import 'dart:io';
-
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 int numOfItems = 1;
+var _statuscode;
 
 class AddToCart extends StatefulWidget {
   final productid;
@@ -43,9 +42,21 @@ class _AddToCartState extends State<AddToCart> {
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18)),
-                  color: Colors.deepOrange,
-                  onPressed: () {
-                    addtocart('$productid', '$numOfItems');
+                  color: Colors.orange,
+                  onPressed: () async{
+                    await addtocart('$productid', '$numOfItems');
+                    if (_statuscode == 200) {
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: const Text("Added to cart"),
+                          duration: Duration(seconds: 5),
+                          action: SnackBarAction(
+                            label: "Done",
+                            onPressed: () {},
+                          ),
+                        ),
+                      );
+                    }
                   },
                   child: Text(
                     "Add to Cart".toUpperCase(),
@@ -75,8 +86,8 @@ class _AddToCartState extends State<AddToCart> {
         body: data,
         headers: {HttpHeaders.authorizationHeader: token});
     if (response.statusCode == 200) {
-      
       jsonresponse = json.decode(response.body);
+      _statuscode = 200;
     }
     if (jsonresponse != null) {
       // Navigator.of(context).pushAndRemoveUntil(

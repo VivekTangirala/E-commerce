@@ -4,7 +4,7 @@ import 'Categorydetailsapi.dart';
 class Categorydetailsimport {
   static Future<Categorydetails> getcategorydetails(String s) async {
     String uri =
-        "https://infintymall.herokuapp.com/homepage/api/product/?category__name=";
+        "https://infintymall.herokuapp.com/vendor/api/product/?category__name=";
     uri = uri + s;
     print(uri);
     try {

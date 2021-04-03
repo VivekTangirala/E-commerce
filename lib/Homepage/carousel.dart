@@ -30,7 +30,6 @@ class _CarouselPagesState extends State<CarouselPages>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     fetchPost();
