@@ -138,13 +138,7 @@ class _Cart1State extends State<Cart1> {
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline2),
-                                        // Text(
-                                        //   "Cocktail dress",
-                                        // ),
-
-                                        // Text(
-                                        //   "Cocktail dress",
-                                        // ),
+                                     
                                         Row(
                                           children: [
                                             Text("Quantity : "),

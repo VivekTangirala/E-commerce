@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:pin_entry_text_field/pin_entry_text_field.dart';
 
 class Confirmotp extends StatefulWidget {
   final value;
@@ -75,19 +76,30 @@ class _ConfirmotpState extends State<Confirmotp> {
                 : ListView(children: <Widget>[
                     heading(context),
                     subHeading(context),
-                    SizedBox(height: SizeConfig.screenHeight * 0.1),
+                    SizedBox(height: SizeConfig.screenHeight * 0.05),
                     Align(
                       alignment: Alignment.topCenter,
                       child: enterOTP(context, phone),
                     ),
-                    OTPTextField(
-                      length: 4,
-                      width: 100,
-                      fieldWidth: 50,
-                      style: TextStyle(fontSize: 20, color: Colors.deepOrange),
-                      textFieldAlignment: MainAxisAlignment.spaceAround,
-                      fieldStyle: FieldStyle.underline,
-                      onCompleted: (pin) {
+                    SizedBox(height:50),
+                    // OTPTextField(
+                    //   length: 4,
+                    //   width: 100,
+                    //   fieldWidth: 50,
+                    //   style: TextStyle(fontSize: 20, color: Colors.deepOrange),
+                    //   textFieldAlignment: MainAxisAlignment.spaceAround,
+                    //   fieldStyle: FieldStyle.underline,
+                    //   onCompleted: (pin) {
+                    //     setState(() {
+                    //       _isLoading = true;
+                    //     });
+                    //     registerOTP(pin);
+                    //   },
+                    // ),
+                    PinEntryTextField(
+                      fieldWidth: getProportionateScreenWidth(70),
+                      
+                      onSubmit: (pin) {
                         setState(() {
                           _isLoading = true;
                         });
@@ -115,8 +127,9 @@ class _ConfirmotpState extends State<Confirmotp> {
       if (jsonResponse != null) {
         Navigator.of(context).push(
           MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  value == 1 ? NewPassword(phone:phone) : SignUpScreen(phone:phone)),
+              builder: (BuildContext context) => value == 1
+                  ? NewPassword(phone: phone)
+                  : SignUpScreen(phone: phone)),
         );
         print(jsonResponse);
       }

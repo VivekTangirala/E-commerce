@@ -96,7 +96,9 @@ class Categoryitemsstate extends State<Categoryitems> {
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ]),
-                        onTap: () {},
+                        onTap: () {
+                          
+                        },
                       );
                     },
                   ),

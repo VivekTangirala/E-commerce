@@ -8,7 +8,7 @@ class Ordersapiimport {
   static Future<Pastordersapi> getorderdetails() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String token = sharedPreferences.getString("token");
-    String uri = "http://infintymall.herokuapp.com/homepage/api/order";
+    String uri = "https://infintymall.herokuapp.com/homepage/api/order";
     try {
       final response = await http
           .get(uri, headers: {HttpHeaders.authorizationHeader: token});

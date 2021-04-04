@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:ecom/Login/newSignIn/signin.dart';
 import 'package:ecom/bottom_nav.dart';
 import 'package:http/http.dart' as http;
 import 'package:ecom/Login/components/constants.dart';
@@ -122,9 +123,10 @@ class _SignUpFormState extends State<SignUpForm> {
     if (response.statusCode == 200) {
       if (jsonResponse != null) {
         _btnController.success();
+        print(jsonResponse["token"]);
         sharedPreferences.setString("token", jsonResponse["token"]);
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (BuildContext context) => BottomNav()),
+            MaterialPageRoute(builder: (BuildContext context) => SignInScreen()),
             (Route<dynamic> route) => false);
       }
     } else {

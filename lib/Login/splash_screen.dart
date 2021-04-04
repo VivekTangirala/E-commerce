@@ -19,7 +19,7 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    new Timer(new Duration(seconds: 1), () {
+    new Timer(new Duration(seconds: 2), () {
       checkFirstSeen();
     });
   }
@@ -28,7 +28,7 @@ class SplashScreenState extends State<SplashScreen> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     bool _seen = (sharedPreferences.getBool('seen') ?? false);
     String _login = (sharedPreferences.getString('token') ?? null);
-
+    print(_login);
     if (_seen || _login!=null) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => HomeFragment()),

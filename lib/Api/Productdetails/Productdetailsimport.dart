@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class Productdetailsimport {
   static Future<Productdetails> getProductdetails(List products) async {
-    String uri = "https://infintymall.herokuapp.com/homepage/api/product/?ids=";
+    String uri = "https://infintymall.herokuapp.com/vendor/api/product/?ids=";
 
     if (products.length > 0) {
       for (var i = 0; i < products.length; i++) {

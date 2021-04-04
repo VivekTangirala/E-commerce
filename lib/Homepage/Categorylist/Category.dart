@@ -50,6 +50,7 @@ class _Categorylist1State extends State<Category> {
                 tag: 'Categories$index',
                 child: GestureDetector(
                   onTap: () {
+                    
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
                       return Categoryitems(
