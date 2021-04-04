@@ -59,83 +59,98 @@ class _DiscoverState extends State<Discover> {
 
   Widget _body() {
     return SizedBox(
+      width: double.infinity,
       height: getProportionateScreenHeight(220.0),
-      child: _productdetails == null
-          ? Center(child: CircularProgressIndicator())
-          //  Shimmer.fromColors(
-          //     child: Center(
-          //       child: Text(
-          //         "TREG",
-          //         style: TextStyle(fontSize: 30),
-          //       ),
-          //     ),
-          //     baseColor: Colors.white,
-          //     highlightColor: Colors.grey,
-          //   )
-          : ListView.builder(
-              controller: _scrollController,
-              itemExtent: 125,
-              physics: ScrollPhysics(),
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: _specialproducts[0].specialProducts.length, //images.length+ 1,
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  child: Container(
-                    margin: EdgeInsets.only(left: 4, bottom: 3),
-                    child: SizedBox(
-                      // height: 100,
-                      //width: getProportionateScreenWidth(0.0),
-                      child: Container(
-                        margin: EdgeInsets.all(5.0),
-                        child: Column(children: [
-                          SizedBox(
-                            height: getProportionateScreenHeight(180.0),
-                            child: Container(
-                              child: FadeInImage(
-                                imageErrorBuilder: (BuildContext context,
-                                    Object exception, StackTrace stackTrace) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            "assets/images/drinks.jpg"),
-                                      ),
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(15.0),
-                                      ), // set rounded corner radius
-                                    ),
-                                  );
-                                },
-                                placeholder:
-                                    AssetImage('assets/images/loading.gif'),
-                                image: NetworkImage(
-                                    _productdetails.results[index].image),
-                                fit: BoxFit.cover,
+      child: _specialproducts == null
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : _specialproducts.length == 0
+              ? Center(
+                  child: Text("We will stack up soon....."),
+                )
+              : ListView.builder(
+                  controller: _scrollController,
+                  itemExtent: 125,
+                  physics: ScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _specialproducts[0]
+                      .specialProducts
+                      .length, //images.length+ 1,
+                  itemBuilder: (BuildContext context, int index) {
+                    return _productdetails == null
+                        ? Shimmer.fromColors(
+                            child: Center(
+                              child: Text(
+                                "TREG",
+                                style: TextStyle(fontSize: 30),
                               ),
-                              //alignment: Alignment.center,
                             ),
-                          ),
-                          SizedBox(height: 0.0),
-                          Text(_productdetails.results[index].name),
-                        ]),
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => DetailsScreen(
-                          productid: _productdetails.results[index].id,
-                        ),
-                      ),
-                    );
+                            baseColor: Colors.white,
+                            highlightColor: Colors.grey,
+                          )
+                        : GestureDetector(
+                            child: Container(
+                              margin: EdgeInsets.only(left: 4, bottom: 3),
+                              child: SizedBox(
+                                // height: 100,
+                                //width: getProportionateScreenWidth(0.0),
+                                child: Container(
+                                  margin: EdgeInsets.all(5.0),
+                                  child: Column(children: [
+                                    SizedBox(
+                                      height:
+                                          getProportionateScreenHeight(180.0),
+                                      child: Container(
+                                        child: FadeInImage(
+                                          imageErrorBuilder:
+                                              (BuildContext context,
+                                                  Object exception,
+                                                  StackTrace stackTrace) {
+                                            return Container(
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: AssetImage(
+                                                      "assets/images/drinks.jpg"),
+                                                ),
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(15.0),
+                                                ), // set rounded corner radius
+                                              ),
+                                            );
+                                          },
+                                          placeholder: AssetImage(
+                                              'assets/images/loading.gif'),
+                                          image: NetworkImage(_productdetails
+                                              .results[index].image),
+                                          fit: BoxFit.cover,
+                                        ),
+                                        //alignment: Alignment.center,
+                                      ),
+                                    ),
+                                    SizedBox(height: 0.0),
+                                    Text(_productdetails.results[index].name),
+                                  ]),
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      DetailsScreen(
+                                    productid:
+                                        _productdetails.results[index].id,
+                                  ),
+                                ),
+                              );
+                            },
+                          );
                   },
-                );
-              },
-            ),
+                ),
     );
   }
 }
