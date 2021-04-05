@@ -37,6 +37,7 @@ class _Categorylist1State extends State<Category> {
   }
 
   Widget layoutCards() {
+
     return ListView.builder(
         padding: EdgeInsets.symmetric(horizontal: 8),
         scrollDirection: Axis.horizontal,
@@ -112,4 +113,5 @@ class _Categorylist1State extends State<Category> {
           );
         });
   }
+
 }
