@@ -80,6 +80,7 @@ Widget searchBar(BuildContext context) {
                 padding: const EdgeInsets.only(top: 0, bottom: 0),
                 child: TextField(
                   onChanged: (String txt) {},
+                  onSubmitted: (String txt){},
                   style: const TextStyle(
                     fontSize: 18,
                   ),

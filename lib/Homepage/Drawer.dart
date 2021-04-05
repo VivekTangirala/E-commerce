@@ -4,6 +4,7 @@ import 'package:ecom/Login/newSignIn/signin.dart';
 import 'package:ecom/Orders/Orders.dart';
 import 'package:ecom/Profile/main_profile.dart';
 import 'package:ecom/Wishlist/Wishlist.dart';
+import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -81,7 +82,7 @@ class _Drawerstate extends State<Drawer1> {
             child: Container(
               padding: EdgeInsets.all(0.0),
               alignment: Alignment.center,
-              height: MediaQuery.of(context).size.height/9,
+              height: MediaQuery.of(context).size.height / 9,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,7 +103,7 @@ class _Drawerstate extends State<Drawer1> {
                       ),
                       Text(
                         "Phone no",
-                          style: Theme.of(context).textTheme.headline3,
+                        style: Theme.of(context).textTheme.headline3,
                       ),
                     ],
                   ),
@@ -140,7 +141,7 @@ class _Drawerstate extends State<Drawer1> {
                         });
                       });
                     }
-                   if (index == 1) {
+                    if (index == 1) {
                       setState(() {
                         c1[index] = Colors.orangeAccent;
                       });
@@ -158,7 +159,7 @@ class _Drawerstate extends State<Drawer1> {
                         });
                       });
                     }
-                     if (index == 3) {
+                    if (index == 3) {
                       setState(() {
                         c1[index] = Colors.orangeAccent;
                       });
@@ -222,7 +223,11 @@ class _Drawerstate extends State<Drawer1> {
                 }
               : null,
           child: Container(
-            margin: EdgeInsets.only(left: 15.0, right: 15.0),
+            margin: EdgeInsets.only(
+              left: 15.0,
+              right: 15.0,
+              bottom: getProportionateScreenHeight(10.0),
+            ),
             alignment: Alignment.center,
             height: 50.0,
             //width: MediaQuery.of(context).size.width - 100,

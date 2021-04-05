@@ -20,7 +20,7 @@ class _BodyState extends State<Body> {
 
   _BodyState(this._productid);
 
-  Productdetails _productdetails;
+  List<Productdetails> _productdetails;
   List<String> l = [];
 
   @override
@@ -68,7 +68,7 @@ class _BodyState extends State<Body> {
                             ));
                           },
                           placeholder: AssetImage('assets/images/loading.gif'),
-                          image: NetworkImage(_productdetails.results[0].image),
+                          image: NetworkImage(_productdetails[0].image),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -91,7 +91,7 @@ class _BodyState extends State<Body> {
                           children: <Widget>[
                             // CounterWithFavBtn(),
                             ProductTitleWithImage(
-                              productdetails: _productdetails.results[0].name,
+                              productdetails: _productdetails[0].name,
                             ),
                             AddToCart(
                               productid: _productid,
@@ -100,7 +100,7 @@ class _BodyState extends State<Body> {
                             SizedBox(height: 20 / 3),
                             Description(
                               productdetails:
-                                  _productdetails.results[0].description,
+                                  _productdetails[0].description,
                             ),
                             SizedBox(height: 20 / 3),
                           ],
