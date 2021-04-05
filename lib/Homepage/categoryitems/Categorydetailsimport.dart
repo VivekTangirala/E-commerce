@@ -2,23 +2,21 @@ import 'package:http/http.dart' as http;
 import 'Categorydetailsapi.dart';
 
 class Categorydetailsimport {
-  static Future<Categorydetails> getcategorydetails(String s) async {
+  static Future<List<Categorydetails>> getcategorydetails(String s) async {
     String uri =
-        "https://infintymall.herokuapp.com/vendor/api/product/?category__name=";
+        "http://infintymall.herokuapp.com/vendor/api/product/?category__name=";
     uri = uri + s;
     print(uri);
     try {
       final response = await http.get(uri);
       if (response.statusCode == 200) {
-        final Categorydetails categorydetails =
+        final List<Categorydetails> categorydetails =
             categorydetailsFromJson(response.body);
         print("working");
-        print(categorydetails.results[0].brand);
         return categorydetails;
       } else {
         print("error");
         print(response.statusCode);
-        print(response.body);
         return null;
       }
     } catch (e) {

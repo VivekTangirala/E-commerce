@@ -64,10 +64,6 @@ class _HomefragmentState extends State<HomeFragment>
         key: scaffoldKey,
         drawer: Drawer1(),
         body: SafeArea(
-          child: LiquidPullToRefresh(
-            onRefresh: () {
-              return _refresh();
-            },
             child: _isloading
                 ? Center(child: CircularProgressIndicator())
                 : Container(
@@ -118,7 +114,7 @@ class _HomefragmentState extends State<HomeFragment>
                     ),
                   ),
           ),
-        ));
+        );
   }
 
   @override

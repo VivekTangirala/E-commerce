@@ -24,9 +24,11 @@ AppBar appBar(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {
           },
         )),
     centerTitle: true,
-    title: Text(
-      "Treg Mart",
-      style: Theme.of(context).textTheme.headline3,
+    title: Center(
+      child: Text(
+        "Treg Mart",
+        style: Theme.of(context).textTheme.headline3,
+      ),
     ),
     actions: [
       IconButton(
@@ -44,7 +46,7 @@ AppBar appBar(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {
               },
             ),
           );
-        //  showSearch(context: context, delegate: SearchBar());
+          //  showSearch(context: context, delegate: SearchBar());
         },
       ),
       IconButton(

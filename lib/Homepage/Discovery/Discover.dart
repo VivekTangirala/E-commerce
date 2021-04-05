@@ -24,7 +24,7 @@ class Discover extends StatefulWidget {
 }
 
 class _DiscoverState extends State<Discover> {
-  Productdetails _productdetails;
+  List<Productdetails> _productdetails;
 
   List<Specialproductsapi> _specialproducts;
   ScrollController _scrollController = new ScrollController();
@@ -125,14 +125,14 @@ class _DiscoverState extends State<Discover> {
                                           placeholder: AssetImage(
                                               'assets/images/loading.gif'),
                                           image: NetworkImage(_productdetails
-                                              .results[index].image),
+                                              [index].image),
                                           fit: BoxFit.cover,
                                         ),
                                         //alignment: Alignment.center,
                                       ),
                                     ),
                                     SizedBox(height: 0.0),
-                                    Text(_productdetails.results[index].name),
+                                    Text(_productdetails[index].name),
                                   ]),
                                 ),
                               ),
@@ -143,7 +143,7 @@ class _DiscoverState extends State<Discover> {
                                   builder: (BuildContext context) =>
                                       DetailsScreen(
                                     productid:
-                                        _productdetails.results[index].id,
+                                        _productdetails[index].id,
                                   ),
                                 ),
                               );

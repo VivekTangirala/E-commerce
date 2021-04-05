@@ -37,7 +37,7 @@ class Brandstate extends State<Brand> {
   Widget _body(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: getProportionateScreenHeight(140.0),
+      height: getProportionateScreenHeight(150.0),
       child: _brandapi != null
           ? ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -50,7 +50,7 @@ class Brandstate extends State<Brand> {
                     margin: EdgeInsets.only(left: 4, bottom: 3),
                     child: SizedBox(
                       // height: 100,
-                      width: getProportionateScreenWidth(100.0),
+                      width: getProportionateScreenWidth(110.0),
                       child: Container(
                         margin: EdgeInsets.all(5.0),
                         child: Column(children: [

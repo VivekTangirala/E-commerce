@@ -26,7 +26,7 @@ class _Categorylist1State extends State<Category> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: getProportionateScreenHeight(100.0),
+      height: getProportionateScreenHeight(115.0),
       width: double.infinity,
       child: _categorydata == null
           ? Center(
