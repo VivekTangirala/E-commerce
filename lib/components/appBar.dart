@@ -1,10 +1,12 @@
 import 'package:ecom/Cart/cart.dart';
 import 'package:ecom/Wishlist/Wishlist.dart';
+import 'package:ecom/components/logInPopup.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-AppBar appBar(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {
+AppBar appBar(
+    BuildContext context, GlobalKey<ScaffoldState> scaffoldKey, String token) {
   return AppBar(
     backgroundColor: Colors.white,
     elevation: 0.0,
@@ -38,14 +40,25 @@ AppBar appBar(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {
           color: Colors.black,
         ),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (BuildContext context) {
-                return Wishlist();
-              },
-            ),
-          );
+          if (token == null) {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return CustomDialogBox(
+                      title: "Login",
+                      descriptions: "SignIn to add products into the cart",
+                      image: "assets/icons/Error.svg");
+                });
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) {
+                  return Wishlist();
+                },
+              ),
+            );
+          }
           //  showSearch(context: context, delegate: SearchBar());
         },
       ),
@@ -56,10 +69,21 @@ AppBar appBar(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {
         ),
         padding: EdgeInsets.only(left: 20, right: 16),
         onPressed: () async {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Cart1()),
-          );
+          if (token == null) {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return CustomDialogBox(
+                      title: "Login",
+                      descriptions: "SignIn to add products into the cart",
+                      image: "assets/icons/Error.svg");
+                });
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Cart1()),
+            );
+          }
         },
       ),
     ],

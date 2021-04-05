@@ -8,6 +8,7 @@ import 'package:ecom/components/searchBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Categorylist/Category.dart';
 import 'Discovery/Discover.dart';
@@ -41,6 +42,7 @@ class _HomefragmentState extends State<HomeFragment>
   List values;
   String a, b, c;
   bool _isloading = true;
+  String token;
   TextEditingController _textEditingController;
   @override
   void initState() {
@@ -50,8 +52,11 @@ class _HomefragmentState extends State<HomeFragment>
 
   var response;
   Future<void> _refresh() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       _isloading = false;
+
+      token = sharedPreferences.getString("token");
     });
   }
 
@@ -59,62 +64,62 @@ class _HomefragmentState extends State<HomeFragment>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: appBar(context,scaffoldKey),
-        key: scaffoldKey,
-        drawer: Drawer1(),
-        body: SafeArea(
-            child: _isloading
-                ? Center(child: CircularProgressIndicator())
-                : Container(
-                    margin: EdgeInsets.only(left: 8, right: 8),
-                    child: SingleChildScrollView(
-                      child: Column(mainAxisSize: MainAxisSize.min, children: <
-                          Widget>[
-                        // _textsection(context),
+      backgroundColor: Colors.white,
+      appBar: appBar(context, scaffoldKey, token),
+      key: scaffoldKey,
+      drawer: Drawer1(),
+      body: SafeArea(
+        child: _isloading
+            ? Center(child: CircularProgressIndicator())
+            : Container(
+                margin: EdgeInsets.only(left: 8, right: 8),
+                child: SingleChildScrollView(
+                  child:
+                      Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                    // _textsection(context),
 
-                        // SizedBox(height: 10),
-                        SizedBox(height: getProportionateScreenHeight(15.0)),
+                    // SizedBox(height: 10),
+                    SizedBox(height: getProportionateScreenHeight(15.0)),
 
-                        searchBar(context),
-                        SizedBox(height: getProportionateScreenHeight(15.0)),
+                    searchBar(context),
+                    SizedBox(height: getProportionateScreenHeight(15.0)),
 
-                        Cashback(),
-                        SizedBox(height: getProportionateScreenHeight(10.0)),
+                    Cashback(),
+                    SizedBox(height: getProportionateScreenHeight(10.0)),
 
-                        // _categoryheading(context, "Categories"),
-                        //  SizedBox(height: getProportionateScreenHeight(10.0)),
+                    // _categoryheading(context, "Categories"),
+                    //  SizedBox(height: getProportionateScreenHeight(10.0)),
 
-                        Category(),
-                        //SizedBox(height: getProportionateScreenHeight(5.0)),
-                        SizedBox(height: getProportionateScreenHeight(10.0)),
+                    Category(),
+                    //SizedBox(height: getProportionateScreenHeight(5.0)),
+                    SizedBox(height: getProportionateScreenHeight(10.0)),
 
-                        _categoryheading(context, "Discover"),
-                        // SpecialProducts(),
-                        Discover(),
-                        // SizedBox(height: getProportionateScreenHeight(5.0)),
+                    _categoryheading(context, "Discover"),
+                    // SpecialProducts(),
+                    Discover(),
+                    // SizedBox(height: getProportionateScreenHeight(5.0)),
 
-                        _categoryheading(context, "Best Offers"),
-                        Bestoffers(),
-                        //Category(),
-                        SizedBox(height: getProportionateScreenHeight(15.0)),
+                    _categoryheading(context, "Best Offers"),
+                    Bestoffers(),
+                    //Category(),
+                    SizedBox(height: getProportionateScreenHeight(15.0)),
 
-                        _categoryheading(context, "Varieties"),
-                        SizedBox(height: getProportionateScreenHeight(10.0)),
-                        Varieties(),
-                        SizedBox(height: getProportionateScreenHeight(10.0)),
-                        Invite(),
-                        SizedBox(height: getProportionateScreenHeight(20.0)),
-                        _categoryheading(context, "Great Deals"),
-                        Discover(),
-                        SizedBox(height: getProportionateScreenHeight(20.0)),
-                        _categoryheading(context, "Shop by brand"),
-                        Brand(),
-                      ]),
-                    ),
-                  ),
-          ),
-        );
+                    _categoryheading(context, "Varieties"),
+                    SizedBox(height: getProportionateScreenHeight(10.0)),
+                    Varieties(),
+                    SizedBox(height: getProportionateScreenHeight(10.0)),
+                    Invite(),
+                    SizedBox(height: getProportionateScreenHeight(20.0)),
+                    _categoryheading(context, "Great Deals"),
+                    Discover(),
+                    SizedBox(height: getProportionateScreenHeight(20.0)),
+                    _categoryheading(context, "Shop by brand"),
+                    Brand(),
+                  ]),
+                ),
+              ),
+      ),
+    );
   }
 
   @override
@@ -133,6 +138,3 @@ Widget _categoryheading(BuildContext context, String str) {
     ),
   );
 }
-
-
-

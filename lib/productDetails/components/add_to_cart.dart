@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ecom/components/logInPopup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -21,8 +22,19 @@ class AddToCart extends StatefulWidget {
 
 class _AddToCartState extends State<AddToCart> {
   final productid;
-
+  String token;
   _AddToCartState(this.productid);
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getToken();
+  }
+
+  getToken() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    token = sharedPreferences.getString('token');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,23 +51,47 @@ class _AddToCartState extends State<AddToCart> {
             Expanded(
               child: SizedBox(
                 height: 50,
+                // ignore: deprecated_member_use
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18)),
                   color: Colors.orange,
-                  onPressed: () async{
-                    await addtocart('$productid', '$numOfItems');
-                    if (_statuscode == 200) {
-                      Scaffold.of(context).showSnackBar(
-                        SnackBar(
-                          content: const Text("Added to cart"),
-                          duration: Duration(seconds: 5),
-                          action: SnackBarAction(
-                            label: "Done",
-                            onPressed: () {},
+                  onPressed: () async {
+                    if (token == null) {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CustomDialogBox(
+                                title: "Login",
+                                descriptions:
+                                    "SignIn to add products into the cart",
+                                image: "assets/icons/Error.svg");
+                          });
+                    } else {
+                      await addtocart('$productid', '$numOfItems');
+
+                      if (_statuscode == 200) {
+                        Scaffold.of(context).showSnackBar(
+                          SnackBar(
+                            content: const Text("Added to cart"),
+                            duration: Duration(seconds: 5),
+                            action: SnackBarAction(
+                              label: "Done",
+                              onPressed: () {},
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                      } else if (_statuscode == 401) {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return CustomDialogBox(
+                                  title: "Login",
+                                  descriptions:
+                                      "SignIn to add products into the cart",
+                                  image: "assets/icons/Error.svg");
+                            });
+                      }
                     }
                   },
                   child: Text(
@@ -76,18 +112,27 @@ class _AddToCartState extends State<AddToCart> {
   }
 
   addtocart(String _product, _quantity) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String token = sharedPreferences.getString('token');
-
     Map data = {'product': _product, 'quantity1': _quantity};
     var jsonresponse;
-    var response = await http.post(
-        "https://infintymall.herokuapp.com/homepage/api/cart",
-        body: data,
-        headers: {HttpHeaders.authorizationHeader: token});
+    var response;
+    try {
+      response = await http.post(
+          "https://infintymall.herokuapp.com/homepage/api/cart",
+          body: data,
+          headers: {HttpHeaders.authorizationHeader: token});
+    } on SocketException {
+      SnackBar(
+        content: const Text("Check your internet connection"),
+        duration: Duration(seconds: 5),
+        // action: SnackBarAction(
+        //   label: "Retry",
+        //   onPressed: () {},
+        // ),
+      );
+    }
+    _statuscode = response.statusCode;
     if (response.statusCode == 200) {
       jsonresponse = json.decode(response.body);
-      _statuscode = 200;
     }
     if (jsonresponse != null) {
       // Navigator.of(context).pushAndRemoveUntil(
