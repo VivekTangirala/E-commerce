@@ -72,7 +72,7 @@ class _Cart1State extends State<Cart1> {
             )
           : _cartapidata.cart.length == 0
               ? Center(
-                  child: Text("Your cart is empty."),
+                  child: Text("Your cart is empty.Let's go shopping"),
                 )
               : Container(
                   padding: EdgeInsets.symmetric(
@@ -94,8 +94,8 @@ class _Cart1State extends State<Cart1> {
                                     Object exception, StackTrace stackTrace) {
                                   return Container(
                                     padding: EdgeInsets.all(5.0),
-                                    height: getProportionateScreenHeight(120.0),
-                                    width: getProportionateScreenWidth(140.0),
+                                    height: getProportionateScreenHeight(100.0),
+                                    width: getProportionateScreenWidth(100.0),
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
@@ -116,10 +116,11 @@ class _Cart1State extends State<Cart1> {
                                   _cartapidata.cart[index].product.image,
                                 ),
                                 fit: BoxFit.fill,
-                                width: getProportionateScreenWidth(140.0),
+                                width: getProportionateScreenWidth(100.0),
+                                height: getProportionateScreenHeight(100),
                               ),
                               SizedBox(
-                                width: getProportionateScreenWidth(0.0),
+                                width: getProportionateScreenWidth(5.0),
                               ),
                               Expanded(
                                 child: Row(
@@ -140,25 +141,26 @@ class _Cart1State extends State<Cart1> {
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline2),
-
-                                        Row(
-                                          children: [
-                                            Text("Quantity : "),
-                                            Text(
-                                              _cartapidata.cart[index].quantity
-                                                  .toString(),
-                                            )
-                                          ],
-                                        ),
                                         Text(
-                                          "Price:- " +
+                                            "Quantity : ${_cartapidata.cart[index].quantity}",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.normal,fontSize: 13)),
+                                        Text(
+                                            "Price:- " +
+                                                _cartapidata.cart[index].product
+                                                    .offerPrice
+                                                    .toString(),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.normal,fontSize: 13)),
+                                        Text(
+                                          "Discount:- " +
                                               _cartapidata.cart[index].product
-                                                  .offerPrice
-                                                  .toString(),
+                                                  .discountPercentage
+                                                  .toString() +
+                                              " %",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.normal,fontSize: 13),
                                         ),
-                                        // Text(
-                                        //   "Color: Yellow",
-                                        // ),
                                         SizedBox(
                                           height: getProportionateScreenHeight(
                                               15.0),
@@ -200,7 +202,7 @@ class _Cart1State extends State<Cart1> {
                                               },
                                             ),
                                             SizedBox(
-                                              width: 5,
+                                              width: 2,
                                             ),
                                             Text(
                                               _cartapidata.cart[index].quantity
@@ -261,7 +263,7 @@ class _Cart1State extends State<Cart1> {
                                             child: Text(
                                               "Remove",
                                               style: TextStyle(
-                                                  fontSize: 15,
+                                                  fontSize: 12,
                                                   color: Colors.white),
                                             ),
                                           ),
@@ -273,45 +275,45 @@ class _Cart1State extends State<Cart1> {
                               ),
                             ],
                           ),
-                          Divider(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Subtotal:-",
-                                    ),
-                                    Text(
-                                      "Discount:-",
-                                    ),
-                                    Text(
-                                      "Total:-",
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    "25",
-                                  ),
-                                  Text(
-                                    _cartapidata
-                                        .cart[index].product.discountPercentage
-                                        .toString(),
-                                  ),
-                                  Text(
-                                    "5000",
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                          // Divider(),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Padding(
+                          //       padding: EdgeInsets.all(0),
+                          //       child: Column(
+                          //         crossAxisAlignment: CrossAxisAlignment.start,
+                          //         children: [
+                          //           Text(
+                          //             "Subtotal:- ",
+                          //           ),
+                          //           Text(
+                          //             "Discount:-",
+                          //           ),
+                          //           Text(
+                          //             "Total:-",
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //     Column(
+                          //       crossAxisAlignment: CrossAxisAlignment.end,
+                          //       children: [
+                          //         Text(
+                          //           "25",
+                          //         ),
+                          //         Text(
+                          //           _cartapidata
+                          //               .cart[index].product.discountPercentage
+                          //               .toString(),
+                          //         ),
+                          //         Text(
+                          //           "5000",
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ],
+                          // ),
                         ]));
                       }),
                 ),
