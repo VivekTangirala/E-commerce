@@ -23,7 +23,6 @@ class _Cart1State extends State<Cart1> {
   Createorderapi _orderdetails;
   List _qty;
   bool firstload = false;
-  List<String> _cartproducts = [];
   @override
   void initState() {
     super.initState();
