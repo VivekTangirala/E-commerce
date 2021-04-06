@@ -15,7 +15,7 @@ class CartApiimport {
     try {
       //print(response.body);
       final response = await http.get(
-          "https://infintymall.herokuapp.com/homepage/api/cart",
+          uri,
           headers: {HttpHeaders.authorizationHeader: token});
       if (response.statusCode == 200) {
         final Cartapi cartapi = cartapiFromJson(response.body);

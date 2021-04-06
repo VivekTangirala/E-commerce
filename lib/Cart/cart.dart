@@ -67,7 +67,7 @@ class _Cart1State extends State<Cart1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: firstload == false
+      body: _cartapidata == null
           ? Center(
               child: CircularProgressIndicator(),
             )
@@ -76,7 +76,10 @@ class _Cart1State extends State<Cart1> {
                   child: Text("Your cart is empty."),
                 )
               : Container(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: getProportionateScreenWidth(8.0),
+                    vertical: getProportionateScreenHeight(8.0),
+                  ),
                   child: ListView.builder(
                       itemCount: _cartapidata.cart.length,
                       physics: ScrollPhysics(),
@@ -138,7 +141,7 @@ class _Cart1State extends State<Cart1> {
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline2),
-                                     
+
                                         Row(
                                           children: [
                                             Text("Quantity : "),
@@ -148,20 +151,11 @@ class _Cart1State extends State<Cart1> {
                                             )
                                           ],
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "Price:-",
-                                            ),
-                                            Text(
-                                              _cartapidata
-                                                  .cart[index].product.price
+                                        Text(
+                                          "Price:- " +
+                                              _cartapidata.cart[index].product
+                                                  .offerPrice
                                                   .toString(),
-                                            ),
-                                            Text("/KG"),
-                                          ],
                                         ),
                                         // Text(
                                         //   "Color: Yellow",
@@ -335,12 +329,16 @@ class _Cart1State extends State<Cart1> {
           color: Colors.black54,
         ),
       ),
-      title: Text("Cart",
+      title: Center(
+        child: Text(
+          "Cart",
           style: GoogleFonts.lato(
             fontSize: 20,
             color: Colors.black87,
             fontWeight: FontWeight.bold,
-          )),
+          ),
+        ),
+      ),
       centerTitle: true,
       backgroundColor: Colors.grey.shade100,
       actions: [
