@@ -51,7 +51,7 @@ class Bestoffersstate extends State<Bestoffers> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: getProportionateScreenHeight(200.0),
+        height: getProportionateScreenHeight(220.0),
         child: _specialproducts == null
             ? Center(
                 child: CircularProgressIndicator(),
@@ -80,7 +80,7 @@ class Bestoffersstate extends State<Bestoffers> {
                                 margin: EdgeInsets.only(left: 4, bottom: 3),
                                 child: SizedBox(
                                   // height: 100,
-                                  width: getProportionateScreenWidth(280.0),
+                                  width: getProportionateScreenWidth(285.0),
                                   child: Container(
                                     margin: EdgeInsets.all(5.0),
                                     child: Column(children: [

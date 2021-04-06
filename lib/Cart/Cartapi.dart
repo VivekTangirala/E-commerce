@@ -11,16 +11,20 @@ String cartapiToJson(Cartapi data) => json.encode(data.toJson());
 class Cartapi {
     Cartapi({
         this.cart,
+        this.detail,
     });
 
     List<Cart> cart;
+    String detail;
 
     factory Cartapi.fromJson(Map<String, dynamic> json) => Cartapi(
         cart: List<Cart>.from(json["Cart"].map((x) => Cart.fromJson(x))),
+        detail: json["detail"],
     );
 
     Map<String, dynamic> toJson() => {
         "Cart": List<dynamic>.from(cart.map((x) => x.toJson())),
+        "detail": detail,
     };
 }
 
@@ -63,67 +67,71 @@ class Cart {
 class Product {
     Product({
         this.id,
+        this.storeName,
         this.name,
         this.availableInventory,
         this.quantity,
         this.price,
         this.image,
         this.description,
+        this.maxUnits,
         this.offerPrice,
         this.discountPercentage,
         this.available,
         this.soldTimes,
         this.category,
-        this.storeName,
         this.brand,
     });
 
     int id;
+    StoreName storeName;
     String name;
     int availableInventory;
     String quantity;
     int price;
     String image;
     String description;
+    int maxUnits;
     int offerPrice;
     int discountPercentage;
     bool available;
     int soldTimes;
     Category category;
-    StoreName storeName;
     Brand brand;
 
     factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
+        storeName: StoreName.fromJson(json["store_name"]),
         name: json["name"],
         availableInventory: json["available_inventory"],
         quantity: json["quantity"],
         price: json["price"],
         image: json["image"],
         description: json["description"],
+        maxUnits: json["max_units"],
         offerPrice: json["offer_price"],
         discountPercentage: json["discount_percentage"],
         available: json["available"],
         soldTimes: json["sold_times"],
         category: Category.fromJson(json["category"]),
-        storeName: StoreName.fromJson(json["store_name"]),
         brand: Brand.fromJson(json["brand"]),
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
+        "store_name": storeName.toJson(),
         "name": name,
         "available_inventory": availableInventory,
         "quantity": quantity,
         "price": price,
         "image": image,
         "description": description,
+        "max_units": maxUnits,
         "offer_price": offerPrice,
         "discount_percentage": discountPercentage,
         "available": available,
         "sold_times": soldTimes,
         "category": category.toJson(),
-        "store_name": storeName.toJson(),
         "brand": brand.toJson(),
     };
 }
@@ -178,60 +186,16 @@ class Category {
 
 class StoreName {
     StoreName({
-        this.id,
-        this.password,
-        this.email,
         this.username,
-        this.phone,
-        this.dateJoined,
-        this.lastLogin,
-        this.isAdmin,
-        this.isActive,
-        this.isStaff,
-        this.isSuperuser,
-        this.isSuperviser,
     });
 
-    int id;
-    String password;
-    String email;
     String username;
-    String phone;
-    DateTime dateJoined;
-    DateTime lastLogin;
-    bool isAdmin;
-    bool isActive;
-    bool isStaff;
-    bool isSuperuser;
-    bool isSuperviser;
 
     factory StoreName.fromJson(Map<String, dynamic> json) => StoreName(
-        id: json["id"],
-        password: json["password"],
-        email: json["email"],
         username: json["username"],
-        phone: json["phone"],
-        dateJoined: DateTime.parse(json["date_joined"]),
-        lastLogin: DateTime.parse(json["last_login"]),
-        isAdmin: json["is_admin"],
-        isActive: json["is_active"],
-        isStaff: json["is_staff"],
-        isSuperuser: json["is_superuser"],
-        isSuperviser: json["is_superviser"],
     );
 
     Map<String, dynamic> toJson() => {
-        "id": id,
-        "password": password,
-        "email": email,
         "username": username,
-        "phone": phone,
-        "date_joined": dateJoined.toIso8601String(),
-        "last_login": lastLogin.toIso8601String(),
-        "is_admin": isAdmin,
-        "is_active": isActive,
-        "is_staff": isStaff,
-        "is_superuser": isSuperuser,
-        "is_superviser": isSuperviser,
     };
 }

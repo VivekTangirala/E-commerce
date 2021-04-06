@@ -96,7 +96,7 @@ class _WishlistState extends State<Wishlist> {
     return Scaffold(
       appBar: _appBar(context),
       body: SafeArea(
-        child: _firstload == false
+        child: _wishlistapi == null
             ? Center(
                 child: CircularProgressIndicator(),
               )

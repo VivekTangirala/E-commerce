@@ -60,7 +60,7 @@ class _DiscoverState extends State<Discover> {
   Widget _body() {
     return SizedBox(
       width: double.infinity,
-      height: getProportionateScreenHeight(220.0),
+      height: getProportionateScreenHeight(250.0),
       child: _specialproducts == null
           ? Center(
               child: CircularProgressIndicator(),
@@ -92,16 +92,14 @@ class _DiscoverState extends State<Discover> {
                           )
                         : GestureDetector(
                             child: Container(
-                              margin: EdgeInsets.only(left: 4, bottom: 3),
+                             margin: EdgeInsets.only(left: 4, bottom: 3),
                               child: SizedBox(
-                                // height: 100,
-                                //width: getProportionateScreenWidth(0.0),
                                 child: Container(
                                   margin: EdgeInsets.all(5.0),
                                   child: Column(children: [
                                     SizedBox(
                                       height:
-                                          getProportionateScreenHeight(180.0),
+                                          getProportionateScreenHeight(200.0),
                                       child: Container(
                                         child: FadeInImage(
                                           imageErrorBuilder:
