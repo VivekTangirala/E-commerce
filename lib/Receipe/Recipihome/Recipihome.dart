@@ -57,49 +57,50 @@ class _RecipihomeState extends State<RecipiHome>
   @override
   bool get wantKeepAlive => true;
 }
-AppBar _appBar(BuildContext context){
+
+AppBar _appBar(BuildContext context) {
   return AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.menu,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              _scaffoldKey.currentState.openDrawer();
-            },
-          ),
-          title: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Recipe",
-                style: Theme.of(context).textTheme.headline3,
-              )),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                EvaIcons.search,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                showSearch(context: context, delegate: SearchBar());
-              },
-            ),
-            IconButton(
-              icon: Icon(
-                EvaIcons.shoppingCartOutline,
-                color: Colors.black,
-              ),
-              padding: EdgeInsets.only(left: 10, right: 15),
-              onPressed: () async {
-                SharedPreferences sharedPreferences =
-                    await SharedPreferences.getInstance();
-                sharedPreferences.clear();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignInScreen()),
-                );
-              },
-            ),
-          ],
-        );
+    leading: IconButton(
+      icon: Icon(
+        Icons.menu,
+        color: Colors.black,
+      ),
+      onPressed: () {
+        _scaffoldKey.currentState.openDrawer();
+      },
+    ),
+    title: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          "Recipe",
+          style: Theme.of(context).textTheme.headline3,
+        )),
+    actions: <Widget>[
+      IconButton(
+        icon: Icon(
+          EvaIcons.search,
+          color: Colors.black,
+        ),
+        onPressed: () {
+          showSearch(context: context, delegate: SearchBar('s'));
+        },
+      ),
+      IconButton(
+        icon: Icon(
+          EvaIcons.shoppingCartOutline,
+          color: Colors.black,
+        ),
+        padding: EdgeInsets.only(left: 10, right: 15),
+        onPressed: () async {
+          SharedPreferences sharedPreferences =
+              await SharedPreferences.getInstance();
+          sharedPreferences.clear();
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SignInScreen()),
+          );
+        },
+      ),
+    ],
+  );
 }

@@ -81,7 +81,7 @@ class _HomefragmentState extends State<HomeFragment>
                     // SizedBox(height: 10),
                     SizedBox(height: getProportionateScreenHeight(15.0)),
 
-                    searchBar(context),
+                    SearchBAr(),
                     SizedBox(height: getProportionateScreenHeight(15.0)),
 
                     Cashback(),

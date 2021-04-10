@@ -71,7 +71,7 @@ class _AddToCartState extends State<AddToCart> {
                       await addtocart('$productid', '$numOfItems');
 
                       if (_statuscode == 200) {
-                        Scaffold.of(context).showSnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: const Text("Added to cart"),
                             duration: Duration(seconds: 5),

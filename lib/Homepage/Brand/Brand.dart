@@ -1,9 +1,9 @@
 import 'package:ecom/Homepage/Brand/Brandapi.dart';
 import 'package:ecom/Homepage/Brand/Brandapiimport.dart';
+import 'package:ecom/Homepage/Branditems/Branditems.dart';
 import 'package:ecom/components/screensize.dart';
 
 import 'package:flutter/material.dart';
-
 
 class Brand extends StatefulWidget {
   @override
@@ -87,7 +87,17 @@ class Brandstate extends State<Brand> {
                       ),
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return Branditems(
+                            brandname: _brandapi[index].name,
+                          );
+                        },
+                      ),
+                    );
+                  },
                 );
               },
             )

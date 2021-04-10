@@ -80,152 +80,118 @@ class _Cart1State extends State<Cart1> {
                     vertical: getProportionateScreenHeight(8.0),
                   ),
                   child: ListView.builder(
-                      itemCount: _cartapidata.cart.length,
-                      physics: ScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                            child: Column(children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              FadeInImage(
-                                imageErrorBuilder: (BuildContext context,
-                                    Object exception, StackTrace stackTrace) {
-                                  return Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    height: getProportionateScreenHeight(100.0),
-                                    width: getProportionateScreenWidth(100.0),
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(
-                                          "assets/images/drinks.jpg",
+                    itemCount: _cartapidata.cart.length,
+                    physics: ScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                FadeInImage(
+                                  imageErrorBuilder: (BuildContext context,
+                                      Object exception, StackTrace stackTrace) {
+                                    return Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      height:
+                                          getProportionateScreenHeight(100.0),
+                                      width: getProportionateScreenWidth(100.0),
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                            "assets/images/drinks.jpg",
+                                          ),
                                         ),
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0),
+                                        ), // set rounded corner radius
                                       ),
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(5.0),
-                                      ), // set rounded corner radius
-                                    ),
-                                  );
-                                },
-                                placeholder:
-                                    AssetImage('assets/images/loading.gif'),
-                                image: NetworkImage(
-                                  _cartapidata.cart[index].product.image,
+                                    );
+                                  },
+                                  placeholder:
+                                      AssetImage('assets/images/loading.gif'),
+                                  image: NetworkImage(
+                                    _cartapidata.cart[index].product.image,
+                                  ),
+                                  fit: BoxFit.fill,
+                                  width: getProportionateScreenWidth(100.0),
+                                  height: getProportionateScreenHeight(100),
                                 ),
-                                fit: BoxFit.fill,
-                                width: getProportionateScreenWidth(100.0),
-                                height: getProportionateScreenHeight(100),
-                              ),
-                              SizedBox(
-                                width: getProportionateScreenWidth(5.0),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                SizedBox(
+                                  width: getProportionateScreenWidth(5.0),
+                                ),
+                                Expanded(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
 
-                                      //mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                            _cartapidata
-                                                .cart[index].product.name,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline2),
-                                        Text(
-                                            "Quantity : ${_cartapidata.cart[index].quantity}",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.normal,fontSize: 13)),
-                                        Text(
-                                            "Price:- " +
+                                        //mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              _cartapidata
+                                                  .cart[index].product.name,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline2),
+                                          Text(
+                                              "Quantity : ${_cartapidata.cart[index].quantity}",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 13)),
+                                          Text(
+                                              "Price:- " +
+                                                  _cartapidata.cart[index]
+                                                      .product.offerPrice
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 13)),
+                                          Text(
+                                            "Discount:- " +
                                                 _cartapidata.cart[index].product
-                                                    .offerPrice
-                                                    .toString(),
+                                                    .discountPercentage
+                                                    .toString() +
+                                                " %",
                                             style: TextStyle(
-                                                fontWeight: FontWeight.normal,fontSize: 13)),
-                                        Text(
-                                          "Discount:- " +
-                                              _cartapidata.cart[index].product
-                                                  .discountPercentage
-                                                  .toString() +
-                                              " %",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.normal,fontSize: 13),
-                                        ),
-                                        SizedBox(
-                                          height: getProportionateScreenHeight(
-                                              15.0),
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      //crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            IconButton(
-                                              icon: Icon(
-                                                Icons.add_circle,
-                                                color: Colors.orangeAccent,
-                                              ),
-                                              onPressed: () async {
-                                                setState(() {
-                                                  _qty[index] = _qty[index] + 1;
-                                                });
-                                                await _cartquantity(
-                                                  _cartapidata
-                                                      .cart[index].product.id
-                                                      .toString(),
-                                                  (int.parse(_cartapidata
-                                                              .cart[index]
-                                                              .product
-                                                              .quantity) +
-                                                          1)
-                                                      .toString(),
-                                                );
-                                                setState(() {
-                                                  _refreshcart();
-                                                });
-                                              },
-                                            ),
-                                            SizedBox(
-                                              width: 2,
-                                            ),
-                                            Text(
-                                              _cartapidata.cart[index].quantity
-                                                  .toString(),
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            IconButton(
-                                              icon: Icon(
-                                                Icons.remove_circle,
-                                                color: Colors.orangeAccent,
-                                              ),
-                                              onPressed: () async {
-                                                setState(() {
-                                                  if (_qty[index] > 1) {
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 13),
+                                          ),
+                                          SizedBox(
+                                            height:
+                                                getProportionateScreenHeight(
+                                                    15.0),
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        //crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              IconButton(
+                                                icon: Icon(
+                                                  Icons.add_circle,
+                                                  color: Colors.orangeAccent,
+                                                ),
+                                                onPressed: () async {
+                                                  setState(() {
                                                     _qty[index] =
-                                                        _qty[index] - 1;
-                                                  }
-                                                });
-                                                if (_cartapidata
-                                                        .cart[index].quantity >
-                                                    1) {
+                                                        _qty[index] + 1;
+                                                  });
                                                   await _cartquantity(
                                                     _cartapidata
                                                         .cart[index].product.id
@@ -233,89 +199,96 @@ class _Cart1State extends State<Cart1> {
                                                     (int.parse(_cartapidata
                                                                 .cart[index]
                                                                 .product
-                                                                .quantity) -
+                                                                .quantity) +
                                                             1)
                                                         .toString(),
                                                   );
                                                   setState(() {
                                                     _refreshcart();
                                                   });
-                                                }
+                                                },
+                                              ),
+                                              SizedBox(
+                                                width: 2,
+                                              ),
+                                              Text(
+                                                _cartapidata
+                                                    .cart[index].quantity
+                                                    .toString(),
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              IconButton(
+                                                icon: Icon(
+                                                  Icons.remove_circle,
+                                                  color: Colors.orangeAccent,
+                                                ),
+                                                onPressed: () async {
+                                                  setState(() {
+                                                    if (_qty[index] > 1) {
+                                                      _qty[index] =
+                                                          _qty[index] - 1;
+                                                    }
+                                                  });
+                                                  if (_cartapidata.cart[index]
+                                                          .quantity >
+                                                      1) {
+                                                    await _cartquantity(
+                                                      _cartapidata.cart[index]
+                                                          .product.id
+                                                          .toString(),
+                                                      (int.parse(_cartapidata
+                                                                  .cart[index]
+                                                                  .product
+                                                                  .quantity) -
+                                                              1)
+                                                          .toString(),
+                                                    );
+                                                    setState(() {
+                                                      _refreshcart();
+                                                    });
+                                                  }
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal:
+                                                  getProportionateScreenWidth(
+                                                      4.0),
+                                            ),
+                                            child: RaisedButton(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.0)),
+                                              onPressed: () => {
+                                                _deleteproduct(_cartapidata
+                                                    .cart[index].product.id)
                                               },
-                                            ),
-                                          ],
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal:
-                                                getProportionateScreenWidth(
-                                                    4.0),
-                                          ),
-                                          child: RaisedButton(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(4.0)),
-                                            onPressed: () => {
-                                              _deleteproduct(_cartapidata
-                                                  .cart[index].product.id)
-                                            },
-                                            color: Colors.redAccent,
-                                            child: Text(
-                                              "Remove",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: Colors.white),
+                                              color: Colors.redAccent,
+                                              child: Text(
+                                                "Remove",
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors.white),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          // Divider(),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //   children: [
-                          //     Padding(
-                          //       padding: EdgeInsets.all(0),
-                          //       child: Column(
-                          //         crossAxisAlignment: CrossAxisAlignment.start,
-                          //         children: [
-                          //           Text(
-                          //             "Subtotal:- ",
-                          //           ),
-                          //           Text(
-                          //             "Discount:-",
-                          //           ),
-                          //           Text(
-                          //             "Total:-",
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //     Column(
-                          //       crossAxisAlignment: CrossAxisAlignment.end,
-                          //       children: [
-                          //         Text(
-                          //           "25",
-                          //         ),
-                          //         Text(
-                          //           _cartapidata
-                          //               .cart[index].product.discountPercentage
-                          //               .toString(),
-                          //         ),
-                          //         Text(
-                          //           "5000",
-                          //         ),
-                          //       ],
-                          //     ),
-                          //   ],
-                          // ),
-                        ]));
-                      }),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
     );
   }

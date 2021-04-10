@@ -88,7 +88,6 @@ class _WishlistState extends State<Wishlist> {
       );
     }
     print(response.statusCode);
-    print(jsonresponse);
   }
 
   @override
