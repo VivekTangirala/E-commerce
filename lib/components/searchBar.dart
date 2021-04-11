@@ -1,11 +1,12 @@
 import 'package:ecom/components/screensize.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom/components/Search/Searchapi.dart';
 import 'package:ecom/components/Search/Searchapiimport.dart';
 import 'package:ecom/components/screensize.dart';
 import 'package:flutter/material.dart';
 
-List _history = ["Example1", "example2"];
+List<String> _history = [];
 List apiresults = ["Example3", "Example1", "example2"];
 List<Searchapi> _searchresults;
 
@@ -25,8 +26,6 @@ class _SearchBArState extends State<SearchBAr> {
   searchdetails(_search) async {
     await Searchimport.getsearchresults(_search).then((value) => setState(() {
           _searchresults = value;
-          print("In searchdetails function");
-          print(value);
         }));
   }
 
@@ -132,10 +131,9 @@ class _SearchBArState extends State<SearchBAr> {
 }
 
 class SearchBar extends SearchDelegate<String> {
-  final func;
-  void _search(String _str) async {
+  var func;
+  Future _search(String _str) async {
     await func(_str);
-    print("In search fnction");
   }
 
   SearchBar(this.func);
@@ -167,18 +165,39 @@ class SearchBar extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    //show some result
-    _search(query.toString());
-    return Container(
-      child: _searchresults == null
-          ? Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: _searchresults.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  child: Text(_searchresults[index].name),
-                );
-              }),
+    //show some result _search(query);
+    return FutureBuilder(
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return Container(
+            child: _searchresults == null
+                ? Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    itemCount: _searchresults.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                        onTap: () {
+                          if (_history.length == 5) {
+                            _history.removeAt(1);
+                          }
+                          _history.add(_searchresults[index].name);
+                        },
+                        splashColor: Colors.grey[100],
+                        child: ListTile(
+                          leading: Icon(EvaIcons.diagonalArrowRightUp),
+                          title: Text(_searchresults[index].name),
+                        ),
+                      );
+                    },
+                  ),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+      future: _search(query),
     );
   }
 
@@ -188,7 +207,7 @@ class SearchBar extends SearchDelegate<String> {
     if (query.isEmpty == false) {
       // _searchresults(query);
     }
-    List suggestions = query.isEmpty ? _history : apiresults;
+    List suggestions = query.isEmpty ? _history.reversed.toList() : apiresults;
     return ListView.builder(
         itemCount: suggestions.length,
         itemBuilder: (BuildContext context, index) {
